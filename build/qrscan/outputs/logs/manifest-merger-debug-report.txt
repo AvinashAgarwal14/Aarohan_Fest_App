@@ -1,0 +1,75 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:1:1-26:12
+	package
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:2:3-30
+		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml
+		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:4:5-13:19
+	android:screenOrientation
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:10:13-49
+	android:supportsRtl
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:7:13-39
+	android:windowSoftInputMode
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:11:13-60
+	android:configChanges
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:9:13-63
+	android:icon
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:6:13-47
+	android:allowBackup
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:5:13-39
+	android:theme
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:8:13-63
+activity#com.shinow.qrscan.SecondActivity
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:12:9-52
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:12:19-49
+uses-permission#android.permission.CAMERA
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:15:5-65
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:15:22-62
+uses-permission#android.permission.VIBRATE
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:16:5-65
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:16:22-63
+uses-permission#android.permission.FLASHLIGHT
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:17:5-69
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:17:22-66
+uses-feature#android.hardware.camera
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:19:5-60
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:19:19-57
+uses-feature#android.hardware.camera.autofocus
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:20:5-70
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:20:19-67
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:22:5-68
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:22:22-65
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:23:5-80
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:23:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:24:5-81
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:24:22-78
+uses-permission#android.permission.INTERNET
+ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:25:5-67
+	android:name
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml:25:22-64
+uses-sdk
+INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml
+INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml
+		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml
+		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.2.17/android/src/main/AndroidManifest.xml

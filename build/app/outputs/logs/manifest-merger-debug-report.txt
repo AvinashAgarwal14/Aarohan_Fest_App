@@ -1,0 +1,857 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:1-86:12
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:1-86:12
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:1-86:12
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:1-86:12
+MERGED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-21:12
+MERGED from [:barcode_scan] /home/avinash/Desktop/Aarohan/build/barcode_scan/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-17:12
+MERGED from [:flutter_facebook_login] /home/avinash/Desktop/Aarohan/build/flutter_facebook_login/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [com.facebook.android:facebook-login:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-login-4.39.0.aar/b532f8d60f5f04f6a6b71a556f2e54a1/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:21:1-37:12
+MERGED from [com.google.android.material:material:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/811b31984feda1f06e7e8cbd53439fe9/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.0.2] /home/avinash/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/615595bfea20cac6a865d70ef2ffc626/AndroidManifest.xml:17:1-22:12
+MERGED from [:google_sign_in] /home/avinash/Desktop/Aarohan/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [:sqflite] /home/avinash/Desktop/Aarohan/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-20:12
+MERGED from [:url_launcher] /home/avinash/Desktop/Aarohan/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-14:12
+MERGED from [:path_provider] /home/avinash/Desktop/Aarohan/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:google_maps_flutter] /home/avinash/Desktop/Aarohan/build/google_maps_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [:location] /home/avinash/Desktop/Aarohan/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-10:12
+MERGED from [:shared_preferences] /home/avinash/Desktop/Aarohan/build/shared_preferences/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:intro_slider] /home/avinash/Desktop/Aarohan/build/intro_slider/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:share] /home/avinash/Desktop/Aarohan/build/share/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-15:12
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:17:1-38:12
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /home/avinash/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/22f6e53be44cd3fca559f3aee15fcd8c/AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:17:1-39:12
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:15:1-37:12
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:15:1-36:12
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/cbccf8e7fed89c4155c053c0e8e89419/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:17:1-42:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-api-phone-16.0.0.aar/48623a40b1c963634a85addeecab7605/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-base-16.0.0.aar/e3a65f0324542f8ff8c34ba2a9f92ac6/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.firebase:firebase-auth-interop:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-interop-17.0.0.aar/99a9dfa7ce14a358039651d38ee15179/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-flags:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/7af799cb13fddbfd01131f6c0f268c65/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-messaging:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-messaging-18.0.0.aar/d8b0cd67641624ec2c7cec4e8b33f3d0/AndroidManifest.xml:17:1-37:12
+MERGED from [com.google.firebase:firebase-core:16.0.9] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.9.aar/2374038c235bdf2dc39828fba94d2d56/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-analytics:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.5.0.aar/6e2477a543288e0cda409ea9c122bd44/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:17:1-36:12
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:17:1-47:12
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-interop-16.0.1.aar/62658c20d60a0f6626f8d13ed7952c51/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:2:1-19:12
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-tasks-17.0.0.aar/25a8fc11521a426cc78a75a02072c797/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-measurement-connector-17.0.1.aar/0a89de1a2b9962b82f8aac1557c6cda7/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/d544eb8b95c32c290f825a97996e8aab/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:17:1-55:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-16.5.0.aar/74533f08701288980bac497f4446e65d/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-stats-16.0.1.aar/278242c0f4ccb0911b3d66e6a84a76a5/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.android.gms:play-services-measurement-base:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-base-16.5.0.aar/f0c2a938d9a691ed80c4c46d762e3e81/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-ads-identifier-16.0.0.aar/91e2f934debb78595ec046ccec39f208/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-17.0.0.aar/b92104d65a5aafa968a1b58f8bd0e3fc/AndroidManifest.xml:17:1-28:12
+MERGED from [me.dm7.barcodescanner:zxing:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/zxing-1.9.13.aar/1748508e25c93c2371103c9b00c17ec0/AndroidManifest.xml:2:1-13:12
+MERGED from [me.dm7.barcodescanner:core:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-core-1.9.13.aar/332a1a5ef5ccfbefd966bbf0b26e11be/AndroidManifest.xml:2:1-13:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/896e92e873f1873c75beaaa8543ddc35/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/2e242d556b4ee2f068bd03c2b4d57e84/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.0.0.aar/2c045bc7ec043ec560661d82adbeab0d/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/0c33d957efb11b9f538e8a6a5f3e571a/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.browser:browser:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/browser-1.0.0.aar/78952f21b062de8cfa658809b4852f00/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/ae108dfac5c0521b369365bb067fcdb6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:21:1-53:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/1fad5d2a5340788029349ab89fe224dc/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/4788573e3c786b2ae10382f5dc4849a1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.0.1.aar/340fb15ccd98272e3ba3758ad54b219b/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/transition-1.0.0.aar/52ef7c632864f963bde862b545a726a9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/55cb5aef01cb9380b38fe7a58de346d2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/1e5ef597b2d2c39b7819637dac530f5f/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/699f05522e92191112de0a42df27ee71/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/344c5fdc122827ef9ed6600d3b422ac3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/4a4259e3d8cafb6c95205aa5191e11fe/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/7695e0c26e8277c9669604d7ab284264/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/36ddb353c737cbea4576b47fd548df4e/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/03f85206da1484b5eaf2a4c1dc777968/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/21d08d2531d32348f438773f218ed4ef/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/b339dcb39d7a8ba0474c919da7bfe442/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/d8c1d1200a235a49304268ef3281da20/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/f0e7db0d5fe3c4be4a143d15e8f0ed71/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/3b82ae5db3d5ca708f4519de1ef018fd/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/7011b4fb9071e5b457e1489fbe41a7ec/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/8a7c39b16b9a95bddddefcfcb650b4fd/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/6ba388874a9c616be6df06fc12566e29/AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/be941fa6dec40b76dcfa88d1b6f42830/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/cardview-1.0.0.aar/d99519198345ba569ebca52cce01825a/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/d37ce4b42c8b5a3de29e2523e11aaba7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/5b22126945d56eed33c0b2979b8b9ad8/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/bb219f383ab1713409d0731dba109877/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-database-collection:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.1.aar/e99b5cb61ad3b4e5a4614c2abfe4e7bb/AndroidManifest.xml:2:1-7:12
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:1-86:12
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:1-86:12
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:1-86:12
+	package
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:2:5-45
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:1-86:12
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:1-86:12
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:8:5-67
+MERGED from [:google_sign_in] /home/avinash/Desktop/Aarohan/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-67
+MERGED from [:google_sign_in] /home/avinash/Desktop/Aarohan/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-67
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:24:5-67
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:27:5-67
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:27:5-67
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:26:5-67
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:26:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:23:5-67
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:8:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:9:5-79
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:25:5-79
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:24:5-79
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:9:22-76
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:10:5-79
+MERGED from [:location] /home/avinash/Desktop/Aarohan/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-79
+MERGED from [:location] /home/avinash/Desktop/Aarohan/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-79
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:10:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:11:5-81
+MERGED from [:location] /home/avinash/Desktop/Aarohan/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-81
+MERGED from [:location] /home/avinash/Desktop/Aarohan/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:11:22-78
+uses-permission#android.permission.CAMERA
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:12:5-65
+MERGED from [:barcode_scan] /home/avinash/Desktop/Aarohan/build/barcode_scan/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-65
+MERGED from [:barcode_scan] /home/avinash/Desktop/Aarohan/build/barcode_scan/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-65
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:12:22-62
+application
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:19:5-85:19
+MERGED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-19:19
+MERGED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-19:19
+MERGED from [:barcode_scan] /home/avinash/Desktop/Aarohan/build/barcode_scan/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-15:19
+MERGED from [:barcode_scan] /home/avinash/Desktop/Aarohan/build/barcode_scan/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-15:19
+MERGED from [com.facebook.android:facebook-login:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-login-4.39.0.aar/b532f8d60f5f04f6a6b71a556f2e54a1/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-login:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-login-4.39.0.aar/b532f8d60f5f04f6a6b71a556f2e54a1/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:28:5-35:19
+MERGED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:28:5-35:19
+MERGED from [com.google.android.material:material:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/811b31984feda1f06e7e8cbd53439fe9/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/811b31984feda1f06e7e8cbd53439fe9/AndroidManifest.xml:22:5-20
+MERGED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-18:19
+MERGED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-18:19
+MERGED from [:url_launcher] /home/avinash/Desktop/Aarohan/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-12:19
+MERGED from [:url_launcher] /home/avinash/Desktop/Aarohan/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-12:19
+MERGED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-13:19
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:30:5-36:19
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /home/avinash/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/22f6e53be44cd3fca559f3aee15fcd8c/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /home/avinash/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/22f6e53be44cd3fca559f3aee15fcd8c/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:29:5-35:19
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:29:5-35:19
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:28:5-34:19
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:28:5-34:19
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/cbccf8e7fed89c4155c053c0e8e89419/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/cbccf8e7fed89c4155c053c0e8e89419/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.firebase:firebase-auth-interop:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-interop-17.0.0.aar/99a9dfa7ce14a358039651d38ee15179/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-auth-interop:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-interop-17.0.0.aar/99a9dfa7ce14a358039651d38ee15179/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-messaging:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-messaging-18.0.0.aar/d8b0cd67641624ec2c7cec4e8b33f3d0/AndroidManifest.xml:22:5-35:19
+MERGED from [com.google.firebase:firebase-messaging:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-messaging-18.0.0.aar/d8b0cd67641624ec2c7cec4e8b33f3d0/AndroidManifest.xml:22:5-35:19
+MERGED from [com.google.firebase:firebase-core:16.0.9] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.9.aar/2374038c235bdf2dc39828fba94d2d56/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-core:16.0.9] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.9.aar/2374038c235bdf2dc39828fba94d2d56/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-analytics:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.5.0.aar/6e2477a543288e0cda409ea9c122bd44/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-analytics:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.5.0.aar/6e2477a543288e0cda409ea9c122bd44/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:28:5-45:19
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:28:5-45:19
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-interop-16.0.1.aar/62658c20d60a0f6626f8d13ed7952c51/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-interop-16.0.1.aar/62658c20d60a0f6626f8d13ed7952c51/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:11:5-17:19
+MERGED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:11:5-17:19
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-tasks-17.0.0.aar/25a8fc11521a426cc78a75a02072c797/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-tasks-17.0.0.aar/25a8fc11521a426cc78a75a02072c797/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-measurement-connector-17.0.1.aar/0a89de1a2b9962b82f8aac1557c6cda7/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-measurement-connector-17.0.1.aar/0a89de1a2b9962b82f8aac1557c6cda7/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/d544eb8b95c32c290f825a97996e8aab/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/d544eb8b95c32c290f825a97996e8aab/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:28:5-53:19
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:28:5-53:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-16.5.0.aar/74533f08701288980bac497f4446e65d/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-16.5.0.aar/74533f08701288980bac497f4446e65d/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:28:5-38:19
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:28:5-38:19
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-stats-16.0.1.aar/278242c0f4ccb0911b3d66e6a84a76a5/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-stats-16.0.1.aar/278242c0f4ccb0911b3d66e6a84a76a5/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:28:5-38:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:28:5-38:19
+MERGED from [com.google.android.gms:play-services-measurement-base:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-base-16.5.0.aar/f0c2a938d9a691ed80c4c46d762e3e81/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-base-16.5.0.aar/f0c2a938d9a691ed80c4c46d762e3e81/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-ads-identifier-16.0.0.aar/91e2f934debb78595ec046ccec39f208/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-ads-identifier-16.0.0.aar/91e2f934debb78595ec046ccec39f208/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-17.0.0.aar/b92104d65a5aafa968a1b58f8bd0e3fc/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-17.0.0.aar/b92104d65a5aafa968a1b58f8bd0e3fc/AndroidManifest.xml:22:5-26:19
+MERGED from [me.dm7.barcodescanner:zxing:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/zxing-1.9.13.aar/1748508e25c93c2371103c9b00c17ec0/AndroidManifest.xml:11:5-20
+MERGED from [me.dm7.barcodescanner:zxing:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/zxing-1.9.13.aar/1748508e25c93c2371103c9b00c17ec0/AndroidManifest.xml:11:5-20
+MERGED from [me.dm7.barcodescanner:core:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-core-1.9.13.aar/332a1a5ef5ccfbefd966bbf0b26e11be/AndroidManifest.xml:11:5-20
+MERGED from [me.dm7.barcodescanner:core:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-core-1.9.13.aar/332a1a5ef5ccfbefd966bbf0b26e11be/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:28:5-51:19
+MERGED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:28:5-51:19
+MERGED from [androidx.core:core:1.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/21d08d2531d32348f438773f218ed4ef/AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/21d08d2531d32348f438773f218ed4ef/AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/6ba388874a9c616be6df06fc12566e29/AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/6ba388874a9c616be6df06fc12566e29/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/21d08d2531d32348f438773f218ed4ef/AndroidManifest.xml:22:18-86
+	android:supportsRtl
+		ADDED from [com.facebook.android:facebook-login:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-login-4.39.0.aar/b532f8d60f5f04f6a6b71a556f2e54a1/AndroidManifest.xml:28:18-44
+	android:label
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:22:9-32
+	android:icon
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:21:9-43
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:20:9-57
+meta-data#com.google.android.gms.version
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-17.0.0.aar/b92104d65a5aafa968a1b58f8bd0e3fc/AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-17.0.0.aar/b92104d65a5aafa968a1b58f8bd0e3fc/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:24:13-58
+activity#com.app.aavishkar.aavishkarapp.MainActivity
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:27:9-50:20
+	android:launchMode
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:31:13-43
+	android:hardwareAccelerated
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:30:13-47
+	android:windowSoftInputMode
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:33:13-55
+	android:configChanges
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:29:13-137
+	android:theme
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:32:13-47
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:28:13-41
+meta-data#io.flutter.app.android.SplashScreenUntilFirstFrame
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:38:13-40:40
+	android:value
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:40:17-37
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:39:17-82
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:42:13-45:29
+action#android.intent.action.MAIN
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:43:17-69
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:43:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:44:17-77
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:44:27-74
+intent-filter#action:name:FLUTTER_NOTIFICATION_CLICK+category:name:android.intent.category.DEFAULT
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:46:13-49:29
+action#FLUTTER_NOTIFICATION_CLICK
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:47:17-69
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:47:25-66
+category#android.intent.category.DEFAULT
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:48:17-76
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:48:27-73
+activity#com.apptreesoftware.mapview.MapActivity
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:51:9-53:74
+	android:theme
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:53:13-71
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:52:13-67
+meta-data#com.facebook.sdk.ApplicationId
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:59:9-61:55
+	android:value
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:61:13-52
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:60:13-58
+activity#com.facebook.FacebookActivity
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:63:9-66:48
+MERGED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:29:9-32:66
+MERGED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:29:9-32:66
+	android:label
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:66:13-45
+	android:configChanges
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:65:13-96
+	android:theme
+		ADDED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:32:13-63
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:64:13-57
+activity#com.apptreesoftware.barcodescan.BarcodeScannerActivity
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:68:9-90
+MERGED from [:barcode_scan] /home/avinash/Desktop/Aarohan/build/barcode_scan/intermediates/library_manifest/debug/AndroidManifest.xml:14:9-91
+MERGED from [:barcode_scan] /home/avinash/Desktop/Aarohan/build/barcode_scan/intermediates/library_manifest/debug/AndroidManifest.xml:14:9-91
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:68:19-88
+activity#com.facebook.CustomTabActivity
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:70:9-81:20
+MERGED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:34:9-67
+MERGED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:34:9-67
+	android:exported
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:72:13-36
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:71:13-58
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:@string/fb_login_protocol_scheme
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:73:13-80:29
+action#android.intent.action.VIEW
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:74:17-69
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:74:25-66
+category#android.intent.category.BROWSABLE
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:77:17-78
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:77:27-75
+data
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:79:17-75
+	android:scheme
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:79:23-72
+meta-data#com.google.android.geo.API_KEY
+ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:82:9-83:73
+	android:value
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:83:16-71
+	android:name
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml:82:20-65
+uses-sdk
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+MERGED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:6:5-44
+MERGED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:6:5-44
+MERGED from [:barcode_scan] /home/avinash/Desktop/Aarohan/build/barcode_scan/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:barcode_scan] /home/avinash/Desktop/Aarohan/build/barcode_scan/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:flutter_facebook_login] /home/avinash/Desktop/Aarohan/build/flutter_facebook_login/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_facebook_login] /home/avinash/Desktop/Aarohan/build/flutter_facebook_login/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [com.facebook.android:facebook-login:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-login-4.39.0.aar/b532f8d60f5f04f6a6b71a556f2e54a1/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-login:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-login-4.39.0.aar/b532f8d60f5f04f6a6b71a556f2e54a1/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:24:5-26:41
+MERGED from [com.google.android.material:material:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/811b31984feda1f06e7e8cbd53439fe9/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/811b31984feda1f06e7e8cbd53439fe9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.2] /home/avinash/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/615595bfea20cac6a865d70ef2ffc626/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.2] /home/avinash/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/615595bfea20cac6a865d70ef2ffc626/AndroidManifest.xml:20:5-44
+MERGED from [:google_sign_in] /home/avinash/Desktop/Aarohan/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:google_sign_in] /home/avinash/Desktop/Aarohan/build/google_sign_in/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /home/avinash/Desktop/Aarohan/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /home/avinash/Desktop/Aarohan/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher] /home/avinash/Desktop/Aarohan/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher] /home/avinash/Desktop/Aarohan/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] /home/avinash/Desktop/Aarohan/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] /home/avinash/Desktop/Aarohan/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] /home/avinash/Desktop/Aarohan/build/google_maps_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] /home/avinash/Desktop/Aarohan/build/google_maps_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:location] /home/avinash/Desktop/Aarohan/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:location] /home/avinash/Desktop/Aarohan/build/location/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] /home/avinash/Desktop/Aarohan/build/shared_preferences/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] /home/avinash/Desktop/Aarohan/build/shared_preferences/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:intro_slider] /home/avinash/Desktop/Aarohan/build/intro_slider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:intro_slider] /home/avinash/Desktop/Aarohan/build/intro_slider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:share] /home/avinash/Desktop/Aarohan/build/share/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:share] /home/avinash/Desktop/Aarohan/build/share/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /home/avinash/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/22f6e53be44cd3fca559f3aee15fcd8c/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] /home/avinash/.gradle/caches/transforms-1/files-1.1/constraintlayout-1.1.2.aar/22f6e53be44cd3fca559f3aee15fcd8c/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/cbccf8e7fed89c4155c053c0e8e89419/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/cbccf8e7fed89c4155c053c0e8e89419/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:21:5-44
+MERGED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:21:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-api-phone-16.0.0.aar/48623a40b1c963634a85addeecab7605/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-api-phone-16.0.0.aar/48623a40b1c963634a85addeecab7605/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-base-16.0.0.aar/e3a65f0324542f8ff8c34ba2a9f92ac6/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-base-16.0.0.aar/e3a65f0324542f8ff8c34ba2a9f92ac6/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-interop-17.0.0.aar/99a9dfa7ce14a358039651d38ee15179/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-interop-17.0.0.aar/99a9dfa7ce14a358039651d38ee15179/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-flags:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/7af799cb13fddbfd01131f6c0f268c65/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-flags:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/7af799cb13fddbfd01131f6c0f268c65/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-messaging:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-messaging-18.0.0.aar/d8b0cd67641624ec2c7cec4e8b33f3d0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-messaging:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-messaging-18.0.0.aar/d8b0cd67641624ec2c7cec4e8b33f3d0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-core:16.0.9] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.9.aar/2374038c235bdf2dc39828fba94d2d56/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-core:16.0.9] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.9.aar/2374038c235bdf2dc39828fba94d2d56/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.5.0.aar/6e2477a543288e0cda409ea9c122bd44/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.5.0.aar/6e2477a543288e0cda409ea9c122bd44/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-interop-16.0.1.aar/62658c20d60a0f6626f8d13ed7952c51/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-interop-16.0.1.aar/62658c20d60a0f6626f8d13ed7952c51/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-tasks-17.0.0.aar/25a8fc11521a426cc78a75a02072c797/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-tasks-17.0.0.aar/25a8fc11521a426cc78a75a02072c797/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-measurement-connector-17.0.1.aar/0a89de1a2b9962b82f8aac1557c6cda7/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-measurement-connector-17.0.1.aar/0a89de1a2b9962b82f8aac1557c6cda7/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/d544eb8b95c32c290f825a97996e8aab/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/d544eb8b95c32c290f825a97996e8aab/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-16.5.0.aar/74533f08701288980bac497f4446e65d/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-16.5.0.aar/74533f08701288980bac497f4446e65d/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-stats-16.0.1.aar/278242c0f4ccb0911b3d66e6a84a76a5/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-stats-16.0.1.aar/278242c0f4ccb0911b3d66e6a84a76a5/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-base-16.5.0.aar/f0c2a938d9a691ed80c4c46d762e3e81/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-base-16.5.0.aar/f0c2a938d9a691ed80c4c46d762e3e81/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-ads-identifier-16.0.0.aar/91e2f934debb78595ec046ccec39f208/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-ads-identifier-16.0.0.aar/91e2f934debb78595ec046ccec39f208/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-17.0.0.aar/b92104d65a5aafa968a1b58f8bd0e3fc/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-17.0.0.aar/b92104d65a5aafa968a1b58f8bd0e3fc/AndroidManifest.xml:20:5-44
+MERGED from [me.dm7.barcodescanner:zxing:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/zxing-1.9.13.aar/1748508e25c93c2371103c9b00c17ec0/AndroidManifest.xml:7:5-9:41
+MERGED from [me.dm7.barcodescanner:zxing:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/zxing-1.9.13.aar/1748508e25c93c2371103c9b00c17ec0/AndroidManifest.xml:7:5-9:41
+MERGED from [me.dm7.barcodescanner:core:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-core-1.9.13.aar/332a1a5ef5ccfbefd966bbf0b26e11be/AndroidManifest.xml:7:5-9:41
+MERGED from [me.dm7.barcodescanner:core:1.9.13] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-core-1.9.13.aar/332a1a5ef5ccfbefd966bbf0b26e11be/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/896e92e873f1873c75beaaa8543ddc35/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/896e92e873f1873c75beaaa8543ddc35/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/2e242d556b4ee2f068bd03c2b4d57e84/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/2e242d556b4ee2f068bd03c2b4d57e84/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.0.0.aar/2c045bc7ec043ec560661d82adbeab0d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.0.0.aar/2c045bc7ec043ec560661d82adbeab0d/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/0c33d957efb11b9f538e8a6a5f3e571a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/0c33d957efb11b9f538e8a6a5f3e571a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.browser:browser:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/browser-1.0.0.aar/78952f21b062de8cfa658809b4852f00/AndroidManifest.xml:20:5-44
+MERGED from [androidx.browser:browser:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/browser-1.0.0.aar/78952f21b062de8cfa658809b4852f00/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/ae108dfac5c0521b369365bb067fcdb6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/ae108dfac5c0521b369365bb067fcdb6/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:24:5-26:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/1fad5d2a5340788029349ab89fe224dc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/1fad5d2a5340788029349ab89fe224dc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/4788573e3c786b2ae10382f5dc4849a1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/4788573e3c786b2ae10382f5dc4849a1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.0.1.aar/340fb15ccd98272e3ba3758ad54b219b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.0.1.aar/340fb15ccd98272e3ba3758ad54b219b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/transition-1.0.0.aar/52ef7c632864f963bde862b545a726a9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/transition-1.0.0.aar/52ef7c632864f963bde862b545a726a9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/55cb5aef01cb9380b38fe7a58de346d2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/55cb5aef01cb9380b38fe7a58de346d2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/1e5ef597b2d2c39b7819637dac530f5f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/1e5ef597b2d2c39b7819637dac530f5f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/699f05522e92191112de0a42df27ee71/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/699f05522e92191112de0a42df27ee71/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/344c5fdc122827ef9ed6600d3b422ac3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/344c5fdc122827ef9ed6600d3b422ac3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/4a4259e3d8cafb6c95205aa5191e11fe/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/4a4259e3d8cafb6c95205aa5191e11fe/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/7695e0c26e8277c9669604d7ab284264/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/7695e0c26e8277c9669604d7ab284264/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/36ddb353c737cbea4576b47fd548df4e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/36ddb353c737cbea4576b47fd548df4e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/03f85206da1484b5eaf2a4c1dc777968/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/03f85206da1484b5eaf2a4c1dc777968/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/21d08d2531d32348f438773f218ed4ef/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/21d08d2531d32348f438773f218ed4ef/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/b339dcb39d7a8ba0474c919da7bfe442/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/b339dcb39d7a8ba0474c919da7bfe442/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/d8c1d1200a235a49304268ef3281da20/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/d8c1d1200a235a49304268ef3281da20/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/f0e7db0d5fe3c4be4a143d15e8f0ed71/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/f0e7db0d5fe3c4be4a143d15e8f0ed71/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/3b82ae5db3d5ca708f4519de1ef018fd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/3b82ae5db3d5ca708f4519de1ef018fd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/7011b4fb9071e5b457e1489fbe41a7ec/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/7011b4fb9071e5b457e1489fbe41a7ec/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/8a7c39b16b9a95bddddefcfcb650b4fd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/8a7c39b16b9a95bddddefcfcb650b4fd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/6ba388874a9c616be6df06fc12566e29/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/6ba388874a9c616be6df06fc12566e29/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/be941fa6dec40b76dcfa88d1b6f42830/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/be941fa6dec40b76dcfa88d1b6f42830/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/cardview-1.0.0.aar/d99519198345ba569ebca52cce01825a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/cardview-1.0.0.aar/d99519198345ba569ebca52cce01825a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/d37ce4b42c8b5a3de29e2523e11aaba7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/d37ce4b42c8b5a3de29e2523e11aaba7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/5b22126945d56eed33c0b2979b8b9ad8/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/5b22126945d56eed33c0b2979b8b9ad8/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/bb219f383ab1713409d0731dba109877/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/bb219f383ab1713409d0731dba109877/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-database-collection:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.1.aar/e99b5cb61ad3b4e5a4614c2abfe4e7bb/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-database-collection:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/firebase-database-collection-16.0.1.aar/e99b5cb61ad3b4e5a4614c2abfe4e7bb/AndroidManifest.xml:5:5-44
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/avinash/Desktop/Aarohan/android/app/src/main/AndroidManifest.xml
+provider#androidx.core.content.FileProvider
+ADDED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:9:9-18:20
+	android:grantUriPermissions
+		ADDED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-47
+	android:authorities
+		ADDED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-64
+	android:exported
+		ADDED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-37
+	tools:replace
+		ADDED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-48
+	android:name
+		ADDED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-62
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:15:13-17:53
+	android:resource
+		ADDED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:17:17-50
+	android:name
+		ADDED from [:flutter_webview_plugin] /home/avinash/Desktop/Aarohan/build/flutter_webview_plugin/intermediates/library_manifest/debug/AndroidManifest.xml:16:17-67
+activity#com.facebook.CustomTabMainActivity
+ADDED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:33:9-71
+	android:name
+		ADDED from [com.facebook.android:facebook-common:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-common-4.39.0.aar/57f52c6e938a8268538e31c535bda3d0/AndroidManifest.xml:33:19-68
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:13:9-17:19
+MERGED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:13:9-17:19
+MERGED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:30:9-34:19
+MERGED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:30:9-34:19
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:29:9-33:19
+MERGED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:29:9-33:19
+MERGED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:33:9-39:19
+MERGED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:33:9-39:19
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:27:9-33:19
+MERGED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:27:9-33:19
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:29:9-35:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:8:18-89
+meta-data#com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar
+ADDED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
+	android:value
+		ADDED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
+	android:name
+		ADDED from [:firebase_storage] /home/avinash/Desktop/Aarohan/build/firebase_storage/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-126
+service#io.flutter.plugins.firebasemessaging.FlutterFirebaseMessagingService
+ADDED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-12:19
+	android:name
+		ADDED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:8:18-101
+intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
+ADDED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:29
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-78
+	android:name
+		ADDED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:10:25-75
+meta-data#com.google.firebase.components:io.flutter.plugins.firebasemessaging.FlutterFirebaseAppRegistrar
+ADDED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-16:85
+	android:value
+		ADDED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:16:17-82
+	android:name
+		ADDED from [:firebase_messaging] /home/avinash/Desktop/Aarohan/build/firebase_messaging/intermediates/library_manifest/debug/AndroidManifest.xml:15:17-127
+activity#io.flutter.plugins.urllauncher.UrlLauncherPlugin$WebViewActivity
+ADDED from [:url_launcher] /home/avinash/Desktop/Aarohan/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:8:9-11:74
+	android:exported
+		ADDED from [:url_launcher] /home/avinash/Desktop/Aarohan/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:10:13-37
+	android:theme
+		ADDED from [:url_launcher] /home/avinash/Desktop/Aarohan/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-71
+	android:name
+		ADDED from [:url_launcher] /home/avinash/Desktop/Aarohan/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-92
+meta-data#com.google.firebase.components:io.flutter.plugins.firebase.database.FlutterFirebaseAppRegistrar
+ADDED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
+	android:value
+		ADDED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
+	android:name
+		ADDED from [:firebase_database] /home/avinash/Desktop/Aarohan/build/firebase_database/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-127
+meta-data#com.google.firebase.components:io.flutter.plugins.firebaseauth.FlutterFirebaseAppRegistrar
+ADDED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
+	android:value
+		ADDED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
+	android:name
+		ADDED from [:firebase_auth] /home/avinash/Desktop/Aarohan/build/firebase_auth/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-122
+meta-data#com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseAppRegistrar
+ADDED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:9:13-11:85
+	android:value
+		ADDED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:11:17-82
+	android:name
+		ADDED from [:firebase_core] /home/avinash/Desktop/Aarohan/build/firebase_core/intermediates/library_manifest/debug/AndroidManifest.xml:10:17-123
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:28:9-32
+uses-library#org.apache.http.legacy
+ADDED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:33:9-35:40
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-maps-17.0.0.aar/a97e7b283951054d46c68b3be0c196de/AndroidManifest.xml:34:13-50
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:23:9-27:75
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:25:13-46
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:26:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:27:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:24:13-93
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:33:9-36:110
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:35:13-36
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:36:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-auth-16.0.1.aar/35be84ea59592abaef7f7ede873fceea/AndroidManifest.xml:34:13-89
+meta-data#com.google.firebase.components:com.google.firebase.storage.StorageRegistrar
+ADDED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:31:13-33:85
+	android:value
+		ADDED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:33:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-storage-17.0.0.aar/c2e6c3731263f6b91d9f205fe00679ba/AndroidManifest.xml:32:17-107
+meta-data#com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar
+ADDED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:30:13-32:85
+	android:value
+		ADDED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:32:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-database:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-database-17.0.0.aar/361b504552f8b9a1f66208d9f99fbd87/AndroidManifest.xml:31:17-109
+activity#com.google.firebase.auth.internal.FederatedSignInActivity
+ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:24:9-31:50
+	android:excludeFromRecents
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:26:13-46
+	android:launchMode
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:28:13-44
+	android:exported
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:27:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:29:13-102
+	android:theme
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:30:13-72
+	tools:replace
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:31:13-47
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:25:13-85
+meta-data#com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar
+ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:36:13-38:85
+	android:value
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:38:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-auth-17.0.0.aar/b852632aac4124807df22e6485929ca4/AndroidManifest.xml:37:17-109
+service#com.google.firebase.messaging.FirebaseMessagingService
+ADDED from [com.google.firebase:firebase-messaging:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-messaging-18.0.0.aar/d8b0cd67641624ec2c7cec4e8b33f3d0/AndroidManifest.xml:28:9-34:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-messaging-18.0.0.aar/d8b0cd67641624ec2c7cec4e8b33f3d0/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-messaging-18.0.0.aar/d8b0cd67641624ec2c7cec4e8b33f3d0/AndroidManifest.xml:29:13-82
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:24:22-65
+meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
+ADDED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:30:13-32:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:32:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-api-16.5.0.aar/694ff8bc44cd758a9716d0c9fdf0e06a/AndroidManifest.xml:31:17-139
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:26:5-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:26:22-79
+meta-data#com.google.firebase.components:com.google.firebase.iid.Registrar
+ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:33:17-96
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:37:9-44:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:39:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:40:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:38:13-78
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:41:13-43:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:42:17-81
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:18.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-iid-18.0.0.aar/bee756eea2d9c2edf8f4bc396082fd20/AndroidManifest.xml:42:25-78
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/AndroidManifest.xml:24:13-79
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:12:9-16:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:14:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:15:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:16:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:17.0.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-common-17.0.0.aar/a85a06422e109428405b04daffcf4972/AndroidManifest.xml:13:13-77
+uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:26:5-110
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:26:22-107
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:29:9-33:20
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:31:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:30:13-85
+receiver#com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver
+ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:34:9-42:20
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:29:9-37:20
+MERGED from [com.google.android.gms:play-services-measurement-impl:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-impl-16.5.0.aar/444b06d52de48f7a12d2c802b7161ad0/AndroidManifest.xml:29:9-37:20
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:29:9-37:20
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-sdk-api-16.5.0.aar/5b61c442e500802be80af86e1b86a5d2/AndroidManifest.xml:29:9-37:20
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:36:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:37:13-36
+	android:permission
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:38:13-69
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:35:13-100
+intent-filter#action:name:com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:39:13-41:29
+action#com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:40:17-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:40:25-76
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:44:9-47:40
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:46:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:45:13-84
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:48:9-52:72
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:50:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:51:13-37
+	android:permission
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:52:13-69
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:16.5.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-measurement-16.5.0.aar/ddd803a667e8bbdb83ae48263c4741e1/AndroidManifest.xml:49:13-87
+provider#com.facebook.internal.FacebookInitProvider
+ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:39:9-42:40
+	android:authorities
+		ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:41:13-72
+	android:exported
+		ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:42:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:40:13-70
+receiver#com.facebook.CurrentAccessTokenExpirationBroadcastReceiver
+ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:44:9-50:20
+	android:exported
+		ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:46:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:45:13-86
+intent-filter#action:name:com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
+ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:47:13-49:29
+action#com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
+ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:48:17-95
+	android:name
+		ADDED from [com.facebook.android:facebook-core:4.39.0] /home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-core-4.39.0.aar/75d3f6df5bd3cf70f45bb822978e3090/AndroidManifest.xml:48:25-92
