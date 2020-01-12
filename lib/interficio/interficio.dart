@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
       _isLoading = true;
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();  //remove this to save user data
+    // prefs.clear();  //remove this to save user data
     var _token = prefs.getString("token");
     if (_token != null) {
       setState(() {

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/avinash/Desktop/Aarohan/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-es-rES/values-es-rES.xml",
+            "outputFile": "C:\\Users\\JYOTISHKA\\Desktop\\aarohan_app\\Aarohan_Fest_App\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-es-rES\\values-es-rES.xml",
             "map": [
                 {
-                    "source": "/home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-facebook-login-4.39.0.aar/b532f8d60f5f04f6a6b71a556f2e54a1/res/values-es-rES/values-es-rES.xml",
+                    "source": "C:\\Users\\JYOTISHKA\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-facebook-login-4.39.0.aar\\46e05727dab48b3e9d119469a4f6cf30\\res\\values-es-rES\\values-es-rES.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

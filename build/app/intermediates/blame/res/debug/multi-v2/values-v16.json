@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/avinash/Desktop/Aarohan/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "C:\\Users\\JYOTISHKA\\Desktop\\aarohan_app\\Aarohan_Fest_App\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "/home/avinash/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/615595bfea20cac6a865d70ef2ffc626/res/values-v16/values-v16.xml",
+                    "source": "C:\\Users\\JYOTISHKA\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.0.2.aar\\dcb31711d3ec95f42b7882dc85c63e2a\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/home/avinash/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/21d08d2531d32348f438773f218ed4ef/res/values-v16/values-v16.xml",
+                    "source": "C:\\Users\\JYOTISHKA\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.1.aar\\d2f43f820ee2324a9853f99ba95cd4bc\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -1,47 +1,47 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:1-9:12
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:1-9:12
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:1-9:12
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:1-9:12
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:1-9:12
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:1-9:12
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:1-9:12
+ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:1-9:12
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:1-9:12
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:1-9:12
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:1-9:12
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:1-9:12
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:1-9:12
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:1-9:12
 	package
-		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:2:3-40
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
+		ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:2:3-40
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:1-9:12
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+		ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:1-9:12
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:1-9:12
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+		ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:1-9:12
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:1:11-69
+		ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:1:11-69
 uses-permission#android.permission.CAMERA
-ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:4:3-63
+ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:4:3-63
 	android:name
-		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:4:20-60
+		ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:4:20-60
 application
-ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:6:3-8:17
+ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:6:3-8:17
 activity#com.apptreesoftware.barcodescan.BarcodeScannerActivity
-ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:7:5-87
+ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:7:5-87
 	android:name
-		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml:7:15-84
+		ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml:7:15-84
 uses-sdk
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+		ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-		ADDED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
-		INJECTED from /home/avinash/Desktop/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/barcode_scan-1.0.0/android/src/main/AndroidManifest.xml
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+		ADDED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml
+		INJECTED from D:\flutter\.pub-cache\hosted\pub.dartlang.org\barcode_scan-1.0.0\android\src\main\AndroidManifest.xml

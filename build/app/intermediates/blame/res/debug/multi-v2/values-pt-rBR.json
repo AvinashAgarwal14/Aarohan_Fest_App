@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/avinash/Desktop/Aarohan/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rBR/values-pt-rBR.xml",
+            "outputFile": "C:\\Users\\JYOTISHKA\\Desktop\\aarohan_app\\Aarohan_Fest_App\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt-rBR\\values-pt-rBR.xml",
             "map": [
                 {
-                    "source": "/home/avinash/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/615595bfea20cac6a865d70ef2ffc626/res/values-pt-rBR/values-pt-rBR.xml",
+                    "source": "C:\\Users\\JYOTISHKA\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.0.2.aar\\dcb31711d3ec95f42b7882dc85c63e2a\\res\\values-pt-rBR\\values-pt-rBR.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "/home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-firebase-messaging-18.0.0.aar/d8b0cd67641624ec2c7cec4e8b33f3d0/res/values-pt-rBR/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "209",
-                        "endColumns": "102",
-                        "endOffsets": "311"
-                    },
-                    "to": {
-                        "startLines": "47",
-                        "startColumns": "4",
-                        "startOffsets": "5595",
-                        "endColumns": "106",
-                        "endOffsets": "5697"
-                    }
-                },
-                {
-                    "source": "/home/avinash/.gradle/caches/transforms-1/files-1.1/play-services-base-17.0.0.aar/32f93d97882a1f1465a89c7aaa6785ae/res/values-pt-rBR/values.xml",
+                    "source": "C:\\Users\\JYOTISHKA\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-17.0.0.aar\\a4446d186bd931b8af747ac85b4ccc1f\\res\\values-pt-rBR\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -55,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/home/avinash/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-17.0.0.aar/b92104d65a5aafa968a1b58f8bd0e3fc/res/values-pt-rBR/values.xml",
+                    "source": "C:\\Users\\JYOTISHKA\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-basement-17.0.0.aar\\369aa26aeef2241ea9835dcdc8538bee\\res\\values-pt-rBR\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -72,7 +55,24 @@
                     }
                 },
                 {
-                    "source": "/home/avinash/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/21d08d2531d32348f438773f218ed4ef/res/values-pt-rBR/values-pt-rBR.xml",
+                    "source": "C:\\Users\\JYOTISHKA\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-firebase-messaging-18.0.0.aar\\fd4b384e7ee13eb96eac20366df6e41d\\res\\values-pt-rBR\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "209",
+                        "endColumns": "102",
+                        "endOffsets": "311"
+                    },
+                    "to": {
+                        "startLines": "47",
+                        "startColumns": "4",
+                        "startOffsets": "5595",
+                        "endColumns": "106",
+                        "endOffsets": "5697"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\JYOTISHKA\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.1.aar\\d2f43f820ee2324a9853f99ba95cd4bc\\res\\values-pt-rBR\\values-pt-rBR.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -1,11 +1,10 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-<<<<<<< HEAD
-export "FLUTTER_ROOT=/home/avinash/Desktop/Flutter/flutter"
-export "FLUTTER_APPLICATION_PATH=/home/avinash/Desktop/aa/Aavishkar_app"
-export "FLUTTER_TARGET=lib/main.dart"
+export "FLUTTER_ROOT=D:\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Users\JYOTISHKA\Desktop\aarohan_app\Aarohan_Fest_App"
+export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "SYMROOT=${SOURCE_ROOT}/../build/ios"
-export "FLUTTER_FRAMEWORK_DIR=/home/avinash/Desktop/Flutter/flutter/bin/cache/artifacts/engine/ios"
+export "SYMROOT=${SOURCE_ROOT}/../build\ios"
+export "FLUTTER_FRAMEWORK_DIR=D:\flutter\bin\cache\artifacts\engine\ios"
 export "FLUTTER_BUILD_NAME=1.0.0"
 export "FLUTTER_BUILD_NUMBER=1"
