@@ -55,8 +55,7 @@ class _CommentCategoryState extends State<CommentCategory> {
         child: new SafeArea(
           top: false,
           bottom: false,
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: new ListView(
             children: <Widget>[
               (commentItems.length > 0)?
               new Stack(
@@ -394,13 +393,13 @@ class _AddNewCommentState extends State<AddNewComment> {
   }
 
   Future addComment(comment) async {
-    await _databaseReferenceForPost.update({
-      'commentsCount':widget.commentCount+1
-    });
-
     var newRef = _databaseReferenceForNewComment.push();
     comment.id = newRef.key;
     newRef.set(comment.toJson());
+
+    _databaseReferenceForPost.update({
+      'commentsCount': widget.commentCount+1
+    });
   }
 
 }
