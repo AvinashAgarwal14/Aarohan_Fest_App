@@ -251,7 +251,9 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                                                   title: Text(suggestionList[index][0]),
                                                   subtitle: Text(suggestionList[index][1]),
                                                   leading: CircleAvatar(
-                                                    child: Image.network(suggestionList[index][2]),
+                                                    child: (suggestionList[index][2]!=null)?Image.network(suggestionList[index][2]):
+
+                                                            Image.asset('../../../images/userIcon.png')
                                                   ),
                                                 );
                                       }))

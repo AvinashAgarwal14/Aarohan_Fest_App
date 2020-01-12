@@ -83,7 +83,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     Icons.home,
                   ),
                   title: Text(
-                    "Home",
+                    "Dashboard",
                   ),
                   selected: (presestPageNumber == 0) ? true : false,
                   onTap: () {
