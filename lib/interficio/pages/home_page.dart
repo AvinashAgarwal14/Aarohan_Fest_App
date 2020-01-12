@@ -141,6 +141,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     super.initState();
     {

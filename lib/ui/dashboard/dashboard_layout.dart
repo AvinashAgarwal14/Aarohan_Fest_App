@@ -30,6 +30,14 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
   Map<String, List<EventItem>> eventsByCategories;
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

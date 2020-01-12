@@ -47,6 +47,14 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     autoAuthenticate();
 

@@ -34,6 +34,14 @@ class _SearchByTagsState extends State<SearchByTags> {
   DatabaseReference databaseReference;
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

@@ -44,6 +44,14 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   AppBarBehavior _appBarBehavior = AppBarBehavior.pinned;
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

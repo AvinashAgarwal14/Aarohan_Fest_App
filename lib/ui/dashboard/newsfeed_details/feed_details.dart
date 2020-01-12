@@ -20,6 +20,14 @@ class FeedDetailsState extends State<FeedDetails> {
   FirebaseUser currentUser;
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

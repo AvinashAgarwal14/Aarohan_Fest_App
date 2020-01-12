@@ -12,6 +12,14 @@ class MyDiceApp extends StatefulWidget {
 
 class _MyDiceAppState extends State<MyDiceApp> {
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     
     super.initState();

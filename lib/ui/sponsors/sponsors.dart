@@ -18,6 +18,14 @@ class _SponsorsState extends State<Sponsors> {
   int indexOfWidget;
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     super.initState();
 

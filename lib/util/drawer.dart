@@ -28,6 +28,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   int presestPageNumber;
   bool darkThemeEnabled; // For the toggler
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

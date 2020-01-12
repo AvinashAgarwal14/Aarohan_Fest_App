@@ -17,6 +17,14 @@ class _NewsfeedState extends State<Newsfeed> {
   DatabaseReference databaseReference;
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

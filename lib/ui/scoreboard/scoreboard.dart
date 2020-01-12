@@ -105,6 +105,14 @@ class _ScoreboardState extends State<Scoreboard> {
   DatabaseReference _databaseReferenceForScoreboard;
   
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

@@ -28,6 +28,14 @@ class _DashboardState extends State<Dashboard> {
 
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

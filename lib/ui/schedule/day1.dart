@@ -14,6 +14,14 @@ class _DayOneScheduleState extends State<DayOneSchedule> {
   List<ScheduleItem> scheduleList;
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

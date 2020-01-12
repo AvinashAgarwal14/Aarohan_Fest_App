@@ -72,6 +72,14 @@ class _UpDownGameState extends State<UpDownGame> {
   }
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     super.initState();
   }

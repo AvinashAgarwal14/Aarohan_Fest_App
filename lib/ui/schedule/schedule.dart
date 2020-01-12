@@ -33,6 +33,14 @@ class _ScheduleState extends State<Schedule> {
   _ScheduleState({this.margin});
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

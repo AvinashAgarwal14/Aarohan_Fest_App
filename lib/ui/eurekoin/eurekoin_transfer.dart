@@ -146,6 +146,14 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
   List suggestionList = new List();
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     super.initState();
 

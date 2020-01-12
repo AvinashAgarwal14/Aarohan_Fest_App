@@ -24,6 +24,14 @@ class _CommentCategoryState extends State<CommentCategory> {
   List<PostsCommentItem> commentItems;
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -156,6 +164,14 @@ class _CommentItemState extends State<CommentItem> {
   TextEditingController editComment = new TextEditingController();
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -307,6 +323,14 @@ class _AddNewCommentState extends State<AddNewComment> {
   TextEditingController commentController = new TextEditingController();
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     // TODO: implement initState
     super.initState();

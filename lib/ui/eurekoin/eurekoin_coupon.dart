@@ -150,6 +150,14 @@ class _EurekoinCouponState extends State<EurekoinCoupon> {
   final loginKey = 'itsnotvalidanyways';
 
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+@override
   void initState() {
     super.initState();
 
