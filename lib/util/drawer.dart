@@ -12,6 +12,7 @@ import '../ui/contact_us/contact_us.dart';
 import '../ui/contributors/contributors.dart';
 import '../interficio/interficio.dart';
 import 'package:aavishkarapp/games/dicegame.dart';
+import 'package:flutter/services.dart';
 
 // The app drawer that appears at every screen
 
@@ -27,17 +28,18 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   int presestPageNumber;
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     presestPageNumber = widget.currentDisplayedPage;
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark));
   }
 
   @override

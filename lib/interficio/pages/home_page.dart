@@ -111,24 +111,33 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _isLoading = true;
     });
-    http.Response response = await http.post(
-      Uri.encodeFull("http://$api_url/api/submit/location/"),
-      headers: {
-        "Authorization": "Token ${user["token"]}",
-        "Content-Type": "application/json"
-      },
-      body: json.encode({
-        "lat": lat,
-        "long": long,
-        "level_no": levelData["level_no"],
-      }),
-    );
-    var data = json.decode(response.body);
+    if (accuracy > 25) {
+       _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content:
+            Text("location not accurate enough. please try again"),
+        duration: Duration(seconds: 1),
+      ));
+    } else {
+      http.Response response = await http.post(
+        Uri.encodeFull("http://$api_url/api/submit/location/"),
+        headers: {
+          "Authorization": "Token ${user["token"]}",
+          "Content-Type": "application/json"
+        },
+        body: json.encode({
+          "lat": lat,
+          "long": long,
+          "level_no": levelData["level_no"],
+        }),
+      );
+      var data = json.decode(response.body);
 
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(data["success"] == true ? "correct location" : "try again"),
-      duration: Duration(seconds: 1),
-    ));
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content:
+            Text(data["success"] == true ? "correct location" : "try again"),
+        duration: Duration(seconds: 1),
+      ));
+    }
     setState(() {
       getLevelData();
     });
@@ -142,13 +151,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     super.initState();
     {
