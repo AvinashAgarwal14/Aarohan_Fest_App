@@ -254,8 +254,8 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                       children: <Widget>[
                         CircleAvatar(radius:  animationStatus==1?60.0:42.0,backgroundColor: Theme.of(context).brightness==Brightness.light?Colors.grey:Colors.black12,),
                         Container(
-                            width: animationStatus==1?120.0:80.0,
-                            height: animationStatus==1?120.0:80.0,
+                            width: animationStatus==1?150.0:80.0,
+                            height: animationStatus==1?150.0:80.0,
                             decoration: new BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: new DecorationImage(
@@ -265,15 +265,15 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                             )
                         ),
 
-                                    CircleAvatar(
+                                    // CircleAvatar(
 
-                                      child: new Image.network(
-                                        "${currentUser.photoUrl}",
-                                        fit: BoxFit.scaleDown,
-                                        //height: _appBarHeight,
-                                      ),backgroundColor: Colors.white,
-                                      radius: animationStatus==2?45.0:80.0,
-                                    ),
+                                    //   child: new Image.network(
+                                    //     "${currentUser.photoUrl}",
+                                    //     fit: BoxFit.scaleDown,
+                                    //     //height: _appBarHeight,
+                                    //   ),backgroundColor: Colors.white,
+                                    //   radius: animationStatus==2?45.0:80.0,
+                                    // ),
                         //maxRadius:10
 
                         // This gradient ensures that the toolbar icons are distinct

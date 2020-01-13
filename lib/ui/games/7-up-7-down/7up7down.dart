@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'dart:async';
@@ -5,19 +8,25 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 class UpDownGame extends StatefulWidget {
   var coins_left;
   var fix;
-  UpDownGame(this.coins_left, this.fix);
+  var currentUser;
+  var betAmount;
+  UpDownGame(this.coins_left, this.fix, this.currentUser, this.betAmount);
   @override
-  _UpDownGameState createState() => _UpDownGameState(coins_left, fix);
+  _UpDownGameState createState() =>
+      _UpDownGameState(coins_left, fix, currentUser, betAmount);
 }
 
 class _UpDownGameState extends State<UpDownGame> {
   var coins_left;
   var fix;
-  _UpDownGameState(this.coins_left, this.fix);
+  var currentUser;
+  var betAmount;
+  _UpDownGameState(this.coins_left, this.fix, this.currentUser, this.betAmount);
   var value;
   var result;
   var upordown;
@@ -25,7 +34,28 @@ class _UpDownGameState extends State<UpDownGame> {
   var dice1 = 1;
   var dice2 = 2;
   bool _isLoading = false;
+  bool _eurekoinLoading = false;
   bool help = false;
+  bool rolling = false;
+  final loginKey = 'itsnotvalidanyways';
+
+  Future getUserEurekoin() async {
+    setState(() {
+      _eurekoinLoading = true;
+    });
+    var email = currentUser.email;
+    var bytes = utf8.encode("$email" + "$loginKey");
+    var encoded = sha1.convert(bytes);
+    String apiUrl = "https://ekoin.nitdgplug.org/api/coins/?token=$encoded";
+    http.Response response = await http.get(apiUrl);
+    print(response);
+    var status = json.decode(response.body)['coins'];
+    print(status);
+    setState(() {
+      coins_left = status;
+      _eurekoinLoading = false;
+    });
+  }
 
   void submit(context, result) async {
     Scaffold.of(context).showBottomSheet((context) {
@@ -46,33 +76,18 @@ class _UpDownGameState extends State<UpDownGame> {
             children: <Widget>[
               Text("THE TOTAL SUM IS $value. YOUR BET WAS 7$upordown"),
               Text(result == "winner"
-                  ? "YOU WIN 10 COINS"
-                  : "YOU LOSE 10 COINS"),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    RaisedButton(
-                      onPressed: () {
-                        SystemChrome.setSystemUIOverlayStyle(
-                            SystemUiOverlayStyle(
-                                statusBarColor: Colors.white,
-                                systemNavigationBarIconBrightness:
-                                    Brightness.dark));
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                      },
-                      child: Text("GO BACK"),
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        setState(() {
-                          picked = false;
-                        });
-                        Navigator.pop(context);
-                      },
-                      child: Text("PLAY AGAIN"),
-                    )
-                  ]),
+                  ? "YOU WIN $betAmount COINS"
+                  : "YOU LOSE $betAmount COINS"),
+              RaisedButton(
+                onPressed: () {
+                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                      statusBarColor: Colors.white,
+                      systemNavigationBarIconBrightness: Brightness.dark));
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                child: Text("GO BACK"),
+              ),
             ],
           ),
         ),
@@ -84,11 +99,15 @@ class _UpDownGameState extends State<UpDownGame> {
     });
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    Response response = await Dio().post(
-        "https://aavishkargames.herokuapp.com/sevenup/create",
-        data: {"email": "romitkarmakar@gmail.com", "status": result});
-    coins_left = response.data["coins"];
+    Response response =
+        await Dio().post("https://aavishkargames.herokuapp.com/create/", data: {
+      "email": currentUser.email,
+      "status": result,
+      "type": "sevenup",
+      "amount": betAmount
+    });
     setState(() {
+      getUserEurekoin();
       _isLoading = false;
     });
     print(response.data);
@@ -98,6 +117,7 @@ class _UpDownGameState extends State<UpDownGame> {
   @override
   void initState() {
     super.initState();
+    print(fix);
   }
 
   @override
@@ -111,62 +131,57 @@ class _UpDownGameState extends State<UpDownGame> {
       },
       child: Scaffold(
         body: Builder(
-          builder: (context) => !help
-              ? SafeArea(
-                  child: Container(
-                    decoration: BoxDecoration(color: Color(0xFF008F23)),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    MediaQuery.of(context).size.width / 5),
-                            margin: EdgeInsets.all(5),
-                            child: Text(
-                              "Choose to bet either 7UP or 7DOWN. If the sum of your roll matches your bet, you win 10 Eurekoins! Otherwise you lose 10. ALL THE BEST",
-                              style:
-                                  TextStyle(fontSize: 35, color: Colors.white),
-                            ),
-                          ),
-                          FlatButton(
-                            color: Colors.white,
-                            child: Text("PROCEED"),
-                            onPressed: () {
-                              setState(() {
-                                help = true;
-                              });
-                            },
+          builder: (context) => Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/dicebg.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
+              child: SafeArea(
+                child: Stack(children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.6),
+                        borderRadius: BorderRadius.circular(20.0)),
+                    margin: EdgeInsets.all(4.0),
+                    padding: EdgeInsets.all(4.0),
+                    child: !help
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(15),
+                                margin: EdgeInsets.all(5),
+                                child: SingleChildScrollView(
+                                  child: Text(
+                                    "\nINSTRUCTIONS:\n\nCHOOSE 7↑ OR 7↓\nIF THE SUM OF THE DICE FACES AFTER YOUR ROLL IS ACCORDING TO YOUR BET, YOU WIN BACK TWICE YOUR BET\nOTHERWISE YOU LOSE ALL OF IT\nALL THE BEST!",
+                                    style: TextStyle(
+                                        fontSize: 35,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              FlatButton(
+                                color: Colors.white,
+                                child: Text("PROCEED"),
+                                onPressed: () {
+                                  setState(() {
+                                    help = true;
+                                  });
+                                },
+                              )
+                            ],
                           )
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-              : Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/dicebg.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
-                    child: SafeArea(
-                      child: Stack(children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.6),
-                              borderRadius: BorderRadius.circular(20.0)),
-                          margin: EdgeInsets.all(4.0),
-                          padding: EdgeInsets.all(4.0),
-                          child: Column(
+                        : Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               _coinsLeft(coins_left),
                               _diceDisplay(),
-                              _start(context),
+                              rolling ? Container() : _start(context),
                               SizedBox(
                                 height: 20,
                               ),
@@ -190,26 +205,24 @@ class _UpDownGameState extends State<UpDownGame> {
                                     ),
                             ],
                           ),
-                        ),
-                        FlatButton(
-                          padding: EdgeInsets.fromLTRB(0, 40.0, 0, 0),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            SystemChrome.setSystemUIOverlayStyle(
-                                SystemUiOverlayStyle(
-                                    statusBarColor: Colors.white,
-                                    systemNavigationBarIconBrightness:
-                                        Brightness.dark));
-                          },
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: Color(0xFF008F23),
-                          ),
-                        ),
-                      ]),
+                  ),
+                  FlatButton(
+                    padding: EdgeInsets.fromLTRB(0, 40.0, 0, 0),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                          statusBarColor: Colors.white,
+                          systemNavigationBarIconBrightness: Brightness.dark));
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Color(0xFF008F23),
                     ),
                   ),
-                ),
+                ]),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -229,13 +242,18 @@ class _UpDownGameState extends State<UpDownGame> {
           FittedBox(
             fit: BoxFit.contain,
             child: Container(
-              child: Text(
-                '$coins_left',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
-                    color: Colors.white),
-              ),
+              child: _eurekoinLoading
+                  ? Container(
+                      child: CircularProgressIndicator(
+                      backgroundColor: Colors.green,
+                    ))
+                  : Text(
+                      '$coins_left',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 40,
+                          color: Colors.white),
+                    ),
             ),
           ),
           Expanded(
@@ -250,6 +268,9 @@ class _UpDownGameState extends State<UpDownGame> {
     return FlatButton(
       color: Color(0xFF008F23),
       onPressed: () {
+        setState(() {
+          rolling = true;
+        });
         if (!picked) {
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text("please pick 7 UP or 7 DOWN"),
@@ -260,7 +281,7 @@ class _UpDownGameState extends State<UpDownGame> {
         } else {
           if (fix == 0) {
             const oneSec = const Duration(milliseconds: 100);
-            var loop = 20;
+            var loop = 30;
             Timer.periodic(
                 oneSec,
                 (Timer t) => setState(() {
@@ -282,7 +303,7 @@ class _UpDownGameState extends State<UpDownGame> {
                     }));
           } else if (fix == 1) {
             const oneSec = const Duration(milliseconds: 100);
-            var loop = 20;
+            var loop = 30;
             Timer.periodic(
               oneSec,
               (Timer t) => setState(
@@ -310,7 +331,7 @@ class _UpDownGameState extends State<UpDownGame> {
             );
           } else if (fix == -1) {
             const oneSec = const Duration(milliseconds: 100);
-            var loop = 20;
+            var loop = 30;
             Timer.periodic(
               oneSec,
               (Timer t) => setState(

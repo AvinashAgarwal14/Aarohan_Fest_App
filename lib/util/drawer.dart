@@ -10,8 +10,8 @@ import '../ui/sponsors/sponsors.dart';
 import '../util/navigator_transitions/slide_left_transitions.dart';
 import '../ui/contact_us/contact_us.dart';
 import '../ui/contributors/contributors.dart';
-import '../interficio/interficio.dart';
-import 'package:aavishkarapp/games/home_page.dart';
+import '../ui/interficio/interficio.dart';
+import 'package:aavishkarapp/ui/games/home_page.dart';
 import 'package:flutter/services.dart';
 
 // The app drawer that appears at every screen
@@ -90,6 +90,21 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                           .push(SlideLeftRoute(widget: EurekoinHomePage()));
                     }
                   }),
+              ListTile(
+                leading: Icon(
+                  Icons.casino,
+                ),
+                title: Text(
+                  "Eurekoin Casino",
+                ),
+                // selected: (presestPageNumber == 8) ? true : false,
+                onTap: (() {
+                  Navigator.popUntil(
+                      context, ModalRoute.withName('/ui/dashboard'));
+                  Navigator.of(context)
+                      .push(SlideLeftRoute(widget: HomePage()));
+                }),
+              ),
               ListTile(
                 leading: Icon(
                   Icons.access_time,
@@ -203,21 +218,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   Navigator.of(context).push(SlideLeftRoute(widget: MyApp()));
                 }),
               ),
-              ListTile(
-                leading: Icon(
-                  Icons.gamepad,
-                ),
-                title: Text(
-                  "Games",
-                ),
-                // selected: (presestPageNumber == 8) ? true : false,
-                onTap: (() {
-                  Navigator.popUntil(
-                      context, ModalRoute.withName('/ui/dashboard'));
-                    Navigator.of(context)
-                      .push(SlideLeftRoute(widget: HomePage()));}
-                ),
-              ),
+
               ListTile(
                   title: Text("About Us",
                       style: TextStyle(
