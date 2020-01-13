@@ -12,6 +12,7 @@ import '../ui/contact_us/contact_us.dart';
 import '../ui/contributors/contributors.dart';
 import '../interficio/interficio.dart';
 import 'package:aavishkarapp/games/dicegame.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // The app drawer that appears at every screen
 
@@ -25,7 +26,7 @@ class NavigationDrawer extends StatefulWidget {
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
   int presestPageNumber;
-  bool darkThemeEnabled; // For the toggler
+  FirebaseUser currentUser;
   @override
   void setState(fn) {
     if(mounted){
@@ -211,10 +212,21 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 ),
                 // selected: (presestPageNumber == 8) ? true : false,
                 onTap: (() {
-                  Navigator.popUntil(
+
+                  if(currentUser==null)
+                  {
+                    Navigator.of(context)
+                            .pushNamed("/ui/account/login")
+                            .then((onReturn) {
+                          _getUser();
+                        });
+                  }
+                  else
+                  {
+                    Navigator.popUntil(
                       context, ModalRoute.withName('/ui/dashboard'));
-                  Navigator.of(context)
-                      .push(SlideLeftRoute(widget: MyDiceApp()));
+                    Navigator.of(context)
+                      .push(SlideLeftRoute(widget: MyDiceApp()));}
                 }),
               ),
               ListTile(
@@ -299,4 +311,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       ),
     );
   }
+  Future _getUser() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    print(user);
+    setState(() {
+      currentUser = user;
+    });}
 }
