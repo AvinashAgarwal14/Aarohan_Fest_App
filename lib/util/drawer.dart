@@ -218,7 +218,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   Navigator.of(context).push(SlideLeftRoute(widget: MyApp()));
                 }),
               ),
-
               ListTile(
                   title: Text("About Us",
                       style: TextStyle(

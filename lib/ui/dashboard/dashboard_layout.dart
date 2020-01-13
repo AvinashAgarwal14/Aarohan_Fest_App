@@ -255,9 +255,12 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                     Image.asset(
                                                         "images/imageplaceholder.png"),
                                                 imageUrl:
-                                                    eventsByCategories["Online"]
-                                                            [index]
-                                                        .imageUrl,
+//                                                    eventsByCategories["Online"]
+//                                                            [index]
+//                                                        .imageUrl,
+//                                                'https://www.hcsa.org.sg/wp-content/uploads/2018/10/181015-HCSA-Res-03-Events-banner.jpg',
+                                                'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+
                                                 height: double.infinity,
                                                 width: double.infinity,
                                                 fit: BoxFit.cover))),
