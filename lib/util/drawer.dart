@@ -11,7 +11,6 @@ import '../util/navigator_transitions/slide_left_transitions.dart';
 import '../ui/contact_us/contact_us.dart';
 import '../ui/contributors/contributors.dart';
 import '../interficio/interficio.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:aavishkarapp/games/dicegame.dart';
 
 // The app drawer that appears at every screen
@@ -44,9 +43,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    Theme.of(context).brightness == Brightness.light
-        ? darkThemeEnabled = false
-        : darkThemeEnabled = true;
     return Opacity(
       opacity: 0.75,
       child: Drawer(
@@ -62,31 +58,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 child: Image.asset("images/gifs/pacman.gif", fit: BoxFit.cover),
               ),
               ListTile(
-                  enabled: true,
-                  trailing: Switch(
-                      activeColor: Color(0xFF505194),
-                      inactiveTrackColor: Colors.grey,
-                      value: darkThemeEnabled,
-                      onChanged: (bool value) {
-                        setState(() {
-                          darkThemeEnabled = value;
-                        });
-                        Theme.of(context).brightness == Brightness.dark
-                            ? DynamicTheme.of(context)
-                                .setThemeData(new ThemeData(
-                                primaryColor: Color(0xFF505194),
-                              ))
-                            : DynamicTheme.of(context)
-                                .setThemeData(new ThemeData(
-//                            accentTextTheme: TextTheme(
-//                                title: TextStyle(color: Colors.white)),
-                                primaryColor: Color(0xFF505194),
-                                splashColor: Colors.transparent,
-                                accentColor: Color(0xFF505194),
-                                brightness: Brightness.dark,
-                              ));
-                        print(Theme.of(context).brightness);
-                      }),
                   leading: Icon(
                     Icons.home,
                   ),
