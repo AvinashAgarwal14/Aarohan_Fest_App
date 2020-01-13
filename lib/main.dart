@@ -10,7 +10,6 @@ import './ui/contact_us/contact_us.dart';
 import './ui/sponsors/sponsors.dart';
 import './ui/contributors/contributors.dart';
 import './ui/about_us/about_us.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import './interficio/interficio.dart';
 
 void main() => runApp(new Aavishkar_App());
@@ -22,22 +21,10 @@ class Aavishkar_App extends StatelessWidget {
     // Wrapped within Dynamic Theme to change the theme
     // By toggling the change theme
 
-    return DynamicTheme(
-       // defaultBrightness: Brightness.dark,
-        data: (brightness) => ThemeData(
-            primaryColor: Color(0xFF505194),
-            brightness: brightness,
-//          splashColor: Colors.transparent,
-//          accentColor: Color(0xFF505194),
-//          brightness: Brightness.dark,
-
-        ),
-        themedWidgetBuilder: (context, theme) {
-          return MaterialApp(
+      return MaterialApp(
             title: "Aavishkar App",
             debugShowMaterialGrid: false,
             debugShowCheckedModeBanner: false,
-            theme: theme,
             home: new Dashboard(),
             initialRoute: "/ui/dashboard",
             routes: <String, WidgetBuilder>{
@@ -57,6 +44,5 @@ class Aavishkar_App extends StatelessWidget {
               "/interficio/interficio.dart": (BuildContext context) => MyApp(),
             },
           );
-        });
   }
 }

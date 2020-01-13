@@ -29,9 +29,6 @@ dependencies:
   path_provider:
   intro_slider: ^1.0.7
   share: ^0.5.3
-  dynamic_theme:
-    git:
-      url: git://github.com/Norbert515/dynamic_theme.git
   google_maps_flutter: ^0.5.20+6
   location: ^2.3.5
   http: ^0.12.0+3
