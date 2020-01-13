@@ -11,7 +11,7 @@ import '../util/navigator_transitions/slide_left_transitions.dart';
 import '../ui/contact_us/contact_us.dart';
 import '../ui/contributors/contributors.dart';
 import '../interficio/interficio.dart';
-import 'package:aavishkarapp/games/dicegame.dart';
+import 'package:aavishkarapp/games/home_page.dart';
 import 'package:flutter/services.dart';
 
 // The app drawer that appears at every screen
@@ -215,7 +215,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   Navigator.popUntil(
                       context, ModalRoute.withName('/ui/dashboard'));
                     Navigator.of(context)
-                      .push(SlideLeftRoute(widget: MyDiceApp()));}
+                      .push(SlideLeftRoute(widget: HomePage()));}
                 ),
               ),
               ListTile(

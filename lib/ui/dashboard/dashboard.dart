@@ -93,7 +93,7 @@ class _DashboardState extends State<Dashboard> {
                         :
                         Container(),
                     IconButton(
-                        icon: Icon(Icons.account_box),
+                        icon: Icon(Icons.person),
                         onPressed: (){
                           Navigator.push(
                             context,
