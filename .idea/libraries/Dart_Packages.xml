@@ -93,13 +93,6 @@
             </list>
           </value>
         </entry>
-        <entry key="dynamic_theme">
-          <value>
-            <list>
-              <option value="$PROJECT_DIR$/../Flutter/flutter/.pub-cache/git/dynamic_theme-6fac9fe49b3af8cccc892b7231119c21e77f8c0d/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="firebase_auth">
           <value>
             <list>
@@ -446,7 +439,6 @@
       </option>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/git/dynamic_theme-6fac9fe49b3af8cccc892b7231119c21e77f8c0d/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/archive-2.0.11/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/args-1.5.2/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.4.0/lib" />
