@@ -177,7 +177,7 @@ class _ScoreboardState extends State<Scoreboard> {
         }
         return Scaffold(
             key: _scaffoldKey,
-            drawer: NavigationDrawer(currentDisplayedPage: 2),
+            drawer: NavigationDrawer(),
             appBar: AppBar(
               title: const Text('Live Scoreboard'), elevation: 10.0,),
             body:
@@ -272,7 +272,7 @@ class _ScoreboardState extends State<Scoreboard> {
       }
       else{
       return Scaffold(
-    drawer: NavigationDrawer(currentDisplayedPage: 2),
+    drawer: NavigationDrawer(),
     body: Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,

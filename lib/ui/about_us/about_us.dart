@@ -16,7 +16,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      drawer: NavigationDrawer(currentDisplayedPage: 7),
+      drawer: NavigationDrawer(),
       appBar: AppBar(
         title: Text("About Aarohan"),
       ),

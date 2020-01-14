@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:url_launcher/url_launcher.dart';
 import './comment_section.dart';
 import './status_section.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -41,9 +40,11 @@ class FeedDetailsState extends State<FeedDetails> {
       children: <Widget>[
         Container(
             height: double.infinity,
-            child: Image.network(
-//             widget.post.imageUrl,
-              'https://novationmusic.com/sites/novation/files/FYS-EventsPageHeader-Desktop.png',
+            child: CachedNetworkImage(
+              placeholder: (context, url) =>
+                  Image.asset(
+                      "images/imageplaceholder.png"),
+              imageUrl: widget.post.imageUrl,
               fit: BoxFit.cover,
             )),
         SafeArea(
@@ -80,7 +81,6 @@ class FeedDetailsState extends State<FeedDetails> {
                       children: <Widget>[
                         SizedBox(height: 20.0),
                           new StatusCategory(
-                            commentsCount: widget.post.commentsCount,
                             postKey: widget.post.key,
                             date: widget.post.date
                           ),

@@ -58,7 +58,7 @@ class _ScheduleState extends State<Schedule> {
         data: themeData,
         child: new Scaffold(
             key: _scaffoldKeyForSchedule,
-            drawer: NavigationDrawer(currentDisplayedPage: 4),
+            drawer: NavigationDrawer(),
             body: new CustomScrollView(slivers: <Widget>[
               new SliverAppBar(
                 expandedHeight: _appBarHeight,

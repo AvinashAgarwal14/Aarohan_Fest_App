@@ -152,7 +152,7 @@ class _ContactUsState extends State<ContactUs> {
   Widget build(BuildContext context) {
     return Scaffold(
 //        backgroundColor: Theme.of(context).brightness==Brightness.light?Colors.white70:Colors.black38,
-        drawer: NavigationDrawer(currentDisplayedPage: 10),
+        drawer: NavigationDrawer(),
         appBar: AppBar(
           title: Text("Contact Us"),
         ),

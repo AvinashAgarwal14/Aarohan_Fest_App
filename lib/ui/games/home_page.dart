@@ -1,7 +1,9 @@
 import 'dart:ui';
-
+import '../eurekoin/eurekoin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../util/drawer.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'dart:async';
@@ -22,6 +24,19 @@ class _HomePageState extends State<HomePage> {
   var userEurekoin = 0;
   final loginKey = 'itsnotvalidanyways';
   var betAmount;
+  int isEurekoinAlreadyRegistered = null;
+
+  @override
+  void initState() {
+    super.initState();
+    _getUser().then((val) {
+      isEurekoinUserRegistered();
+    });
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark));
+  }
 
   Future _getUser() async {
     setState(() {
@@ -33,6 +48,24 @@ class _HomePageState extends State<HomePage> {
       currentUser = user;
       _eurekoinLoading = false;
     });
+  }
+
+  Future isEurekoinUserRegistered() async {
+    var email = currentUser.email;
+    var bytes = utf8.encode("$email" + "$loginKey");
+    var encoded = sha1.convert(bytes);
+    String apiUrl = "https://ekoin.nitdgplug.org/api/exists/?token=$encoded";
+    http.Response response = await http.get(apiUrl);
+    var status = json.decode(response.body)['status'];
+    if (status == '1') {
+      setState(() {
+        isEurekoinAlreadyRegistered = 1;
+      });
+      getUserEurekoin();
+    } else
+      setState(() {
+        isEurekoinAlreadyRegistered = 0;
+      });
   }
 
   Future getUserEurekoin() async {
@@ -51,18 +84,6 @@ class _HomePageState extends State<HomePage> {
       userEurekoin = status;
       _eurekoinLoading = false;
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getUser().then((val) {
-      getUserEurekoin();
-    });
-
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        systemNavigationBarIconBrightness: Brightness.dark));
   }
 
   var coins_left;
@@ -136,7 +157,9 @@ class _HomePageState extends State<HomePage> {
             statusBarColor: Colors.white,
             systemNavigationBarIconBrightness: Brightness.dark));
       },
-      child: Scaffold(
+      child: (isEurekoinAlreadyRegistered == null)?CircularProgressIndicator():
+    (isEurekoinAlreadyRegistered == 1)?
+      Scaffold(
         key: _scaffoldkey,
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -185,6 +208,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+        drawer: NavigationDrawer(),
         backgroundColor: Colors.white,
         body: Builder(
           builder: (context) => _isLoading
@@ -447,7 +471,8 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
         ),
-      ),
+      ):
+    EurekoinHomePage(),
     );
   }
 }

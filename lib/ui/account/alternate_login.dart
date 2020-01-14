@@ -224,7 +224,7 @@
 //          body: previouslyLoggedIn == false
 //              ? new Scaffold(
 //              key: _scaffoldKey,
-//              drawer: NavigationDrawer(currentDisplayedPage: 8),
+//              drawer: NavigationDrawer(),
 //              body: new CustomScrollView(slivers: <Widget>[
 //                new SliverAppBar(
 //                  expandedHeight: _appBarHeight,
