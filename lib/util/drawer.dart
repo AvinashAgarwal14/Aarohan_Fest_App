@@ -69,7 +69,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Eurekoin Wallet",
                   ),
                   onTap: () {
-                    Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                    Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
                           .push(SlideLeftRoute(widget: EurekoinHomePage()));
                     }
@@ -82,7 +82,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   "Eurekoin Casino",
                 ),
                 onTap: (() {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context)
                         .push(SlideLeftRoute(widget: HomePage()));
                 }),
@@ -95,7 +95,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   "Schedule",
                 ),
                 onTap: () {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context)
                         .push(SlideLeftRoute(widget: Schedule()));
                   }
@@ -113,7 +113,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Scoreboard",
                   ),
                   onTap: () {
-                    Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                    Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
                           .push(SlideLeftRoute(widget: Scoreboard()));
                   }),
@@ -125,7 +125,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   "Tags",
                 ),
                 onTap: () {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context)
                         .push(SlideLeftRoute(widget: SearchByTags()));
                   }
@@ -147,7 +147,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   "Interficio",
                 ),
                 onTap: (() {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context).push(SlideLeftRoute(widget: MyApp()));
                 }),
               ),
@@ -162,7 +162,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   "Sponsors",
                 ),
                 onTap: (() {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context)
                         .push(SlideLeftRoute(widget: Sponsors()));
                 }),
@@ -175,7 +175,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Contact Us",
                   ),
                   onTap: () {
-                    Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                    Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
                           .push(SlideLeftRoute(widget: ContactUs()));
                   }),
@@ -187,7 +187,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Contributors",
                   ),
                   onTap: () {
-                    Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                    Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
                           .push(SlideLeftRoute(widget: Contributors()));
                   }),
@@ -195,7 +195,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 leading: Icon(Icons.info),
                 title: Text("About Aarohan"),
                 onTap: (() {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
+                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context)
                         .push(SlideLeftRoute(widget: AboutUsPage()));
                 }),
