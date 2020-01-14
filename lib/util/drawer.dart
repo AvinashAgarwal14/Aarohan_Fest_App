@@ -31,9 +31,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        systemNavigationBarIconBrightness: Brightness.dark));
   }
 
   @override

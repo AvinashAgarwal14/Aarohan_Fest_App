@@ -84,6 +84,7 @@ flutter:
     - images/gifs/
     - images/Contributors/
     - fonts/Orbitron-Medium.ttf
+    - assets/loading.gif
     - assets/dicegame.jpg
     - assets/cardgame.jpg
     - assets/cards.jpg

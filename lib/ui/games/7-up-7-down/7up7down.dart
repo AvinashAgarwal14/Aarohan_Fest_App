@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import 'package:carousel_slider/carousel_slider.dart';
 
 List<T> map<T>(List list, Function handler) {
   List<T> result = new List();
@@ -81,13 +80,26 @@ class _UpDownGameState extends State<UpDownGame> {
         child: Container(
           height: MediaQuery.of(context).size.height / 4,
           width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [BoxShadow(spreadRadius: 10, blurRadius: 10)],
+            color: Colors.green.withOpacity(0.8),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Text("THE TOTAL SUM IS $value. YOUR BET WAS 7$upordown"),
-              Text(result == "winner"
-                  ? "YOU WIN $betAmount COINS"
-                  : "YOU LOSE $betAmount COINS"),
+              Text(
+                "THE TOTAL SUM IS $value. YOUR BET WAS 7$upordown",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              Text(
+                result == "winner"
+                    ? "YOU WIN $betAmount COINS"
+                    : "YOU LOSE $betAmount COINS",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
               RaisedButton(
                 onPressed: () {
                   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -96,7 +108,7 @@ class _UpDownGameState extends State<UpDownGame> {
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                child: Text("GO BACK"),
+                child: Text("TRY AGAIN"),
               ),
             ],
           ),
@@ -124,23 +136,16 @@ class _UpDownGameState extends State<UpDownGame> {
     await prefs.setInt('coins', coins_left);
   }
 
-  void getRecent() async {
-    setState(() {
-      _isLoading = true;
-    });
-    Response response =
-        await Dio().get("https://aavishkargames.herokuapp.com/list/sevenup/");
-    recentResult = response.data["result"];
-    print(recentResult);
-    setState(() {
-      _isLoading = false;
-    });
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    getRecent();
     print(fix);
   }
 
@@ -231,40 +236,6 @@ class _UpDownGameState extends State<UpDownGame> {
                                         ),
                                       ),
                                     ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.white.withOpacity(0.7),
-                                ),
-                                width: MediaQuery.of(context).size.width,
-                                height: 50,
-                                child: CarouselSlider(
-                                  items: map<Widget>(
-                                    recentResult,
-                                    (index, i) {
-                                      return ListTile(
-                                        leading:
-                                            Text(recentResult[index]["email"].split("@")[0]),
-                                        title: Text(
-                                          "${recentResult[index]["status"]}: ${recentResult[index]["amount"]} coins",
-                                          style: TextStyle(
-                                              color: recentResult[index]
-                                                          ["status"] ==
-                                                      "winner"
-                                                  ? Colors.green
-                                                  : Colors.red),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                  viewportFraction: 1.0,
-                                  autoPlayAnimationDuration:
-                                      Duration(milliseconds: 700),
-                                  autoPlayCurve: Curves.easeIn,
-                                  autoPlay: true,
-                                  autoPlayInterval: Duration(milliseconds: 100),
-                                ),
-                              )
                             ],
                           ),
                   ),
