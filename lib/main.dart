@@ -25,8 +25,8 @@ class Aavishkar_App extends StatelessWidget {
             title: "Aavishkar App",
             debugShowMaterialGrid: false,
             debugShowCheckedModeBanner: false,
-            home: new Dashboard(),
-            initialRoute: "/ui/dashboard",
+            
+            initialRoute: "/ui/account/login",
             routes: <String, WidgetBuilder>{
               "/ui/dashboard": (BuildContext context) => Dashboard(),
               "/ui/tags": (BuildContext context) => SearchByTags(),

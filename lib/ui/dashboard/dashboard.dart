@@ -13,6 +13,7 @@ import '../search_by_tags/tags.dart';
 import '../eurekoin/eurekoin.dart';
 import '../account/login.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:aavishkarapp/ui/account/account_page.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -97,7 +98,7 @@ class _DashboardState extends State<Dashboard> {
                         onPressed: (){
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => LogInPage()),
+                            MaterialPageRoute(builder: (context) => Account_Page()),
                           ).then((onReturn){
                             getUser();
                           });
