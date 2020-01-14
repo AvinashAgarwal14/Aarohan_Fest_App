@@ -13,6 +13,7 @@ import '../search_by_tags/tags.dart';
 import '../eurekoin/eurekoin.dart';
 import '../account/login.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:aavishkarapp/ui/account/account_page.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -89,23 +90,16 @@ class _DashboardState extends State<Dashboard> {
                             ).then((onReturn) {
                               getUser();
                             });
-                          }
-                        })
-                    : Container(),
-                IconButton(
-                    icon: Icon(Icons.person),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LogInPage()),
-                      ).then((onReturn) {
-                        getUser();
-                      });
-                    })
-              ],
-            )),
-        drawer: NavigationDrawer(currentDisplayedPage: 0),
-        body: Stack(children: <Widget>[
+                          }}
+                      )
+                        :
+                        Container(),
+                  ],
+                )
+      ),
+      drawer: NavigationDrawer(currentDisplayedPage: 0),
+      body: Stack(
+        children: <Widget> [
           DashBoardLayout(),
           SlidingUpPanel(
               minHeight: 65.0,

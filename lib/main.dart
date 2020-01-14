@@ -27,16 +27,17 @@ class Aavishkar_App extends StatelessWidget {
     // Wrapped within Dynamic Theme to change the theme
     // By toggling the change theme
 
-    return MaterialApp(
-      title: "Aavishkar App",
-      debugShowMaterialGrid: false,
-      debugShowCheckedModeBanner: false,
-      home: new Dashboard(),
-      initialRoute: "/ui/dashboard",
-      routes: <String, WidgetBuilder>{
-        "/ui/dashboard": (BuildContext context) => Dashboard(),
-        "/ui/tags": (BuildContext context) => SearchByTags(),
-        "/ui/schedule": (BuildContext context) => Schedule(),
+
+      return MaterialApp(
+            title: "Aavishkar App",
+            debugShowMaterialGrid: false,
+            debugShowCheckedModeBanner: false,
+            
+            initialRoute: "/ui/account/login",
+            routes: <String, WidgetBuilder>{
+              "/ui/dashboard": (BuildContext context) => Dashboard(),
+              "/ui/tags": (BuildContext context) => SearchByTags(),
+              "/ui/schedule": (BuildContext context) => Schedule(),
 //              "/ui/maps/map": (BuildContext context) => MapPage(),
         "/ui/account/login": (BuildContext context) => LogInPage(),
         "/ui/scoreboard": (BuildContext context) => Scoreboard(),
