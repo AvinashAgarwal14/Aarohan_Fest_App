@@ -35,12 +35,12 @@ class Aavishkar_App extends StatelessWidget {
             theme: ThemeData(
               primaryColor: Color(0xFF505194)
             ),
-            home: LogInPage(),
-            initialRoute: "/ui/dashboard",
+            initialRoute: "/ui/account/login",
             routes: <String, WidgetBuilder>{
               "/ui/dashboard": (BuildContext context) => Dashboard(),
               "/ui/tags": (BuildContext context) => SearchByTags(),
               "/ui/schedule": (BuildContext context) => Schedule(),
+              "/ui/account/login": (BuildContext context) => LogInPage(),
 //            "/ui/maps/map": (BuildContext context) => MapPage(),
               "/ui/scoreboard": (BuildContext context) => Scoreboard(),
               "/ui/eurekoin": (BuildContext context) => EurekoinHomePage(),

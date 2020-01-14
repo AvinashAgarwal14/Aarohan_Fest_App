@@ -20,6 +20,13 @@ class _AuthPageState extends State<AuthPage> {
   final Map<String, dynamic> user;
   _AuthPageState(this.user);
 
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
   final Map<String, dynamic> _loginFormData = {
     "username": null,
     "password": null,
