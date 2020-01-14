@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "6317672023-0f24vhbohfbjgjivc99dsav7a9lvuqti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.aavishkar.aavishkarapp",
+            "certificate_hash": "185e86681b9a30d8ac9a772f1d29589a48982d4a"
+          }
+        },
+        {
+          "client_id": "6317672023-pfi17c1niiu8vhcrmksebak8bujbsnts.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.aavishkar.aavishkarapp",
+            "certificate_hash": "0b5f8e0837dac1d092ffa15907987a498a4efd52"
+          }
+        },
+        {
           "client_id": "6317672023-ifc7ejdf67fhmssja6cd36rr5necps2l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -44,43 +60,6 @@
           "android_info": {
             "package_name": "com.app.aavishkar.aavishkarapp",
             "certificate_hash": "57418194dc27016c11e1761915a77c1ad47969d0"
-          }
-        },
-        {
-          "client_id": "6317672023-hirt906ngj5rqek090k4pt00id6rc2s3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAvMveBSH3jaSmvmE_VCs41Xox3GHeQqOA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "6317672023-hirt906ngj5rqek090k4pt00id6rc2s3.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:6317672023:android:bdeb9fde07e8e9fabac512",
-        "android_client_info": {
-          "package_name": "com.example.loginfb"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "6317672023-s2jeid5dimj7mlhvucl6al56r8ldeqbf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.loginfb",
-            "certificate_hash": "f1a309072a73d189e93afd3c07c263423baf8c68"
           }
         },
         {

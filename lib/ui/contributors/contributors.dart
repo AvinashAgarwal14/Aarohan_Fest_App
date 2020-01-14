@@ -17,12 +17,20 @@ IconData facebook_1 = IconData(0xf300, fontFamily: kFontFam);
 
 //TODO Data Entry
 Map contributors={
-  "Name":["Aarohan"],
-  "ProfilesFacebook":[""],
-"ProfilesGithub":[""],
-"ProfilesLinkedin":[""],
-  "Contact":[""],
-"Image":[""],
+  "Name":["Avinash Agarwal", "Akshat Jain", "Aritra Karmakar"],
+  "ProfilesFacebook":["https://www.facebook.com/avinash.agarwal.1614",
+  "https://www.facebook.com/akshat.jain.336333",
+  "https://www.facebook.com/aritra.karmakar.3",
+  ],
+"ProfilesGithub":["https://github.com/AvinashAgarwal14",
+"https://github.com/Akshat7321",
+"https://github.com/gravitydestroyer",
+],
+"ProfilesLinkedin":["https://www.linkedin.com/in/agarwalavinash14/",
+"https://www.linkedin.com/in/akshat-jain-007365a2/",
+"https://www.facebook.com/aritra.karmakar.3"],
+  "Contact":["+91 8981866219","+91 8004937056","+91 8759579260"],
+"Image":["images/Contributors/avinash.jpeg","images/Contributors/akshat.jpg","images/Contributors/aritra bhaiya.jpg"],
 };
 
 
@@ -33,9 +41,12 @@ class _ContributorsState extends State<Contributors> {
     return Scaffold(
       drawer: NavigationDrawer(currentDisplayedPage: 11),
       appBar: AppBar(title: Text("Contributors"),),
+//      backgroundColor: Theme.of(context).brightness==Brightness.light?Colors.white70:Colors.black ,
         body: ListView.builder(
-            itemCount: 1,
+
+            itemCount: 3,
             itemBuilder: (context, index) {
+
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Stack(

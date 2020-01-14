@@ -42,7 +42,8 @@ class FeedDetailsState extends State<FeedDetails> {
         Container(
             height: double.infinity,
             child: Image.network(
-              widget.post.imageUrl,
+//             widget.post.imageUrl,
+              'https://novationmusic.com/sites/novation/files/FYS-EventsPageHeader-Desktop.png',
               fit: BoxFit.cover,
             )),
         SafeArea(
