@@ -44,8 +44,7 @@ class _NewsfeedState extends State<Newsfeed> {
     return
       (feed.length != 0)
         ? ListView.builder(
-        //reverse: true,
-
+        //reverse: true
             cacheExtent: MediaQuery.of(context).size.height * 3,
             itemCount: reverseFeed.length,
             itemBuilder: (BuildContext context, position) {

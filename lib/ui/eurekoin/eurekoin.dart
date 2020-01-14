@@ -145,7 +145,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     return (currentUser != null)
         ? (isEurekoinAlreadyRegistered == null)
             ? new Scaffold(
-                drawer: NavigationDrawer(currentDisplayedPage: 1),
+                drawer: NavigationDrawer(),
                 body: new Container(
                     padding: EdgeInsets.only(bottom: 50.0),
                     decoration: BoxDecoration(
@@ -154,7 +154,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                             fit: BoxFit.fill))))
             : (isEurekoinAlreadyRegistered == 0)
                 ? new Scaffold(
-                    drawer: NavigationDrawer(currentDisplayedPage: 1),
+                    drawer: NavigationDrawer(),
                     body: new Stack(
                       children: <Widget>[
                         new Container(
@@ -234,7 +234,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                       ],
                     ))
                 : new Scaffold(
-                    drawer: NavigationDrawer(currentDisplayedPage: 1),
+                    drawer: NavigationDrawer(),
                     key: _scaffoldKey,
                     body: new Stack(
                       children: <Widget>[

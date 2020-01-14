@@ -74,7 +74,7 @@
 //   Widget build(BuildContext context) {
 //     if(shown==0){
 //       return Scaffold(
-//           drawer: NavigationDrawer(currentDisplayedPage: 6),
+//           drawer: NavigationDrawer(),
 //           body:showMap()
 //       );
 //       }

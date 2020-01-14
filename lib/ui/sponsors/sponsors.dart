@@ -39,7 +39,7 @@ class _SponsorsState extends State<Sponsors> {
     indexOfWidget=0;
     return Scaffold(
       appBar: AppBar(title: Text("Sponsors")),
-      drawer: NavigationDrawer(currentDisplayedPage: 9),
+      drawer: NavigationDrawer(),
       body: sponsorList.length > 0
           ? ListView.builder(
               cacheExtent: MediaQuery.of(context).size.height*5,

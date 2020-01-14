@@ -39,7 +39,7 @@ class _ContributorsState extends State<Contributors> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawer(currentDisplayedPage: 11),
+      drawer: NavigationDrawer(),
       appBar: AppBar(title: Text("Contributors"),),
 //      backgroundColor: Theme.of(context).brightness==Brightness.light?Colors.white70:Colors.black ,
         body: ListView.builder(

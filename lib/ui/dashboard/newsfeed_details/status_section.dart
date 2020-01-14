@@ -7,11 +7,10 @@ import '../../../model/post_likes.dart';
 import 'package:intl/intl.dart';
 
 class StatusCategory extends StatefulWidget {
-  StatusCategory({Key key, this.postKey, this.commentsCount, this.date})
+  StatusCategory({Key key, this.postKey, this.date})
       : super(key: key);
   final postKey;
   final String date;
-  final int commentsCount;
 
   @override
   _StatusCategoryState createState() => _StatusCategoryState();
@@ -23,6 +22,7 @@ class _StatusCategoryState extends State<StatusCategory> {
   FirebaseDatabase _database = FirebaseDatabase.instance;
   DatabaseReference _databaseReferenceForPostsLikes;
   int numberOfLikes;
+  int numberOfComments;
   FirebaseUser currentUser;
   List<String> likeIds;
   String likeId;
@@ -45,6 +45,7 @@ class _StatusCategoryState extends State<StatusCategory> {
     super.initState();
     getUser(0);
     numberOfLikes = 0;
+    numberOfComments = 0;
     currentLike = false;
     likeIds = new List();
     _databaseReferenceForPostsLikes =
@@ -53,6 +54,7 @@ class _StatusCategoryState extends State<StatusCategory> {
 
     _databaseReferenceForPosts =
         _database.reference().child("Posts").child("${widget.postKey}");
+    _databaseReferenceForPosts.onValue.listen(_onCommentsAdded);
   }
 
   @override
@@ -118,7 +120,7 @@ class _StatusCategoryState extends State<StatusCategory> {
                       Padding(
                         padding: EdgeInsets.only(top: 2.0),
                       ),
-                      Text(widget.commentsCount.toString())
+                      Text("$numberOfComments")
                     ],
                   ),
                   Column(
@@ -157,6 +159,12 @@ class _StatusCategoryState extends State<StatusCategory> {
             }
         }
       }
+    });
+  }
+
+  void _onCommentsAdded(Event event) {
+    setState(() {
+      numberOfComments = event.snapshot.value["commentsCount"];
     });
   }
 

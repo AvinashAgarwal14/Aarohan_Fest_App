@@ -24,8 +24,11 @@ class EventDetailsState extends State<EventDetails> {
       children: <Widget>[
         Container(
             height: double.infinity,
-            child: Image.network(
-              widget.item.imageUrl,
+            child: CachedNetworkImage(
+              placeholder: (context, url) =>
+                  Image.asset(
+                      "images/imageplaceholder.png"),
+              imageUrl: widget.item.imageUrl,
               fit: BoxFit.cover,
             )),
         SafeArea(

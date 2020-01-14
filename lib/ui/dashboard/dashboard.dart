@@ -9,9 +9,7 @@ import './dashboard_layout.dart';
 import './newsfeed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:barcode_scan/barcode_scan.dart';
-import '../search_by_tags/tags.dart';
 import '../eurekoin/eurekoin.dart';
-import '../account/login.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class Dashboard extends StatefulWidget {
@@ -64,14 +62,6 @@ class _DashboardState extends State<Dashboard> {
               )),
               title: Text("Aarohan"),
               actions: <Widget>[
-                IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SearchByTags()),
-                      );
-                    }),
                 (currentUser != null && isEurekoinAlreadyRegistered != null)
                     ? IconButton(
                         icon: Image(
@@ -89,23 +79,16 @@ class _DashboardState extends State<Dashboard> {
                             ).then((onReturn) {
                               getUser();
                             });
-                          }
-                        })
-                    : Container(),
-                IconButton(
-                    icon: Icon(Icons.person),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LogInPage()),
-                      ).then((onReturn) {
-                        getUser();
-                      });
-                    })
-              ],
-            )),
-        drawer: NavigationDrawer(currentDisplayedPage: 0),
-        body: Stack(children: <Widget>[
+                          }}
+                      )
+                        :
+                        Container(),
+                  ],
+                )
+      ),
+      drawer: NavigationDrawer(),
+      body: Stack(
+        children: <Widget> [
           DashBoardLayout(),
           SlidingUpPanel(
               minHeight: 65.0,

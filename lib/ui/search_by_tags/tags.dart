@@ -105,7 +105,7 @@ class _SearchByTagsState extends State<SearchByTags> {
       appBar: AppBar(
         title: Text("Tags"),
       ),
-      drawer: NavigationDrawer(currentDisplayedPage: 3),
+      drawer: NavigationDrawer(),
       body: Column(
         children: <Widget>[
           Padding(
