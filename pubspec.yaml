@@ -84,11 +84,12 @@ flutter:
     - images/gifs/
     - images/Contributors/
     - fonts/Orbitron-Medium.ttf
+    - assets/score.png
     - assets/loading.gif
     - assets/dicegame.jpg
     - assets/cardgame.jpg
     - assets/cards.jpg
-    - assets/fcards.png
+    - assets/fcards.jpg
     - assets/mdice.png
     - assets/mcards.jpg
     - assets/gambling.png
