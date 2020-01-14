@@ -143,10 +143,12 @@ class _HomePageState extends State<HomePage> {
           leading: BackButton(
             color: Colors.blue,
             onPressed: () {
-              Navigator.pop(context);
-              SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                  statusBarColor: Colors.white,
-                  systemNavigationBarIconBrightness: Brightness.dark));
+              setState(() {
+                Navigator.pop(context);
+                SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                    statusBarColor: Colors.white,
+                    systemNavigationBarIconBrightness: Brightness.dark));
+              });
             },
           ),
           title: Row(
@@ -209,113 +211,133 @@ class _HomePageState extends State<HomePage> {
                                 height: MediaQuery.of(context).size.height / 6,
                                 padding: EdgeInsets.all(10),
                                 margin: EdgeInsets.all(5),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Text(
-                                      "CHOOSE YOUR BET",
-                                      style: TextStyle(
-                                          fontSize: 21,
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        FlatButton(
-                                          color: Colors.blue,
-                                          child: Text(
-                                            "10",
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                child: _eurekoinLoading
+                                    ? Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Text(
+                                          "FETCHING EUREKOINS. TRY AGAIN",
+                                          style: TextStyle(
+                                              fontSize: 21,
+                                              color: Colors.blue,
+                                              fontWeight: FontWeight.bold),
+                                        ))
+                                    : Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Text(
+                                            "CHOOSE YOUR BET",
+                                            style: TextStyle(
+                                                fontSize: 21,
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                          onPressed: () {
-                                            setState(() {
-                                              Navigator.pop(context);
-                                              betAmount = 10;
-                                              if (betAmount > userEurekoin) {
-                                                Scaffold.of(context)
-                                                    .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                    "NOT ENOUGH EUREKOINS",
-                                                    style: TextStyle(
-                                                      color: Colors.blue,
-                                                    ),
-                                                  ),
-                                                  duration:
-                                                      Duration(seconds: 1),
-                                                  backgroundColor: Colors.white,
-                                                  elevation: 3.0,
-                                                ));
-                                              } else {
-                                                getTossDice(10);
-                                              }
-                                            });
-                                          },
-                                        ),
-                                        FlatButton(
-                                          color: Colors.blue,
-                                          child: Text(
-                                            "15",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                            betAmount = 15;
-                                            if (betAmount > userEurekoin) {
-                                              Scaffold.of(context)
-                                                  .showSnackBar(SnackBar(
-                                                content: Text(
-                                                  "NOT ENOUGH EUREKOINS",
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: <Widget>[
+                                              FlatButton(
+                                                color: Colors.blue,
+                                                child: Text(
+                                                  "10",
                                                   style: TextStyle(
-                                                    color: Colors.blue,
-                                                  ),
+                                                      color: Colors.white),
                                                 ),
-                                                duration: Duration(seconds: 1),
-                                                backgroundColor: Colors.white,
-                                                elevation: 3.0,
-                                              ));
-                                            } else {
-                                              getTossDice(15);
-                                            }
-                                          },
-                                        ),
-                                        FlatButton(
-                                          color: Colors.blue,
-                                          child: Text(
-                                            "20",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                            betAmount = 20;
-                                            if (betAmount > userEurekoin) {
-                                              Scaffold.of(context)
-                                                  .showSnackBar(SnackBar(
-                                                content: Text(
-                                                  "NOT ENOUGH EUREKOINS",
+                                                onPressed: () {
+                                                  setState(() {
+                                                    Navigator.pop(context);
+                                                    betAmount = 10;
+                                                    if (betAmount >
+                                                        userEurekoin) {
+                                                      Scaffold.of(context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                        content: Text(
+                                                          "NOT ENOUGH EUREKOINS",
+                                                          style: TextStyle(
+                                                            color: Colors.blue,
+                                                          ),
+                                                        ),
+                                                        duration: Duration(
+                                                            seconds: 1),
+                                                        backgroundColor:
+                                                            Colors.white,
+                                                        elevation: 3.0,
+                                                      ));
+                                                    } else {
+                                                      getTossDice(10);
+                                                    }
+                                                  });
+                                                },
+                                              ),
+                                              FlatButton(
+                                                color: Colors.blue,
+                                                child: Text(
+                                                  "15",
                                                   style: TextStyle(
-                                                    color: Colors.blue,
-                                                  ),
+                                                      color: Colors.white),
                                                 ),
-                                                duration: Duration(seconds: 1),
-                                                backgroundColor: Colors.white,
-                                                elevation: 3.0,
-                                              ));
-                                            } else {
-                                              getTossDice(20);
-                                            }
-                                          },
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ));
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  betAmount = 15;
+                                                  if (betAmount >
+                                                      userEurekoin) {
+                                                    Scaffold.of(context)
+                                                        .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                        "NOT ENOUGH EUREKOINS",
+                                                        style: TextStyle(
+                                                          color: Colors.blue,
+                                                        ),
+                                                      ),
+                                                      duration:
+                                                          Duration(seconds: 1),
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      elevation: 3.0,
+                                                    ));
+                                                  } else {
+                                                    getTossDice(15);
+                                                  }
+                                                },
+                                              ),
+                                              FlatButton(
+                                                color: Colors.blue,
+                                                child: Text(
+                                                  "20",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  betAmount = 20;
+                                                  if (betAmount >
+                                                      userEurekoin) {
+                                                    Scaffold.of(context)
+                                                        .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                        "NOT ENOUGH EUREKOINS",
+                                                        style: TextStyle(
+                                                          color: Colors.blue,
+                                                        ),
+                                                      ),
+                                                      duration:
+                                                          Duration(seconds: 1),
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      elevation: 3.0,
+                                                    ));
+                                                  } else {
+                                                    getTossDice(20);
+                                                  }
+                                                },
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ));
                           }, backgroundColor: Colors.white.withOpacity(0));
                         },
                         child: Container(

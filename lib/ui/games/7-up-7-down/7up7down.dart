@@ -9,6 +9,15 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:carousel_slider/carousel_slider.dart';
+
+List<T> map<T>(List list, Function handler) {
+  List<T> result = new List();
+  for (var i = 0; i < list.length; i++) {
+    result.add(handler(i, list[i]));
+  }
+  return result;
+}
 
 class UpDownGame extends StatefulWidget {
   var coins_left;
@@ -38,6 +47,7 @@ class _UpDownGameState extends State<UpDownGame> {
   bool help = false;
   bool rolling = false;
   final loginKey = 'itsnotvalidanyways';
+  List<dynamic> recentResult;
 
   Future getUserEurekoin() async {
     setState(() {
@@ -114,9 +124,23 @@ class _UpDownGameState extends State<UpDownGame> {
     await prefs.setInt('coins', coins_left);
   }
 
+  void getRecent() async {
+    setState(() {
+      _isLoading = true;
+    });
+    Response response =
+        await Dio().get("https://aavishkargames.herokuapp.com/list/sevenup/");
+    recentResult = response.data["result"];
+    print(recentResult);
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    getRecent();
     print(fix);
   }
 
@@ -157,7 +181,7 @@ class _UpDownGameState extends State<UpDownGame> {
                                 margin: EdgeInsets.all(5),
                                 child: SingleChildScrollView(
                                   child: Text(
-                                    "\nINSTRUCTIONS:\n\nCHOOSE 7↑ OR 7↓\nIF THE SUM OF THE DICE FACES AFTER YOUR ROLL IS ACCORDING TO YOUR BET, YOU WIN BACK TWICE YOUR BET\nOTHERWISE YOU LOSE ALL OF IT\nALL THE BEST!",
+                                    "\nINSTRUCTIONS:\n\n\n🎲 choose 7↑ or 7↓\n\n🎲 if the sum of the dice faces is according to you bet, you win back twice the amount\n\n🎲 otherwise you lose your bet",
                                     style: TextStyle(
                                         fontSize: 35,
                                         color: Colors.white,
@@ -165,15 +189,19 @@ class _UpDownGameState extends State<UpDownGame> {
                                   ),
                                 ),
                               ),
-                              FlatButton(
-                                color: Colors.white,
-                                child: Text("PROCEED"),
-                                onPressed: () {
-                                  setState(() {
-                                    help = true;
-                                  });
-                                },
-                              )
+                              _isLoading
+                                  ? Container(
+                                      child: CircularProgressIndicator(),
+                                    )
+                                  : FlatButton(
+                                      color: Colors.white,
+                                      child: Text("PROCEED"),
+                                      onPressed: () {
+                                        setState(() {
+                                          help = true;
+                                        });
+                                      },
+                                    )
                             ],
                           )
                         : Column(
@@ -181,7 +209,7 @@ class _UpDownGameState extends State<UpDownGame> {
                             children: <Widget>[
                               _coinsLeft(coins_left),
                               _diceDisplay(),
-                              rolling ? Container() : _start(context),
+                              rolling && picked ? Container() : _start(context),
                               SizedBox(
                                 height: 20,
                               ),
@@ -203,6 +231,40 @@ class _UpDownGameState extends State<UpDownGame> {
                                         ),
                                       ),
                                     ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.white.withOpacity(0.7),
+                                ),
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                child: CarouselSlider(
+                                  items: map<Widget>(
+                                    recentResult,
+                                    (index, i) {
+                                      return ListTile(
+                                        leading:
+                                            Text(recentResult[index]["email"].split("@")[0]),
+                                        title: Text(
+                                          "${recentResult[index]["status"]}: ${recentResult[index]["amount"]} coins",
+                                          style: TextStyle(
+                                              color: recentResult[index]
+                                                          ["status"] ==
+                                                      "winner"
+                                                  ? Colors.green
+                                                  : Colors.red),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  viewportFraction: 1.0,
+                                  autoPlayAnimationDuration:
+                                      Duration(milliseconds: 700),
+                                  autoPlayCurve: Curves.easeIn,
+                                  autoPlay: true,
+                                  autoPlayInterval: Duration(milliseconds: 100),
+                                ),
+                              )
                             ],
                           ),
                   ),
@@ -374,6 +436,7 @@ class _UpDownGameState extends State<UpDownGame> {
         setState(() {
           upordown = "up";
           picked = true;
+          rolling = false;
         });
       },
       child: Column(
@@ -401,6 +464,7 @@ class _UpDownGameState extends State<UpDownGame> {
         setState(() {
           upordown = "down";
           picked = true;
+          rolling = false;
         });
       },
       child: Column(
