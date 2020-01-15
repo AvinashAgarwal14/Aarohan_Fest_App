@@ -13,6 +13,7 @@ import '../ui/interficio/interficio.dart';
 import 'package:aavishkarapp/ui/games/home_page.dart';
 import 'package:flutter/services.dart';
 import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
+import 'package:aavishkarapp/ui/account/account_page.dart';
 
 class NavigationDrawer extends StatefulWidget {
 
@@ -149,6 +150,18 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: (() {
                   Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context).push(SlideLeftRoute(widget: MyApp()));
+                }),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.account_box,
+                ),
+                title: Text(
+                  "Account",
+                ),
+                onTap: (() {
+                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                  Navigator.of(context).push(SlideLeftRoute(widget: Account_Page()));
                 }),
               ),
 

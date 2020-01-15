@@ -11,6 +11,7 @@ import '../../util/event_details.dart';
 import '../../util/detailSection.dart';
 import '../../util/drawer.dart'; 
 import 'package:aavishkarapp/ui/account/login.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
  
 class Account_Page extends StatefulWidget {
   @override
@@ -24,6 +25,7 @@ class _Account_PageState extends State<Account_Page> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = new GoogleSignIn();
   FirebaseUser currentUser;
+  final _facebookLogin = new FacebookLogin();
 
   bool previouslyLoggedIn = false;
 
@@ -115,23 +117,16 @@ class _Account_PageState extends State<Account_Page> {
 
                         child: _card('Eurekoin wallet', '',Icon(Icons.videogame_asset)),
                       ),
-                      // GestureDetector(
-                      //   onTap: () {
-                      //     if (currentUser.providerData[1].providerId ==
-                      //         "google.com")
-                      //       _gSignOut();
-                      //     else
-                      //     print("Logout!");
-                      //   },
-                      //   child: DetailCategory(
-                      //     icon: Icons.remove_circle,
-                      //     children: <Widget>[
-                      //       DetailItem(
-                      //         lines: <String>['Logout'],
-                      //       )
-                      //     ],
-                      //   ),
-                      // )
+                      GestureDetector(
+                        onTap: () {
+                          if (currentUser.providerData[1].providerId ==
+                              "google.com")
+                            _gSignOut();
+                          else
+                          print("Logout!");
+                        },
+                        child: _card('Logout','', Icon(Icons.remove_circle)),
+                      )
                     ]))
               ])
       
@@ -143,8 +138,72 @@ class _Account_PageState extends State<Account_Page> {
     await _auth.signOut();
     setState(() {
       previouslyLoggedIn = true;
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LogInPage()),);
     });
   }
+
+  _fSignOut() async {
+    _facebookLogin.logOut();
+    _auth.signOut();
+    setState(() {
+      previouslyLoggedIn = true;
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LogInPage()),);
+    });
+  }
+
+  Future _gSignIn() async {
+    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+    GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    final FirebaseUser user =
+        (await _auth.signInWithCredential(credential)).user;
+    currentUser = user;
+    database
+        .reference()
+        .child("Profiles")
+        .update({"${user.uid}": "${user.email}"});
+    print("User: $user");
+    return user;
+  }
+
+  Future<int> _fSignIn() async {
+    FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
+    final accessToken = facebookLoginResult.accessToken.token;
+    if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
+      final facebookAuthCred =
+          FacebookAuthProvider.getCredential(accessToken: accessToken);
+      final user = await firebaseAuth.signInWithCredential(facebookAuthCred);
+      print("User : ");
+      return 1;
+    } else
+      return 0;
+  }
+
+  Future<FacebookLoginResult> _handleFBSignIn() async {
+    FacebookLogin facebookLogin = FacebookLogin();
+    FacebookLoginResult facebookLoginResult =
+        await facebookLogin.logInWithReadPermissions(['email']);
+    switch (facebookLoginResult.status) {
+      case FacebookLoginStatus.cancelledByUser:
+        print("Cancelled");
+        break;
+      case FacebookLoginStatus.error:
+        print("error");
+        break;
+      case FacebookLoginStatus.loggedIn:
+        print("Logged In");
+        break;
+    }
+    return facebookLoginResult;
+  }
+
+
 Widget _card(String mainheading, String subheading ,Widget _icon)
 {
   return Container(

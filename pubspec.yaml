@@ -82,6 +82,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - images/
+    - assets/background.png
     - images/gifs/
     - images/Contributors/
     - fonts/Orbitron-Medium.ttf
