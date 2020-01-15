@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
       });
     });
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xFFF2837A),
+        statusBarColor: Color(0xFFD3A372),
         systemNavigationBarIconBrightness: Brightness.dark));
     setState(() {
       _isLoading = false;

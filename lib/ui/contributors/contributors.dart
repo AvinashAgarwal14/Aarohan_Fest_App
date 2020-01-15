@@ -78,7 +78,7 @@ class _ContributorsState extends State<Contributors> {
         ),
 //      backgroundColor: Theme.of(context).brightness==Brightness.light?Colors.white70:Colors.black ,
         body: ListView.builder(
-            itemCount: 5,
+            itemCount: 6,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.all(10.0),
