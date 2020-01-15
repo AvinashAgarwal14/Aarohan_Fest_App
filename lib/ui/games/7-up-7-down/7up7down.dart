@@ -10,14 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
-List<T> map<T>(List list, Function handler) {
-  List<T> result = new List();
-  for (var i = 0; i < list.length; i++) {
-    result.add(handler(i, list[i]));
-  }
-  return result;
-}
-
 class UpDownGame extends StatefulWidget {
   var coins_left;
   var fix;
@@ -46,7 +38,6 @@ class _UpDownGameState extends State<UpDownGame> {
   bool help = false;
   bool rolling = false;
   final loginKey = 'itsnotvalidanyways';
-  List<dynamic> recentResult;
 
   Future getUserEurekoin() async {
     setState(() {
@@ -83,7 +74,7 @@ class _UpDownGameState extends State<UpDownGame> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             boxShadow: [BoxShadow(spreadRadius: 10, blurRadius: 10)],
-            color: Colors.green.withOpacity(0.8),
+            color: result == "winner" ? Colors.green : Colors.red,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -100,7 +91,10 @@ class _UpDownGameState extends State<UpDownGame> {
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
-              RaisedButton(
+              FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40)),
+                color: Colors.white,
                 onPressed: () {
                   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
                       statusBarColor: Colors.white,
@@ -108,7 +102,11 @@ class _UpDownGameState extends State<UpDownGame> {
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                child: Text("TRY AGAIN"),
+                child: Text(
+                  "TRY AGAIN",
+                  style: TextStyle(
+                      color: result == "winner" ? Colors.green : Colors.red),
+                ),
               ),
             ],
           ),
@@ -175,40 +173,37 @@ class _UpDownGameState extends State<UpDownGame> {
                     decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(20.0)),
-                    margin: EdgeInsets.all(4.0),
-                    padding: EdgeInsets.all(4.0),
                     child: !help
-                        ? Column(
+                        ? Scrollbar(
+                            child: Column(
+                            mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Container(
                                 padding: EdgeInsets.all(15),
                                 margin: EdgeInsets.all(5),
-                                child: SingleChildScrollView(
-                                  child: Text(
-                                    "\nINSTRUCTIONS:\n\n\n🎲 choose 7↑ or 7↓\n\n🎲 if the sum of the dice faces is according to you bet, you win back twice the amount\n\n🎲 otherwise you lose your bet",
-                                    style: TextStyle(
-                                        fontSize: 35,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                child: Text(
+                                  "\nINSTRUCTIONS:\n\n\n🎲 choose 7↑ or 7↓\n\n🎲 if the sum of the dice faces is according to your bet, you win back twice the amount\n\n🎲 otherwise you lose your bet",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              _isLoading
-                                  ? Container(
-                                      child: CircularProgressIndicator(),
-                                    )
-                                  : FlatButton(
-                                      color: Colors.white,
-                                      child: Text("PROCEED"),
-                                      onPressed: () {
-                                        setState(() {
-                                          help = true;
-                                        });
-                                      },
-                                    )
+                              FlatButton(
+                                color: Color(0xFF0187F8),
+                                child: Text(
+                                  "PROCEED",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    help = true;
+                                  });
+                                },
+                              )
                             ],
-                          )
+                          ))
                         : Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
@@ -298,8 +293,10 @@ class _UpDownGameState extends State<UpDownGame> {
   }
 
   Widget _start(context) {
-    return FlatButton(
-      color: Color(0xFF008F23),
+    return RaisedButton(
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      color: Color(0xFFfc8200),
       onPressed: () {
         setState(() {
           rolling = true;
@@ -308,7 +305,7 @@ class _UpDownGameState extends State<UpDownGame> {
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text("please pick 7 UP or 7 DOWN"),
             duration: Duration(seconds: 1),
-            backgroundColor: Color(0xFF008F23),
+            backgroundColor: Color(0xFFfc8200),
             elevation: 3.0,
           ));
         } else {
