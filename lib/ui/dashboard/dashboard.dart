@@ -11,6 +11,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import '../eurekoin/eurekoin.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:aavishkarapp/ui/account/login.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -23,6 +26,16 @@ class _DashboardState extends State<Dashboard> {
   int isEurekoinAlreadyRegistered;
   String barcodeString;
   final loginKey = 'itsnotvalidanyways';
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+  DatabaseReference databaseReference;
+  int click = 0, gclick = 0;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = new GoogleSignIn();
+
+  bool previouslyLoggedIn = false;
+  
+  
+  
 
   @override
   void setState(fn) {
@@ -34,15 +47,24 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
+    initUser();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+  
+    
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.white,
         systemNavigationBarIconBrightness: Brightness.dark));
     getUser();
+  }
+  initUser() async{
+    currentUser= await _auth.currentUser();
+    setState(() {
+      
+    });
   }
 
   @override
@@ -83,6 +105,20 @@ class _DashboardState extends State<Dashboard> {
                       )
                         :
                         Container(),
+                      
+                      SizedBox(width:10),
+                      IconButton(
+                        icon:Icon(Icons.power_settings_new),
+                        onPressed: (){
+                          setState((){
+                            _logout();
+                            
+                          }
+                          );
+                        },
+                        ),
+
+                      SizedBox(width:10),
                   ],
                 )
       ),
@@ -188,6 +224,106 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
+  Future<void> _logout() async {
+  return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Container(
+    height: 300,
+    decoration: BoxDecoration(
+      color: Colors.indigo[400],
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.all(Radius.circular(12))
+    ),
+    child: Column(
+      children: <Widget>[
+        Container(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Image.asset('assets/sad.png', height: 120, width: 120,),
+          ),
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12))
+          ),
+        ),
+        SizedBox(height: 24,),
+        Text('Do you want to Logout?', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
+        SizedBox(height: 10,),
+        Padding(
+          padding: const EdgeInsets.only(right: 16, left: 16),
+          child: Text('Email: ${currentUser.email}', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
+        ),
+        SizedBox(height: 20,),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            FlatButton(onPressed: (){
+              Navigator.of(context).pop();
+            }, child: Text('CANCEL'),color: Colors.white, textColor: Colors.indigo[400],),
+            SizedBox(width: 8,),
+            RaisedButton(onPressed: (){
+              _gSignOut();
+            }, child: Text('LOGOUT'),textColor: Colors.indigo[400],color: Colors.white, )
+          ],
+        )
+      ],
+    ),
+  )
+            
+            );
+      });
+  
+  
+  
+  
+  
+  // <void>(
+  //   context: context,
+  //   barrierDismissible: true, // user must tap button!
+  //   builder: (BuildContext context) {
+  //     return AlertDialog(
+  //         elevation: 100,
+  //       shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+  //       title: Text('Logout'),
+  //       content: SingleChildScrollView(
+  //         child: ListBody(
+  //           children: <Widget>[
+  //             Text('${currentUser.email}')
+  //           ],
+  //         ),
+  //       ),
+  //       actions: <Widget>[
+  //         Row(
+  //           children: <Widget>[
+  //             FlatButton(
+  //           child: Text('Cancel'),
+  //           onPressed: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //         ),
+  //         FlatButton(
+  //           child: Text('Logout'),
+  //           onPressed: () {
+              
+  //             _gSignOut();
+  //             },
+  //         ),
+  //           ],
+  //         )
+  //       ],
+  //     );
+  //   },
+  // );
+}
+
+
   void showDialogBox(String message) {
     // flutter defined function
     print("$message");
@@ -203,7 +339,7 @@ class _DashboardState extends State<Dashboard> {
             new FlatButton(
               child: new Text("Close"),
               onPressed: () {
-                Navigator.of(context).pop();
+                 Navigator.of(context).pop();    
               },
             ),
           ],
@@ -211,6 +347,38 @@ class _DashboardState extends State<Dashboard> {
       },
     );
   }
+
+
+  _gSignOut() async {
+    await _googleSignIn.signOut();
+    await _auth.signOut();
+    setState(() {
+      previouslyLoggedIn = true;
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LogInPage()),);
+            
+    });
+  }
+  Future _gSignIn() async {
+    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+    GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    final FirebaseUser user =
+        (await _auth.signInWithCredential(credential)).user;
+    currentUser = user;
+    database
+        .reference()
+        .child("Profiles")
+        .update({"${user.uid}": "${user.email}"});
+    print("User: $user");
+    return user;
+  }
+
 
   Future<int> couponEurekoin(String coupon) async {
     var email = currentUser.email;

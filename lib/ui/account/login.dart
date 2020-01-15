@@ -143,17 +143,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
 //                                ?
                             SizedBox(
                                 height: MediaQuery.of(context).size.height),
-                            animationStatus == 0
-                                ? Positioned(
-                                    left: 3.0,
-                                    top: 30.0,
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: BackButton(
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                : Container(),
 
 //                                : Container(),
 
