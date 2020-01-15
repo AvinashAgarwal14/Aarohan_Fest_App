@@ -149,7 +149,7 @@ class BlackJackModel {
       winner = side;
       return;
     }
-    if(side == 1) checkWinner();
+    if(currentMove == 1) checkWinner();
   }
 
   void start() {
