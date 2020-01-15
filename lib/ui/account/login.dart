@@ -11,6 +11,8 @@ import '../../util/event_details.dart';
 import '../../util/detailSection.dart';
 import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
 import '../../util/drawer.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
+import 'dart:io';
 
 var kFontFam = 'CustomFonts';
 var firebaseAuth = FirebaseAuth.instance;
@@ -114,7 +116,9 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     if (currentUser == null) {
       return new Scaffold(
           drawer: NavigationDrawer(),
-          body: new Container(
+          body:WillPopScope(
+            onWillPop: _exit,
+           child: new Container(
               decoration: new BoxDecoration(
                 image: backgroundImage,
               ),
@@ -222,7 +226,8 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                     })
                           ])
                     ],
-                  ))));
+                  ))),
+                  ));
     } else {
       return Dashboard();
     }
@@ -354,5 +359,53 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
         ],
       ),
     ));
+  }
+  Future<bool> _exit() async {
+  return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Container(
+    height: 300,
+    decoration: BoxDecoration(
+      color: Colors.indigo[400],
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.all(Radius.circular(12))
+    ),
+    child: Column(
+      children: <Widget>[
+        Container(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Image.asset('assets/sad.png', height: 120, width: 120,),
+          ),
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12))
+          ),
+        ),
+        SizedBox(height: 24,),
+        Text('Do you want to Exit?', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
+        SizedBox(height: 10,),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            FlatButton(onPressed: (){
+              exit(0);
+            }, child: Text('EXIT'),color: Colors.white, textColor: Colors.indigo[400],),
+            ],
+        )
+      ],
+    ),
+  )
+            
+            );
+      });
+  
   }
 }
