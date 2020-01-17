@@ -174,7 +174,8 @@ class _SearchByTagsState extends State<SearchByTags> {
                       Container(
                           padding: const EdgeInsets.only(left: 14.0, right: 14.0),
                           height: MediaQuery.of(context).size.height * 0.75,
-                          child: SearchBox()),
+                          child: SearchBox(
+                              eventsList: eventsByTags['All'])),
                     ]))
           ]),
     );
