@@ -41,7 +41,8 @@ class _DashboardState extends State<Dashboard> {
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.white,
-        systemNavigationBarIconBrightness: Brightness.dark));
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.light));
     getUser();
   }
 

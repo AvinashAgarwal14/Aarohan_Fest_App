@@ -1,13 +1,29 @@
 import 'dart:math';
 
 class BlackJackModel {
-  
   int currentMove = 0;
+  int future = 0;
   List<int> playerScores = [0];
   List<int> dealerScores = [0];
   List<String> playerCards = [];
   List<String> dealerCards = [];
   int winner = -1;
+  int sequenceIndex = 0;
+  int sequenceNo = 0;
+  List<List<String>> winSequences = [
+    ['3', '9', '5', '4'],
+    ['10', '6', '5'],
+    ['K', '7', '4'],
+    ['Q', 'A']
+  ];
+  List<List<String>> loseSequences = [
+    ['3', '5', '8', 'Q'],
+    ['6', '8', '10'],
+    ['K', '3', 'J'],
+    ['Q', '5', '7']
+  ];
+
+  BlackJackModel(this.future);
 
   String generateCard() {
     List<dynamic> colors = ['C', 'D', 'H', 'S'];
@@ -33,6 +49,7 @@ class BlackJackModel {
   }
 
   void calculateScore(String card, int side) {
+    print(card);
     List<int> scores = [];
     String number = card.substring(1);
     if (number == "A") {
@@ -129,41 +146,74 @@ class BlackJackModel {
     int playerScore = playerScores.reduce(max);
     int dealerScore = dealerScores.reduce(max);
 
-    if (playerScore == dealerScore) winner = 2;
-    else if(dealerScore > playerScore) winner = 1;
+    if (playerScore == dealerScore)
+      winner = 2;
+    else if (dealerScore > playerScore) winner = 1;
   }
 
-  void addCard(int side) {
-    String card = generateCard();
+  void addCard(String card, int side) {
     if (side == 0)
       playerCards.add(card);
     else
       dealerCards.add(card);
     calculateScore(card, side);
     removeReduntant(side);
-    if(checkBust(side)) {
+    if (checkBust(side)) {
       winner = side == 0 ? 1 : 0;
       return;
     }
-    if(check21(side)) {
+    if (check21(side)) {
       winner = side;
       return;
     }
-    if(currentMove == 1) checkWinner();
+    if (currentMove == 1) checkWinner();
+  }
+
+  String generateColor(String card) {
+    List<dynamic> colors = ['C', 'D', 'H', 'S'];
+    String str = '${colors[Random().nextInt(colors.length - 1)]}$card';
+    return str;
   }
 
   void start() {
-    addCard(0);
-    addCard(0);
-    addCard(1);
+    if (future == 0) {
+      addCard(generateCard(), 0);
+      addCard(generateCard(), 0);
+      addCard(generateCard(), 1);
+    } else if (future == 1) {
+      sequenceNo = Random().nextInt(winSequences.length - 1);
+      addCard(generateColor(winSequences[sequenceNo][sequenceIndex++]), 0);
+      addCard(generateColor(winSequences[sequenceNo][sequenceIndex++]), 0);
+      addCard(generateColor(loseSequences[sequenceNo][0]), 1);
+    } else {
+      sequenceNo = Random().nextInt(loseSequences.length - 1);
+      addCard(generateColor(loseSequences[sequenceNo][sequenceIndex++]), 0);
+      addCard(generateColor(loseSequences[sequenceNo][sequenceIndex++]), 0);
+      addCard(generateColor(winSequences[sequenceNo][0]), 1);
+    }
   }
 
   void hit() {
-    if(winner == -1) addCard(currentMove);
-    else print("Game finnished");
+    if (winner == -1) {
+      if (future == 0)
+        addCard(generateCard(), currentMove);
+      else if (future == 1) {
+        if (currentMove == 1)
+          addCard(generateColor(loseSequences[sequenceNo][sequenceIndex++]), currentMove);
+        else
+          addCard(generateColor(winSequences[sequenceNo][sequenceIndex++]), currentMove);
+      } else {
+        if (currentMove == 0)
+          addCard(generateColor(loseSequences[sequenceNo][sequenceIndex++]), currentMove);
+        else
+          addCard(generateColor(winSequences[sequenceNo][sequenceIndex++]), currentMove);
+      }
+    } else
+      print("Game finnished");
   }
 
   void stand() {
     currentMove = 1;
+    sequenceIndex = 1;
   }
 }

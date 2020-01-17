@@ -13,9 +13,9 @@ import '../ui/interficio/interficio.dart';
 import 'package:aavishkarapp/ui/games/home_page.dart';
 import 'package:flutter/services.dart';
 import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
+import 'package:aavishkarapp/ui/arcade/arcade_game.dart';
 
 class NavigationDrawer extends StatefulWidget {
-
   @override
   _NavigationDrawerState createState() => _NavigationDrawerState();
 }
@@ -59,7 +59,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.of(context)
-                          .push(SlideLeftRoute(widget: Dashboard()));
+                        .push(SlideLeftRoute(widget: Dashboard()));
                   }),
               ListTile(
                   leading: Icon(
@@ -69,11 +69,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Eurekoin Wallet",
                   ),
                   onTap: () {
-                    Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.popUntil(
+                        context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
-                          .push(SlideLeftRoute(widget: EurekoinHomePage()));
-                    }
-                  ),
+                        .push(SlideLeftRoute(widget: EurekoinHomePage()));
+                  }),
               ListTile(
                 leading: Icon(
                   Icons.casino,
@@ -82,24 +82,39 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   "Eurekoin Casino",
                 ),
                 onTap: (() {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                  Navigator.popUntil(
+                      context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context)
-                        .push(SlideLeftRoute(widget: HomePage()));
+                      .push(SlideLeftRoute(widget: HomePage()));
                 }),
               ),
               ListTile(
                 leading: Icon(
-                  Icons.access_time,
+                  Icons.tap_and_play,
                 ),
                 title: Text(
-                  "Schedule",
+                  "Arcade",
                 ),
-                onTap: () {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                onTap: (() {
+                  Navigator.popUntil(
+                      context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context)
-                        .push(SlideLeftRoute(widget: Schedule()));
-                  }
+                      .push(SlideLeftRoute(widget: ArcadeGame()));
+                }),
               ),
+              ListTile(
+                  leading: Icon(
+                    Icons.access_time,
+                  ),
+                  title: Text(
+                    "Schedule",
+                  ),
+                  onTap: () {
+                    Navigator.popUntil(
+                        context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.of(context)
+                        .push(SlideLeftRoute(widget: Schedule()));
+                  }),
               ListTile(
                   title: Text("Utilities",
                       style: TextStyle(
@@ -113,23 +128,24 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Scoreboard",
                   ),
                   onTap: () {
-                    Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.popUntil(
+                        context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
-                          .push(SlideLeftRoute(widget: Scoreboard()));
+                        .push(SlideLeftRoute(widget: Scoreboard()));
                   }),
               ListTile(
-                leading: Icon(
-                  Icons.youtube_searched_for,
-                ),
-                title: Text(
-                  "Tags",
-                ),
-                onTap: () {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
-                  Navigator.of(context)
+                  leading: Icon(
+                    Icons.youtube_searched_for,
+                  ),
+                  title: Text(
+                    "Tags",
+                  ),
+                  onTap: () {
+                    Navigator.popUntil(
+                        context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.of(context)
                         .push(SlideLeftRoute(widget: SearchByTags()));
-                  }
-              ),
+                  }),
 //              ListTile(
 //                leading: Icon(Icons.my_location,),
 //                title: Text("Maps",),
@@ -147,13 +163,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   "Interficio",
                 ),
                 onTap: (() {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                  Navigator.popUntil(
+                      context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context).push(SlideLeftRoute(widget: MyApp()));
                 }),
               ),
 
               ListTile(
-                  title: Text("About Us",
+                  title: Text("Team Aavishkar",
                       style: TextStyle(
                           color: Colors.grey, fontWeight: FontWeight.bold))),
               ListTile(
@@ -162,9 +179,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   "Sponsors",
                 ),
                 onTap: (() {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                  Navigator.popUntil(
+                      context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context)
-                        .push(SlideLeftRoute(widget: Sponsors()));
+                      .push(SlideLeftRoute(widget: Sponsors()));
                 }),
               ),
               ListTile(
@@ -175,9 +193,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Contact Us",
                   ),
                   onTap: () {
-                    Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.popUntil(
+                        context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
-                          .push(SlideLeftRoute(widget: ContactUs()));
+                        .push(SlideLeftRoute(widget: ContactUs()));
                   }),
               ListTile(
                   leading: Icon(
@@ -187,17 +206,19 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Contributors",
                   ),
                   onTap: () {
-                    Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.popUntil(
+                        context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
-                          .push(SlideLeftRoute(widget: Contributors()));
+                        .push(SlideLeftRoute(widget: Contributors()));
                   }),
               ListTile(
                 leading: Icon(Icons.info),
                 title: Text("About Aarohan"),
                 onTap: (() {
-                  Navigator.popUntil(context, (ModalRoute.withName('/ui/account/login')));
+                  Navigator.popUntil(
+                      context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context)
-                        .push(SlideLeftRoute(widget: AboutUsPage()));
+                      .push(SlideLeftRoute(widget: AboutUsPage()));
                 }),
               ),
             ]),
