@@ -17,13 +17,16 @@ IconData facebook_1 = IconData(0xf300, fontFamily: kFontFam);
 
 //TODO Data Entry
 Map contributors = {
+  // sudipta da
   "Name": [
     "Jyotishka Dasgupta",
     "Romit Karmakar",
     "Simran Singh",
     "Avinash Agarwal",
     "Akshat Jain",
-    "Aritra Karmakar"
+    "Sudipta Pandit",
+    "Aritra Karmakar",
+    "Revanth Reddy"
   ],
   "ProfilesFacebook": [
     "https://www.instagram.com/jyotishka_dasgupta/",
@@ -31,7 +34,9 @@ Map contributors = {
     "https://www.facebook.com/simran9907",
     "https://www.facebook.com/avinash.agarwal.1614",
     "https://www.facebook.com/akshat.jain.336333",
+    "",
     "https://www.facebook.com/aritra.karmakar.3",
+    "https://www.facebook.com/revanth.m"
   ],
   "ProfilesGithub": [
     "https://github.com/phoenix7139",
@@ -39,7 +44,9 @@ Map contributors = {
     "https://github.com/simran9928",
     "https://github.com/AvinashAgarwal14",
     "https://github.com/Akshat7321",
+    "https://github.com/realsdx",
     "https://github.com/gravitydestroyer",
+    "https://github.com/revanth-reddy/",
   ],
   "ProfilesLinkedin": [
     "https://www.linkedin.com/in/jyotishka-dasgupta-7a2a1217b/",
@@ -47,7 +54,9 @@ Map contributors = {
     "https://www.linkedin.com/in/simran-singh-aa4bb5184",
     "https://www.linkedin.com/in/agarwalavinash14/",
     "https://www.linkedin.com/in/akshat-jain-007365a2/",
-    "https://www.facebook.com/aritra.karmakar.3"
+    "",
+    "https://www.facebook.com/aritra.karmakar.3",
+    "https://www.linkedin.com/in/revanth--reddy/",
   ],
   "Contact": [
     "+91 9163479911",
@@ -55,7 +64,9 @@ Map contributors = {
     "+91 62957224629",
     "+91 8981866219",
     "+91 8004937056",
-    "+91 8759579260"
+    "+91 7501479332",
+    "+91 8759579260",
+    "+91 9398562859"
   ],
   "Image": [
     "images/Contributors/Jyotishka.jpg",
@@ -63,7 +74,9 @@ Map contributors = {
     "images/Contributors/simran.jpeg",
     "images/Contributors/avinash.jpeg",
     "images/Contributors/akshat.jpg",
-    "images/Contributors/aritrabhaiya.jpg"
+    "images/Contributors/",
+    "images/Contributors/aritrabhaiya.jpg",
+    "images/Contributors/revanth_reddy.jpg"
   ],
 };
 
@@ -78,7 +91,7 @@ class _ContributorsState extends State<Contributors> {
         ),
 //      backgroundColor: Theme.of(context).brightness==Brightness.light?Colors.white70:Colors.black ,
         body: ListView.builder(
-            itemCount: 6,
+            itemCount: 8,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.all(10.0),

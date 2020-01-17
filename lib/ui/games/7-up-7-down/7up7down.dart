@@ -15,10 +15,13 @@ class UpDownGame extends StatefulWidget {
   var fix;
   var currentUser;
   var betAmount;
-  UpDownGame(this.coins_left, this.fix, this.currentUser, this.betAmount);
+
+  String help = "false";
+  UpDownGame(
+      this.coins_left, this.fix, this.currentUser, this.betAmount, this.help);
   @override
   _UpDownGameState createState() =>
-      _UpDownGameState(coins_left, fix, currentUser, betAmount);
+      _UpDownGameState(coins_left, fix, currentUser, betAmount, help);
 }
 
 class _UpDownGameState extends State<UpDownGame> {
@@ -26,7 +29,9 @@ class _UpDownGameState extends State<UpDownGame> {
   var fix;
   var currentUser;
   var betAmount;
-  _UpDownGameState(this.coins_left, this.fix, this.currentUser, this.betAmount);
+  String help = "false";
+  _UpDownGameState(
+      this.coins_left, this.fix, this.currentUser, this.betAmount, this.help);
   var value;
   var result;
   var upordown;
@@ -35,9 +40,9 @@ class _UpDownGameState extends State<UpDownGame> {
   var dice2 = 2;
   bool _isLoading = false;
   bool _eurekoinLoading = false;
-  bool help = false;
   bool rolling = false;
   final loginKey = 'itsnotvalidanyways';
+  PersistentBottomSheetController _controller;
 
   Future getUserEurekoin() async {
     setState(() {
@@ -55,10 +60,17 @@ class _UpDownGameState extends State<UpDownGame> {
       coins_left = status;
       _eurekoinLoading = false;
     });
+    _controller.setState(() {
+      _eurekoinLoading = false;
+    });
   }
 
   void submit(context, result) async {
-    Scaffold.of(context).showBottomSheet((context) {
+    setState(() {
+      _isLoading = true;
+      _eurekoinLoading = true;
+    });
+    _controller = Scaffold.of(context).showBottomSheet((context) {
       return WillPopScope(
         onWillPop: () {
           Navigator.pop(context);
@@ -91,33 +103,37 @@ class _UpDownGameState extends State<UpDownGame> {
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
-              FlatButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-                color: Colors.white,
-                onPressed: () {
-                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                      statusBarColor: Colors.white,
-                      systemNavigationBarIconBrightness: Brightness.dark));
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  "TRY AGAIN",
-                  style: TextStyle(
-                      color: result == "winner" ? Colors.green : Colors.red),
-                ),
-              ),
+              _eurekoinLoading
+                  ? Container(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.blue,
+                      ),
+                    )
+                  : FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40)),
+                      color: Colors.white,
+                      onPressed: () {
+                        SystemChrome.setSystemUIOverlayStyle(
+                            SystemUiOverlayStyle(
+                                statusBarColor: Colors.white,
+                                systemNavigationBarIconBrightness:
+                                    Brightness.dark));
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "TRY AGAIN",
+                        style: TextStyle(
+                            color:
+                                result == "winner" ? Colors.green : Colors.red),
+                      ),
+                    ),
             ],
           ),
         ),
       );
     });
-
-    setState(() {
-      _isLoading = true;
-    });
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Response response =
         await Dio().post("https://aavishkargames.herokuapp.com/create/", data: {
@@ -130,8 +146,14 @@ class _UpDownGameState extends State<UpDownGame> {
       getUserEurekoin();
       _isLoading = false;
     });
+
     print(response.data);
     await prefs.setInt('coins', coins_left);
+  }
+
+  void setHelp() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("help1", "true");
   }
 
   @override
@@ -173,7 +195,7 @@ class _UpDownGameState extends State<UpDownGame> {
                     decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(20.0)),
-                    child: !help
+                    child: help == "false"
                         ? Scrollbar(
                             child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -198,7 +220,8 @@ class _UpDownGameState extends State<UpDownGame> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    help = true;
+                                    help = "true";
+                                    setHelp();
                                   });
                                 },
                               )
@@ -257,37 +280,37 @@ class _UpDownGameState extends State<UpDownGame> {
   }
 
   Widget _coinsLeft(var coins_left) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.black12, borderRadius: BorderRadius.circular(20.0)),
-      margin: EdgeInsets.only(left: 230),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          SizedBox(
-            width: 5.0,
-          ),
-          FittedBox(
-            fit: BoxFit.contain,
-            child: Container(
-              child: _eurekoinLoading
-                  ? Container(
-                      child: CircularProgressIndicator(
-                      backgroundColor: Colors.green,
-                    ))
-                  : Text(
-                      '$coins_left',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40,
-                          color: Colors.white),
-                    ),
+    return Align(
+      alignment: Alignment.topRight,
+      child: Container(
+        height: 50,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              width: 5.0,
             ),
-          ),
-          Expanded(
-            child: Image.asset('assets/coined.png'),
-          ),
-        ],
+            FittedBox(
+              fit: BoxFit.contain,
+              child: Container(
+                child: _eurekoinLoading
+                    ? Container(
+                        child: CircularProgressIndicator(
+                        backgroundColor: Colors.green,
+                      ))
+                    : Text(
+                        '$coins_left',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white),
+                      ),
+              ),
+            ),
+            Image.asset('assets/coined.png'),
+          ],
+        ),
       ),
     );
   }
