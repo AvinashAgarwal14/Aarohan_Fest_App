@@ -16,10 +16,12 @@ class BlackJack extends StatefulWidget {
   var fix;
   var currentUser;
   var betAmount;
-  BlackJack(this.coins_left, this.fix, this.currentUser, this.betAmount);
+  String help;
+  BlackJack(
+      this.coins_left, this.fix, this.currentUser, this.betAmount, this.help);
   @override
   _BlackJackState createState() =>
-      _BlackJackState(coins_left, fix, currentUser, betAmount);
+      _BlackJackState(coins_left, fix, currentUser, betAmount, help);
 }
 
 class _BlackJackState extends State<BlackJack> {
@@ -27,11 +29,14 @@ class _BlackJackState extends State<BlackJack> {
   var fix;
   var currentUser;
   var betAmount;
+  String help;
   bool _eurekoinLoading = false;
   bool _isLoading = false;
-  bool help = false;
   final loginKey = 'itsnotvalidanyways';
-  _BlackJackState(this.coins_left, this.fix, this.currentUser, this.betAmount);
+
+  PersistentBottomSheetController _controller;
+  _BlackJackState(
+      this.coins_left, this.fix, this.currentUser, this.betAmount, this.help);
 
   BlackJackModel blackJack;
   Future getUserEurekoin() async {
@@ -50,6 +55,114 @@ class _BlackJackState extends State<BlackJack> {
       coins_left = status;
       _eurekoinLoading = false;
     });
+    _controller.setState(() {
+      _eurekoinLoading = false;
+    });
+  }
+
+  void showDialog(BuildContext context, int code) async {
+    Color status = Colors.green.withOpacity(0.8);
+    if (code == 1) status = Colors.red.withOpacity(0.8);
+    if (code == 2) status = Colors.yellow.withOpacity(0.8);
+    var result;
+    if (code == 0)
+      result = "winner";
+    else if (code == 1)
+      result = "loser";
+    else
+      result = "";
+
+    setState(() {
+      _isLoading = true;
+      _eurekoinLoading = true;
+    });
+    _controller = Scaffold.of(context).showBottomSheet((context) {
+      return WillPopScope(
+        onWillPop: () {
+          Navigator.pop(context);
+          Navigator.pop(context);
+
+          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              systemNavigationBarIconBrightness: Brightness.dark));
+        },
+        child: Container(
+          height: MediaQuery.of(context).size.height / 4,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [BoxShadow(spreadRadius: 10, blurRadius: 10)],
+            color: status,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text(
+                result,
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              Text(
+                result == "winner"
+                    ? "YOU WIN $betAmount coins"
+                    : result == "loser"
+                        ? "YOU LOSE $betAmount coins"
+                        : "IT'S A DRAW",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              _eurekoinLoading
+                  ? Container(
+                      child: CircularProgressIndicator(
+                        backgroundColor: status,
+                      ),
+                    )
+                  : FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40)),
+                      color: Colors.white,
+                      onPressed: () {
+                        SystemChrome.setSystemUIOverlayStyle(
+                            SystemUiOverlayStyle(
+                                statusBarColor: Colors.white,
+                                systemNavigationBarIconBrightness:
+                                    Brightness.dark));
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "TRY AGAIN",
+                        style: TextStyle(
+                            color:
+                                result == "winner" ? Colors.green : Colors.red),
+                      ),
+                    ),
+            ],
+          ),
+        ),
+      );
+    });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Response response =
+        await Dio().post("https://aavishkargames.herokuapp.com/create/", data: {
+      "email": currentUser.email,
+      "status": result,
+      "type": "blackjack",
+      "amount": betAmount
+    });
+    setState(() {
+      getUserEurekoin();
+      _isLoading = false;
+    });
+
+    print(response.data);
+    await prefs.setInt('coins', coins_left);
+  }
+
+  void setHelp() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("help2", "true");
   }
 
   @override
@@ -61,9 +174,8 @@ class _BlackJackState extends State<BlackJack> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    blackJack = new BlackJackModel();
+    blackJack = new BlackJackModel(fix);
     setState(() {
       blackJack.start();
       if (blackJack.winner != -1) {
@@ -101,7 +213,7 @@ class _BlackJackState extends State<BlackJack> {
                                 borderRadius: BorderRadius.circular(20.0)),
                             // margin: EdgeInsets.all(10.0),
                             // padding: EdgeInsets.all(10.0),
-                            child: !help
+                            child: help == "false"
                                 ? Scrollbar(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -128,7 +240,8 @@ class _BlackJackState extends State<BlackJack> {
                                           ),
                                           onPressed: () {
                                             setState(() {
-                                              help = true;
+                                              help = "true";
+                                              setHelp();
                                             });
                                           },
                                         )
@@ -141,7 +254,10 @@ class _BlackJackState extends State<BlackJack> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: <Widget>[
-                                        _coinsLeft(coins_left),
+                                        Expanded(
+                                          flex: 2,
+                                          child: _coinsLeft(coins_left),
+                                        ),
                                         Expanded(
                                           flex: 8,
                                           child: Container(
@@ -273,128 +389,38 @@ class _BlackJackState extends State<BlackJack> {
   }
 
   Widget _coinsLeft(var coins_left) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.black12, borderRadius: BorderRadius.circular(20.0)),
-      margin: EdgeInsets.only(left: 230),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          SizedBox(
-            width: 5.0,
-          ),
-          FittedBox(
-            fit: BoxFit.contain,
-            child: Container(
-              child: _eurekoinLoading
-                  ? Container(
-                      child: CircularProgressIndicator(
-                      backgroundColor: Colors.green,
-                    ))
-                  : Text(
-                      '$coins_left',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40,
-                          color: Colors.white),
-                    ),
+    return Align(
+      alignment: Alignment.topRight,
+      child: Container(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              width: 5.0,
             ),
-          ),
-          Expanded(
-            child: Image.asset('assets/coined.png'),
-          ),
-        ],
+            FittedBox(
+              fit: BoxFit.contain,
+              child: Container(
+                child: _eurekoinLoading
+                    ? Container(
+                        child: CircularProgressIndicator(
+                        backgroundColor: Colors.green,
+                      ))
+                    : Text(
+                        '$coins_left',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40,
+                            color: Colors.white),
+                      ),
+              ),
+            ),
+            Image.asset('assets/coined.png'),
+          ],
+        ),
       ),
     );
-  }
-
-  void showDialog(BuildContext context, int code) async {
-    Color status = Colors.green.withOpacity(0.8);
-    if (code == 1) status = Colors.red.withOpacity(0.8);
-    if (code == 2) status = Colors.yellow.withOpacity(0.8);
-    var result;
-    if (code == 0)
-      result = "winner";
-    else if (code == 1)
-      result = "loser";
-    else
-      result = "";
-
-    Scaffold.of(context).showBottomSheet((context) {
-      return WillPopScope(
-        onWillPop: () {
-          Navigator.pop(context);
-          Navigator.pop(context);
-
-          SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              systemNavigationBarIconBrightness: Brightness.dark));
-        },
-        child: Container(
-          height: MediaQuery.of(context).size.height / 4,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [BoxShadow(spreadRadius: 10, blurRadius: 10)],
-            color: status,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text(
-                result,
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-              Text(
-                result == "winner"
-                    ? "YOU WIN $betAmount coins"
-                    : result == "loser"
-                        ? "YOU LOSE $betAmount coins"
-                        : "IT'S A DRAW",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-              FlatButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
-                color: Colors.white,
-                onPressed: () {
-                  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                      statusBarColor: Colors.white,
-                      systemNavigationBarIconBrightness: Brightness.dark));
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  "TRY AGAIN",
-                  style: TextStyle(
-                      color: result == "winner" ? Colors.green : Colors.red),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    });
-    setState(() {
-      _isLoading = true;
-    });
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Response response =
-        await Dio().post("https://aavishkargames.herokuapp.com/create/", data: {
-      "email": currentUser.email,
-      "status": result,
-      "type": "blackjack",
-      "amount": betAmount
-    });
-    setState(() {
-      getUserEurekoin();
-      _isLoading = false;
-    });
-    print(response.data);
-    await prefs.setInt('coins', coins_left);
   }
 
   Hit(BuildContext context) {
@@ -409,7 +435,7 @@ class _BlackJackState extends State<BlackJack> {
   Stand(BuildContext context) {
     setState(() {
       blackJack.stand();
-      const oneSec = const Duration(seconds: 1);
+      const oneSec = const Duration(milliseconds: 1500);
       Timer.periodic(oneSec, (Timer t) {
         Hit(context);
         if (blackJack.winner != -1) {
