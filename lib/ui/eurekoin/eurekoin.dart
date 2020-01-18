@@ -406,11 +406,11 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                           left: 14.0, right: 14.0),
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.55,
+                                              0.60,
                                       child: (transHistory == null)
                                           ? Container()
                                           : (transHistory.length != 0)
-                                              ? buildTransactionsWidget()
+                                              ? ListView(children: buildTransactionsWidget())
                                               : Container()),
                                 ]))
                       ],
@@ -617,15 +617,15 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     for (var item in transHistory) {
       var time = new DateFormat.yMMMd()
           .add_jm()
-          .format(DateTime.parse(item['created_at']).toLocal());
-      if (item['receiver'] == currentUser.email) {
+          .format(DateTime.parse(item[2]).toLocal());
+      if (item[0] > 0) {
         buildItems.add(ListTile(
             title: Text("Received from:"),
             isThreeLine: true,
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("${item['source']}",
+                Text("${item[1]}",
                     style: TextStyle(
                         color: Theme.of(context).brightness == Brightness.light
                             ? Colors.black
@@ -633,7 +633,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                 Text("$time")
               ],
             ),
-            trailing: Text("+ ${item['amount']}",
+            trailing: Text("${item[0]}",
                 style: TextStyle(color: Colors.green))));
       } else {
         buildItems.add(ListTile(
@@ -641,7 +641,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("${item['receiver']}",
+                Text("${item[1]}",
                     style: TextStyle(
                         color: Theme.of(context).brightness == Brightness.light
                             ? Colors.black
@@ -650,7 +650,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
               ],
             ),
             isThreeLine: true,
-            trailing: Text("- ${item['amount']}",
+            trailing: Text("${item[0]}",
                 style: TextStyle(color: Colors.red))));
       }
     }

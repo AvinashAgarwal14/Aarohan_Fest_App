@@ -17,7 +17,22 @@ class EventDetails extends StatefulWidget {
 enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class EventDetailsState extends State<EventDetails> {
+
   @override
+  void setState(fn) {
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
