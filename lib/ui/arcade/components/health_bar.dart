@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 import '../game_controller.dart';
 
 class HealthBar {
@@ -8,34 +10,43 @@ class HealthBar {
   Rect remainingHealthRect;
 
   HealthBar(this.gameController) {
-    double barWidth = gameController.screenSize.width / 1.75;
+    double barWidth = gameController.screenSize.width;
     healthBarRect = Rect.fromLTWH(
-      gameController.screenSize.width / 2 - barWidth / 2,
-      gameController.screenSize.height * 0.8,
+      // gameController.screenSize.width / 2 - barWidth / 2,
+      // gameController.screenSize.height * 0.8,
+      // barWidth,
+      // gameController.tileSize * 0.5,
+      0,
+      gameController.screenSize.height - gameController.tileSize * 0.5,
       barWidth,
       gameController.tileSize * 0.5,
     );
     remainingHealthRect = Rect.fromLTWH(
-      gameController.screenSize.width / 2 - barWidth / 2,
-      gameController.screenSize.height * 0.8,
+      // gameController.screenSize.width / 2 - barWidth / 2,
+      // gameController.screenSize.height * 0.8,
+      // barWidth,
+      // gameController.tileSize * 0.5,
+      0,
+      gameController.screenSize.height - gameController.tileSize * 0.5,
       barWidth,
       gameController.tileSize * 0.5,
     );
   }
 
   void render(Canvas c) {
-    Paint healthBarColor = Paint()..color = Color(0xFFFF0000);
-    Paint remainingBarColor = Paint()..color = Color(0xFF00FF00);
+    Paint healthBarColor = Paint()..color = Colors.red;
+    Paint remainingBarColor = Paint()..color = Colors.green;
     c.drawRect(healthBarRect, healthBarColor);
     c.drawRect(remainingHealthRect, remainingBarColor);
   }
 
   void update(double t) {
-    double barWidth = gameController.screenSize.width / 1.75;
-    double percentHealth = gameController.player.currentHealth / gameController.player.maxHealth;
+    double barWidth = gameController.screenSize.width;
+    double percentHealth =
+        gameController.player.currentHealth / gameController.player.maxHealth;
     remainingHealthRect = Rect.fromLTWH(
-      gameController.screenSize.width / 2 - barWidth / 2,
-      gameController.screenSize.height * 0.8,
+      0,
+      gameController.screenSize.height - gameController.tileSize * 0.5,
       barWidth * percentHealth,
       gameController.tileSize * 0.5,
     );

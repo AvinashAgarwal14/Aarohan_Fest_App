@@ -26,9 +26,7 @@ class _ArcadeGameState extends State<ArcadeGame> {
     TapGestureRecognizer tapper = TapGestureRecognizer();
     tapper.onTapDown = gameController.onTapDown;
     flameUtil.addGestureRecognizer(tapper);
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   @override
@@ -39,6 +37,31 @@ class _ArcadeGameState extends State<ArcadeGame> {
 
   @override
   Widget build(BuildContext context) {
-    return gameController.widget != null ? gameController.widget : Scaffold();
+    return Scaffold(
+        body: Stack(
+      children: <Widget>[
+        gameController.widget != null ? gameController.widget : Container(),
+        Positioned(
+          bottom: 30,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              "HEALTH",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                  fontSize: 18,
+                  shadows: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.9),
+                        offset: Offset(2, 2),
+                        blurRadius: 5,
+                        spreadRadius: 5)
+                  ]),
+            ),
+          ),
+        ),
+      ],
+    ));
   }
 }

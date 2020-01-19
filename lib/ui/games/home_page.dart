@@ -181,8 +181,8 @@ class _HomePageState extends State<HomePage> {
       _enterLoading = true;
     });
     Response response =
-        await Dio().get("https://aavishkargames.herokuapp.com/list/sevenup/");
-    recentResult = response.data["result"];
+        await Dio().get("https://aavishkargames.herokuapp.com/list/");
+    recentResult = response.data["value"];
     print(recentResult);
     setState(() {
       _enterLoading = false;
@@ -201,7 +201,7 @@ class _HomePageState extends State<HomePage> {
       },
       child: (isEurekoinAlreadyRegistered == null || _enterLoading)
           ? Scaffold(
-              backgroundColor: Color(0xFF231F20),
+              backgroundColor: Color(0xFFFFA594),
               body: Center(
                 child: Image.asset("assets/loading.gif"),
               ),
@@ -265,7 +265,7 @@ class _HomePageState extends State<HomePage> {
                   body: Builder(
                     builder: (context) => _isLoading
                         ? Container(
-                            color: Color(0xFF231F20),
+                            color: Color(0xFFFFA594),
                             child: Center(
                               child: Image.asset("assets/loading.gif"),
                             ),
