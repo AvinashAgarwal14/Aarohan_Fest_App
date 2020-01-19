@@ -8,8 +8,8 @@ import '../../../util/detailSection.dart';
 import 'package:intl/intl.dart';
 
 class CommentCategory extends StatefulWidget {
-
-  const CommentCategory({ Key key, this.postKey, this.commentCount}) : super(key: key);
+  const CommentCategory({Key key, this.postKey, this.commentCount})
+      : super(key: key);
   final postKey;
   final commentCount;
 
@@ -18,28 +18,29 @@ class CommentCategory extends StatefulWidget {
 }
 
 class _CommentCategoryState extends State<CommentCategory> {
-
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   DatabaseReference _databaseReferenceForComments;
   List<PostsCommentItem> commentItems;
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     commentItems = new List();
-    _databaseReferenceForComments = _database.reference().child("Posts-Comments").child(widget.postKey);
+    _databaseReferenceForComments =
+        _database.reference().child("Posts-Comments").child(widget.postKey);
     _databaseReferenceForComments.onChildAdded.listen(_onCommentsEntryAdded);
-    _databaseReferenceForComments.onChildChanged.listen(_onCommentsEntryUpdated);
-    _databaseReferenceForComments.onChildRemoved.listen(_onCommentsEntryRemoved);
+    _databaseReferenceForComments.onChildChanged
+        .listen(_onCommentsEntryUpdated);
+    _databaseReferenceForComments.onChildRemoved
+        .listen(_onCommentsEntryRemoved);
   }
 
   @override
@@ -48,8 +49,8 @@ class _CommentCategoryState extends State<CommentCategory> {
     return new Container(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       decoration: new BoxDecoration(
-          border: new Border(bottom: new BorderSide(color: themeData.dividerColor))
-      ),
+          border: new Border(
+              bottom: new BorderSide(color: themeData.dividerColor))),
       child: new DefaultTextStyle(
         style: Theme.of(context).textTheme.subhead,
         child: new SafeArea(
@@ -57,16 +58,16 @@ class _CommentCategoryState extends State<CommentCategory> {
           bottom: false,
           child: new ListView(
             children: <Widget>[
-              (commentItems.length > 0)?
-              new Stack(
-                children: <Widget>[
-                  _buildComments(),
-                  new Column(
-                    children: getComments().toList(),
-                  )
-                ],
-              ):
-              new Container()
+              (commentItems.length > 0)
+                  ? new Stack(
+                      children: <Widget>[
+                        _buildComments(),
+                        new Column(
+                          children: getComments().toList(),
+                        )
+                      ],
+                    )
+                  : new Container()
             ],
           ),
         ),
@@ -74,26 +75,21 @@ class _CommentCategoryState extends State<CommentCategory> {
     );
   }
 
-  List<CommentItem> getComments()
-  {
+  List<CommentItem> getComments() {
     List<CommentItem> comments = new List();
-    List fromDatabase = commentItems ;
-    for(var comment in fromDatabase)
-    {
-      comments.add(
-          new CommentItem(
-              lines: <String>[
-                '${comment.authorName}',
-                '${comment.text}',
-                '${comment.createdDate}',
-              ],
-              commentId: comment.id,
-              postKey: widget.postKey,
-              authorId: comment.authorId,
-              authorImage: comment.authorImage,
-              commentCount: widget.commentCount
-          )
-      );
+    List fromDatabase = commentItems;
+    for (var comment in fromDatabase) {
+      comments.add(new CommentItem(
+          lines: <String>[
+            '${comment.authorName}',
+            '${comment.text}',
+            '${comment.createdDate}',
+          ],
+          commentId: comment.id,
+          postKey: widget.postKey,
+          authorId: comment.authorId,
+          authorImage: comment.authorImage,
+          commentCount: widget.commentCount));
     }
     return comments;
   }
@@ -110,7 +106,8 @@ class _CommentCategoryState extends State<CommentCategory> {
     });
 
     setState(() {
-      commentItems[commentItems.indexOf(oldEntry)] = PostsCommentItem.fromSnapshot(event.snapshot);
+      commentItems[commentItems.indexOf(oldEntry)] =
+          PostsCommentItem.fromSnapshot(event.snapshot);
     });
   }
 
@@ -134,12 +131,17 @@ class _CommentCategoryState extends State<CommentCategory> {
       ),
     );
   }
-
 }
 
-class CommentItem extends StatefulWidget{
-
-  CommentItem({ Key key, this.lines, this.commentId, this.postKey, this.authorId, this.authorImage, this.commentCount})
+class CommentItem extends StatefulWidget {
+  CommentItem(
+      {Key key,
+      this.lines,
+      this.commentId,
+      this.postKey,
+      this.authorId,
+      this.authorImage,
+      this.commentCount})
       : assert(lines.length > 1),
         super(key: key);
 
@@ -155,7 +157,6 @@ class CommentItem extends StatefulWidget{
 }
 
 class _CommentItemState extends State<CommentItem> {
-
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   FirebaseUser currentUser;
   DatabaseReference _databaseReferenceForComments;
@@ -164,65 +165,60 @@ class _CommentItemState extends State<CommentItem> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getUser();
-    _databaseReferenceForComments = _database.reference().child("Posts-Comments").child(widget.postKey);
-    _databaseReferenceForPost = _database.reference().child("Posts").child(widget.postKey);
+    _databaseReferenceForComments =
+        _database.reference().child("Posts-Comments").child(widget.postKey);
+    _databaseReferenceForPost =
+        _database.reference().child("Posts").child(widget.postKey);
     editComment.text = widget.lines[1];
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    final List<Text> columnChildren = [new Text(widget.lines.first, style: themeData.textTheme.title)];
+    final List<Text> columnChildren = [
+      new Text(widget.lines.first, style: themeData.textTheme.title)
+    ];
     String lastLine = widget.lines.last;
-    List<String> updatedLine ;
-    updatedLine = widget.lines.sublist(1, widget.lines.length-1);
-    for(String line in updatedLine)
-      columnChildren.add(new Text(line));
+    List<String> updatedLine;
+    updatedLine = widget.lines.sublist(1, widget.lines.length - 1);
+    for (String line in updatedLine) columnChildren.add(new Text(line));
     columnChildren.add(new Text(lastLine, style: themeData.textTheme.caption));
 
     return new MergeSemantics(
         child: new Padding(
-          padding: const EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              CircleAvatar(
-                  backgroundImage: NetworkImage("${widget.authorImage}")
-              ),
-              Padding(padding: EdgeInsets.only(right: 7.0)),
-              new Expanded(
-                  child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: columnChildren
-                  )
-              ),
-              (currentUser!=null && currentUser.uid == widget.authorId)?
-              IconButton(
-                  icon: Icon(Icons.edit,
-                      color: Color(0xFF505194)),
-                  onPressed: _editOption
-              ):Container(),
-              (currentUser!=null && currentUser.uid == widget.authorId)?
-              IconButton(
-                  icon: Icon(Icons.delete,
-                      color: Color(0xFF505194)),
-                  onPressed: _deleteOption
-              ):Container()
-            ],
-          ),
-        )
-    );
+      padding: const EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 10.0),
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          CircleAvatar(backgroundImage: NetworkImage("${widget.authorImage}")),
+          Padding(padding: EdgeInsets.only(right: 7.0)),
+          new Expanded(
+              child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: columnChildren)),
+          (currentUser != null && currentUser.uid == widget.authorId)
+              ? IconButton(
+                  icon: Icon(Icons.edit, color: Color(0xFF505194)),
+                  onPressed: _editOption)
+              : Container(),
+          (currentUser != null && currentUser.uid == widget.authorId)
+              ? IconButton(
+                  icon: Icon(Icons.delete, color: Color(0xFF505194)),
+                  onPressed: _deleteOption)
+              : Container()
+        ],
+      ),
+    ));
   }
 
   void _editOption() {
@@ -234,17 +230,17 @@ class _CommentItemState extends State<CommentItem> {
           title: new Text('Edit'),
           content: new SingleChildScrollView(
               child: new TextFormField(
-                controller: editComment,
-              )
-          ),
+            controller: editComment,
+          )),
           actions: <Widget>[
             new FlatButton(
               child: new Text('Update'),
               onPressed: () {
                 Navigator.of(context).pop();
                 _databaseReferenceForComments.child(widget.commentId).update({
-                  'text':editComment.text,
-                  'createdDate':new DateFormat.yMMMd().add_jm().format(new DateTime.now())
+                  'text': editComment.text,
+                  'createdDate':
+                      new DateFormat.yMMMd().add_jm().format(new DateTime.now())
                 });
               },
             ),
@@ -268,17 +264,15 @@ class _CommentItemState extends State<CommentItem> {
         return new AlertDialog(
           title: new Text('Delete'),
           content: new SingleChildScrollView(
-              child: new Text('Are you sure you want to delete ?')
-          ),
+              child: new Text('Are you sure you want to delete ?')),
           actions: <Widget>[
             new FlatButton(
               child: new Text('Delete'),
               onPressed: () {
                 Navigator.of(context).pop();
                 _databaseReferenceForComments.child(widget.commentId).remove();
-                _databaseReferenceForPost.update({
-                  'commentsCount':widget.commentCount-1
-                });
+                _databaseReferenceForPost
+                    .update({'commentsCount': widget.commentCount - 1});
               },
             ),
             new FlatButton(
@@ -303,8 +297,9 @@ class _CommentItemState extends State<CommentItem> {
 }
 
 class AddNewComment extends StatefulWidget {
-
-  const AddNewComment({ Key key, this.postKey, this.user, this.commentCount, this.parent}) : super(key: key);
+  const AddNewComment(
+      {Key key, this.postKey, this.user, this.commentCount, this.parent})
+      : super(key: key);
   final String postKey;
   final FirebaseUser user;
   final commentCount;
@@ -315,7 +310,6 @@ class AddNewComment extends StatefulWidget {
 }
 
 class _AddNewCommentState extends State<AddNewComment> {
-
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   DatabaseReference _databaseReferenceForNewComment;
   DatabaseReference _databaseReferenceForPost;
@@ -323,18 +317,19 @@ class _AddNewCommentState extends State<AddNewComment> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _databaseReferenceForNewComment = _database.reference().child("Posts-Comments").child(widget.postKey);
-    _databaseReferenceForPost = _database.reference().child("Posts").child(widget.postKey);
+    _databaseReferenceForNewComment =
+        _database.reference().child("Posts-Comments").child(widget.postKey);
+    _databaseReferenceForPost =
+        _database.reference().child("Posts").child(widget.postKey);
   }
 
   @override
@@ -349,32 +344,51 @@ class _AddNewCommentState extends State<AddNewComment> {
                   padding: EdgeInsets.only(right: 20.0),
                 ),
                 Expanded(
-                  flex: 4 ,
+                  flex: 4,
                   child: TextField(
                     controller: commentController,
-                    decoration: InputDecoration(
-                        hintText: "Enter your comment"
-                    ),
+                    decoration: InputDecoration(hintText: "Enter your comment"),
                   ),
                 ),
                 Expanded(
                   child: IconButton(
                       icon: Icon(Icons.play_arrow, color: Colors.black),
-                      onPressed: ()
-                      {
-                        if(widget.user == null)
-                        {
-                          Navigator.of(context).pushNamed('/ui/account/login').then((onReturn){
+                      onPressed: () {
+                        if (widget.user == null) {
+                          Navigator.of(context)
+                              .pushNamed('/ui/account/login')
+                              .then((onReturn) {
                             widget.parent.getUser();
                           });
-                        }
-                        else
-                        {
-                          PostsCommentItem comment = new PostsCommentItem('','', '', '', '','');
+                        } else if (commentController.text == '') {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return new AlertDialog(
+                                content: new SingleChildScrollView(
+                                    child: new Text(
+                                        'Please enter a valid comment')),
+                                actions: <Widget>[
+                                  new FlatButton(
+                                    child: new Text('Okay'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          PostsCommentItem comment =
+                              new PostsCommentItem('', '', '', '', '', '');
                           comment.authorId = widget.user.uid;
                           comment.authorImage = widget.user.photoUrl;
                           comment.authorName = widget.user.displayName;
-                          comment.createdDate = new DateFormat.yMMMd().add_jm().format(new DateTime.now());
+                          comment.createdDate = new DateFormat.yMMMd()
+                              .add_jm()
+                              .format(new DateTime.now());
                           comment.text = commentController.text;
                           setState(() {
                             commentController.clear();
@@ -382,14 +396,12 @@ class _AddNewCommentState extends State<AddNewComment> {
                           addComment(comment);
                           FocusScope.of(context).requestFocus(new FocusNode());
                         }
-                      }
-                  ),
+                      }),
                 )
               ],
             )
           ],
-        )
-    );
+        ));
   }
 
   Future addComment(comment) async {
@@ -397,13 +409,7 @@ class _AddNewCommentState extends State<AddNewComment> {
     comment.id = newRef.key;
     newRef.set(comment.toJson());
 
-    _databaseReferenceForPost.update({
-      'commentsCount': widget.commentCount+1
-    });
+    _databaseReferenceForPost
+        .update({'commentsCount': widget.commentCount + 1});
   }
-
 }
-
-
-
-
