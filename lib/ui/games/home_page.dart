@@ -475,7 +475,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     child: BackdropFilter(
                                       filter: ImageFilter.blur(
-                                          sigmaX: 7.0, sigmaY: 7.0),
+                                          sigmaX: 5.0, sigmaY: 5.0),
                                       child: SafeArea(
                                         child: Container(
                                           padding: EdgeInsets.all(20),
@@ -701,7 +701,7 @@ class _HomePageState extends State<HomePage> {
                                     child: ClipRect(
                                       child: BackdropFilter(
                                         filter: ImageFilter.blur(
-                                            sigmaX: 5.0, sigmaY: 5.0),
+                                            sigmaX: 3.0, sigmaY: 3.0),
                                         child: SafeArea(
                                           child: Container(
                                             padding: EdgeInsets.all(20),

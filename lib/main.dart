@@ -30,7 +30,7 @@ class Aavishkar_App extends StatelessWidget {
     // By toggling the change theme
 
       return MaterialApp(
-            title: "Aavishkar App",
+            title: "Aarohan App",
             debugShowMaterialGrid: false,
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
