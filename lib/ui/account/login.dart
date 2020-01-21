@@ -217,7 +217,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                         : _fSignIn(),
                                     builder: (BuildContext context,
                                         AsyncSnapshot snapshot) {
-                                      if (currentUser == null) {
+                                      if (currentUser == null && userProfile==null) {
                                         print("---------Gangnum");
                                         return animationStatus == 1
                                             ? Container(

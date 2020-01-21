@@ -1,82 +1,42 @@
 {
   "project_info": {
-    "project_number": "6317672023",
-    "firebase_url": "https://aavishkar-app.firebaseio.com",
-    "project_id": "aavishkar-app",
-    "storage_bucket": "aavishkar-app.appspot.com"
+    "project_number": "550997604028",
+    "firebase_url": "https://aarohan-76222.firebaseio.com",
+    "project_id": "aarohan-76222",
+    "storage_bucket": "aarohan-76222.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:6317672023:android:f964a412fbabcb20",
+        "mobilesdk_app_id": "1:550997604028:android:192f2670958d919559c2b9",
         "android_client_info": {
-          "package_name": "com.app.aavishkar.aavishkarapp"
+          "package_name": "com.app.aarohan.aarohanapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "6317672023-0f24vhbohfbjgjivc99dsav7a9lvuqti.apps.googleusercontent.com",
+          "client_id": "550997604028-7fddu42qco7lctggbiqrfj4pkahet58b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.app.aavishkar.aavishkarapp",
-            "certificate_hash": "185e86681b9a30d8ac9a772f1d29589a48982d4a"
-          }
-        },
-        {
-          "client_id": "6317672023-pfi17c1niiu8vhcrmksebak8bujbsnts.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.app.aavishkar.aavishkarapp",
-            "certificate_hash": "0b5f8e0837dac1d092ffa15907987a498a4efd52"
-          }
-        },
-        {
-          "client_id": "6317672023-ifc7ejdf67fhmssja6cd36rr5necps2l.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.app.aavishkar.aavishkarapp",
+            "package_name": "com.app.aarohan.aarohanapp",
             "certificate_hash": "1f6bbe8d595a2b430a59a442610daf240059d25d"
           }
         },
         {
-          "client_id": "6317672023-ncgf4grs2ikh2scfdf11cqpnjhoajhqt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.app.aavishkar.aavishkarapp",
-            "certificate_hash": "f1a309072a73d189e93afd3c07c263423baf8c68"
-          }
-        },
-        {
-          "client_id": "6317672023-h8e93p30lpr4c7jmsnfjtfae5oa8j09o.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.app.aavishkar.aavishkarapp",
-            "certificate_hash": "daef85472508446684a71abdbe89e60f649299fb"
-          }
-        },
-        {
-          "client_id": "6317672023-j39rncahfn0u8331qo7at4lduagtaad8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.app.aavishkar.aavishkarapp",
-            "certificate_hash": "57418194dc27016c11e1761915a77c1ad47969d0"
-          }
-        },
-        {
-          "client_id": "6317672023-hirt906ngj5rqek090k4pt00id6rc2s3.apps.googleusercontent.com",
+          "client_id": "550997604028-enuccq868jbq14kmnidjgeaf11ti8gt5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAvMveBSH3jaSmvmE_VCs41Xox3GHeQqOA"
+          "current_key": "AIzaSyAWsWXAYXZx6IXI5axkk8wf1E1ck9O_FbM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "6317672023-hirt906ngj5rqek090k4pt00id6rc2s3.apps.googleusercontent.com",
+              "client_id": "550997604028-enuccq868jbq14kmnidjgeaf11ti8gt5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

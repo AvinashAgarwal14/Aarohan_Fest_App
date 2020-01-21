@@ -104,13 +104,13 @@ class _DashboardState extends State<Dashboard> {
                       )
                         :
                         Container(),
-                        SizedBox(width:10),
-                      IconButton(
-                        icon:Icon(Icons.account_box),
-                        onPressed: (){
-                          _logout();
-                        },
-                        ),
+                      //   SizedBox(width:10),
+                      // IconButton(
+                      //   icon:Icon(Icons.account_box),
+                      //   onPressed: (){
+                      //     _logout();
+                      //   },
+                      //   ),
 
                       SizedBox(width:10),
                   ],
