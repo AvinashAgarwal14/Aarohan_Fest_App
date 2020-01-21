@@ -56,6 +56,7 @@ class _CommentCategoryState extends State<CommentCategory> {
           top: false,
           bottom: false,
           child: new ListView(
+            cacheExtent: MediaQuery.of(context).size.height*5,
             children: <Widget>[
               (commentItems.length > 0)?
               new Stack(

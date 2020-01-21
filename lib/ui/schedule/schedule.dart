@@ -111,6 +111,7 @@ class _ScheduleState extends State<Schedule> {
                         ),
                       ),
                       child: new ListView.builder(
+                          cacheExtent: MediaQuery.of(context).size.height*5,
                           itemCount: week.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (BuildContext context, int index) {

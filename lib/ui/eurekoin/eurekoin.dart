@@ -410,7 +410,9 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                       child: (transHistory == null)
                                           ? Container()
                                           : (transHistory.length != 0)
-                                              ? ListView(children: buildTransactionsWidget())
+                                              ? ListView(
+                                                cacheExtent: MediaQuery.of(context).size.height*5,
+                                                children: buildTransactionsWidget())
                                               : Container()),
                                 ]))
                       ],
