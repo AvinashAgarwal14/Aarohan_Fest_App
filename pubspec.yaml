@@ -88,6 +88,8 @@ flutter:
     - fonts/Orbitron-Medium.ttf
     - assets/score.png
     - assets/loading.gif
+    - assets/fire.gif
+    - assets/gamebackground.jpg
     - assets/dicegame.jpg
     - assets/cardgame.jpg
     - assets/fcards.jpg

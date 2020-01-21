@@ -1,7 +1,12 @@
 import 'package:aavishkarapp/ui/arcade/arcade_game.dart';
+import 'package:aavishkarapp/ui/arcade/game_controller.dart';
 import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
+import 'package:flame/util.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './ui/search_by_tags/tags.dart';
 //import './ui/maps/map.dart';
 import './ui/account/login.dart';
@@ -15,15 +20,30 @@ import './ui/about_us/about_us.dart';
 import './ui/interficio/interficio.dart';
 import './ui/games/home_page.dart';
 
-void main() {
+void main() async {
   // debugPaintSizeEnabled = true;
   // debugPaintBaselinesEnabled = true;
   // debugPaintPointersEnabled = true;
 
-  runApp(Aavishkar_App());
+  
+  WidgetsFlutterBinding.ensureInitialized();
+  Util flameUtil = Util();
+  // await flameUtil.fullScreen();
+  await flameUtil.setOrientation(DeviceOrientation.portraitUp);
+
+  SharedPreferences storage = await SharedPreferences.getInstance();
+  GameController gameController = GameController(storage);
+
+  TapGestureRecognizer tapper = TapGestureRecognizer();
+  tapper.onTapDown = gameController.onTapDown;
+  flameUtil.addGestureRecognizer(tapper);
+
+  runApp(Aavishkar_App(gameController));
 }
 
 class Aavishkar_App extends StatelessWidget {
+  GameController gameController;
+  Aavishkar_App(this.gameController);
   @override
   Widget build(BuildContext context) {
     // Wrapped within Dynamic Theme to change the theme
@@ -52,7 +72,7 @@ class Aavishkar_App extends StatelessWidget {
                   Contributors(),
               "/ui/about_us/about_us": (BuildContext context) => AboutUsPage(),
               "/interficio/interficio.dart": (BuildContext context) => MyApp(),
-              "/ui/arcade_game": (BuildContext context) => ArcadeGame(),
+              "/ui/arcade_game": (BuildContext context) => ArcadeGame(gameController),
       },
     );
   }

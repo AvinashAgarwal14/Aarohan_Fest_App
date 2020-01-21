@@ -1,67 +1,72 @@
-import 'package:flame/util.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import './game_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-GameController gameController;
+import './state.dart';
+
+// GameController gameController;
 
 class ArcadeGame extends StatefulWidget {
+  GameController gameController;
+  ArcadeGame(this.gameController);
   @override
-  _ArcadeGameState createState() => _ArcadeGameState();
+  _ArcadeGameState createState() => _ArcadeGameState(gameController);
 }
 
 class _ArcadeGameState extends State<ArcadeGame> {
-  void gameStart() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    Util flameUtil = Util();
-    await flameUtil.fullScreen();
-    await flameUtil.setOrientation(DeviceOrientation.portraitUp);
-
-    SharedPreferences storage = await SharedPreferences.getInstance();
-    gameController = GameController(storage);
-    print("control");
-    TapGestureRecognizer tapper = TapGestureRecognizer();
-    tapper.onTapDown = gameController.onTapDown;
-    flameUtil.addGestureRecognizer(tapper);
-    setState(() {});
-  }
+  GameController gameController;
+  _ArcadeGameState(this.gameController);
+  bool _isLoading = false;
 
   @override
   void initState() {
-    gameStart();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        gameController.widget != null ? gameController.widget : Container(),
-        Positioned(
-          bottom: 30,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              "HEALTH",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                  fontSize: 18,
-                  shadows: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(0.9),
-                        offset: Offset(2, 2),
-                        blurRadius: 5,
-                        spreadRadius: 5)
-                  ]),
-            ),
-          ),
-        ),
-      ],
-    ));
+    return WillPopScope(
+      onWillPop: () {
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarIconBrightness: Brightness.light));
+        Navigator.pop(context);
+      },
+      child: Scaffold(
+          body: _isLoading
+              ? LinearProgressIndicator()
+              : Stack(
+                  children: <Widget>[
+                    gameController.widget != null
+                        ? gameController.widget
+                        : Container(),
+                    // gameController.state == States.menu
+                    //     ? Positioned(
+                    //         bottom: 30,
+                    //         child: Container(
+                    //           padding: EdgeInsets.symmetric(horizontal: 20),
+                    //           child: Text(
+                    //             "HEALTH",
+                    //             style: TextStyle(
+                    //                 fontWeight: FontWeight.bold,
+                    //                 color: Colors.grey,
+                    //                 fontSize: 18,
+                    //                 shadows: [
+                    //                   BoxShadow(
+                    //                       color: Colors.grey.withOpacity(0.9),
+                    //                       offset: Offset(2, 2),
+                    //                       blurRadius: 5,
+                    //                       spreadRadius: 5)
+                    //                 ]),
+                    //           ),
+                    //         ),
+                    //       )
+                    //     : Container(),
+                  ],
+                )),
+    );
   }
 }
