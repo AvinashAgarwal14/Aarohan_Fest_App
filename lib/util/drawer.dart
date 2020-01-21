@@ -58,8 +58,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   ),
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.of(context)
-                        .push(SlideLeftRoute(widget: Dashboard()));
+                    Navigator.of(context).pushNamed("/ui/dashboard");
                   }),
               ListTile(
                   leading: Icon(
@@ -71,8 +70,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   onTap: () {
                     Navigator.popUntil(
                         context, (ModalRoute.withName('/ui/account/login')));
-                    Navigator.of(context)
-                        .push(SlideLeftRoute(widget: EurekoinHomePage()));
+                    Navigator.of(context).pushNamed("/ui/eurekoin");
                   }),
               ListTile(
                 leading: Icon(
@@ -84,8 +82,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: (() {
                   Navigator.popUntil(
                       context, (ModalRoute.withName('/ui/account/login')));
-                  Navigator.of(context)
-                      .push(SlideLeftRoute(widget: HomePage()));
+                  Navigator.of(context).pushNamed("/ui/eurekoin_casino");
                 }),
               ),
               ListTile(
@@ -98,8 +95,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: (() {
                   Navigator.popUntil(
                       context, (ModalRoute.withName('/ui/account/login')));
-                  Navigator.of(context)
-                      .push(SlideLeftRoute(widget: ArcadeGame()));
+                  Navigator.of(context).pushNamed("/ui/arcade_game");
                 }),
               ),
               ListTile(
@@ -112,8 +108,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   onTap: () {
                     Navigator.popUntil(
                         context, (ModalRoute.withName('/ui/account/login')));
-                    Navigator.of(context)
-                        .push(SlideLeftRoute(widget: Schedule()));
+                    Navigator.of(context).pushNamed("/ui/schedule");
                   }),
               ListTile(
                   title: Text("Utilities",
@@ -130,8 +125,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   onTap: () {
                     Navigator.popUntil(
                         context, (ModalRoute.withName('/ui/account/login')));
-                    Navigator.of(context)
-                        .push(SlideLeftRoute(widget: Scoreboard()));
+                    Navigator.of(context).pushNamed("/ui/scoreboard");
                   }),
               ListTile(
                   leading: Icon(
@@ -143,18 +137,21 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   onTap: () {
                     Navigator.popUntil(
                         context, (ModalRoute.withName('/ui/account/login')));
-                    Navigator.of(context)
-                        .push(SlideLeftRoute(widget: SearchByTags()));
+                    Navigator.of(context).pushNamed("/ui/tags");
                   }),
-//              ListTile(
-//                leading: Icon(Icons.my_location,),
-//                title: Text("Maps",),
-//                onTap: (() {
-//                  Navigator.popUntil(context, (ModalRoute.withName('/ui/dashboard')));
-//                    Navigator.of(context)
-//                        .push(SlideLeftRoute(widget: MapPage()));
-//                }),
-//              ),
+              // ListTile(
+              //   leading: Icon(
+              //     Icons.my_location,
+              //   ),
+              //   title: Text(
+              //     "Maps",
+              //   ),
+              //   onTap: (() {
+              //     Navigator.popUntil(
+              //         context, (ModalRoute.withName('/ui/dashboard')));
+              //     Navigator.of(context).push(SlideLeftRoute(widget: MapPage()));
+              //   }),
+              // ),
               ListTile(
                 leading: Icon(
                   Icons.map,
@@ -165,10 +162,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: (() {
                   Navigator.popUntil(
                       context, (ModalRoute.withName('/ui/account/login')));
-                  Navigator.of(context).push(SlideLeftRoute(widget: MyApp()));
+                  Navigator.of(context)
+                      .pushNamed("/interficio/interficio.dart");
                 }),
               ),
-
               ListTile(
                   title: Text("Team Aavishkar",
                       style: TextStyle(
@@ -181,8 +178,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: (() {
                   Navigator.popUntil(
                       context, (ModalRoute.withName('/ui/account/login')));
-                  Navigator.of(context)
-                      .push(SlideLeftRoute(widget: Sponsors()));
+                  Navigator.of(context).pushNamed("/ui/sponsors/sponsors");
                 }),
               ),
               ListTile(
@@ -196,7 +192,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     Navigator.popUntil(
                         context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
-                        .push(SlideLeftRoute(widget: ContactUs()));
+                        .pushNamed("/ui/contact_us/contact_us");
                   }),
               ListTile(
                   leading: Icon(
@@ -209,7 +205,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     Navigator.popUntil(
                         context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context)
-                        .push(SlideLeftRoute(widget: Contributors()));
+                        .pushNamed("/ui/contributors/contributors");
                   }),
               ListTile(
                 leading: Icon(Icons.info),
@@ -217,8 +213,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 onTap: (() {
                   Navigator.popUntil(
                       context, (ModalRoute.withName('/ui/account/login')));
-                  Navigator.of(context)
-                      .push(SlideLeftRoute(widget: AboutUsPage()));
+                  Navigator.of(context).pushNamed("/ui/about_us/about_us");
                 }),
               ),
             ]),

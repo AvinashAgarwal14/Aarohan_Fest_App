@@ -1,3 +1,4 @@
+import 'package:aavishkarapp/ui/arcade/arcade_game.dart';
 import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -51,6 +52,7 @@ class Aavishkar_App extends StatelessWidget {
                   Contributors(),
               "/ui/about_us/about_us": (BuildContext context) => AboutUsPage(),
               "/interficio/interficio.dart": (BuildContext context) => MyApp(),
+              "/ui/arcade_game": (BuildContext context) => ArcadeGame(),
       },
     );
   }

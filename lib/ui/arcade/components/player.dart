@@ -1,6 +1,19 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 import '../game_controller.dart';
+
+class OpenPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return null;
+  }
+}
 
 class Player {
   final GameController gameController;
@@ -21,7 +34,7 @@ class Player {
   }
 
   void render(Canvas c) {
-    Paint color = Paint()..color = Color(0xFF0000FF);
+    Paint color = Paint()..color = Colors.blue.withOpacity(0.5);
     c.drawRect(playerRect, color);
   }
 
@@ -31,5 +44,4 @@ class Player {
       gameController.initialize();
     }
   }
-
 }
