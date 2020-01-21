@@ -11,6 +11,9 @@ import '../../util/event_details.dart';
 import '../../util/detailSection.dart';
 import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
 import '../../util/drawer.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as JSON;
 
 var kFontFam = 'CustomFonts';
 var firebaseAuth = FirebaseAuth.instance;
@@ -34,6 +37,9 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   final GoogleSignIn _googleSignIn = new GoogleSignIn();
   final _facebookLogin = new FacebookLogin();
   FirebaseUser currentUser;
+  Map userProfile;
+  bool _isLoggedIn=false;
+
 
   bool previouslyLoggedIn = false;
   AnimationController _glogInButtonController;
@@ -111,10 +117,12 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (currentUser == null) {
+    if (currentUser == null && userProfile==null) {
       return new Scaffold(
           drawer: NavigationDrawer(),
-          body: new Container(
+          body: WillPopScope(
+            onWillPop: _exit,
+            child: Container(
               decoration: new BoxDecoration(
                 image: backgroundImage,
               ),
@@ -233,7 +241,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                     })
                           ])
                     ],
-                  ))));
+                  )))));
     } else {
       return Dashboard();
     }
@@ -273,8 +281,10 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     _auth.signOut();
     setState(() {
       previouslyLoggedIn = true;
+      _isLoggedIn=false;
     });
   }
+  
 
   Future _gSignIn() async {
     GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
@@ -301,9 +311,14 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
     final accessToken = facebookLoginResult.accessToken.token;
     if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
-      final facebookAuthCred =
-          FacebookAuthProvider.getCredential(accessToken: accessToken);
-      final user = await firebaseAuth.signInWithCredential(facebookAuthCred);
+      final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${accessToken}');
+      final profile = JSON.jsonDecode(graphResponse.body);
+      print(profile);
+      setState(() {
+          userProfile = profile;
+          _isLoggedIn = true;
+        });
+    
       print("User : ");
       return 1;
     } else
@@ -327,7 +342,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     }
     return facebookLoginResult;
   }
-
   SignIn(String str) {
     return (new Container(
       width: MediaQuery.of(context).size.width - 80.0,
@@ -366,4 +380,54 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
       ),
     ));
   }
+
+  Future<bool> _exit() async {
+  return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Container(
+    height: 300,
+    decoration: BoxDecoration(
+      color: Colors.indigo[400],
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.all(Radius.circular(12))
+    ),
+    child: Column(
+      children: <Widget>[
+        Container(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Image.asset('assets/sad.png', height: 120, width: 120,),
+          ),
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12))
+          ),
+        ),
+        SizedBox(height: 24,),
+        Text('Do you want to Exit?', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
+        SizedBox(height: 10,),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            FlatButton(onPressed: (){
+              exit(0);
+            }, child: Text('EXIT'),color: Colors.white, textColor: Colors.indigo[400],),
+            ],
+        )
+      ],
+    ),
+  )
+            
+            );
+      });
+  
+  }
+
 }
