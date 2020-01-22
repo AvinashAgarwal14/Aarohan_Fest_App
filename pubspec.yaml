@@ -88,6 +88,14 @@ flutter:
     - fonts/Orbitron-Medium.ttf
     - assets/score.png
     - assets/loading.gif
+    - assets/images/gamebackground.jpg
+    - assets/images/chip.png
+    - assets/images/malware.png
+    - assets/images/malwaredamaged.png
+    - assets/images/virus.png
+    - assets/images/virusdamaged.png
+    - assets/images/greenvirus.png
+    - assets/images/greenvirusdamaged.png
     - assets/dicegame.jpg
     - assets/cardgame.jpg
     - assets/fcards.jpg

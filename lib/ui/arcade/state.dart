@@ -1,4 +1,4 @@
-enum State {
+enum States {
   menu,
   playing,
 }

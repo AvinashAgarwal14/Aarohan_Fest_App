@@ -24,7 +24,7 @@ class ScoreText {
       painter.text = TextSpan(
         text: gameController.score.toString(),
         style: TextStyle(
-          color: Colors.black,
+          color: Colors.white,
           fontSize: 70.0,
         ),
       );

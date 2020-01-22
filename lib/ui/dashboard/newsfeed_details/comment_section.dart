@@ -361,7 +361,7 @@ class _AddNewCommentState extends State<AddNewComment> {
                               .then((onReturn) {
                             widget.parent.getUser();
                           });
-                        } else if (commentController.text == '') {
+                        } else if (commentController.text.trim().isEmpty) {
                           showDialog(
                             context: context,
                             barrierDismissible: false, // user must tap button!
@@ -390,7 +390,7 @@ class _AddNewCommentState extends State<AddNewComment> {
                           comment.createdDate = new DateFormat.yMMMd()
                               .add_jm()
                               .format(new DateTime.now());
-                          comment.text = commentController.text;
+                          comment.text = commentController.text.trim();
                           setState(() {
                             commentController.clear();
                           });

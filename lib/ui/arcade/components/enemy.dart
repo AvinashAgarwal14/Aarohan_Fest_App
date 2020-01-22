@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'dart:math';
+import 'package:flame/sprite.dart';
 
 import '../game_controller.dart';
 
@@ -9,37 +11,44 @@ class Enemy {
   double speed;
   Rect enemyRect;
   bool isDead = false;
+  Sprite enemySprite;
+  Sprite damagedEnemy;
 
   Enemy(this.gameController, double x, double y) {
     health = 2;
     damage = 1;
     speed = gameController.tileSize * 2;
+    var enemychoice = Random().nextInt(3);
+    if (enemychoice == 0) {
+      enemySprite = Sprite('virus.png');
+      damagedEnemy = Sprite('virusdamaged.png');
+    } else if (enemychoice == 1) {
+      enemySprite = Sprite('greenvirus.png');
+      damagedEnemy = Sprite('greenvirusdamaged.png');
+    } else {
+      enemySprite = Sprite('malware.png');
+      damagedEnemy = Sprite('malwaredamaged.png');
+    }
     enemyRect = Rect.fromLTWH(
       x,
       y,
-      gameController.tileSize * 1.2,
-      gameController.tileSize * 1.2,
+      gameController.tileSize * 2,
+      gameController.tileSize * 2,
     );
   }
 
   void render(Canvas c) {
-    Color color;
     switch (health) {
       case 1:
-        color = Color(0xFFFF7F7F);
+        damagedEnemy.renderRect(c, enemyRect);
         break;
       case 2:
-        color = Color(0xFFFF4C4C);
-        break;
-      case 3:
-        color = Color(0xFFFF4500);
+        enemySprite.renderRect(c, enemyRect);
         break;
       default:
-        color = Color(0xFFFF0000);
+        enemySprite.renderRect(c, enemyRect);
         break;
     }
-    Paint enemyColor = Paint()..color = color;
-    c.drawRect(enemyRect, enemyColor);
   }
 
   void update(double t) {
@@ -69,7 +78,8 @@ class Enemy {
       if (health <= 0) {
         isDead = true;
         gameController.score++;
-        if (gameController.score > (gameController.storage.getInt('highscore') ?? 0)) {
+        if (gameController.score >
+            (gameController.storage.getInt('highscore') ?? 0)) {
           gameController.storage.setInt('highscore', gameController.score);
         }
       }

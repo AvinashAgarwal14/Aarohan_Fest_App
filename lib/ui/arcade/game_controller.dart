@@ -12,6 +12,7 @@ import './components/score_text.dart';
 import './components/start_text.dart';
 import './enemy_spawner.dart';
 import './state.dart';
+import './components/background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GameController extends Game {
@@ -25,9 +26,10 @@ class GameController extends Game {
   HealthBar healthBar;
   int score;
   ScoreText scoreText;
-  State state;
+  States state;
   HighscoreText highscoreText;
   StartText startText;
+  Background background;
 
   GameController(this.storage) {
     initialize();
@@ -35,7 +37,7 @@ class GameController extends Game {
 
   void initialize() async {
     resize(await Flame.util.initialDimensions());
-    state = State.menu;
+    state = States.menu;
     rand = Random();
     player = Player(this);
     enemies = List<Enemy>();
@@ -45,19 +47,24 @@ class GameController extends Game {
     scoreText = ScoreText(this);
     highscoreText = HighscoreText(this);
     startText = StartText(this);
+    background = Background(this);
   }
 
   void render(Canvas c) {
-    Rect background = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
-    Paint backgroundPaint = Paint()..color = Color(0xFFFAFAFA);
-    c.drawRect(background, backgroundPaint);
+    // Rect background = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
+    // Paint backgroundPaint = Paint()..color = Color(0xFFFAFAFA);
+    // c.drawRect(background, backgroundPaint);
+    background.render(c);
 
+if(c!=null)
+{
     player.render(c);
+}
 
-    if (state == State.menu) {
+    if (state == States.menu) {
       startText.render(c);
       highscoreText.render(c);
-    } else if (state == State.playing) {
+    } else if (state == States.playing) {
       enemies.forEach((Enemy enemy) => enemy.render(c));
       scoreText.render(c);
       healthBar.render(c);
@@ -65,10 +72,10 @@ class GameController extends Game {
   }
 
   void update(double t) {
-    if (state == State.menu) {
+    if (state == States.menu) {
       startText.update(t);
       highscoreText.update(t);
-    } else if (state == State.playing) {
+    } else if (state == States.playing) {
       enemySpawner.update(t);
       enemies.forEach((Enemy enemy) => enemy.update(t));
       enemies.removeWhere((Enemy enemy) => enemy.isDead);
@@ -84,9 +91,9 @@ class GameController extends Game {
   }
 
   void onTapDown(TapDownDetails d) {
-    if (state == State.menu) {
-      state = State.playing;
-    } else if (state == State.playing) {
+    if (state == States.menu) {
+      state = States.playing;
+    } else if (state == States.playing) {
       enemies.forEach((Enemy enemy) {
         if (enemy.enemyRect.contains(d.globalPosition)) {
           enemy.onTapDown();
