@@ -743,13 +743,16 @@ class _HomePageState extends State<HomePage> {
                                               color: Colors.black,
                                               thickness: 3,
                                             ),
-                                            Text(
-                                              recentResult[index]["email"]
-                                                  .split("@")[0],
-                                              style: GoogleFonts.signika(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                            recentResult[index]["email"] != null
+                                                ? Text(
+                                                    recentResult[index]["email"]
+                                                        .split("@")[0],
+                                                    style: GoogleFonts.signika(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )
+                                                : Text(""),
                                             Text(
                                               "${recentResult[index]["status"]}: ${recentResult[index]["amount"]} coins",
                                               style: GoogleFonts.signika(

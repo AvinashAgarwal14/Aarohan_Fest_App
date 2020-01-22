@@ -31,7 +31,7 @@ void main() async {
   // await flameUtil.fullScreen();
   await flameUtil.setOrientation(DeviceOrientation.portraitUp);
   Flame.images.loadAll([
-    "gamebackgound.jpg",
+    "gamebackground.jpg",
     "chip.png",
     "virus.png",
     "virusdamaged.png",

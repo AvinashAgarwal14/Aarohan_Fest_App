@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "550997604028-khamp8441846qui9f2ajivgpj80bd50f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.aarohan.aarohanapp",
+            "certificate_hash": "185e86681b9a30d8ac9a772f1d29589a48982d4a"
+          }
+        },
+        {
+          "client_id": "550997604028-jhgi6iie7usv9vedmaapd1ctbr0cntf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.aarohan.aarohanapp",
+            "certificate_hash": "0b5f8e0837dac1d092ffa15907987a498a4efd52"
+          }
+        },
+        {
           "client_id": "550997604028-7fddu42qco7lctggbiqrfj4pkahet58b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
