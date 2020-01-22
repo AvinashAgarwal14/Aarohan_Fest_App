@@ -210,6 +210,7 @@ class _HomePageState extends State<HomePage> {
               ? Scaffold(
                   key: _scaffoldkey,
                   appBar: AppBar(
+                    brightness: Brightness.light,
                     backgroundColor: Colors.white,
                     leading: BackButton(
                       color: Colors.blue,
