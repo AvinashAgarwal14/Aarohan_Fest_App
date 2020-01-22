@@ -12,6 +12,7 @@ import './components/score_text.dart';
 import './components/start_text.dart';
 import './enemy_spawner.dart';
 import './state.dart';
+import './components/background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GameController extends Game {
@@ -28,6 +29,7 @@ class GameController extends Game {
   States state;
   HighscoreText highscoreText;
   StartText startText;
+  Background background;
 
   GameController(this.storage) {
     initialize();
@@ -45,12 +47,14 @@ class GameController extends Game {
     scoreText = ScoreText(this);
     highscoreText = HighscoreText(this);
     startText = StartText(this);
+    background = Background(this);
   }
 
   void render(Canvas c) {
-    Rect background = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
-    Paint backgroundPaint = Paint()..color = Color(0xFFFAFAFA);
-    c.drawRect(background, backgroundPaint);
+    // Rect background = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
+    // Paint backgroundPaint = Paint()..color = Color(0xFFFAFAFA);
+    // c.drawRect(background, backgroundPaint);
+    background.render(c);
 
 if(c!=null)
 {
