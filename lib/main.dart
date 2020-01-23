@@ -8,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './ui/search_by_tags/tags.dart';
+import './ui/Memories/share_memories.dart';
 //import './ui/maps/map.dart';
 import './ui/account/login.dart';
 import './ui/scoreboard/scoreboard.dart';
@@ -20,6 +21,7 @@ import './ui/about_us/about_us.dart';
 import './ui/interficio/interficio.dart';
 import './ui/games/home_page.dart';
 import 'package:flame/flame.dart';
+import './ui/Memories/share_memories.dart';
 
 void main() async {
   // debugPaintSizeEnabled = true;
@@ -74,6 +76,7 @@ class Aavishkar_App extends StatelessWidget {
         "/ui/scoreboard": (BuildContext context) => Scoreboard(),
         "/ui/eurekoin": (BuildContext context) => EurekoinHomePage(),
         "/ui/eurekoin_casino": (BuildContext context) => HomePage(),
+        "/ui/share_memories": (BuildContext context) => ShareMemories(),
         "/ui/sponsors/sponsors": (BuildContext context) => Sponsors(),
         "/ui/contact_us/contact_us": (BuildContext context) => ContactUs(),
         "/ui/contributors/contributors": (BuildContext context) =>

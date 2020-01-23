@@ -195,6 +195,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.3"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.5"
+  flutter_speed_dial:
+    dependency: "direct main"
+    description:
+      name: flutter_speed_dial
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.5"
+  flutter_staggered_grid_view:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_grid_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   flutter_svg:
     dependency: transitive
     description:
@@ -263,6 +284,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3+1"
   intl:
     dependency: "direct main"
     description:
@@ -508,4 +536,4 @@ packages:
     version: "2.1.16"
 sdks:
   dart: ">2.4.0 <3.0.0"
-  flutter: ">=1.10.15-pre.148 <2.0.0"
+  flutter: ">=1.12.13 <2.0.0"
