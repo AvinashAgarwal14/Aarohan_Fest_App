@@ -61,8 +61,8 @@ class _DashboardState extends State<Dashboard> {
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarIconBrightness: Brightness.light));
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarIconBrightness: Brightness.dark));
     getUser();
   }
 
@@ -72,6 +72,7 @@ class _DashboardState extends State<Dashboard> {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(50.0),
             child: AppBar(
+              brightness: Brightness.light,
               backgroundColor: Colors.white,
               iconTheme: IconThemeData(
                 color: Colors.black,

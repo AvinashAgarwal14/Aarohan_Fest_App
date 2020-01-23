@@ -19,7 +19,7 @@ class HealthBar {
       0,
       gameController.screenSize.height - gameController.tileSize * 0.5,
       barWidth,
-      gameController.tileSize * 0.5,
+      gameController.tileSize,
     );
     remainingHealthRect = Rect.fromLTWH(
       // gameController.screenSize.width / 2 - barWidth / 2,
@@ -29,7 +29,7 @@ class HealthBar {
       0,
       gameController.screenSize.height - gameController.tileSize * 0.5,
       barWidth,
-      gameController.tileSize * 0.5,
+      gameController.tileSize,
     );
   }
 
