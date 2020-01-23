@@ -7,7 +7,6 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 class UpDownGame extends StatefulWidget {
@@ -63,6 +62,27 @@ class _UpDownGameState extends State<UpDownGame> {
     _controller.setState(() {
       _eurekoinLoading = false;
     });
+  }
+
+  Future<int> transferEurekoin(
+      var amount, String transerTo, String transferFrom) async {
+    setState(() {
+      _isLoading = true;
+    });
+    var email = transferFrom;
+    var bytes = utf8.encode("$email" + "$loginKey");
+    var encoded = sha1.convert(bytes);
+    String apiUrl =
+        "https://ekoin.nitdgplug.org/api/transfer/?token=$encoded&amount=$amount&email=$transerTo";
+    print(apiUrl);
+    http.Response response = await http.get(apiUrl);
+    print(response.body);
+    var status = json.decode(response.body)['status'];
+    setState(() {
+      _isLoading = false;
+    });
+    getUserEurekoin();
+    return int.parse(status);
   }
 
   void submit(context, result) async {
@@ -134,27 +154,57 @@ class _UpDownGameState extends State<UpDownGame> {
         ),
       );
     });
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Response response =
-        await Dio().post("https://aavishkargames.herokuapp.com/create/", data: {
+    result == "winner"
+        ? transferEurekoin(
+            betAmount, currentUser.email, "singhsimrananshu@gmail.com")
+        : transferEurekoin(
+            betAmount, "singhsimrananshu@gmail.com", currentUser.email);
+
+    var gameStatus = {
       "email": currentUser.email,
       "status": result,
       "type": "sevenup",
       "amount": betAmount
-    });
+    };
+
+    http.Response responseTest = await http
+        .get("https://aarohan-76222.firebaseio.com/Games/Recent.json");
+    var eachRecentResult = json.decode(responseTest.body);
+    print(eachRecentResult);
+    print("size: ${eachRecentResult.length}");
+
+    if (eachRecentResult.length >= 10) {
+      int i = 1;
+      String remove;
+
+      eachRecentResult.forEach((String str, dynamic player) {
+        if (i == 0)
+          return;
+        else {
+          remove = str;
+          i--;
+        }
+      });
+
+      await http.delete(
+          "https://aarohan-76222.firebaseio.com/Games/Recent/$remove.json");
+    }
+
+    http.Response response = await http.post(
+        "https://aarohan-76222.firebaseio.com/Games/Recent.json",
+        body: json.encode(gameStatus));
+    print("here ${response.body}");
+
     setState(() {
-      getUserEurekoin();
       _isLoading = false;
     });
-
-    print(response.data);
-    await prefs.setInt('coins', coins_left);
   }
 
   void setHelp() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("help1", "true");
   }
+  
 
   @override
   void setState(fn) {
@@ -177,6 +227,7 @@ class _UpDownGameState extends State<UpDownGame> {
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
             statusBarColor: Colors.white,
             systemNavigationBarIconBrightness: Brightness.dark));
+      
       },
       child: Scaffold(
         body: Builder(

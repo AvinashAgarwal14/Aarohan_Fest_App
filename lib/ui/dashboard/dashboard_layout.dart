@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import '../../util/event_details.dart';
 import '../../model/event.dart';
@@ -20,7 +21,6 @@ class DashBoardLayout extends StatefulWidget {
 }
 
 class _DashBoardLayoutState extends State<DashBoardLayout> {
-  
   CarouselSlider instance;
   int j = 0;
 
@@ -31,15 +31,17 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
-    // TODO: implement initState
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark));
     super.initState();
 
     eventsByCategories = {
@@ -259,8 +261,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
 //                                                            [index]
 //                                                        .imageUrl,
 //                                                'https://www.hcsa.org.sg/wp-content/uploads/2018/10/181015-HCSA-Res-03-Events-banner.jpg',
-                                                'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
-
+                                                    'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
                                                 height: double.infinity,
                                                 width: double.infinity,
                                                 fit: BoxFit.cover))),
@@ -317,44 +318,42 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                           [index])),
                             );
                           },
-                          child: new Container (
+                          child: new Container(
                             padding: EdgeInsets.only(bottom: 25.0),
-                           child: new Column (
-                             children: <Widget>[
-                               new Container(
-                                 child: new ClipRRect(
-                                     borderRadius: new BorderRadius.all(
-                                         new Radius.circular(5.0)),
-                                     child: CachedNetworkImage(
-                                         placeholder: (context, url) => Image.asset(
-                                             "images/imageplaceholder.png"),
-                                         imageUrl: eventsByCategories[
-                                         "Workshops and Special Attractions"]
-                                         [index]
-                                             .imageUrl,
-                                         fit: BoxFit.cover)),
-                                 height: 150.0,
-                               ),
-                               Padding(
-                                         padding:
-                                         const EdgeInsets.symmetric(
-                                             vertical: 10,
-                                             horizontal: 10),
-                                         child: Text(
-                                           eventsByCategories[
-                                           "Workshops and Special Attractions"]
-                                           [index].title,
-                                             textAlign: TextAlign.justify,
-                                             style: TextStyle(
-                                               fontWeight:
-                                               FontWeight.bold,
-                                             fontSize: 18,
-                                             ),
-                                   ),
-                               )
-
-                             ],
-                           ),
+                            child: new Column(
+                              children: <Widget>[
+                                new Container(
+                                  child: new ClipRRect(
+                                      borderRadius: new BorderRadius.all(
+                                          new Radius.circular(5.0)),
+                                      child: CachedNetworkImage(
+                                          placeholder: (context, url) =>
+                                              Image.asset(
+                                                  "images/imageplaceholder.png"),
+                                          imageUrl: eventsByCategories[
+                                                      "Workshops and Special Attractions"]
+                                                  [index]
+                                              .imageUrl,
+                                          fit: BoxFit.cover)),
+                                  height: 150.0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 10),
+                                  child: Text(
+                                    eventsByCategories[
+                                                "Workshops and Special Attractions"]
+                                            [index]
+                                        .title,
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ));
                     },
                     itemCount:
@@ -362,9 +361,8 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                             .length,
                     viewportFraction: 0.7,
                     scale: 0.9,
-                    pagination: new SwiperPagination(
-                        margin: new EdgeInsets.all(5.0)
-                    ),
+                    pagination:
+                        new SwiperPagination(margin: new EdgeInsets.all(5.0)),
                   ),
                 )
               ],
@@ -490,7 +488,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                 MaterialPageRoute(
                                     builder: (context) => EventDetails(
                                         item: eventsByCategories["Talk"]
-                                        [index])),
+                                            [index])),
                               );
                             },
                             child: Container(
@@ -499,7 +497,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10)),
+                                    BorderRadius.all(Radius.circular(10)),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
                                     blurRadius: 3,
@@ -524,9 +522,9 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                   Image.asset(
                                                       "images/imageplaceholder.png"),
                                               imageUrl:
-                                              eventsByCategories["Talk"]
-                                              [index]
-                                                  .imageUrl,
+                                                  eventsByCategories["Talk"]
+                                                          [index]
+                                                      .imageUrl,
                                               height: double.infinity,
                                               width: double.infinity,
                                               fit: BoxFit.cover))),
@@ -534,8 +532,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 8),
                                       child: Text(
-                                        eventsByCategories["Talk"][index]
-                                            .title,
+                                        eventsByCategories["Talk"][index].title,
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                             fontSize: 12,

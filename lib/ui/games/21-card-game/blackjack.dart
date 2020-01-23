@@ -60,6 +60,27 @@ class _BlackJackState extends State<BlackJack> {
     });
   }
 
+  Future<int> transferEurekoin(
+      var amount, String transerTo, String transferFrom) async {
+    setState(() {
+      _isLoading = true;
+    });
+    var email = transferFrom;
+    var bytes = utf8.encode("$email" + "$loginKey");
+    var encoded = sha1.convert(bytes);
+    String apiUrl =
+        "https://ekoin.nitdgplug.org/api/transfer/?token=$encoded&amount=$amount&email=$transerTo";
+    print(apiUrl);
+    http.Response response = await http.get(apiUrl);
+    print(response.body);
+    var status = json.decode(response.body)['status'];
+    setState(() {
+      _isLoading = false;
+    });
+    getUserEurekoin();
+    return int.parse(status);
+  }
+
   void showDialog(BuildContext context, int code) async {
     Color status = Colors.green.withOpacity(0.8);
     if (code == 1) status = Colors.red.withOpacity(0.8);
@@ -143,21 +164,39 @@ class _BlackJackState extends State<BlackJack> {
       );
     });
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Response response =
-        await Dio().post("https://aavishkargames.herokuapp.com/create/", data: {
+    // Response response =
+    //     await Dio().post("https://aavishkargames.herokuapp.com/create/", data: {
+    //   "email": currentUser.email,
+    //   "status": result,
+    //   "type": "blackjack",
+    //   "amount": betAmount
+    // });
+
+    result == "winner"
+        ? transferEurekoin(
+            betAmount, currentUser.email, "singhsimrananshu@gmail.com")
+        : transferEurekoin(
+            betAmount, "singhsimrananshu@gmail.com", currentUser.email);
+
+    var gameStatus = {
       "email": currentUser.email,
       "status": result,
       "type": "blackjack",
       "amount": betAmount
-    });
+    };
+
+    print(gameStatus);
+
+    http.Response response = await http.post(
+        "https://aarohan-76222.firebaseio.com/Games/Recent.json",
+        body: json.encode(gameStatus));
+    print("here ${response.body}");
+
     setState(() {
       getUserEurekoin();
       _isLoading = false;
     });
 
-    print(response.data);
-    await prefs.setInt('coins', coins_left);
   }
 
   void setHelp() async {

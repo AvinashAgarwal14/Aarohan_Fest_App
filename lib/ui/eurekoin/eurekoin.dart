@@ -130,6 +130,11 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
 
 @override
   void initState() {
+    
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark));
     // TODO: implement initState
     super.initState();
     _getUser();
@@ -242,6 +247,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                           controller: scrollController,
                           slivers: <Widget>[
                             new SliverAppBar(
+                              brightness: Brightness.light,
                               expandedHeight: _appBarHeight,
                               pinned: _appBarBehavior == AppBarBehavior.pinned,
                               floating: _appBarBehavior ==

@@ -27,13 +27,17 @@ void main() async {
   // debugPaintSizeEnabled = true;
   // debugPaintBaselinesEnabled = true;
   // debugPaintPointersEnabled = true;
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark));
 
   WidgetsFlutterBinding.ensureInitialized();
   Util flameUtil = Util();
   // await flameUtil.fullScreen();
   await flameUtil.setOrientation(DeviceOrientation.portraitUp);
   Flame.images.loadAll([
-    "gamebackgound.jpg",
+    "gamebackground.jpg",
     "chip.png",
     "virus.png",
     "virusdamaged.png",
