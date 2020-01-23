@@ -246,6 +246,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                               ? Container(
                                   height: (suggestionList.length > 6)? 300.0: 150.0,
                                   child: ListView.builder(
+                                      cacheExtent: MediaQuery.of(context).size.height*5,
                                       itemCount: suggestionList.length,
                                       itemBuilder: (context, index) {
                                         return  ListTile(

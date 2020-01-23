@@ -129,6 +129,18 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   }),
               ListTile(
                   leading: Icon(
+                    Icons.image,
+                  ),
+                  title: Text(
+                    "Share Aarohan's Memory",
+                  ),
+                  onTap: () {
+                    Navigator.popUntil(
+                        context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.of(context).pushNamed("/ui/share_memories");
+                  }),
+              ListTile(
+                  leading: Icon(
                     Icons.youtube_searched_for,
                   ),
                   title: Text(

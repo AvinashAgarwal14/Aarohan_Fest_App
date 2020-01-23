@@ -22,7 +22,7 @@ class StartText {
     painter.text = TextSpan(
       text: 'Start',
       style: TextStyle(
-        color: Colors.black,
+        color: Colors.white,
         fontSize: 50.0,
       ),
     );
