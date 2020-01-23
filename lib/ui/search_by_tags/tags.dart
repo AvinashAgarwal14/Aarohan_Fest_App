@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:aavishkarapp/ui/search_by_tags/search.dart';
 import 'package:flutter/material.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../util/drawer.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
@@ -7,9 +9,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../model/event.dart';
 import '../../util/event_details.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'search_box.dart';
-
 
 Map<String, List<EventItem>> eventsByTags;
 
@@ -110,74 +109,77 @@ class _SearchByTagsState extends State<SearchByTags> {
       ),
       drawer: NavigationDrawer(),
       body: Stack(
-          children: <Widget> [
-            Column(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 10.0),
+              ),
+              Container(
+                  child: new Column(
+                mainAxisSize: MainAxisSize.min,
+                children: cardChildren,
+              )),
+              Divider(
+                color: Theme.of(context).brightness==Brightness.light ?Colors.grey:Color(0xFF505194),
+              ),
+              Container(
+                  child: Expanded(
+                child: ListView.builder(
+                    cacheExtent: MediaQuery.of(context).size.height*3,
+                    itemCount: eventsByTags[_selectedTag].length,
+                    itemBuilder: (context, position) {
+                      return Container(
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => new EventDetails(
+                                          item: eventsByTags[_selectedTag]
+                                              [position])),
+                                );
+                              },
+                              child: SearchByTagsCards(
+                                  eventCard: eventsByTags[_selectedTag]
+                                      [position])));
+                    }),
+              ))
+            ],
+          ),
+          SlidingUpPanel(
+            minHeight: 65.0,
+            maxHeight: MediaQuery.of(context).size.height * 0.85,
+            panel: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                ),
-                Container(
-                    child: new Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: cardChildren,
-                    )),
-                Divider(
-                  color: Theme.of(context).brightness==Brightness.light ?Colors.grey:Color(0xFF505194),
-                ),
-                Container(
-                    child: Expanded(
-                      child: ListView.builder(
-                          cacheExtent: MediaQuery.of(context).size.height*3,
-                          itemCount: eventsByTags[_selectedTag].length,
-                          itemBuilder: (context, position) {
-                            return Container(
-                                child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => new EventDetails(
-                                                item: eventsByTags[_selectedTag]
-                                                [position])),
-                                      );
-                                    },
-                                    child: SearchByTagsCards(
-                                        eventCard: eventsByTags[_selectedTag]
-                                        [position])));
-                          }),
-                    ))
-              ],
-            ),
-            SlidingUpPanel(
-                minHeight: 65.0,
-                maxHeight: MediaQuery.of(context).size.height * 0.85,
-                panel: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 5.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: 35,
-                            height: 8,
-                            decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(12.0))),
-                          )
-                        ],
+                SizedBox(height: 5.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 35,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.all(Radius.circular(12.0))
                       ),
-                      SizedBox(height: 13.0),
-                      Center(child: Text("Search")),
-                      SizedBox(height: 20.0),
-                      Container(
-                          padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-                          height: MediaQuery.of(context).size.height * 0.75,
-                          child: SearchBox(
-                              eventsList: eventsByTags['All'])),
-                    ]))
-          ]),
+                    )
+                  ],
+                ),
+                SizedBox(height: 13.0),
+                Center(child: Text("Search")),
+                SizedBox(height: 20.0),
+                Container(
+                  padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  child: SearchTab()
+                ),
+              ]
+            )
+          )
+        ],
+      ),
     );
   }
 
@@ -260,7 +262,7 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
                   height: 256.0,
                   child: SizedBox.expand(
                     child: Hero(
-                        tag: widget.eventCard.title,
+                        tag: widget.eventCard.imageUrl,
                         child: CachedNetworkImage(
                             placeholder:  (context, url) => Image.asset("images/imageplaceholder.png"),
                             imageUrl: widget.eventCard.imageUrl,
