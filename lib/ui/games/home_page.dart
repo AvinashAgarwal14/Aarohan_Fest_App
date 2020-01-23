@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../util/drawer.dart';
 
-import 'package:dio/dio.dart';
 import 'dart:async';
 import 'package:aavishkarapp/ui/games/7-up-7-down/7up7down.dart';
 import 'package:aavishkarapp/ui/games/21-card-game/blackjack.dart';
@@ -75,7 +74,6 @@ class _HomePageState extends State<HomePage> {
         isEurekoinAlreadyRegistered = 1;
       });
       getUserEurekoin();
-      print("111");
     } else
       setState(() {
         isEurekoinAlreadyRegistered = 0;
@@ -106,7 +104,6 @@ class _HomePageState extends State<HomePage> {
   String help1 = "false";
   String help2 = "false";
 
-  var coins_left;
   var fix = 2;
   bool _isLoading = false;
   bool _eurekoinLoading = false;
@@ -116,61 +113,61 @@ class _HomePageState extends State<HomePage> {
 
   PersistentBottomSheetController _controller;
 
-  void getTossDice(betAmount) async {
+  void getXvalue(game, betAmount) async {
     setState(() {
       _isLoading = true;
     });
-    Response response2 = await Dio().post(
-        "https://aavishkargames.herokuapp.com/toss/",
-        data: {"email": currentUser.email});
 
-    fix = response2.data["status"];
-    print(fix);
+    http.Response response =
+        await http.get("https://aarohan-76222.firebaseio.com/Games/$game.json");
+    var xValue = json.decode(response.body)["Max"];
+    var currentValue = json.decode(response.body)["Current"];
+    print(xValue);
+    print(currentValue);
+    if (currentValue > xValue / 2)
+      fix = 1;
+    else if (currentValue < -(xValue / 2))
+      fix = -1;
+    else
+      fix = 0;
+
+    print("fix: $fix");
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    help1 = prefs.getString("help1") ?? "false";
-    Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => UpDownGame(
-                    userEurekoin, fix, currentUser, betAmount, help1)))
-        .then((value) {
-      setState(() {
-        getUserEurekoin();
-      });
-    });
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF0187F8),
-        systemNavigationBarIconBrightness: Brightness.dark));
-    setState(() {
-      _isLoading = false;
-    });
-  }
+    game == "7up7down"
+        ? help1 = prefs.getString("help1") ?? "false"
+        : help2 = prefs.getString("help2") ?? "false";
+    game == "7up7down"
+        ? Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => UpDownGame(
+                        userEurekoin, fix, currentUser, betAmount, help1)))
+            .then((value) {
+            setState(() {
+              getUserEurekoin();
+              getRecent();
+            });
+          })
+        : Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BlackJack(
+                        userEurekoin, fix, currentUser, betAmount, help2)))
+            .then((value) {
+            setState(() {
+              getUserEurekoin();
+              getRecent();
+            });
+          });
+    game == "7up7down"
+        ? SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            statusBarColor: Color(0xFF0187F8),
+            systemNavigationBarIconBrightness: Brightness.dark))
+        : SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            statusBarColor: Color(0xFFD3A372),
+            systemNavigationBarIconBrightness: Brightness.dark));
 
-  void getTossCard(betAmount) async {
-    setState(() {
-      _isLoading = true;
-    });
-    Response response2 = await Dio().post(
-        "https://aavishkargames.herokuapp.com/toss/",
-        data: {"email": currentUser.email});
-
-    fix = response2.data["status"];
-    print(fix);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    help2 = prefs.getString("help2") ?? "false";
-    Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => BlackJack(
-                    userEurekoin, fix, currentUser, betAmount, help2)))
-        .then((value) {
-      setState(() {
-        getUserEurekoin();
-      });
-    });
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xFFD3A372),
-        systemNavigationBarIconBrightness: Brightness.dark));
     setState(() {
       _isLoading = false;
     });
@@ -180,10 +177,18 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _enterLoading = true;
     });
-    Response response =
-        await Dio().get("https://aavishkargames.herokuapp.com/list/");
-    recentResult = response.data["value"];
-    print(recentResult);
+    http.Response response = await http
+        .get("https://aarohan-76222.firebaseio.com/Games/Recent.json");
+    var eachRecentResult = json.decode(response.body);
+
+    recentResult = List<dynamic>();
+    if (eachRecentResult != null) {
+      eachRecentResult.forEach((String ignore, dynamic player) {
+        recentResult.add(player);
+      });
+    } else
+      recentResult = null;
+
     setState(() {
       _enterLoading = false;
     });
@@ -374,7 +379,9 @@ class _HomePageState extends State<HomePage> {
                                                                       3.0,
                                                                 ));
                                                               } else {
-                                                                getTossDice(10);
+                                                                getXvalue(
+                                                                    "7up7down",
+                                                                    10);
                                                               }
                                                             });
                                                           },
@@ -414,7 +421,9 @@ class _HomePageState extends State<HomePage> {
                                                                 elevation: 3.0,
                                                               ));
                                                             } else {
-                                                              getTossDice(15);
+                                                              getXvalue(
+                                                                  "7up7down",
+                                                                  15);
                                                             }
                                                           },
                                                         ),
@@ -453,7 +462,9 @@ class _HomePageState extends State<HomePage> {
                                                                 elevation: 3.0,
                                                               ));
                                                             } else {
-                                                              getTossDice(20);
+                                                              getXvalue(
+                                                                  "7up7down",
+                                                                  20);
                                                             }
                                                           },
                                                         )
@@ -599,7 +610,9 @@ class _HomePageState extends State<HomePage> {
                                                                       3.0,
                                                                 ));
                                                               } else {
-                                                                getTossCard(10);
+                                                                getXvalue(
+                                                                    "Blackjack",
+                                                                    10);
                                                               }
                                                             });
                                                           },
@@ -639,7 +652,9 @@ class _HomePageState extends State<HomePage> {
                                                                 elevation: 3.0,
                                                               ));
                                                             } else {
-                                                              getTossCard(15);
+                                                              getXvalue(
+                                                                  "Blackjack",
+                                                                  15);
                                                             }
                                                           },
                                                         ),
@@ -678,7 +693,9 @@ class _HomePageState extends State<HomePage> {
                                                                 elevation: 3.0,
                                                               ));
                                                             } else {
-                                                              getTossCard(20);
+                                                              getXvalue(
+                                                                  "Blackjack",
+                                                                  20);
                                                             }
                                                           },
                                                         )
@@ -732,51 +749,62 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   width: MediaQuery.of(context).size.width,
                                   height: 40,
-                                  child: CarouselSlider(
-                                    items: map<Widget>(
-                                      recentResult,
-                                      (index, i) {
-                                        return Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            VerticalDivider(
-                                              color: Colors.black,
-                                              thickness: 3,
-                                            ),
-                                            recentResult[index]["email"] != null
-                                                ? Text(
-                                                    recentResult[index]["email"]
-                                                        .split("@")[0],
+                                  child: recentResult == null ||
+                                          recentResult.length <= 0
+                                      ? Container()
+                                      : CarouselSlider(
+                                          items: map<Widget>(
+                                            recentResult,
+                                            (index, i) {
+                                              return Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: <Widget>[
+                                                  VerticalDivider(
+                                                    color: Colors.black,
+                                                    thickness: 3,
+                                                  ),
+                                                  recentResult[index]
+                                                              ["email"] !=
+                                                          null
+                                                      ? Text(
+                                                          recentResult[index]
+                                                                  ["email"]
+                                                              .split("@")[0],
+                                                          style: GoogleFonts
+                                                              .signika(
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                        )
+                                                      : Text(""),
+                                                  Text(
+                                                    "${recentResult[index]["status"]}: ${recentResult[index]["amount"]} coins",
                                                     style: GoogleFonts.signika(
-                                                        fontSize: 20,
+                                                        color: recentResult[
+                                                                        index][
+                                                                    "status"] ==
+                                                                "winner"
+                                                            ? Colors.green
+                                                            : Colors.red,
                                                         fontWeight:
-                                                            FontWeight.bold),
-                                                  )
-                                                : Text(""),
-                                            Text(
-                                              "${recentResult[index]["status"]}: ${recentResult[index]["amount"]} coins",
-                                              style: GoogleFonts.signika(
-                                                  color: recentResult[index]
-                                                              ["status"] ==
-                                                          "winner"
-                                                      ? Colors.green
-                                                      : Colors.red,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                    viewportFraction: 1.0,
-                                    autoPlayAnimationDuration:
-                                        Duration(milliseconds: 700),
-                                    autoPlayCurve: Curves.easeIn,
-                                    autoPlay: true,
-                                    autoPlayInterval:
-                                        Duration(milliseconds: 100),
-                                  ),
+                                                            FontWeight.bold,
+                                                        fontSize: 18),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                          viewportFraction: 1.0,
+                                          autoPlayAnimationDuration:
+                                              Duration(milliseconds: 700),
+                                          autoPlayCurve: Curves.easeIn,
+                                          autoPlay: true,
+                                          autoPlayInterval:
+                                              Duration(milliseconds: 100),
+                                        ),
                                 ),
                               )
                             ],
