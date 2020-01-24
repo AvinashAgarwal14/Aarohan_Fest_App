@@ -55,7 +55,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
     };
 
     database.setPersistenceEnabled(true);
-    database.setPersistenceCacheSizeBytes(150000000);
+    database.setPersistenceCacheSizeBytes(150000);
     databaseReference = database.reference().child("Events");
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
