@@ -34,7 +34,7 @@ class _BlackJackState extends State<BlackJack> {
   bool _eurekoinLoading = false;
   bool _isLoading = false;
   final loginKey = 'itsnotvalidanyways';
-  
+
   final databaseReference =
       FirebaseDatabase.instance.reference().child("Games");
 
@@ -95,7 +95,7 @@ class _BlackJackState extends State<BlackJack> {
     else if (code == 1)
       result = "loser";
     else
-      result = "";
+      result = "draw";
 
     setState(() {
       _isLoading = true;
@@ -231,11 +231,12 @@ class _BlackJackState extends State<BlackJack> {
     print(" $current gfgf $betAmount");
     if (result == "winner")
       change = current + betAmount;
-    else
+    else if (result == "draw") {
+      change = current;
+    } else
       change = current - betAmount;
 
     databaseReference.child("Blackjack").set({"Current": change, "Max": max});
-
 
     print(gameStatus);
 
@@ -248,7 +249,6 @@ class _BlackJackState extends State<BlackJack> {
       getUserEurekoin();
       _isLoading = false;
     });
-
   }
 
   void setHelp() async {
