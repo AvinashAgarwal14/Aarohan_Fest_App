@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import './eurekoin.dart';
 
+bool _isLoading = false;
+
 typedef TransferEurekoinItemBodyBuilder<T> = Widget Function(
     TransferEurekoinItem<T> item);
 typedef ValueToString<T> = String Function(T value);
@@ -96,8 +98,7 @@ class CollapsibleBody extends StatelessWidget {
             Container(
                 margin: const EdgeInsets.only(right: 8.0),
                 child: FlatButton(
-                    onPressed: onCancel,
-                child: const Text('Cancel')))
+                    onPressed: onCancel, child: const Text('Cancel')))
           ]))
     ]);
   }
@@ -141,19 +142,18 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
   final loginKey = 'itsnotvalidanyways';
 
   TextEditingController amountController = new TextEditingController();
-  TextEditingController emailController = new TextEditingController( );
+  TextEditingController emailController = new TextEditingController();
   StreamSubscription<List> processingSuggestionList;
   List suggestionList = new List();
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     super.initState();
 
@@ -179,34 +179,51 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                   margin: const EdgeInsets.symmetric(horizontal: 16.0),
                   onSave: () {
                     if (formKey.currentState.validate()) {
+                      setState(() {
+                        _isLoading = true;
+                      });
+
                       String debit = amountController.text;
                       String transfer = emailController.text;
+
                       Future<int> result = transferEurekoin(debit, transfer);
                       result.then((value) {
                         print(value);
                         if (value == 0) {
                           setState(() {
                             item.error = "Successful!";
+                            _isLoading = false;
+                            PaymentSuccessDialog(
+                                context, item.error, debit, transfer);
                           });
                           widget.parent.getUserEurekoin();
                           widget.parent.transactionsHistory();
                         } else if (value == 2 || value == 5)
                           setState(() {
                             item.error = "Incorrect User!";
+                            _isLoading = false;
+                            PaymentSuccessDialog(
+                                context, item.error, debit, transfer);
                           });
                         else if (value == 3)
                           setState(() {
                             item.error = "Insufficient Balance!";
+                            _isLoading = false;
+                            PaymentSuccessDialog(
+                                context, item.error, debit, transfer);
                           });
                         else if (value == 4)
                           setState(() {
                             item.error = "Invalid Amount!";
+                            _isLoading = false;
+                            PaymentSuccessDialog(
+                                context, item.error, debit, transfer);
                           });
                         setState(() {
                           amountController.text = '';
                           emailController.text = '';
                         });
-                        Form.of(context).reset();
+                        // Form.of(context).reset();
                         close();
                       });
                     }
@@ -217,58 +234,74 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                       amountController.text = '';
                       emailController.text = '';
                     });
-                    Form.of(context).reset();
+                    // Form.of(context).reset();
                     close();
                   },
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            style: Theme.of(context).textTheme.subhead,
-                              keyboardType: TextInputType.number,
-                              controller: amountController,
-                              decoration: InputDecoration(
-                                //fillColor: Colors.black,
-                                labelText: "Amount",//helperStyle:  TextStyle(color: Colors.blue),
-                                labelStyle: TextStyle(color: Colors.grey),
-                              ),
-                              validator: (val) => val == "" ? val : null),
-                          TextFormField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                hintText: "Name",
-                                labelText: "Transfer To",
-                                labelStyle: TextStyle(color: Colors.grey),
-                              ),
-                              validator: (val) => val == "" ? val : null),
-                          (suggestionList.length != 0)
-                              ? Container(
-                                  height: (suggestionList.length > 6)? 300.0: 150.0,
-                                  child: ListView.builder(
-                                      cacheExtent: MediaQuery.of(context).size.height*5,
-                                      itemCount: suggestionList.length,
-                                      itemBuilder: (context, index) {
-                                        return  ListTile(
-                                                  onTap: (){
-                                                    setState(() {
-                                                      emailController.text =
+                  child: _isLoading
+                      ? Container(
+                          child: LinearProgressIndicator(),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                  style: Theme.of(context).textTheme.subhead,
+                                  keyboardType: TextInputType.number,
+                                  controller: amountController,
+                                  decoration: InputDecoration(
+                                    //fillColor: Colors.black,
+                                    labelText:
+                                        "Amount", //helperStyle:  TextStyle(color: Colors.blue),
+                                    labelStyle: TextStyle(color: Colors.grey),
+                                  ),
+                                  validator: (val) => val == "" ? val : null),
+                              TextFormField(
+                                  controller: emailController,
+                                  decoration: InputDecoration(
+                                    hintText: "Name",
+                                    labelText: "Transfer To",
+                                    labelStyle: TextStyle(color: Colors.grey),
+                                  ),
+                                  validator: (val) => val == "" ? val : null),
+                              (suggestionList.length != 0)
+                                  ? Container(
+                                      height: (suggestionList.length > 6)
+                                          ? 300.0
+                                          : 150.0,
+                                      child: ListView.builder(
+                                          cacheExtent: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              5,
+                                          itemCount: suggestionList.length,
+                                          itemBuilder: (context, index) {
+                                            return ListTile(
+                                              onTap: () {
+                                                setState(() {
+                                                  emailController.text =
                                                       suggestionList[index][1];
-                                                      suggestionList = new List();
-                                                    });
-                                                  },
-                                                  title: Text(suggestionList[index][0]),
-                                                  subtitle: Text(suggestionList[index][1]),
-                                                  leading: CircleAvatar(
-                                                    child: (suggestionList[index][2]!=null)?Image.network(suggestionList[index][2]):
-
-                                                            Image.asset('../../../images/userIcon.png')
-                                                  ),
-                                                );
-                                      }))
-                              : Container()
-                        ],
-                      )),
+                                                  suggestionList = new List();
+                                                });
+                                              },
+                                              title: Text(
+                                                  suggestionList[index][0]),
+                                              subtitle: Text(
+                                                  suggestionList[index][1]),
+                                              leading: CircleAvatar(
+                                                  child: (suggestionList[index]
+                                                              [2] !=
+                                                          null)
+                                                      ? Image.network(
+                                                          suggestionList[index]
+                                                              [2])
+                                                      : Image.asset(
+                                                          '../../../images/userIcon.png')),
+                                            );
+                                          }))
+                                  : Container()
+                            ],
+                          )),
                 );
               },
             ),
@@ -280,7 +313,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData=Theme.of(context);
+    ThemeData themeData = Theme.of(context);
     return new Theme(
         data: themeData,
         child: SingleChildScrollView(
@@ -298,7 +331,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                         setState(() {
                           _transferEurekoinItem[index].isExpanded = !isExpanded;
                         });
-                        if(_transferEurekoinItem[index].isExpanded==true)
+                        if (_transferEurekoinItem[index].isExpanded == true)
                           widget.parent.moveDown();
                       },
                       children: _transferEurekoinItem
@@ -350,4 +383,90 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
       return json.decode(response.body)['users'];
     }
   }
+}
+
+Widget PaymentSuccessDialog(context, message, amount, to) {
+  final TextStyle subtitle = TextStyle(fontSize: 12.0, color: Colors.grey);
+  final TextStyle label = TextStyle(fontSize: 14.0, color: Colors.grey);
+
+  showDialog(
+    context: context,
+    child: Center(
+      child: SizedBox(
+        height: 370,
+        child: Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: _isLoading
+                ? Container(
+                    child: LinearProgressIndicator(),
+                  )
+                : Column(
+                    children: <Widget>[
+                      Text(
+                        message,
+                        style: label,
+                      ),
+                      Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "DATE",
+                            style: label,
+                          ),
+                          Text("TIME", style: label)
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("2, April 2019"),
+                          Text("9:10 AM")
+                        ],
+                      ),
+                      SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "TO",
+                                style: label,
+                              ),
+                              Text(to),
+                              // Text(
+                              //   to,
+                              //   style: subtitle,
+                              // ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "AMOUNT",
+                                style: label,
+                              ),
+                              Text("\$ $amount"),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20.0),
+                    ],
+                  ),
+          ),
+        ),
+      ),
+    ),
+  );
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'dart:async';
@@ -13,7 +14,7 @@ class UpDownGame extends StatefulWidget {
   var coins_left;
   var fix;
   var currentUser;
-  var betAmount;
+  int betAmount;
 
   String help = "false";
   UpDownGame(
@@ -27,7 +28,7 @@ class _UpDownGameState extends State<UpDownGame> {
   var coins_left;
   var fix;
   var currentUser;
-  var betAmount;
+  int betAmount;
   String help = "false";
   _UpDownGameState(
       this.coins_left, this.fix, this.currentUser, this.betAmount, this.help);
@@ -42,6 +43,9 @@ class _UpDownGameState extends State<UpDownGame> {
   bool rolling = false;
   final loginKey = 'itsnotvalidanyways';
   PersistentBottomSheetController _controller;
+
+  final databaseReference =
+      FirebaseDatabase.instance.reference().child("Games");
 
   Future getUserEurekoin() async {
     setState(() {
@@ -161,39 +165,88 @@ class _UpDownGameState extends State<UpDownGame> {
             betAmount, "singhsimrananshu@gmail.com", currentUser.email);
 
     var gameStatus = {
-      "email": currentUser.email,
+      "name": currentUser.displayName,
       "status": result,
       "type": "sevenup",
       "amount": betAmount
     };
-
-    http.Response responseTest = await http
-        .get("https://aarohan-76222.firebaseio.com/Games/Recent.json");
-    var eachRecentResult = json.decode(responseTest.body);
-    print(eachRecentResult);
-    print("size: ${eachRecentResult.length}");
-
-    if (eachRecentResult.length >= 10) {
-      int i = 1;
+    var recentLen;
+    var recentData;
+    await databaseReference
+        .child("Recent")
+        .once()
+        .then((DataSnapshot snapshot) {
+      print('Data : ${snapshot.value}');
+      recentData = snapshot.value;
+      recentLen = snapshot.value.length;
+    });
+    if (recentLen >= 10) {
+      int i = recentLen - 10;
       String remove;
-
-      eachRecentResult.forEach((String str, dynamic player) {
+      recentData.forEach((dynamic str, dynamic player) async {
         if (i == 0)
           return;
         else {
           remove = str;
           i--;
         }
+        print(remove);
+        databaseReference.child("Recent").child(remove).remove();
       });
-
-      await http.delete(
-          "https://aarohan-76222.firebaseio.com/Games/Recent/$remove.json");
     }
 
-    http.Response response = await http.post(
-        "https://aarohan-76222.firebaseio.com/Games/Recent.json",
-        body: json.encode(gameStatus));
-    print("here ${response.body}");
+    int current;
+    int max;
+
+    await databaseReference.child("Recent").push().set(gameStatus);
+
+    await databaseReference
+        .child("7up7down")
+        .once()
+        .then((DataSnapshot snapshot) {
+      print('Data : ${snapshot.value}');
+      current = snapshot.value["Current"];
+      max = snapshot.value["Max"];
+    });
+    int change;
+    print(" $current gfgf $betAmount");
+    if (result == "winner")
+      change = current + betAmount;
+    else
+      change = current - betAmount;
+
+    databaseReference.child("7up7down").set({"Current": change, "Max": max});
+
+    // http.Response responseTest = await http
+    //     .get("https://aarohan-76222.firebaseio.com/Games/Recent.json");
+    // var eachRecentResult = json.decode(responseTest.body);
+    // print(eachRecentResult);
+    // print("size: ${eachRecentResult.length}");
+
+    // if (eachRecentResult.length >= 10) {
+    //   int i = eachRecentResult.length - 10;
+    //   String remove;
+    //   eachRecentResult.forEach((String str, dynamic player) async {
+    //     if (i == 0)
+    //       return;
+    //     else {
+    //       remove = str;
+    //       i--;
+    //     }
+
+    //     await http.delete(
+    //         "https://aarohan-76222.firebaseio.com/Games/Recent/$remove.json");
+    //   });
+    // }
+
+    //   http.Response response = await http.post(
+    //       "https://aarohan-76222.firebaseio.com/Games/Recent.json",
+    //       body: json.encode(gameStatus));
+    //   print("here ${response.body}");
+
+    //   http.Response res = await http
+    //       .get("https://aarohan-76222.firebaseio.com/Games/7up7down.json");
+    //   print(json.decode(res.body));
 
     setState(() {
       _isLoading = false;
@@ -204,7 +257,6 @@ class _UpDownGameState extends State<UpDownGame> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("help1", "true");
   }
-  
 
   @override
   void setState(fn) {
@@ -227,7 +279,6 @@ class _UpDownGameState extends State<UpDownGame> {
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
             statusBarColor: Colors.white,
             systemNavigationBarIconBrightness: Brightness.dark));
-      
       },
       child: Scaffold(
         body: Builder(

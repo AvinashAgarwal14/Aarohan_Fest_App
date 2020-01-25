@@ -122,15 +122,13 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
-    
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.white,
         statusBarIconBrightness: Brightness.dark,
@@ -417,8 +415,13 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                           ? Container()
                                           : (transHistory.length != 0)
                                               ? ListView(
-                                                cacheExtent: MediaQuery.of(context).size.height*5,
-                                                children: buildTransactionsWidget())
+                                                  cacheExtent:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height *
+                                                          5,
+                                                  children:
+                                                      buildTransactionsWidget())
                                               : Container()),
                                 ]))
                       ],
@@ -528,7 +531,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
 
   Future scanQR() async {
     try {
-      String hiddenString =await BarcodeScanner.scan();
+      String hiddenString = await BarcodeScanner.scan();
       setState(() {
         barcodeString = hiddenString;
         Future<int> result = couponEurekoin(barcodeString);
@@ -537,32 +540,87 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
           if (value == 0) {
             setState(() {
               barcodeString = "Successful!";
+              PaymentSuccessDialog(context, barcodeString);
             });
             getUserEurekoin();
             showDialogBox(barcodeString);
           } else if (value == 2)
             setState(() {
               barcodeString = "Invalid Coupon";
-              showDialogBox(barcodeString);
+              // showDialogBox(barcodeString);
+              PaymentSuccessDialog(context, barcodeString);
             });
           else if (value == 3)
             setState(() {
               barcodeString = "Already Used";
-              showDialogBox(barcodeString);
+              // showDialogBox(barcodeString);
+              PaymentSuccessDialog(context, barcodeString);
             });
           else if (value == 4)
             setState(() {
               barcodeString = "Coupon Expired";
-              showDialogBox(barcodeString);
+              // showDialogBox(barcodeString);
+              PaymentSuccessDialog(context, barcodeString);
             });
         });
       });
     } on PlatformException catch (e) {
-        setState(() {
-          barcodeString = 'The user did not grant the camera permission!';
-          showDialogBox(barcodeString);
-        });
-      }
+      setState(() {
+        barcodeString = 'The user did not grant the camera permission!';
+        showDialogBox(barcodeString);
+      });
+    }
+  }
+
+  Widget PaymentSuccessDialog(context, message) {
+    final TextStyle subtitle = TextStyle(fontSize: 12.0, color: Colors.grey);
+    final TextStyle label = TextStyle(fontSize: 14.0, color: Colors.grey);
+
+    showDialog(
+      context: context,
+      child: Center(
+        child: SizedBox(
+          height: 370,
+          child: Dialog(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  Text("QR Code Result"),
+                  Text(
+                    message,
+                    style: label,
+                  ),
+                  Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "DATE",
+                        style: label,
+                      ),
+                      Text("TIME", style: label)
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[Text("2, April 2019"), Text("9:10 AM")],
+                  ),
+                  SizedBox(height: 20.0),
+                  SizedBox(height: 20.0),
+                  FlatButton(
+                    child: new Text("Close"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   void showDialogBox(String message) {
@@ -641,8 +699,8 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                 Text("$time")
               ],
             ),
-            trailing: Text("${item[0]}",
-                style: TextStyle(color: Colors.green))));
+            trailing:
+                Text("${item[0]}", style: TextStyle(color: Colors.green))));
       } else {
         buildItems.add(ListTile(
             title: Text("Sent to:"),
@@ -658,8 +716,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
               ],
             ),
             isThreeLine: true,
-            trailing: Text("${item[0]}",
-                style: TextStyle(color: Colors.red))));
+            trailing: Text("${item[0]}", style: TextStyle(color: Colors.red))));
       }
     }
     return buildItems.toList();
