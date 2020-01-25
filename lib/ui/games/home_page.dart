@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:aavishkarapp/ui/dashboard/dashboard_layout.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,6 +29,10 @@ class _HomePageState extends State<HomePage> {
   final loginKey = 'itsnotvalidanyways';
   var betAmount;
   int isEurekoinAlreadyRegistered = null;
+
+//  DatabaseReference databaseReference;
+  final databaseReference =
+      FirebaseDatabase.instance.reference().child("Games");
 
   @override
   void setState(fn) {
@@ -118,15 +123,25 @@ class _HomePageState extends State<HomePage> {
       _isLoading = true;
     });
 
-    http.Response response =
-        await http.get("https://aarohan-76222.firebaseio.com/Games/$game.json");
-    var xValue = json.decode(response.body)["Max"];
-    var currentValue = json.decode(response.body)["Current"];
-    print(xValue);
-    print(currentValue);
-    if (currentValue > xValue / 2)
+    var xValue;
+    var currentValue;
+    await databaseReference.child(game).once().then((DataSnapshot snapshot) {
+      print('Data : ${snapshot.value}');
+
+      xValue = snapshot.value["Max"];
+      currentValue = snapshot.value["Current"];
+    });
+
+    // http.Response response =
+    //     await http.get("https://aarohan-76222.firebaseio.com/Games/$game.json");
+    // var xValue = json.decode(response.body)["Max"];
+    // var currentValue = json.decode(response.body)["Current"];
+
+    print("x : $xValue");
+    print("c: $currentValue");
+    if (currentValue < -(xValue / 2))
       fix = 1;
-    else if (currentValue < -(xValue / 2))
+    else if (currentValue > xValue / 2)
       fix = -1;
     else
       fix = 0;
@@ -173,21 +188,39 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // Map<String, dynamic> eachRecentResult;
   void getRecent() async {
     setState(() {
       _enterLoading = true;
     });
-    http.Response response = await http
-        .get("https://aarohan-76222.firebaseio.com/Games/Recent.json");
-    var eachRecentResult = json.decode(response.body);
 
     recentResult = List<dynamic>();
-    if (eachRecentResult != null) {
-      eachRecentResult.forEach((String ignore, dynamic player) {
-        recentResult.add(player);
-      });
-    } else
-      recentResult = null;
+    await databaseReference
+        .child("Recent")
+        .once()
+        .then((DataSnapshot snapshot) {
+      print('recent : ${snapshot.value}');
+      // eachRecentResult = json.decode(snapshot.value);
+      // print(eachRecentResult);
+      if (snapshot.value != null) {
+        snapshot.value.forEach((dynamic ignore, dynamic player) {
+          recentResult.add(player);
+        });
+      } else
+        recentResult = null;
+    });
+
+    // http.Response response = await http
+    //     .get("https://aarohan-76222.firebaseio.com/Games/Recent.json");
+    // var eachRecentResult = json.decode(response.body);
+
+    // recentResult = List<dynamic>();
+    // if (eachRecentResult != null) {
+    //   eachRecentResult.forEach((String ignore, dynamic player) {
+    //     recentResult.add(player);
+    //   });
+    // } else
+    //   recentResult = null;
 
     setState(() {
       _enterLoading = false;
@@ -343,6 +376,7 @@ class _HomePageState extends State<HomePage> {
                                                               .spaceEvenly,
                                                       children: <Widget>[
                                                         FloatingActionButton(
+                                                          heroTag: "bt1",
                                                           child: Text(
                                                             "10",
                                                             style: TextStyle(
@@ -387,6 +421,7 @@ class _HomePageState extends State<HomePage> {
                                                           },
                                                         ),
                                                         FloatingActionButton(
+                                                          heroTag: "bt2",
                                                           child: Text(
                                                             "15",
                                                             style: TextStyle(
@@ -428,6 +463,7 @@ class _HomePageState extends State<HomePage> {
                                                           },
                                                         ),
                                                         FloatingActionButton(
+                                                          heroTag: "bt3",
                                                           child: Text(
                                                             "20",
                                                             style: TextStyle(
@@ -574,6 +610,7 @@ class _HomePageState extends State<HomePage> {
                                                               .spaceEvenly,
                                                       children: <Widget>[
                                                         FloatingActionButton(
+                                                          heroTag: "bt4",
                                                           child: Text(
                                                             "10",
                                                             style: TextStyle(
@@ -618,6 +655,7 @@ class _HomePageState extends State<HomePage> {
                                                           },
                                                         ),
                                                         FloatingActionButton(
+                                                          heroTag: "bt5",
                                                           child: Text(
                                                             "15",
                                                             style: TextStyle(
@@ -659,6 +697,7 @@ class _HomePageState extends State<HomePage> {
                                                           },
                                                         ),
                                                         FloatingActionButton(
+                                                          heroTag: "bt6",
                                                           child: Text(
                                                             "20",
                                                             style: TextStyle(
@@ -766,11 +805,11 @@ class _HomePageState extends State<HomePage> {
                                                     thickness: 3,
                                                   ),
                                                   recentResult[index]
-                                                              ["email"] !=
+                                                              ["displayName"] !=
                                                           null
                                                       ? Text(
-                                                          recentResult[index]
-                                                                  ["email"]
+                                                          recentResult[index][
+                                                                  "displayName"]
                                                               .split("@")[0],
                                                           style: GoogleFonts
                                                               .signika(

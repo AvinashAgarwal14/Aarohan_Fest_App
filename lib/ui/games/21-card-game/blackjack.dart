@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'dart:async';
@@ -33,6 +34,9 @@ class _BlackJackState extends State<BlackJack> {
   bool _eurekoinLoading = false;
   bool _isLoading = false;
   final loginKey = 'itsnotvalidanyways';
+  
+  final databaseReference =
+      FirebaseDatabase.instance.reference().child("Games");
 
   PersistentBottomSheetController _controller;
   _BlackJackState(
@@ -179,18 +183,66 @@ class _BlackJackState extends State<BlackJack> {
             betAmount, "singhsimrananshu@gmail.com", currentUser.email);
 
     var gameStatus = {
-      "email": currentUser.email,
+      "name": currentUser.displayName,
       "status": result,
       "type": "blackjack",
       "amount": betAmount
     };
 
+    var recentLen;
+    var recentData;
+    await databaseReference
+        .child("Recent")
+        .once()
+        .then((DataSnapshot snapshot) {
+      print('Data : ${snapshot.value}');
+      recentData = snapshot.value;
+      recentLen = snapshot.value.length;
+    });
+    if (recentLen >= 10) {
+      int i = recentLen - 10;
+      String remove;
+      recentData.forEach((dynamic str, dynamic player) async {
+        if (i == 0)
+          return;
+        else {
+          remove = str;
+          i--;
+        }
+        print(remove);
+        databaseReference.child("Recent").child(remove).remove();
+      });
+    }
+
+    int current;
+    int max;
+
+    await databaseReference.child("Recent").push().set(gameStatus);
+
+    await databaseReference
+        .child("Blackjack")
+        .once()
+        .then((DataSnapshot snapshot) {
+      print('Data : ${snapshot.value}');
+      current = snapshot.value["Current"];
+      max = snapshot.value["Max"];
+    });
+    int change;
+    print(" $current gfgf $betAmount");
+    if (result == "winner")
+      change = current + betAmount;
+    else
+      change = current - betAmount;
+
+    databaseReference.child("Blackjack").set({"Current": change, "Max": max});
+
+
     print(gameStatus);
 
-    http.Response response = await http.post(
-        "https://aarohan-76222.firebaseio.com/Games/Recent.json",
-        body: json.encode(gameStatus));
-    print("here ${response.body}");
+    // http.Response response = await http.post(
+    //     "https://aarohan-76222.firebaseio.com/Games/Recent.json",
+    //     body: json.encode(gameStatus));
+    // print("here ${response.body}");
 
     setState(() {
       getUserEurekoin();
