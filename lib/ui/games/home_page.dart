@@ -805,12 +805,11 @@ class _HomePageState extends State<HomePage> {
                                                     thickness: 3,
                                                   ),
                                                   recentResult[index]
-                                                              ["displayName"] !=
+                                                              ["name"] !=
                                                           null
                                                       ? Text(
                                                           recentResult[index][
-                                                                  "displayName"]
-                                                              .split("@")[0],
+                                                                  "name"],
                                                           style: GoogleFonts
                                                               .signika(
                                                                   fontSize: 20,
