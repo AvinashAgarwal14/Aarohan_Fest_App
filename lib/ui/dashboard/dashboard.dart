@@ -84,6 +84,12 @@ class _DashboardState extends State<Dashboard> {
               )),
               title: Text("Aarohan"),
               actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.youtube_searched_for),
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("/ui/tags");
+                  },
+                ),
                 (currentUser != null && isEurekoinAlreadyRegistered != null)
                     ? IconButton(
                         icon: Image(
