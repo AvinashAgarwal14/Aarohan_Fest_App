@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../util/event_details.dart';
 import '../../model/event.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -25,6 +24,8 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
   CarouselSlider instance;
   int j = 0;
 
+  PageController controller;
+
   List carouselImageList;
   final FirebaseDatabase database = FirebaseDatabase.instance;
   DatabaseReference databaseReference;
@@ -43,6 +44,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
         statusBarColor: Colors.white,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark));
+    controller = PageController();
     super.initState();
 
     eventsByCategories = {
@@ -72,8 +74,6 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
         duration: new Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
-  PageController controller;
-
   @override
   Widget build(BuildContext context) {
     if (eventsByCategories["Online"].length != 0 &&
@@ -99,9 +99,10 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                     padding: new EdgeInsets.symmetric(vertical: 0.0),
                     child: instance),
                 new Container(
+                  height: 300,
                   color: Colors.white,
                   child: CarouselSlider(
-                    height: 290.0,
+                    height: 250.0,
                     //TODO add the upcoming events as per the date
                     items: map<Widget>(carouselImageList, (index, i) {
                       return GestureDetector(
@@ -114,10 +115,26 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                           );
                         },
                         child: new Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey[800],
+                                  offset: Offset(4.0, 4.0),
+                                  blurRadius: 15.0,
+                                  spreadRadius: 1.0),
+                              BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(-4.0, -4.0),
+                                  blurRadius: 15.0,
+                                  spreadRadius: 1.0),
+                            ],
+                          ),
                           margin: new EdgeInsets.all(10.0),
                           child: new ClipRRect(
                             borderRadius:
-                                new BorderRadius.all(new Radius.circular(5.0)),
+                                new BorderRadius.all(new Radius.circular(10.0)),
                             child: new Stack(
                               children: <Widget>[
                                 CachedNetworkImage(
@@ -129,7 +146,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                     width: MediaQuery.of(context).size.width -
                                         10.0),
                                 new Positioned(
-                                  bottom: 20.0,
+                                  bottom: 0.0,
                                   left: 30.0,
                                   right: 30.0,
                                   child: Container(
@@ -141,7 +158,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                           BorderRadius.all(Radius.circular(10)),
                                       boxShadow: [
                                         BoxShadow(
-                                            color: Colors.grey[500],
+                                            color: Colors.grey[800],
                                             offset: Offset(4.0, 4.0),
                                             blurRadius: 15.0,
                                             spreadRadius: 1.0),
@@ -210,16 +227,35 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 15.0),
-                  child:
-                      Text("Online Events", style: TextStyle(fontSize: 18.0)),
+                  padding: EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 10.0),
+                  child: Text(
+                    "Online Events",
+                    style: TextStyle(
+                      fontSize: 21.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                      shadows: [
+                        BoxShadow(
+                            color: Colors.grey[800],
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                        BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(-4.0, -4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                      ],
+                    ),
+                  ),
                 ),
                 Container(
                   color: Colors.white,
-                  padding: EdgeInsets.only(top: 5.0),
-                  height: 200.0,
+                  padding: EdgeInsets.symmetric(vertical: 5.0),
+                  height: 280.0,
                   // width: MediaQuery.of(context).size.width-10.0,
                   child: ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                     cacheExtent: 1350.0,
                     itemCount: eventsByCategories["Online"].length,
                     scrollDirection: Axis.horizontal,
@@ -234,20 +270,25 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                           );
                         },
                         child: Container(
-                          height: 150.0,
+                          height: 100.0,
                           width: 150.0,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Colors.grey[300],
                             borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: <BoxShadow>[
+                            boxShadow: [
                               BoxShadow(
-                                blurRadius: 3,
-                                spreadRadius: 1,
-                                color: Colors.blue[900].withOpacity(0.1),
-                              )
+                                  color: Colors.grey[800],
+                                  offset: Offset(4.0, 4.0),
+                                  blurRadius: 15.0,
+                                  spreadRadius: 1.0),
+                              BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(-4.0, -4.0),
+                                  blurRadius: 15.0,
+                                  spreadRadius: 1.0),
                             ],
                           ),
-                          margin: new EdgeInsets.all(5.0),
+                          margin: new EdgeInsets.symmetric(horizontal: 20.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -295,22 +336,37 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
           //TODO Workshop And Games
           Container(
             color: Colors.white,
-
             //color: Colors.grey.shade200,
             padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 15.0),
+                  padding: EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 10.0),
                   child: Text(
                     "Workshops and Special Attractions ",
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(
+                      fontSize: 21.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                      shadows: [
+                        BoxShadow(
+                            color: Colors.grey[800],
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                        BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(-4.0, -4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 5.0),
-                  height: 225.0,
+                  height: 290.0,
                   width: MediaQuery.of(context).size.width,
                   child: Swiper(
                     itemBuilder: (BuildContext context, int index) {
@@ -330,6 +386,26 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                             child: new Column(
                               children: <Widget>[
                                 new Container(
+                              
+                                  margin: EdgeInsets.symmetric(vertical: 20),
+                                  decoration: BoxDecoration(
+                                    
+                                    color: Colors.grey[300],
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey[800],
+                                          offset: Offset(4.0, 4.0),
+                                          blurRadius: 15.0,
+                                          spreadRadius: 1.0),
+                                      BoxShadow(
+                                          color: Colors.white,
+                                          offset: Offset(-4.0, -4.0),
+                                          blurRadius: 15.0,
+                                          spreadRadius: 1.0),
+                                    ],
+                                  ),
                                   child: new ClipRRect(
                                       borderRadius: new BorderRadius.all(
                                           new Radius.circular(5.0)),
@@ -354,8 +430,21 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                         .title,
                                     textAlign: TextAlign.justify,
                                     style: TextStyle(
+                                      fontSize: 19.0,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18,
+                                      color: Colors.grey[800],
+                                      shadows: [
+                                        BoxShadow(
+                                            color: Colors.grey[800],
+                                            offset: Offset(4.0, 4.0),
+                                            blurRadius: 15.0,
+                                            spreadRadius: 1.0),
+                                        BoxShadow(
+                                            color: Colors.white,
+                                            offset: Offset(-4.0, -4.0),
+                                            blurRadius: 15.0,
+                                            spreadRadius: 1.0),
+                                      ],
                                     ),
                                   ),
                                 )
@@ -366,17 +455,13 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                     itemCount:
                         eventsByCategories["Workshops and Special Attractions"]
                             .length,
-                    viewportFraction: 0.7,
-                    scale: 0.9,
-                    pagination:
-                        new SwiperPagination(margin: new EdgeInsets.all(5.0)),
+                    viewportFraction: 0.6,
+                    scale: 0.5,
+                    // pagination: new SwiperPagination(
+                    //     margin: new EdgeInsets.all(5.0),
+                    //     builder: SwiperPagination.dots),
                   ),
                 ),
-                // SmoothPageIndicator(
-                //   controller: controller,
-                //   count: 11,
-                //   effect: WormEffect(),
-                // ),
               ],
             ),
           ),
@@ -388,17 +473,35 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 15.0),
+                  padding: EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 10.0),
                   child: Text(
                     "On-site Events ",
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(
+                      fontSize: 21.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                      shadows: [
+                        BoxShadow(
+                            color: Colors.grey[800],
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                        BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(-4.0, -4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 5.0),
-                  height: 200.0,
+                  height: 280.0,
                   //width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                       cacheExtent: 4000.0,
                       itemCount: eventsByCategories["On-site"].length,
                       scrollDirection: Axis.horizontal,
@@ -417,18 +520,24 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                               height: 150.0,
                               width: 150.0,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Colors.grey[300],
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
-                                boxShadow: <BoxShadow>[
+                                boxShadow: [
                                   BoxShadow(
-                                    blurRadius: 3,
-                                    spreadRadius: 1,
-                                    color: Colors.blue[900].withOpacity(0.1),
-                                  )
+                                      color: Colors.grey[800],
+                                      offset: Offset(4.0, 4.0),
+                                      blurRadius: 15.0,
+                                      spreadRadius: 1.0),
+                                  BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(-4.0, -4.0),
+                                      blurRadius: 15.0,
+                                      spreadRadius: 1.0),
                                 ],
                               ),
-                              margin: new EdgeInsets.all(5.0),
+                              margin:
+                                  new EdgeInsets.symmetric(horizontal: 20.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
@@ -477,17 +586,37 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 15.0),
+                  padding: EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 10.0),
                   child: Text(
                     "Tech Talks ",
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(
+                      fontSize: 21.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                      shadows: [
+                        BoxShadow(
+                            color: Colors.grey[800],
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                        BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(-4.0, -4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 5.0),
-                  height: 200.0,
+                  padding: EdgeInsets.only(
+                    top: 5.0,
+                  ),
+                  height: 280.0,
                   //width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                       cacheExtent: 4000.0,
                       itemCount: eventsByCategories["Talk"].length,
                       scrollDirection: Axis.horizontal,
@@ -506,18 +635,24 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                               height: 150.0,
                               width: 150.0,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Colors.grey[300],
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
-                                boxShadow: <BoxShadow>[
+                                boxShadow: [
                                   BoxShadow(
-                                    blurRadius: 3,
-                                    spreadRadius: 1,
-                                    color: Colors.blue[900].withOpacity(0.1),
-                                  )
+                                      color: Colors.grey[800],
+                                      offset: Offset(4.0, 4.0),
+                                      blurRadius: 15.0,
+                                      spreadRadius: 1.0),
+                                  BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(-4.0, -4.0),
+                                      blurRadius: 15.0,
+                                      spreadRadius: 1.0),
                                 ],
                               ),
-                              margin: new EdgeInsets.all(5.0),
+                              margin: new EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[

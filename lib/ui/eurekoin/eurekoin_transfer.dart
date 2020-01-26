@@ -47,18 +47,18 @@ class DualHeaderWithHint extends StatelessWidget {
           ),
         ),
       ),
-      Expanded(
-          flex: 3,
-          child: Container(
-              margin: const EdgeInsets.only(left: 24.0),
-              child: _crossFade(
-                  DefaultTextStyle(
-                      style: Theme.of(context).textTheme.subhead,
-                      child: Text(error, style: TextStyle(color: Colors.red))),
-                  DefaultTextStyle(
-                      style: Theme.of(context).textTheme.subhead,
-                      child: Text("")),
-                  showHint)))
+      // Expanded(
+      //     flex: 3,
+      //     child: Container(
+      //         margin: const EdgeInsets.only(left: 24.0),
+      //         child: _crossFade(
+      //             DefaultTextStyle(
+      //                 style: Theme.of(context).textTheme.subhead,
+      //                 child: Text(error, style: TextStyle(color: Colors.red))),
+      //             DefaultTextStyle(
+      //                 style: Theme.of(context).textTheme.subhead,
+      //                 child: Text("")),
+      //             showHint)))
     ]);
   }
 }
@@ -85,21 +85,24 @@ class CollapsibleBody extends StatelessWidget {
                   style: textTheme.caption.copyWith(fontSize: 15.0),
                   child: child))),
       const Divider(height: 1.0),
-      Container(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-            Container(
-                margin: const EdgeInsets.only(right: 8.0),
-                child: FlatButton(
-                    onPressed: onSave,
-                    textTheme: ButtonTextTheme.normal,
-                    child: const Text('Send'))),
-            Container(
-                margin: const EdgeInsets.only(right: 8.0),
-                child: FlatButton(
-                    onPressed: onCancel, child: const Text('Cancel')))
-          ]))
+      _isLoading
+          ? Container()
+          : Container(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                        margin: const EdgeInsets.only(right: 8.0),
+                        child: FlatButton(
+                            onPressed: onSave,
+                            textTheme: ButtonTextTheme.normal,
+                            child: const Text('Send'))),
+                    Container(
+                        margin: const EdgeInsets.only(right: 8.0),
+                        child: FlatButton(
+                            onPressed: onCancel, child: const Text('Cancel')))
+                  ]))
     ]);
   }
 }
@@ -239,7 +242,8 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                   },
                   child: _isLoading
                       ? Container(
-                          child: LinearProgressIndicator(),
+                          child: SizedBox(
+                              height: 2, child: LinearProgressIndicator()),
                         )
                       : Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -410,7 +414,7 @@ Widget PaymentSuccessDialog(context, message, amount, to) {
     context: context,
     child: Center(
       child: SizedBox(
-        height: 300,
+        height: 280,
         child: Dialog(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
