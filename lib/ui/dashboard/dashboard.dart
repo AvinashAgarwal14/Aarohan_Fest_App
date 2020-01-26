@@ -11,7 +11,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import '../eurekoin/eurekoin.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:aavishkarapp/ui/account/login.dart';
