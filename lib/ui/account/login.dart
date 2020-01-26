@@ -386,51 +386,86 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   }
 
   Future<bool> _exit() async {
-  return showDialog(
+    return  showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-            child: Container(
-    height: 300,
-    decoration: BoxDecoration(
-      color: Colors.indigo[400],
-      shape: BoxShape.rectangle,
-      borderRadius: BorderRadius.all(Radius.circular(12))
-    ),
-    child: Column(
-      children: <Widget>[
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Image.asset('assets/sad.png', height: 120, width: 120,),
-          ),
-          width: double.infinity,
+        return Center(
+      child: Dialog(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.only(right: 16.0),
+          height: 150,
           decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12))
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(75),
+              bottomLeft: Radius.circular(75),
+              topRight: Radius.circular(10),
+              bottomRight: Radius.circular(10)
+            )
+          ),
+          child: Row(
+            children: <Widget>[
+              SizedBox(width: 20.0),
+              CircleAvatar(radius: 55, backgroundColor: Colors.grey.shade200, 
+              child:  Material(
+                      color: Colors.transparent,
+                      child:Padding(
+                        padding: EdgeInsets.all(0),
+                        child:ClipOval(
+                          child: Image.asset('assets/Aarohan_logo.jpg'),//network image
+                        ),
+                        )
+                    ),),
+              // Image.asset('assets/Aarohan_logo.jpg', width: 60,),),
+              SizedBox(width: 20.0),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("Alert!", style: Theme.of(context).textTheme.title,),
+                    SizedBox(height: 10.0),
+                    Flexible(
+                      child: Text(
+                        "Do you want to Exit?"),
+                    ),
+                    SizedBox(height: 10.0),
+                    Row(children: <Widget>[
+                      Expanded(
+                        child: RaisedButton(
+                          child: Text("Cancel"),
+                          color: Colors.red,
+                          colorBrightness: Brightness.dark,
+                          onPressed: (){Navigator.pop(context);},
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                        ),
+                      ),
+                      SizedBox(width: 10.0),
+                      Expanded(
+                        child: RaisedButton(
+                          child: Text("Exit"),
+                          color: Colors.green,
+                          colorBrightness: Brightness.dark,
+                          onPressed: (){
+                            exit(0);
+                          },
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                        ),
+                      ),
+                    ],)
+                  ],
+                ),
+              )
+            ],
           ),
         ),
-        SizedBox(height: 24,),
-        Text('Do you want to Exit?', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
-        SizedBox(height: 10,),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            FlatButton(onPressed: (){
-              exit(0);
-            }, child: Text('EXIT'),color: Colors.white, textColor: Colors.indigo[400],),
-            ],
-        )
-      ],
-    ),
-  )
-            
-            );
-      });
+      ),
+    );
+      }
+    );
   
   }
 

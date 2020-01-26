@@ -298,13 +298,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.8"
-  intro_slider:
-    dependency: "direct main"
-    description:
-      name: intro_slider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.3"
   location:
     dependency: "direct main"
     description:
