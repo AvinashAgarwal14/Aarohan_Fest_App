@@ -197,8 +197,3 @@ class _SearchTabState extends State<SearchTab> {
         .update({'color': color.toString()});
   }
 }
-
-//   @override
-//   Widget build(BuildContext context) {
-    
-// }
