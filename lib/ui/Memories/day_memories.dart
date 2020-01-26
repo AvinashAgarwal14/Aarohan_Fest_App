@@ -69,33 +69,99 @@ class _DayMemoriesState extends State<DayMemories>
 
   @override
   Widget build(BuildContext context) {
-    return (showDay != null)? (showDay==true)?(sharedImages.length != 0)
-        ? Container(
-      padding: EdgeInsets.all(10.0),
-        child: CustomScrollView(
-            cacheExtent: MediaQuery.of(context).size.height * 3,
-            slivers: <Widget>[
-                new SliverStaggeredGrid.countBuilder(
-                  crossAxisCount: 3,
-                  itemCount: sharedImages.length,
-                  itemBuilder: (context, index) => GestureDetector(
-                      onTap: () =>
-                          showImageDialog(context, sharedImages[index]),
-                      child: new ClipRRect(
-                          borderRadius:
-                              new BorderRadius.all(new Radius.circular(10.0)),
-                          child: new CachedNetworkImage(
-                              placeholder: (context, url) =>
-                                  Image.asset("images/imageplaceholder.png"),
-                              imageUrl: sharedImages[index].imageURL,
-                              fit: BoxFit.cover))),
-                  staggeredTileBuilder: (index) =>
-                      _staggeredTiles[index % _staggeredTiles.length],
-                  mainAxisSpacing: 8.0,
-                  crossAxisSpacing: 8.0,
-                )
-              ]))
-        : Container() : Image.asset('images/imageplaceholder.png'): Center(child: CircularProgressIndicator());
+    return (showDay != null)
+        ? (showDay == true)
+            ? (sharedImages.length != 0)
+                ? Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: CustomScrollView(
+                      cacheExtent: MediaQuery.of(context).size.height * 3,
+                      slivers: <Widget>[
+                        new SliverStaggeredGrid.countBuilder(
+                          crossAxisCount: 3,
+                          itemCount: sharedImages.length,
+                          itemBuilder: (context, index) => GestureDetector(
+                            child: new ClipRRect(
+                              borderRadius: new BorderRadius.all(
+                                  new Radius.circular(10.0)),
+                              child: new Hero(
+                                tag: "$index",
+                                child: CachedNetworkImage(
+                                    placeholder: (context, url) => Image.asset(
+                                        "images/imageplaceholder.png"),
+                                    imageUrl: sharedImages[index].imageURL,
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
+                            onTap: () => Navigator.of(context).push(
+                              new MaterialPageRoute(
+                                  fullscreenDialog: true,
+                                  builder: (BuildContext context) {
+                                    return Scaffold(
+                                      body: Column(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Container(
+                                              width: double.infinity,
+                                              child: Hero(
+                                                tag: "$index",
+                                                child: CachedNetworkImage(
+                                                    placeholder: (context,
+                                                            url) =>
+                                                        Image.asset(
+                                                            "images/imageplaceholder.png"),
+                                                    imageUrl:
+                                                        sharedImages[index]
+                                                            .imageURL,
+                                                    fit: BoxFit.contain),
+                                              ),
+                                            ),
+                                          ),
+                                          Column(
+                                            children: <Widget>[
+                                              Text(
+                                                sharedImages[index].name,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 21),
+                                              ),
+                                              Text(
+                                                sharedImages[index].email,
+                                                style: TextStyle(
+                                                    fontStyle: FontStyle.italic,
+                                                    fontSize: 13),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  IconButton(
+                                                    color: Colors.black,
+                                                    icon: Icon(Icons.close),
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ),
+                          staggeredTileBuilder: (index) =>
+                              _staggeredTiles[index % _staggeredTiles.length],
+                          mainAxisSpacing: 8.0,
+                          crossAxisSpacing: 8.0,
+                        ),
+                      ],
+                    ),
+                  )
+                : Container()
+            : Image.asset('images/imageplaceholder.png')
+        : Center(child: CircularProgressIndicator());
   }
 
   void _onImageEntryAdded(Event event) {
@@ -124,46 +190,7 @@ class _DayMemoriesState extends State<DayMemories>
     });
   }
 
-  showImageDialog(BuildContext context, image) {
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                child: CachedNetworkImage(
-                  placeholder: (context, url) =>
-                      Image.asset("images/imageplaceholder.png"),
-                  imageUrl: image.imageURL,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
-            Column(
-              children: <Widget>[
-                Text(image.name),
-                Text(image.email),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    IconButton(
-                      color: Colors.white,
-                      icon: Icon(Icons.close),
-                      onPressed: () => Navigator.pop(context),
-                    )
-                  ],
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  showImageDialog(BuildContext context, image) {}
 
   void onComingSoonAdded(Event event) {
     setState(() {

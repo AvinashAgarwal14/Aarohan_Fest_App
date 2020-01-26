@@ -388,13 +388,32 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
 Widget PaymentSuccessDialog(context, message, amount, to) {
   final TextStyle subtitle = TextStyle(fontSize: 12.0, color: Colors.grey);
   final TextStyle label = TextStyle(fontSize: 14.0, color: Colors.grey);
+  final List<String> months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+  final String time = "${DateTime.now().hour}:${DateTime.now().minute}";
+  final String date =
+      "${DateTime.now().day} ${months[DateTime.now().month - 1]}, ${DateTime.now().year}";
 
   showDialog(
     context: context,
     child: Center(
       child: SizedBox(
-        height: 370,
+        height: 300,
         child: Dialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: _isLoading
@@ -420,10 +439,7 @@ Widget PaymentSuccessDialog(context, message, amount, to) {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text("2, April 2019"),
-                          Text("9:10 AM")
-                        ],
+                        children: <Widget>[Text(date), Text(time)],
                       ),
                       SizedBox(height: 20.0),
                       Row(

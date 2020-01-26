@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../util/event_details.dart';
 import '../../model/event.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -71,6 +72,8 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
         duration: new Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
+  PageController controller;
+
   @override
   Widget build(BuildContext context) {
     if (eventsByCategories["Online"].length != 0 &&
@@ -89,205 +92,209 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
             color: Theme.of(context).brightness == Brightness.light
                 ? Color.fromRGBO(232, 232, 232, 1.0)
                 : Color.fromRGBO(80, 80, 80, 1.0),
-            padding: new EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+            // padding: new EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
             child: Column(
               children: <Widget>[
                 Padding(
                     padding: new EdgeInsets.symmetric(vertical: 0.0),
                     child: instance),
-                new CarouselSlider(
-                  height: 270.0,
-                  //TODO add the upcoming events as per the date
-                  items: map<Widget>(carouselImageList, (index, i) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EventDetails(
-                                  item: eventsByCategories["All"][index])),
-                        );
-                      },
-                      child: new Container(
+                new Container(
+                  color: Colors.white,
+                  child: CarouselSlider(
+                    height: 290.0,
+                    //TODO add the upcoming events as per the date
+                    items: map<Widget>(carouselImageList, (index, i) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EventDetails(
+                                    item: eventsByCategories["All"][index])),
+                          );
+                        },
+                        child: new Container(
                           margin: new EdgeInsets.all(10.0),
                           child: new ClipRRect(
-                              borderRadius: new BorderRadius.all(
-                                  new Radius.circular(5.0)),
-                              child: new Stack(
-                                children: <Widget>[
-                                  CachedNetworkImage(
-                                      placeholder: (context, url) =>
-                                          Image.asset(
-                                              "images/imageplaceholder.png"),
-                                      imageUrl: eventsByCategories["All"][index]
-                                          .imageUrl,
-                                      fit: BoxFit.cover,
-                                      width: MediaQuery.of(context).size.width -
-                                          10.0),
-                                  new Positioned(
-                                      bottom: 0.0,
-                                      left: 30.0,
-                                      right: 30.0,
-                                      child: Container(
-                                        height: 100.0,
-                                        width: 200.0,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          boxShadow: <BoxShadow>[
-                                            BoxShadow(
-                                              blurRadius: 3,
-                                              spreadRadius: 1,
-                                              color: Colors.blue[900]
-                                                  .withOpacity(0.1),
-                                            )
-                                          ],
+                            borderRadius:
+                                new BorderRadius.all(new Radius.circular(5.0)),
+                            child: new Stack(
+                              children: <Widget>[
+                                CachedNetworkImage(
+                                    placeholder: (context, url) => Image.asset(
+                                        "images/imageplaceholder.png"),
+                                    imageUrl: eventsByCategories["All"][index]
+                                        .imageUrl,
+                                    fit: BoxFit.cover,
+                                    width: MediaQuery.of(context).size.width -
+                                        10.0),
+                                new Positioned(
+                                  bottom: 20.0,
+                                  left: 30.0,
+                                  right: 30.0,
+                                  child: Container(
+                                    height: 100.0,
+                                    width: 200.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[500],
+                                            offset: Offset(4.0, 4.0),
+                                            blurRadius: 15.0,
+                                            spreadRadius: 1.0),
+                                        BoxShadow(
+                                            color: Colors.white,
+                                            offset: Offset(-4.0, -4.0),
+                                            blurRadius: 15.0,
+                                            spreadRadius: 1.0),
+                                      ],
+                                    ),
+                                    margin: new EdgeInsets.all(5.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10, horizontal: 10),
+                                            child: Text(
+                                                eventsByCategories["All"][index]
+                                                    .title,
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                ))),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 0.0, horizontal: 10),
+                                          child: Text(
+                                            eventsByCategories["All"][index]
+                                                    .body
+                                                    .substring(0, 90) +
+                                                " ...",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              color: Colors.black38,
+                                              fontSize: 12,
+                                            ),
+                                          ),
                                         ),
-                                        margin: new EdgeInsets.all(5.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10,
-                                                        horizontal: 10),
-                                                child: Text(
-                                                    eventsByCategories["All"]
-                                                            [index]
-                                                        .title,
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 18,
-                                                    ))),
-                                            Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 0.0,
-                                                        horizontal: 10),
-                                                child: Text(
-                                                  eventsByCategories["All"]
-                                                              [index]
-                                                          .body
-                                                          .substring(0, 90) +
-                                                      " ...",
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    color: Colors.black38,
-                                                    fontSize: 12,
-                                                  ),
-                                                ))
-                                          ],
-                                        ),
-                                      ))
-                                ],
-                              ))),
-                    );
-                  }).toList(),
-                  autoPlay: true,
-                  viewportFraction: 0.85,
-                  aspectRatio: 16 / 9,
-                  pauseAutoPlayOnTouch: Duration(seconds: 2),
-                ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    autoPlay: true,
+                    viewportFraction: 0.85,
+                    aspectRatio: 16 / 9,
+                    pauseAutoPlayOnTouch: Duration(seconds: 2),
+                  ),
+                )
               ],
             ),
           ),
           //TODO Online Events
           Container(
-              padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(left: 15.0),
-                    child:
-                        Text("Online Events", style: TextStyle(fontSize: 18.0)),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 5.0),
-                    height: 200.0,
-                    // width: MediaQuery.of(context).size.width-10.0,
-                    child: ListView.builder(
-                        cacheExtent: 1350.0,
-                        itemCount: eventsByCategories["Online"].length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => EventDetails(
-                                          item: eventsByCategories["Online"]
-                                              [index])),
-                                );
-                              },
-                              child: Container(
-                                height: 150.0,
-                                width: 150.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                      blurRadius: 3,
-                                      spreadRadius: 1,
-                                      color: Colors.blue[900].withOpacity(0.1),
-                                    )
-                                  ],
-                                ),
-                                margin: new EdgeInsets.all(5.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                        height: 150.0,
-                                        child: ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10),
-                                            ),
-                                            child: CachedNetworkImage(
-                                                placeholder: (context, url) =>
-                                                    Image.asset(
-                                                        "images/imageplaceholder.png"),
-                                                imageUrl:
+            color: Colors.white,
+            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child:
+                      Text("Online Events", style: TextStyle(fontSize: 18.0)),
+                ),
+                Container(
+                  color: Colors.white,
+                  padding: EdgeInsets.only(top: 5.0),
+                  height: 200.0,
+                  // width: MediaQuery.of(context).size.width-10.0,
+                  child: ListView.builder(
+                    cacheExtent: 1350.0,
+                    itemCount: eventsByCategories["Online"].length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EventDetails(
+                                    item: eventsByCategories["Online"][index])),
+                          );
+                        },
+                        child: Container(
+                          height: 150.0,
+                          width: 150.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                blurRadius: 3,
+                                spreadRadius: 1,
+                                color: Colors.blue[900].withOpacity(0.1),
+                              )
+                            ],
+                          ),
+                          margin: new EdgeInsets.all(5.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                  height: 150.0,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
+                                      ),
+                                      child: CachedNetworkImage(
+                                          placeholder: (context, url) =>
+                                              Image.asset(
+                                                  "images/imageplaceholder.png"),
+                                          imageUrl:
 //                                                    eventsByCategories["Online"]
 //                                                            [index]
 //                                                        .imageUrl,
 //                                                'https://www.hcsa.org.sg/wp-content/uploads/2018/10/181015-HCSA-Res-03-Events-banner.jpg',
-                                                    'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
-                                                height: double.infinity,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover))),
-                                    Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8, horizontal: 8),
-                                        child: Text(
-                                          eventsByCategories["Online"][index]
-                                              .title,
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500),
-                                        ))
-                                  ],
+                                              'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                          height: double.infinity,
+                                          width: double.infinity,
+                                          fit: BoxFit.cover))),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 8),
+                                child: Text(
+                                  eventsByCategories["Online"][index].title,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500),
                                 ),
-                              ));
-                        }),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
           //TODO Workshop And Games
           Container(
-            color: Theme.of(context).brightness == Brightness.light
-                ? Color.fromRGBO(232, 232, 232, 1.0)
-                : Color.fromRGBO(80, 80, 80, 1.0),
+            color: Colors.white,
 
             //color: Colors.grey.shade200,
             padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 15.0),
@@ -364,12 +371,18 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                     pagination:
                         new SwiperPagination(margin: new EdgeInsets.all(5.0)),
                   ),
-                )
+                ),
+                // SmoothPageIndicator(
+                //   controller: controller,
+                //   count: 11,
+                //   effect: WormEffect(),
+                // ),
               ],
             ),
           ),
           //TODO On-Site Events
           Container(
+            color: Colors.white,
             padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -458,9 +471,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
           ),
           // TODO Talk
           Container(
-            color: Theme.of(context).brightness == Brightness.light
-                ? Color.fromRGBO(232, 232, 232, 1.0)
-                : Color.fromRGBO(80, 80, 80, 1.0),
+            color: Colors.white,
             padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
