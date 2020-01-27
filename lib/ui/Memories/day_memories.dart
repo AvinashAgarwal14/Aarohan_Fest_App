@@ -12,8 +12,9 @@ class DayMemories extends StatefulWidget {
   _DayMemoriesState createState() => _DayMemoriesState();
 }
 
-class _DayMemoriesState extends State<DayMemories> {
-
+class _DayMemoriesState extends State<DayMemories>
+//    with AutomaticKeepAliveClientMixin<DayMemories>
+{
   final List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
     const StaggeredTile.count(2, 2),
     const StaggeredTile.count(1, 1),
@@ -35,8 +36,9 @@ class _DayMemoriesState extends State<DayMemories> {
 
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   DatabaseReference _databaseReferenceForMemories;
+  DatabaseReference _databaseReferenceForComingSoon;
+  bool showDay;
   List<MemoryItem> sharedImages;
-
 
   @override
   void setState(fn) {
@@ -50,55 +52,50 @@ class _DayMemoriesState extends State<DayMemories> {
     // TODO: implement initState
     super.initState();
     sharedImages = new List();
-    print(widget.dayNumber);
-    _database.setPersistenceEnabled(true);
-    _database.setPersistenceCacheSizeBytes(150000000);
+    showDay == null;
+//    _database.setPersistenceEnabled(true);
+//    _database.setPersistenceCacheSizeBytes(150000000);
     _databaseReferenceForMemories =
         _database.reference().child("Memories/Day-${widget.dayNumber}");
     _databaseReferenceForMemories.onChildAdded.listen(_onImageEntryAdded);
-    _databaseReferenceForMemories.onChildChanged
-        .listen(_onImageEntryUpdated);
-    _databaseReferenceForMemories.onChildRemoved
-        .listen(_onImageEntryRemoved);
+    _databaseReferenceForMemories.onChildChanged.listen(_onImageEntryUpdated);
+    _databaseReferenceForMemories.onChildRemoved.listen(_onImageEntryRemoved);
+
+    _databaseReferenceForComingSoon = _database.reference().child("comingsoon");
+    _databaseReferenceForComingSoon.onValue.listen(onComingSoonAdded);
+
+    print(widget.dayNumber);
   }
 
   @override
   Widget build(BuildContext context) {
-    return (sharedImages.length !=0) ?
-//    Scaffold(
-//      backgroundColor: Colors.white,
-//      appBar: AppBar(
-//        centerTitle: true,
-//        elevation: 0,
-//        title: Text(
-//          'Day - ${widget.dayNumber} Memories',
-//          style: TextStyle(color: Colors.black),
-//        ),
-//        backgroundColor: Colors.transparent,
-//        iconTheme: IconThemeData(color: Colors.black),
-//      ),
-//      body:
-      StaggeredGridView.countBuilder(
-        padding: const EdgeInsets.all(8.0),
-        crossAxisCount: 3,
-        itemCount: sharedImages.length,
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () => showImageDialog(context, sharedImages[index]),
-          child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                image:
-                CachedNetworkImageProvider(sharedImages[index].imageURL),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.circular(10.0)),
-        )),
-        staggeredTileBuilder: (index) => _staggeredTiles[index % _staggeredTiles.length],
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
-      )
-//    )
-    : Container();
+    return (showDay != null)? (showDay==true)?(sharedImages.length != 0)
+        ? Container(
+      padding: EdgeInsets.all(10.0),
+        child: CustomScrollView(
+            cacheExtent: MediaQuery.of(context).size.height * 3,
+            slivers: <Widget>[
+                new SliverStaggeredGrid.countBuilder(
+                  crossAxisCount: 3,
+                  itemCount: sharedImages.length,
+                  itemBuilder: (context, index) => GestureDetector(
+                      onTap: () =>
+                          showImageDialog(context, sharedImages[index]),
+                      child: new ClipRRect(
+                          borderRadius:
+                              new BorderRadius.all(new Radius.circular(10.0)),
+                          child: new CachedNetworkImage(
+                              placeholder: (context, url) =>
+                                  Image.asset("images/imageplaceholder.png"),
+                              imageUrl: sharedImages[index].imageURL,
+                              fit: BoxFit.cover))),
+                  staggeredTileBuilder: (index) =>
+                      _staggeredTiles[index % _staggeredTiles.length],
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
+                )
+              ]))
+        : Container() : Image.asset('images/imageplaceholder.png'): Center(child: CircularProgressIndicator());
   }
 
   void _onImageEntryAdded(Event event) {
@@ -117,7 +114,6 @@ class _DayMemoriesState extends State<DayMemories> {
           MemoryItem.fromSnapshot(event.snapshot);
     });
   }
-
 
   void _onImageEntryRemoved(Event event) {
     var oldEntry = sharedImages.singleWhere((entry) {
@@ -140,6 +136,8 @@ class _DayMemoriesState extends State<DayMemories> {
               child: Container(
                 width: double.infinity,
                 child: CachedNetworkImage(
+                  placeholder: (context, url) =>
+                      Image.asset("images/imageplaceholder.png"),
                   imageUrl: image.imageURL,
                   fit: BoxFit.contain,
                 ),
@@ -165,5 +163,11 @@ class _DayMemoriesState extends State<DayMemories> {
         ),
       ),
     );
+  }
+
+  void onComingSoonAdded(Event event) {
+    setState(() {
+      showDay = !event.snapshot.value["day-${widget.dayNumber}"];
+    });
   }
 }

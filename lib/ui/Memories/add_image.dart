@@ -2,13 +2,15 @@ import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To Firestore
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart'; // For Image Picker
-import 'package:path/path.dart' as Path;
+import 'package:image_picker/image_picker.dart';
 import '../../model/memory.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/rendering.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:intl/intl.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SendImageEntry extends StatefulWidget {
   @override
@@ -19,8 +21,11 @@ class _SendImageEntryState extends State<SendImageEntry> {
   File _image;
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   DatabaseReference _databaseReferenceForMemories;
-  bool upload = false;
+  bool upload;
   FirebaseUser currentUser;
+  bool comingSoon;
+  var dayNumber;
+  var savedImageString;
 
   ScrollController scrollController;
   bool dialVisible = true;
@@ -35,8 +40,11 @@ class _SendImageEntryState extends State<SendImageEntry> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _getUser();
+    upload = false;
     _image = null;
+    savedImageString = null;
+    _getUser();
+    loadSavedImage();
     _databaseReferenceForMemories =
         _database.reference().child("Memories/Day-0");
     scrollController = ScrollController()
@@ -44,6 +52,27 @@ class _SendImageEntryState extends State<SendImageEntry> {
         setDialVisible(scrollController.position.userScrollDirection ==
             ScrollDirection.forward);
       });
+
+//    comingSoon = true;
+    dayNumber = 0;
+    comingSoon = false;
+
+//    var format = new DateFormat.yMd();
+//    var dateString = format.format(DateTime.now()).split('/');
+//    print(dateString);
+//    var month = int.parse(dateString[0]);
+//    var day = int.parse(dateString[1]);
+//    if(month == 2 && day>=7 && day<=10) {
+//      comingSoon = false;
+//      if(day == 7)
+//        dayNumber = 0;
+//      if(day == 8)
+//        dayNumber = 1;
+//      if(day == 9)
+//        dayNumber = 2;
+//      if(day == 10)
+//        dayNumber = 3;
+//    }
   }
 
   @override
@@ -55,28 +84,33 @@ class _SendImageEntryState extends State<SendImageEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return (upload == false)?  Scaffold(
-        body: Column(children: <Widget>[
+    return (comingSoon == false) ? (upload == false)?  Scaffold(
+        body:
+        Column(children: <Widget>[
           Container(
-              height: 300.0,
+              height: 400.0,
               child: (_image != null)
                   ? Image(image: FileImage(File(_image.path)))
                   : Image.asset('images/imageplaceholder.png')),
-          _image != null
-              ? RaisedButton(
-                  child: Text('Upload File'),
-                  onPressed: uploadFile,
+          Row(
+            children:<Widget>[
+              Expanded(
+                child: RaisedButton(
+                  child: (_image!=null && _image.path == savedImageString)? Text("Image Uploaded!"):Text('Upload Image'),
+                  onPressed: (_image!=null && _image.path != savedImageString)?uploadFile:null,
                   color: Colors.cyan,
-                )
-              : Container(),
-          _image != null
-              ? RaisedButton(
-                  child: Text('Clear Selection'),
-                  onPressed: clearSelection,
-                )
-              : Container(),
+                ),
+              ),
+            SizedBox(width: 10.0),
+            RaisedButton(
+              child: Text('Clear Selection'),
+              onPressed: (_image!=null)?clearSelection:null,
+              color: Colors.red,
+            )
+            ]
+          ),
           Center(
-            child: Text("Share your favourite Aarohan memory and get a chance to win Eurekoins!"),
+            child: Text("Share your favourite Aarohan memory for Day - $dayNumber and get a chance to win Eurekoins!"),
           )
         ]),
         floatingActionButton: SpeedDial(
@@ -118,11 +152,12 @@ class _SendImageEntryState extends State<SendImageEntry> {
               onTap: chooseFileGallery,
             ),
           ],
-        )) : Center(child: CircularProgressIndicator());
+        )
+    ) : Center(child: CircularProgressIndicator()) : Image.asset('images/imageplaceholder.png');
   }
 
   Future chooseFileCamera() async {
-    await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 60).then((image) {
+    await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 20).then((image) {
       setState(() {
         _image = image;
       });
@@ -130,7 +165,8 @@ class _SendImageEntryState extends State<SendImageEntry> {
   }
 
   Future chooseFileGallery() async {
-    await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 60).then((image) {
+    await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 20).then((image) {
+      print(image);
       setState(() {
         _image = image;
       });
@@ -143,19 +179,23 @@ class _SendImageEntryState extends State<SendImageEntry> {
     });
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
-        .child('Memories/Day-0/${Path.basename(_image.path)}}');
+        .child('Memories/Day-${dayNumber}/${currentUser.displayName}-${currentUser.email}');
     StorageUploadTask uploadTask = storageReference.putFile(_image);
     await uploadTask.onComplete;
-    print('File Uploaded');
     storageReference.getDownloadURL().then((fileURL) {
-      var newRef = _databaseReferenceForMemories.push();
+      var format = new DateFormat.yMd();
+      var dateString = format.format(DateTime.now());
       MemoryItem newImage =
-          new MemoryItem(currentUser.displayName, currentUser.displayName, currentUser.email, fileURL);
-      newRef.set(newImage.toJson());
+          new MemoryItem(currentUser.displayName, dateString, currentUser.email, fileURL);
+      var bytes = utf8.encode("${currentUser.email}" + "${currentUser.displayName}");
+      var encoded = sha1.convert(bytes);
+      _databaseReferenceForMemories.child("$encoded").set(newImage.toJson());
     });
     setState(() {
       upload = false;
     });
+    saveImage(_image.path);
+    print('File Uploaded');
   }
 
   clearSelection() {
@@ -166,9 +206,25 @@ class _SendImageEntryState extends State<SendImageEntry> {
 
   Future _getUser() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    print(user);
     setState(() {
       currentUser = user;
     });
+  }
+
+  loadSavedImage() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      savedImageString = preferences.getString('savedImageString');
+      _image = File(savedImageString);
+    });
+
+  }
+
+  saveImage(value) async {
+    setState((){
+      savedImageString = value;
+    });
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('savedImageString', '$value');
   }
 }

@@ -8,7 +8,10 @@ class ShareMemories extends StatefulWidget {
 }
 
 class _ShareMemoriesState extends State<ShareMemories> {
-  var _currentState = 0;
+
+  var _currentIndex = 0;
+  final pageController = PageController();
+
   List TabViews = <Widget>[
     SendImageEntry(),
     DayMemories(dayNumber: 0),
@@ -16,11 +19,18 @@ class _ShareMemoriesState extends State<ShareMemories> {
     DayMemories(dayNumber: 2),
     DayMemories(dayNumber: 3)
   ];
+
   @override
   void setState(fn) {
     if (mounted) {
       super.setState(fn);
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -32,20 +42,24 @@ class _ShareMemoriesState extends State<ShareMemories> {
         elevation: 0,
         title: Text('Share Your Memories'),
       ),
-      body: TabViews[_currentState],
+      body:
+      PageView(
+        children: TabViews,
+        controller: pageController,
+        onPageChanged: onPageChanged,
+      ),
+//      TabViews[_currentState],
         bottomNavigationBar: Container(
           child: BottomNavigationBar(
-            currentIndex: _currentState,
+            currentIndex: _currentIndex,
             onTap:(int index){
-              setState(() {
-                _currentState = index;
-              });
+              pageController.jumpToPage(index);
             },
             fixedColor: Theme.of(context).primaryColor,
             items:[
               BottomNavigationBarItem(
-                icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
-                title: Text("Share Image",),
+                  icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
+                  title: Text("Share Image",)
               ),
               BottomNavigationBarItem(
                   icon: Icon(Icons.today, color: Theme.of(context).primaryColor),
@@ -54,10 +68,12 @@ class _ShareMemoriesState extends State<ShareMemories> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.today, color: Theme.of(context).primaryColor),
                   title: Text("Day 1")
-              ),BottomNavigationBarItem(
+              ),
+              BottomNavigationBarItem(
                   icon: Icon(Icons.today, color: Theme.of(context).primaryColor),
                   title: Text("Day 2")
-              ),BottomNavigationBarItem(
+              ),
+              BottomNavigationBarItem(
                   icon: Icon(Icons.today, color: Theme.of(context).primaryColor),
                   title: Text("Day 3")
               )
@@ -65,5 +81,11 @@ class _ShareMemoriesState extends State<ShareMemories> {
           ),
         )
     );
+  }
+
+  void onPageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }

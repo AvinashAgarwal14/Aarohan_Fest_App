@@ -14,7 +14,7 @@ dependencies:
   firebase_core:
   firebase_database:
   firebase_storage:
-  url_launcher: ^3.0.3
+  url_launcher: ^5.4.1
   flutter_webview_plugin: ^0.3.10+1
   flutter_facebook_login:
   cached_network_image: ^2.0.0
@@ -27,7 +27,8 @@ dependencies:
   intl: ^0.15.7
   palette_generator: ^0.2.0
   path_provider: ^1.5.1
-  share: ^0.5.3
+  #intro_slider: ^1.0.7
+  share: ^0.6.3+5
   google_maps_flutter: ^0.5.20+6
   location: ^2.3.5
   http: ^0.12.0+3
@@ -90,6 +91,7 @@ flutter:
     - images/Contributors/
     - assets/
     - assets/images/
+    - assets/Aarohan_logo.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
