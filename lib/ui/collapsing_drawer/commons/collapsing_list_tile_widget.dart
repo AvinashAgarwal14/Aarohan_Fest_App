@@ -44,12 +44,12 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
                   BoxShadow(
                       color: Colors.white,
                       offset: Offset(2.0, 2.0),
-                      blurRadius: 10.0,
+                      blurRadius: 8.0,
                       spreadRadius: 1.0),
                   BoxShadow(
                       color: Colors.grey[600],
                       offset: Offset(-2.0, -2.0),
-                      blurRadius: 10.0,
+                      blurRadius: 8.0,
                       spreadRadius: 1.0),
                 ],
                 gradient: LinearGradient(
@@ -74,12 +74,12 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
                   BoxShadow(
                       color: Colors.grey[600],
                       offset: Offset(2.0, 2.0),
-                      blurRadius: 10.0,
+                      blurRadius: 8.0,
                       spreadRadius: 1.0),
                   BoxShadow(
                       color: Colors.white,
                       offset: Offset(-2.0, -2.0),
-                      blurRadius: 10.0,
+                      blurRadius: 8.0,
                       spreadRadius: 1.0),
                 ],
                 gradient: LinearGradient(
@@ -105,8 +105,8 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
         //       : Colors.transparent,
         // ),
         width: widthAnimation.value,
-        margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+        margin: EdgeInsets.symmetric(horizontal: 11.0, vertical: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 13.0, vertical: 8.0),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(

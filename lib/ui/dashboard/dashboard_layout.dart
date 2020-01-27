@@ -27,7 +27,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
   CarouselSlider instance;
   int j = 0;
   double maxWidth = 180;
-  double minWidth = 63;
+  double minWidth = 70;
   bool isCollapsed = false;
   AnimationController _animationController;
   Animation<double> widthAnimation;

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,7 +16,7 @@ class HomePage extends StatefulWidget {
 
 GoogleMapController mapController;
 
-String api_url = "phoenix7139.pythonanywhere.com";
+String api_url = "romitkarmakar.pythonanywhere.com";
 
 bool header = false;
 
@@ -112,9 +111,8 @@ class _HomePageState extends State<HomePage> {
       _isLoading = true;
     });
     if (accuracy > 25) {
-       _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content:
-            Text("location not accurate enough. please try again"),
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text("location not accurate enough. please try again"),
         duration: Duration(seconds: 1),
       ));
     } else {
@@ -177,12 +175,12 @@ class _HomePageState extends State<HomePage> {
     var deviceSize = MediaQuery.of(context).size;
 
 //animation using animatedpositioned. mean position toggle values
-    double bottom = _isUp ? 55.0 : (deviceSize.height / 2);
+    double bottom = _isUp ? 65.0 : (deviceSize.height / 2);
     double top = _isUp
-        ? (_isOpen ? deviceSize.height / 3 : (deviceSize.height - 145))
+        ? (_isOpen ? deviceSize.height / 3 : (deviceSize.height * 3 / 4))
         : bottom;
     double top2 =
-        _isUp ? (deviceSize.height - 35) : ((deviceSize.height) / 2) + 10;
+        _isUp ? (deviceSize.height - 80) : ((deviceSize.height) / 2) + 10;
     var bottom3 = _isUp ? deviceSize.height : ((deviceSize.height) / 2) + 10;
     var bottom4 = _isUp ? 10.0 : deviceSize.height - 80;
     var right4 = 20.0;
@@ -193,280 +191,25 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: Text("drawer"),
       ),
-      body: Stack(
-        children: <Widget>[
-          GameMap(), //google map as main background of the app
-          AnimatedPositioned(
-            //top instructions panel
-            bottom: bottom3,
-            right: 0.0,
-            left: 0.0,
-            top: -15.0,
-            duration: Duration(milliseconds: 900),
-            curve: Curves.easeOutQuart,
-            child: Center(
-              child: AnimatedOpacity(
-                duration: Duration(milliseconds: 900),
-                curve: Curves.easeOutQuart,
-                opacity: _isUp ? 0.5 : 0.8,
-                child: Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.5),
-                          offset: Offset.zero,
-                          blurRadius: 10,
-                          spreadRadius: 5),
-                    ],
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      stops: [0.7, 1.0],
-                      colors: [Colors.black, Colors.grey],
-                    ),
-                    borderRadius: BorderRadius.circular(17),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      "INSTRUCTIONS",
-                      style:
-                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          AnimatedPositioned(
-            //level box displayed on home page
-            bottom: bottom,
-            right: 10.0,
-            left: 10.0,
-            top: top,
-            duration: Duration(milliseconds: 900),
-            curve: Curves.bounceOut,
-            child: Center(
-              child: AnimatedOpacity(
-                duration: Duration(milliseconds: 900),
-                curve: Curves.easeOutQuart,
-                opacity: _isUp ? (_isOpen ? 0.9 : 0.7) : 0.0,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _isOpen = !_isOpen;
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
-                            offset: Offset.zero,
-                            blurRadius: 10,
-                            spreadRadius: 5),
-                      ],
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(17),
-                    ),
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned(
-                          top: 0.0,
-                          left: 0.0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              _isLoading
-                                  ? Container(
-                                      padding: EdgeInsets.only(right: 20),
-                                      child: CircularProgressIndicator())
-                                  : levelData["title"] == null
-                                      ? Text(
-                                          levelData["level"],
-                                          style: TextStyle(
-                                            color: _isOpen
-                                                ? Color(0xFF0059B3)
-                                                : Colors.white,
-                                            fontSize: 32,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        )
-                                      : Text(
-                                          levelData["title"],
-                                          style: TextStyle(
-                                            color: _isOpen
-                                                ? Color(0xFF0059B3)
-                                                : Colors.white,
-                                            fontSize: 32,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                              SizedBox(
-                                width: 20.0,
-                              ),
-                              levelData["title"] == null
-                                  ? Container()
-                                  : levelData["map_hint"]
-                                      ? Icon(
-                                          Icons.location_on,
-                                          size: 28,
-                                        )
-                                      : Icon(
-                                          Icons.assistant_photo,
-                                          size: 28,
-                                        ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          _isLoading || levelData["title"] == null
-              ? Container(
-                  padding: EdgeInsets.only(right: 20),
-                  child: CircularProgressIndicator())
-              : AnimatedPositioned(
-                  //question along with textfield for answer and submit button
-                  top: _isOpen && _isUp
-                      ? deviceSize.height / 3 + 60.0
-                      : deviceSize.height + 5.0,
-                  bottom: _isOpen && _isUp ? 75.0 : -5.0,
-                  left: 20.0,
-                  right: 20.0,
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            GameMap(), //google map as main background of the app
+            AnimatedPositioned(
+              //top instructions panel
+              bottom: bottom3,
+              right: 0.0,
+              left: 0.0,
+              top: -15.0,
+              duration: Duration(milliseconds: 900),
+              curve: Curves.easeOutQuart,
+              child: Center(
+                child: AnimatedOpacity(
                   duration: Duration(milliseconds: 900),
                   curve: Curves.easeOutQuart,
-                  child: GestureDetector(
-                    onTap: () {
-                      FocusScope.of(context).requestFocus(new FocusNode());
-                    },
-                    child: Container(
-                      child: Center(
-                        child: ScrollConfiguration(
-                          behavior: MyBehavior(),
-                          child: ListView(
-                            children: <Widget>[
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFFFE000),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 7, horizontal: 15),
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 10),
-                                child: Text(
-                                  levelData["ques"],
-                                  style: TextStyle(
-                                      color: _isOpen
-                                          ? Color(0xFF0091CC)
-                                          : Colors.white,
-                                      fontSize: 17,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                              ),
-                              ListTile(
-                                title: levelData["map_hint"]
-                                    ? Container(
-                                        child: Center(
-                                          child: Column(
-                                            children: <Widget>[
-                                              ListTile(
-                                                leading: Icon(Icons
-                                                    .subdirectory_arrow_left),
-                                                title: Text("LATITUDE: $lat"),
-                                              ),
-                                              ListTile(
-                                                leading: Icon(Icons
-                                                    .subdirectory_arrow_right),
-                                                title: Text("LONGITUDE: $long"),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    : TextField(
-                                        focusNode: _fieldFocusNode,
-                                        controller: _answerFieldController,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                        decoration: InputDecoration(
-                                          filled: false,
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xFF0091CC),
-                                              width: 3.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  Colors.white.withOpacity(0.5),
-                                              width: 3.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          labelText: 'answer here',
-                                          labelStyle: TextStyle(
-                                              color:
-                                                  Colors.white.withOpacity(0.5),
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                              ),
-                              ListTile(
-                                title: FlatButton(
-                                  child: Text("SUBMIT"),
-                                  onPressed: () {
-                                    setState(() {
-                                      levelData["map_hint"]
-                                          ? submitLocation()
-                                          : submitLevelAnswer(
-                                              _answerFieldController.text);
-                                    });
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-          AnimatedPositioned(
-            //leaderboard generated dynamically using listview.builder
-            bottom: -15.0,
-            right: 0.0,
-            left: 0.0,
-            top: top2,
-            duration: Duration(milliseconds: 900),
-            curve: Curves.easeOutQuart,
-            child: Center(
-              child: AnimatedOpacity(
-                duration: Duration(milliseconds: 900),
-                curve: Curves.easeOutQuart,
-                opacity: _isUp ? 0.6 : 0.8,
-                child: GestureDetector(
-                  onVerticalDragStart: (context) {
-                    setState(() {
-                      _isUp = !_isUp;
-                      getScoreboard();
-                    });
-                  },
+                  opacity: _isUp ? 0.5 : 0.8,
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                    padding: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
@@ -478,119 +221,367 @@ class _HomePageState extends State<HomePage> {
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        stops: [0.5, 1.0],
-                        colors: [Color(0xFF0091FF), Color(0xFF0059FF)],
+                        stops: [0.5, 0.8, 1.0],
+                        colors: [
+                          Colors.grey[900],
+                          Colors.grey[600],
+                          Colors.grey
+                        ],
                       ),
                       borderRadius: BorderRadius.circular(17),
                     ),
-                    child: Center(
-                      child: ListView.builder(
-                        itemCount:
-                            leaderboard == null ? 0 : leaderboard.length + 1,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (index == 0) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      SizedBox(width: 40),
-                                      Text(
-                                        "name",
-                                        style: TextStyle(
-                                            fontSize: 31,
-                                            fontStyle: FontStyle.italic,
-                                            color: Color(0xFFFFE000)),
-                                      )
-                                    ]),
-                                Text(
-                                  "score",
-                                  style: TextStyle(
-                                      fontSize: 31,
-                                      fontStyle: FontStyle.italic,
-                                      color: Color(0xFFFFE000)),
-                                )
-                              ],
-                            );
-                          } else {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      "$index",
-                                      style: TextStyle(
-                                          fontSize: 23,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      leaderboard[index - 1]["name"],
-                                      style: TextStyle(
-                                          fontSize: 23,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  "${leaderboard[index - 1]["score"]}",
-                                  style: TextStyle(
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            );
-                          }
-                        },
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "INSTRUCTIONS",
+                        style: TextStyle(
+                            fontSize: 32, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          AnimatedPositioned(
-            //leaderboard icon that triggers animation
-            bottom: deviceSize.height - top2 - 25,
-            left: 20,
-            top: top2 - 35,
-            duration: Duration(milliseconds: 1200),
-            curve: Curves.easeOutQuart,
-            child: GestureDetector(
-              onVerticalDragStart: (context) {
-                setState(() {
-                  _isUp = !_isUp;
-                  getScoreboard();
-                });
-              },
-              child: Image.asset("assets/leaderboard.png"),
-            ),
-          ),
-          AnimatedPositioned(
-            //info icon that triggers animation
-            bottom: bottom4,
-            right: right4,
-            duration: Duration(milliseconds: 1200),
-            curve: Curves.easeOutQuart,
-            child: GestureDetector(
-              onVerticalDragStart: (context) {
-                setState(() {
-                  _isUp = !_isUp;
-                  getScoreboard();
-                });
-              },
-              child: Icon(
-                Icons.info,
-                size: 70,
+            AnimatedPositioned(
+              //level box displayed on home page
+              bottom: bottom,
+              right: 10.0,
+              left: 10.0,
+              top: top,
+              duration: Duration(milliseconds: 900),
+              curve: Curves.bounceOut,
+              child: Center(
+                child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 900),
+                  curve: Curves.easeOutQuart,
+                  opacity: _isUp ? (_isOpen ? 0.9 : 0.7) : 0.0,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _isOpen = !_isOpen;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.5),
+                              offset: Offset.zero,
+                              blurRadius: 10,
+                              spreadRadius: 5),
+                        ],
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(17),
+                      ),
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned(
+                            top: 0.0,
+                            left: 0.0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                _isLoading
+                                    ? Container(
+                                        padding: EdgeInsets.only(right: 20),
+                                        child: CircularProgressIndicator())
+                                    : Text(
+                                        levelData["title"],
+                                        style: TextStyle(
+                                          color: _isOpen
+                                              ? Color(0xFF0059B3)
+                                              : Colors.white,
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                SizedBox(
+                                  width: 20.0,
+                                ),
+                                Icon(
+                                  Icons.assistant_photo,
+                                  size: 28,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+            _isLoading || levelData["title"] == null
+                ? Container(
+                    // padding: EdgeInsets.only(right: 20),
+                    // child: CircularProgressIndicator(),
+                  )
+                : AnimatedPositioned(
+                    //question along with textfield for answer and submit button
+                    top: _isOpen && _isUp
+                        ? deviceSize.height / 3 + 60.0
+                        : deviceSize.height + 5.0,
+                    bottom: _isOpen && _isUp ? 75.0 : -5.0,
+                    left: 20.0,
+                    right: 20.0,
+                    duration: Duration(milliseconds: 900),
+                    curve: Curves.easeOutQuart,
+                    child: GestureDetector(
+                      onTap: () {
+                        FocusScope.of(context).requestFocus(new FocusNode());
+                      },
+                      child: Container(
+                        child: Center(
+                          child: ScrollConfiguration(
+                            behavior: MyBehavior(),
+                            child: ListView(
+                              children: <Widget>[
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFFFE000),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 7, horizontal: 15),
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
+                                  child: Text(
+                                    levelData["ques"],
+                                    style: TextStyle(
+                                        color: _isOpen
+                                            ? Color(0xFF0091CC)
+                                            : Colors.white,
+                                        fontSize: 17,
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                                ListTile(
+                                  // title: levelData["map_hint"]
+                                  //     ?
+                                  title: Container(
+                                    child: Center(
+                                      child: Column(
+                                        children: <Widget>[
+                                          ListTile(
+                                            leading: Icon(
+                                                Icons.subdirectory_arrow_left),
+                                            title: Text("LATITUDE: $lat"),
+                                          ),
+                                          ListTile(
+                                            leading: Icon(
+                                                Icons.subdirectory_arrow_right),
+                                            title: Text("LONGITUDE: $long"),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  // : TextField(
+                                  //     focusNode: _fieldFocusNode,
+                                  //     controller: _answerFieldController,
+                                  //     style: TextStyle(
+                                  //       color: Colors.white,
+                                  //     ),
+                                  //     decoration: InputDecoration(
+                                  //       filled: false,
+                                  //       focusedBorder: OutlineInputBorder(
+                                  //         borderSide: BorderSide(
+                                  //           color: Color(0xFF0091CC),
+                                  //           width: 3.0,
+                                  //         ),
+                                  //         borderRadius:
+                                  //             BorderRadius.circular(10),
+                                  //       ),
+                                  //       enabledBorder: OutlineInputBorder(
+                                  //         borderSide: BorderSide(
+                                  //           color: Colors.white
+                                  //               .withOpacity(0.5),
+                                  //           width: 3.0,
+                                  //         ),
+                                  //         borderRadius:
+                                  //             BorderRadius.circular(10),
+                                  //       ),
+                                  //       labelText: 'answer here',
+                                  //       labelStyle: TextStyle(
+                                  //           color: Colors.white
+                                  //               .withOpacity(0.5),
+                                  //           fontWeight: FontWeight.bold),
+                                  //     ),
+                                  //   ),
+                                ),
+                                ListTile(
+                                  title: FlatButton(
+                                    child: Text("SUBMIT"),
+                                    onPressed: () {
+                                      setState(() {
+                                        submitLocation();
+                                      });
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+            AnimatedPositioned(
+              //leaderboard generated dynamically using listview.builder
+              bottom: -15.0,
+              right: 0.0,
+              left: 0.0,
+              top: top2,
+              duration: Duration(milliseconds: 900),
+              curve: Curves.easeOutQuart,
+              child: Center(
+                child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 900),
+                  curve: Curves.easeOutQuart,
+                  opacity: _isUp ? 0.6 : 0.8,
+                  child: GestureDetector(
+                    onVerticalDragStart: (context) {
+                      setState(() {
+                        print("leader");
+                        _isUp = !_isUp;
+                        getScoreboard();
+                      });
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.5),
+                              offset: Offset.zero,
+                              blurRadius: 10,
+                              spreadRadius: 5),
+                        ],
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.5, 1.0],
+                          colors: [Color(0xFF0091FF), Color(0xFF0059FF)],
+                        ),
+                        borderRadius: BorderRadius.circular(17),
+                      ),
+                      child: Center(
+                        child: ListView.builder(
+                          itemCount:
+                              leaderboard == null ? 0 : leaderboard.length + 1,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (index == 0) {
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        SizedBox(width: 40),
+                                        Text(
+                                          "name",
+                                          style: TextStyle(
+                                              fontSize: 31,
+                                              fontStyle: FontStyle.italic,
+                                              color: Color(0xFFFFE000)),
+                                        )
+                                      ]),
+                                  Text(
+                                    "score",
+                                    style: TextStyle(
+                                        fontSize: 31,
+                                        fontStyle: FontStyle.italic,
+                                        color: Color(0xFFFFE000)),
+                                  )
+                                ],
+                              );
+                            } else {
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        "$index",
+                                        style: TextStyle(
+                                            fontSize: 23,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Text(
+                                        leaderboard[index - 1]["name"],
+                                        style: TextStyle(
+                                            fontSize: 23,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    "${leaderboard[index - 1]["score"]}",
+                                    style: TextStyle(
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            AnimatedPositioned(
+              //leaderboard icon that triggers animation
+              bottom: deviceSize.height - top2 - 25,
+              left: 20,
+              top: top2 - 35,
+              duration: Duration(milliseconds: 1200),
+              curve: Curves.easeOutQuart,
+              child: GestureDetector(
+                onVerticalDragStart: (context) {
+                  setState(() {
+                    _isUp = !_isUp;
+                    getScoreboard();
+                  });
+                },
+                child: Image.asset("assets/leaderboard.png"),
+              ),
+            ),
+            AnimatedPositioned(
+              //info icon that triggers animation
+              bottom: bottom4,
+              right: right4,
+              duration: Duration(milliseconds: 1200),
+              curve: Curves.easeOutQuart,
+              child: GestureDetector(
+                onVerticalDragStart: (context) {
+                  setState(() {
+                    print("he");
+                    _isUp = !_isUp;
+                    getScoreboard();
+                  });
+                },
+                child: Icon(
+                  Icons.info,
+                  size: 70,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

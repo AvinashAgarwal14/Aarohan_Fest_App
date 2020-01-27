@@ -41,7 +41,7 @@ class _AuthPageState extends State<AuthPage> {
 
   bool _isLoading = false;
 
-  String api_url = "phoenix7139.pythonanywhere.com";
+  String api_url = "romitkarmakar.pythonanywhere.com";
 
   AuthMode _authmode = AuthMode.login;
 

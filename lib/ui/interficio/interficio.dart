@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter/rendering.dart';
@@ -56,7 +54,7 @@ class _MyAppState extends State<MyApp> {
 
 @override
   void initState() {
-    autoAuthenticate();
+    // autoAuthenticate();
 
     super.initState();
   }
