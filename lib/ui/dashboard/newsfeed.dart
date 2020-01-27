@@ -18,13 +18,12 @@ class _NewsfeedState extends State<Newsfeed> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -40,11 +39,10 @@ class _NewsfeedState extends State<Newsfeed> {
 
   @override
   Widget build(BuildContext context) {
-    List reverseFeed=feed.reversed.toList();
-    return
-      (feed.length != 0)
+    List reverseFeed = feed.reversed.toList();
+    return (feed.length != 0)
         ? ListView.builder(
-        //reverse: true
+            //reverse: true
             cacheExtent: MediaQuery.of(context).size.height * 3,
             itemCount: reverseFeed.length,
             itemBuilder: (BuildContext context, position) {
@@ -53,15 +51,13 @@ class _NewsfeedState extends State<Newsfeed> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => FeedDetails(
-                              post: reverseFeed[position])
-                      ),
+                          builder: (context) =>
+                              FeedDetails(post: reverseFeed[position])),
                     );
                   },
                   child: NewsfeedCards(cardItem: reverseFeed[position]));
             })
-        :
-      Container(
+        : Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
@@ -135,7 +131,11 @@ class _NewsfeedCardsState extends State<NewsfeedCards> {
                     padding: EdgeInsets.all(5.0),
                     child: new Row(
                       children: <Widget>[
-                        Icon(Icons.thumb_up, size: 20.0,color: Color(0xFF505194),),
+                        Icon(
+                          Icons.thumb_up,
+                          size: 20.0,
+                          color: Color(0xFF505194),
+                        ),
                         Padding(padding: EdgeInsets.only(left: 3.0)),
                         Text("${widget.cardItem.likesCount}")
                       ],
@@ -148,7 +148,7 @@ class _NewsfeedCardsState extends State<NewsfeedCards> {
                         Icon(
                           Icons.comment,
                           size: 20.0,
-                            color: Color(0xFF505194),
+                          color: Color(0xFF505194),
                         ),
                         Padding(padding: EdgeInsets.only(left: 3.0)),
                         Text("${widget.cardItem.commentsCount}")
@@ -159,7 +159,11 @@ class _NewsfeedCardsState extends State<NewsfeedCards> {
                     padding: EdgeInsets.all(5.0),
                     child: new Row(
                       children: <Widget>[
-                        Icon(Icons.date_range, size: 20.0,color: Color(0xFF505194),),
+                        Icon(
+                          Icons.date_range,
+                          size: 20.0,
+                          color: Color(0xFF505194),
+                        ),
                         Padding(padding: EdgeInsets.only(left: 3.0)),
                         Text(widget.cardItem.date)
                       ],

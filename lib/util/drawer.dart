@@ -30,7 +30,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Map userProfile;
 
   bool previouslyLoggedIn = false;
-  bool _isLoggedIn=false;
+  bool _isLoggedIn = false;
 
   @override
   void setState(fn) {
@@ -40,17 +40,15 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     initUser();
   }
-  initUser() async{
-    currentUser= await _auth.currentUser();
-    setState(() {
-      
-    });
+
+  initUser() async {
+    currentUser = await _auth.currentUser();
+    setState(() {});
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -68,18 +66,16 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 padding: EdgeInsets.all(0.0),
                 child: Image.asset("images/gifs/pacman.gif", fit: BoxFit.cover),
               ),
-               ListTile(
-                
-                  title:Text('${currentUser.displayName}'),
-                  leading: Icon(Icons.person),
-                  subtitle: Text(
-                    "${currentUser.email}",
-                  ),),
-                  SizedBox(
-                    child: Divider(
-                      color:Colors.grey[100]
-                    ),
-                  ),
+              ListTile(
+                title: Text('${currentUser.displayName}'),
+                leading: Icon(Icons.person),
+                subtitle: Text(
+                  "${currentUser.email}",
+                ),
+              ),
+              SizedBox(
+                child: Divider(color: Colors.grey[100]),
+              ),
               ListTile(
                   leading: Icon(
                     Icons.home,
@@ -258,12 +254,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       context, (ModalRoute.withName('/ui/account/login')));
                   Navigator.of(context).pushNamed("/ui/about_us/about_us");
                 }),
-              ), 
+              ),
               ListTile(
                 leading: Icon(Icons.power_settings_new),
                 title: Text("Logout"),
                 onTap: (() {
-                  
                   _logout();
                 }),
               ),
@@ -273,16 +268,19 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       ),
     );
   }
+
   _gSignOut() async {
     await _googleSignIn.signOut();
     await _auth.signOut();
     setState(() {
       previouslyLoggedIn = true;
       setState(() {
-      previouslyLoggedIn = true;
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LogInPage()),);
-            
-    });
+        previouslyLoggedIn = true;
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LogInPage()),
+        );
+      });
     });
   }
 
@@ -291,12 +289,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     _auth.signOut();
     setState(() {
       previouslyLoggedIn = true;
-      _isLoggedIn=false;
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LogInPage()),);
-
+      _isLoggedIn = false;
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LogInPage()),
+      );
     });
   }
-  
 
   Future _gSignIn() async {
     GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
@@ -323,14 +322,15 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
     final accessToken = facebookLoginResult.accessToken.token;
     if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
-      final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${accessToken}');
+      final graphResponse = await http.get(
+          'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${accessToken}');
       final profile = JSON.jsonDecode(graphResponse.body);
       print(profile);
       setState(() {
-          userProfile = profile;
-          _isLoggedIn = true;
-        });
-    
+        userProfile = profile;
+        _isLoggedIn = true;
+      });
+
       print("User : ");
       return 1;
     } else
@@ -356,87 +356,95 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   }
 
   Future<void> _logout() async {
-  return showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return Center(
-      child: Dialog(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        child: Container(
-          padding: EdgeInsets.only(right: 16.0),
-          height: 150,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(75),
-              bottomLeft: Radius.circular(75),
-              topRight: Radius.circular(10),
-              bottomRight: Radius.circular(10)
-            )
-          ),
-          child: Row(
-            children: <Widget>[
-              SizedBox(width: 20.0),
-              CircleAvatar(radius: 55, backgroundColor: Colors.grey.shade200, 
-              child: Material(
-                      color: Colors.transparent,
-                      child:Padding(
-                        padding: EdgeInsets.all(0),
-                        child:ClipOval(
-                          child: Image.asset('assets/Aarohan_logo.jpg'),//network image
-                        ),
-                        )
-                    ),),
-              // Image.asset('assets/Aarohan_logo.jpg', width: 60,),),
-              SizedBox(width: 20.0),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return Center(
+            child: Dialog(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              child: Container(
+                padding: EdgeInsets.only(right: 16.0),
+                height: 150,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(75),
+                        bottomLeft: Radius.circular(75),
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10))),
+                child: Row(
                   children: <Widget>[
-                    Text("Alert!", style: Theme.of(context).textTheme.title,),
-                    SizedBox(height: 10.0),
-                    Flexible(
-                      child: Text(
-                        "Do you want to Logout?"),
+                    SizedBox(width: 20.0),
+                    CircleAvatar(
+                      radius: 55,
+                      backgroundColor: Colors.grey.shade200,
+                      child: Material(
+                          color: Colors.transparent,
+                          child: Padding(
+                            padding: EdgeInsets.all(0),
+                            child: ClipOval(
+                              child: Image.asset(
+                                  'assets/Aarohan_logo.jpg'), //network image
+                            ),
+                          )),
                     ),
-                    SizedBox(height: 10.0),
-                    Row(children: <Widget>[
-                      Expanded(
-                        child: RaisedButton(
-                          child: Text("Cancel"),
-                          color: Colors.red,
-                          colorBrightness: Brightness.dark,
-                          onPressed: (){Navigator.pop(context);},
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                        ),
+                    // Image.asset('assets/Aarohan_logo.jpg', width: 60,),),
+                    SizedBox(width: 20.0),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Alert!",
+                            style: Theme.of(context).textTheme.title,
+                          ),
+                          SizedBox(height: 10.0),
+                          Flexible(
+                            child: Text("Do you want to Logout?"),
+                          ),
+                          SizedBox(height: 10.0),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: RaisedButton(
+                                  child: Text("Cancel"),
+                                  color: Colors.red,
+                                  colorBrightness: Brightness.dark,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(20.0)),
+                                ),
+                              ),
+                              SizedBox(width: 10.0),
+                              Expanded(
+                                child: RaisedButton(
+                                  child: Text("Logout"),
+                                  color: Colors.green,
+                                  colorBrightness: Brightness.dark,
+                                  onPressed: () {
+                                    _gSignOut();
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(20.0)),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                      SizedBox(width: 10.0),
-                      Expanded(
-                        child: RaisedButton(
-                          child: Text("Logout"),
-                          color: Colors.green,
-                          colorBrightness: Brightness.dark,
-                          onPressed: (){
-                            _gSignOut();
-                          },
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                        ),
-                      ),
-                    ],)
+                    )
                   ],
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-     
+              ),
+            ),
+          );
+        });
   }
-  );
-  }
-
 }

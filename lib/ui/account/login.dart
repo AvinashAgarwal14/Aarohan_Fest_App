@@ -9,7 +9,6 @@ import './loginAnimation.dart';
 import 'package:flutter/animation.dart';
 import './styles.dart';
 import '../../util/event_details.dart';
-import '../../util/detailSection.dart';
 import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
 import '../../util/drawer.dart';
 import 'dart:io';
@@ -124,7 +123,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     if (currentUser == null && userProfile==null) {
       return new Scaffold(
-          drawer: NavigationDrawer(),
           body: WillPopScope(
             onWillPop: _exit,
             child: Container(
@@ -156,20 +154,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
 //                                ?
                             SizedBox(
                                 height: MediaQuery.of(context).size.height),
-                            animationStatus == 0
-                                ? Positioned(
-                                    left: 3.0,
-                                    top: 30.0,
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: BackButton(
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                : Container(),
-
-//                                : Container(),
-
                             animationStatus == 0
                                 ? (Container(
                                     child: new Column(

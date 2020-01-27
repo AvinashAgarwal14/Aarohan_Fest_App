@@ -84,80 +84,91 @@ class _SendImageEntryState extends State<SendImageEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return (comingSoon == false) ? (upload == false)?  Scaffold(
-        body:
-        Column(children: <Widget>[
-          Container(
-              height: 400.0,
-              child: (_image != null)
-                  ? Image(image: FileImage(File(_image.path)))
-                  : Image.asset('images/imageplaceholder.png')),
-          Row(
-            children:<Widget>[
-              Expanded(
-                child: RaisedButton(
-                  child: (_image!=null && _image.path == savedImageString)? Text("Image Uploaded!"):Text('Upload Image'),
-                  onPressed: (_image!=null && _image.path != savedImageString)?uploadFile:null,
-                  color: Colors.cyan,
-                ),
-              ),
-            SizedBox(width: 10.0),
-            RaisedButton(
-              child: Text('Clear Selection'),
-              onPressed: (_image!=null)?clearSelection:null,
-              color: Colors.red,
-            )
-            ]
-          ),
-          Center(
-            child: Text("Share your favourite Aarohan memory for Day - $dayNumber and get a chance to win Eurekoins!"),
-          )
-        ]),
-        floatingActionButton: SpeedDial(
-          // both default to 16
-          marginRight: 18,
-          marginBottom: 20,
-          animatedIcon: AnimatedIcons.menu_close,
-          animatedIconTheme: IconThemeData(size: 22.0),
-          // this is ignored if animatedIcon is non null
-          // child: Icon(Icons.add),
-          visible: dialVisible,
-          // If true user is forced to close dial manually
-          // by tapping main button and overlay is not rendered.
-          closeManually: false,
-          curve: Curves.bounceIn,
-          overlayColor: Colors.black,
-          overlayOpacity: 0.5,
-          onOpen: () => print('OPENING DIAL'),
-          onClose: () => print('DIAL CLOSED'),
-          tooltip: 'Options',
-          heroTag: 'options-hero-tag',
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          elevation: 8.0,
-          shape: CircleBorder(),
-          children: [
-            SpeedDialChild(
-              child: Icon(Icons.camera_enhance),
-              backgroundColor: Colors.blue,
-              label: 'Camera',
-              labelStyle: TextStyle(fontSize: 18.0),
-              onTap: chooseFileCamera,
-            ),
-            SpeedDialChild(
-              child: Icon(Icons.sd_storage),
-              backgroundColor: Colors.green,
-              label: 'Gallery',
-              labelStyle: TextStyle(fontSize: 18.0),
-              onTap: chooseFileGallery,
-            ),
-          ],
-        )
-    ) : Center(child: CircularProgressIndicator()) : Image.asset('images/imageplaceholder.png');
+    return (comingSoon == false)
+        ? (upload == false)
+            ? Scaffold(
+                body: Column(children: <Widget>[
+                  Container(
+                      height: 400.0,
+                      child: (_image != null)
+                          ? Image(image: FileImage(File(_image.path)))
+                          : Image.asset('images/imageplaceholder.png')),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        RaisedButton(
+                          child: (_image != null &&
+                                  _image.path == savedImageString)
+                              ? Text("Image Uploaded!")
+                              : Text('Upload Image'),
+                          onPressed: (_image != null &&
+                                  _image.path != savedImageString)
+                              ? uploadFile
+                              : null,
+                          color: Colors.cyan,
+                        ),
+                        SizedBox(width: 10.0),
+                        RaisedButton(
+                          child: Text('Clear Selection'),
+                          onPressed: (_image != null) ? clearSelection : null,
+                          color: Colors.red,
+                        )
+                      ]),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Center(
+                      child: Text(
+                          "Share your favourite Aarohan memory for Day - $dayNumber and get a chance to win Eurekoins!"),
+                    ),
+                  )
+                ]),
+                floatingActionButton: SpeedDial(
+                  // both default to 16
+                  marginRight: 18,
+                  marginBottom: 20,
+                  animatedIcon: AnimatedIcons.menu_close,
+                  animatedIconTheme: IconThemeData(size: 22.0),
+                  // this is ignored if animatedIcon is non null
+                  // child: Icon(Icons.add),
+                  visible: dialVisible,
+                  // If true user is forced to close dial manually
+                  // by tapping main button and overlay is not rendered.
+                  closeManually: false,
+                  curve: Curves.bounceIn,
+                  overlayColor: Colors.black,
+                  overlayOpacity: 0.5,
+                  onOpen: () => print('OPENING DIAL'),
+                  onClose: () => print('DIAL CLOSED'),
+                  tooltip: 'Options',
+                  heroTag: 'options-hero-tag',
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  elevation: 8.0,
+                  shape: CircleBorder(),
+                  children: [
+                    SpeedDialChild(
+                      child: Icon(Icons.camera_enhance),
+                      backgroundColor: Colors.blue,
+                      label: 'Camera',
+                      labelStyle: TextStyle(fontSize: 18.0),
+                      onTap: chooseFileCamera,
+                    ),
+                    SpeedDialChild(
+                      child: Icon(Icons.sd_storage),
+                      backgroundColor: Colors.green,
+                      label: 'Gallery',
+                      labelStyle: TextStyle(fontSize: 18.0),
+                      onTap: chooseFileGallery,
+                    ),
+                  ],
+                ))
+            : Center(child: CircularProgressIndicator())
+        : Image.asset('images/imageplaceholder.png');
   }
 
   Future chooseFileCamera() async {
-    await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 20).then((image) {
+    await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 20)
+        .then((image) {
       setState(() {
         _image = image;
       });
@@ -165,7 +176,8 @@ class _SendImageEntryState extends State<SendImageEntry> {
   }
 
   Future chooseFileGallery() async {
-    await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 20).then((image) {
+    await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 20)
+        .then((image) {
       print(image);
       setState(() {
         _image = image;
@@ -177,17 +189,17 @@ class _SendImageEntryState extends State<SendImageEntry> {
     setState(() {
       upload = true;
     });
-    StorageReference storageReference = FirebaseStorage.instance
-        .ref()
-        .child('Memories/Day-${dayNumber}/${currentUser.displayName}-${currentUser.email}');
+    StorageReference storageReference = FirebaseStorage.instance.ref().child(
+        'Memories/Day-${dayNumber}/${currentUser.displayName}-${currentUser.email}');
     StorageUploadTask uploadTask = storageReference.putFile(_image);
     await uploadTask.onComplete;
     storageReference.getDownloadURL().then((fileURL) {
       var format = new DateFormat.yMd();
       var dateString = format.format(DateTime.now());
-      MemoryItem newImage =
-          new MemoryItem(currentUser.displayName, dateString, currentUser.email, fileURL);
-      var bytes = utf8.encode("${currentUser.email}" + "${currentUser.displayName}");
+      MemoryItem newImage = new MemoryItem(
+          currentUser.displayName, dateString, currentUser.email, fileURL);
+      var bytes =
+          utf8.encode("${currentUser.email}" + "${currentUser.displayName}");
       var encoded = sha1.convert(bytes);
       _databaseReferenceForMemories.child("$encoded").set(newImage.toJson());
     });
@@ -217,11 +229,10 @@ class _SendImageEntryState extends State<SendImageEntry> {
       savedImageString = preferences.getString('savedImageString');
       _image = File(savedImageString);
     });
-
   }
 
   saveImage(value) async {
-    setState((){
+    setState(() {
       savedImageString = value;
     });
     SharedPreferences preferences = await SharedPreferences.getInstance();
