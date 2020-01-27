@@ -7,10 +7,10 @@ import '../../model/memory.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/rendering.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SendImageEntry extends StatefulWidget {
   @override
@@ -21,11 +21,12 @@ class _SendImageEntryState extends State<SendImageEntry> {
   File _image;
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   DatabaseReference _databaseReferenceForMemories;
-  bool upload;
+  bool uploading;
   FirebaseUser currentUser;
   bool comingSoon;
+  bool alreadyUploaded;
   var dayNumber;
-  var savedImageString;
+  var savedImageURL;
 
   ScrollController scrollController;
   bool dialVisible = true;
@@ -40,13 +41,12 @@ class _SendImageEntryState extends State<SendImageEntry> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    upload = false;
+    uploading = false;
+    alreadyUploaded = null;
     _image = null;
-    savedImageString = null;
+    savedImageURL = null;
     _getUser();
-    loadSavedImage();
-    _databaseReferenceForMemories =
-        _database.reference().child("Memories/Day-0");
+
     scrollController = ScrollController()
       ..addListener(() {
         setDialVisible(scrollController.position.userScrollDirection ==
@@ -73,6 +73,9 @@ class _SendImageEntryState extends State<SendImageEntry> {
 //      if(day == 10)
 //        dayNumber = 3;
 //    }
+
+    _databaseReferenceForMemories =
+        _database.reference().child("Memories/Day-$dayNumber");
   }
 
   @override
@@ -84,25 +87,30 @@ class _SendImageEntryState extends State<SendImageEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return (comingSoon == false)
-        ? (upload == false)
+    return (comingSoon == false && alreadyUploaded!=null)
+        ? (uploading == false)
             ? Scaffold(
                 body: Column(children: <Widget>[
                   Container(
                       height: 400.0,
-                      child: (_image != null)
+                      child: (alreadyUploaded)?
+                      CachedNetworkImage(
+                          placeholder: (context, url) => Image.asset(
+                              "images/imageplaceholder.png"),
+                          imageUrl: savedImageURL)
+                          :(_image != null)
                           ? Image(image: FileImage(File(_image.path)))
                           : Image.asset('images/imageplaceholder.png')),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         RaisedButton(
-                          child: (_image != null &&
-                                  _image.path == savedImageString)
+                          child: ((_image != null &&
+                                  _image.path == savedImageURL) || savedImageURL!=null)
                               ? Text("Image Uploaded!")
                               : Text('Upload Image'),
                           onPressed: (_image != null &&
-                                  _image.path != savedImageString)
+                                  _image.path != savedImageURL)
                               ? uploadFile
                               : null,
                           color: Colors.cyan,
@@ -171,6 +179,8 @@ class _SendImageEntryState extends State<SendImageEntry> {
         .then((image) {
       setState(() {
         _image = image;
+        savedImageURL = null;
+        alreadyUploaded = false;
       });
     });
   }
@@ -181,13 +191,15 @@ class _SendImageEntryState extends State<SendImageEntry> {
       print(image);
       setState(() {
         _image = image;
+        savedImageURL = null;
+        alreadyUploaded = false;
       });
     });
   }
 
   Future uploadFile() async {
     setState(() {
-      upload = true;
+      uploading = true;
     });
     StorageReference storageReference = FirebaseStorage.instance.ref().child(
         'Memories/Day-${dayNumber}/${currentUser.displayName}-${currentUser.email}');
@@ -202,11 +214,11 @@ class _SendImageEntryState extends State<SendImageEntry> {
           utf8.encode("${currentUser.email}" + "${currentUser.displayName}");
       var encoded = sha1.convert(bytes);
       _databaseReferenceForMemories.child("$encoded").set(newImage.toJson());
+      saveImage(fileURL);
     });
     setState(() {
-      upload = false;
+      uploading = false;
     });
-    saveImage(_image.path);
     print('File Uploaded');
   }
 
@@ -214,6 +226,7 @@ class _SendImageEntryState extends State<SendImageEntry> {
     setState(() {
       _image = null;
     });
+    loadSavedImage();
   }
 
   Future _getUser() async {
@@ -221,21 +234,28 @@ class _SendImageEntryState extends State<SendImageEntry> {
     setState(() {
       currentUser = user;
     });
+    loadSavedImage();
   }
 
   loadSavedImage() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      savedImageString = preferences.getString('savedImageString');
-      _image = File(savedImageString);
+    var bytes =
+    utf8.encode("${currentUser.email}" + "${currentUser.displayName}");
+    var encoded = sha1.convert(bytes);
+    print("jhuihihuhiu");
+    _databaseReferenceForMemories.child('$encoded').onValue.listen((Event event) {
+      if(event.snapshot.value == null) {
+        savedImageURL = null;
+        alreadyUploaded = false;
+      } else {
+        savedImageURL = event.snapshot.value['imageURL'];
+        alreadyUploaded = true;
+      }
     });
   }
 
   saveImage(value) async {
     setState(() {
-      savedImageString = value;
+      savedImageURL = value;
     });
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString('savedImageString', '$value');
   }
 }
