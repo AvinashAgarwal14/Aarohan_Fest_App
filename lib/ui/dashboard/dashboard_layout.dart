@@ -6,9 +6,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import '../../util/event_details.dart';
 import '../../model/event.dart';
 import 'package:firebase_database/firebase_database.dart';
-// import '../collapsing_drawer/custom_navigation_drawer.dart';
-import '../collapsing_drawer/custom_navigation_drawer.dart';
-
 List<T> map<T>(List list, Function handler) {
   List<T> result = new List();
   for (var i = 0; i < list.length; i++) {
