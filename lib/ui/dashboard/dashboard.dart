@@ -160,18 +160,18 @@ class _DashboardState extends State<Dashboard> {
                       fontSize: 21.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[800],
-                      shadows: [
-                        BoxShadow(
-                            color: Colors.grey[800],
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                        BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                      ],
+                      // shadows: [
+                      //   BoxShadow(
+                      //       color: Colors.grey[800],
+                      //       offset: Offset(4.0, 4.0),
+                      //       blurRadius: 15.0,
+                      //       spreadRadius: 1.0),
+                      //   BoxShadow(
+                      //       color: Colors.white,
+                      //       offset: Offset(-4.0, -4.0),
+                      //       blurRadius: 15.0,
+                      //       spreadRadius: 1.0),
+                      // ],
                     ),
                   ),
                 ),

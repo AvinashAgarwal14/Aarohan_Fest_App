@@ -318,7 +318,7 @@ class _HomePageState extends State<HomePage> {
                 ? Container(
                     // padding: EdgeInsets.only(right: 20),
                     // child: CircularProgressIndicator(),
-                  )
+                    )
                 : AnimatedPositioned(
                     //question along with textfield for answer and submit button
                     top: _isOpen && _isUp
