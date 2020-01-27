@@ -36,22 +36,68 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
     return InkWell(
       onTap: widget.onTap,
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(35),
-          color:  Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                       color: Colors.grey[500],
-                        offset: Offset(4.0, 4.0),
-                        blurRadius: 15.0,
-                        spreadRadius: 1.0),
-                    BoxShadow(
-                        color: Colors.white,
-                        offset: Offset(-4.0, -4.0),
-                        blurRadius: 15.0,
-                        spreadRadius: 1.0),
-                  ],
-        ),
+        decoration: widget.isSelected
+            ? BoxDecoration(
+                borderRadius: BorderRadius.circular(35),
+                color: Colors.grey[300],
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 1.0),
+                  BoxShadow(
+                      color: Colors.grey[600],
+                      offset: Offset(-2.0, -2.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 1.0),
+                ],
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.grey[700],
+                      Colors.grey[600],
+                      Colors.grey[500],
+                      Colors.grey[200],
+                    ],
+                    stops: [
+                      0,
+                      0.1,
+                      0.3,
+                      1
+                    ]))
+            : BoxDecoration(
+                borderRadius: BorderRadius.circular(35),
+                color: Colors.grey[300],
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey[600],
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 1.0),
+                  BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(-2.0, -2.0),
+                      blurRadius: 10.0,
+                      spreadRadius: 1.0),
+                ],
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.grey[200],
+                      Colors.grey[300],
+                      Colors.grey[400],
+                      Colors.grey[500],
+                    ],
+                    stops: [
+                      0.1,
+                      0.3,
+                      0.8,
+                      1
+                    ]),
+              ),
         //  BoxDecoration(
         //   borderRadius: BorderRadius.all(Radius.circular(16.0)),
         //   color: widget.isSelected
@@ -68,7 +114,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
               Icon(
                 widget.icon,
                 color: widget.isSelected ? selectedColor : Colors.grey[700],
-                size: 27.0,
+                size: 23.0,
               ),
               SizedBox(width: sizedBoxAnimation.value),
               (widthAnimation.value >= 190)

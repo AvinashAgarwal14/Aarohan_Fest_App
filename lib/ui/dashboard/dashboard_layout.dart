@@ -27,7 +27,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
   CarouselSlider instance;
   int j = 0;
   double maxWidth = 180;
-  double minWidth = 67;
+  double minWidth = 63;
   bool isCollapsed = false;
   AnimationController _animationController;
   Animation<double> widthAnimation;
@@ -108,9 +108,86 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
           //   ),
           // ),
           AnimatedPositioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: widthAnimation.value,
+            duration: Duration(milliseconds: 400),
+            child: AnimatedBuilder(
+              animation: _animationController,
+              builder: (context, widget) => Container(
+                width: widthAnimation.value,
+                decoration: BoxDecoration(color: Colors.white),
+                // gradient: LinearGradient(
+                //   stops: [0.7, 1],
+                //   begin: Alignment.topCenter,
+                //   end: Alignment.bottomCenter,
+                //   colors: [
+                //     Colors.white,
+                //     Colors.grey[300],
+                //   ],
+                // ),
+
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 20,
+                    ),
+                    CollapsingListTile(
+                      title: 'Techie',
+                      icon: Icons.person,
+                      animationController: _animationController,
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, counter) {
+                          return CollapsingListTile(
+                            onTap: () {
+                              setState(() {
+                                currentSelectedIndex = counter;
+                              });
+                            },
+                            isSelected: currentSelectedIndex == counter,
+                            title: navigationItems[counter].title,
+                            icon: navigationItems[counter].icon,
+                            animationController: _animationController,
+                          );
+                        },
+                        itemCount: navigationItems.length,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          isCollapsed = !isCollapsed;
+                        });
+                        isCollapsed
+                            ? _animationController.forward().then((f) {
+                                setState(() {});
+                              })
+                            : _animationController.reverse().then((f) {
+                                setState(() {});
+                              });
+                      },
+                      child: AnimatedIcon(
+                        icon: AnimatedIcons.menu_close,
+                        progress: _animationController,
+                        color: selectedColor,
+                        size: 30.0,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 100.0,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          AnimatedPositioned(
             // width: MediaQuery.of(context).size.width,
             duration: Duration(milliseconds: 400),
-            left: 0,
+            left: widthAnimation.value,
             width: MediaQuery.of(context).size.width,
             top: 0,
             bottom: 0,
@@ -748,83 +825,6 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
                 ),
                 SizedBox(height: 65.0),
               ],
-            ),
-          ),
-          AnimatedPositioned(
-            left: 0,
-            top: 0,
-            bottom: 0,
-            width: widthAnimation.value,
-            duration: Duration(milliseconds: 400),
-            child: AnimatedBuilder(
-              animation: _animationController,
-              builder: (context, widget) => Container(
-                width: widthAnimation.value,
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0)
-                    // gradient: LinearGradient(
-                    //   stops: [0.7, 1],
-                    //   begin: Alignment.topCenter,
-                    //   end: Alignment.bottomCenter,
-                    //   colors: [
-                    //     Colors.white,
-                    //     Colors.grey[300],
-                    //   ],
-                    // ),
-                    ),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 20,
-                    ),
-                    CollapsingListTile(
-                      title: 'Techie',
-                      icon: Icons.person,
-                      animationController: _animationController,
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemBuilder: (context, counter) {
-                          return CollapsingListTile(
-                            onTap: () {
-                              setState(() {
-                                currentSelectedIndex = counter;
-                              });
-                            },
-                            isSelected: currentSelectedIndex == counter,
-                            title: navigationItems[counter].title,
-                            icon: navigationItems[counter].icon,
-                            animationController: _animationController,
-                          );
-                        },
-                        itemCount: navigationItems.length,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          isCollapsed = !isCollapsed;
-                        });
-                        isCollapsed
-                            ? _animationController.forward().then((f) {
-                                setState(() {});
-                              })
-                            : _animationController.reverse().then((f) {
-                                setState(() {});
-                              });
-                      },
-                      child: AnimatedIcon(
-                        icon: AnimatedIcons.menu_close,
-                        progress: _animationController,
-                        color: selectedColor,
-                        size: 30.0,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 100.0,
-                    ),
-                  ],
-                ),
-              ),
             ),
           ),
 
