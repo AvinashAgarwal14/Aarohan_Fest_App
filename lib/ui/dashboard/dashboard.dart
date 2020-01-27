@@ -20,7 +20,6 @@ import 'package:flutter/animation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
 
-
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -41,7 +40,7 @@ class _DashboardState extends State<Dashboard> {
   Map userProfile;
 
   bool previouslyLoggedIn = false;
-  bool _isLoggedIn=false;
+  bool _isLoggedIn = false;
 
   @override
   void setState(fn) {
@@ -68,93 +67,119 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(50.0),
-            child: AppBar(
-              brightness: Brightness.light,
-              backgroundColor: Colors.white,
-              iconTheme: IconThemeData(
-                color: Colors.black,
-              ),
-              textTheme: TextTheme(
-                  title: TextStyle(
-                color: Colors.black,
-                fontSize: 20.0,
-              )),
-              title: Text("Aarohan"),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.youtube_searched_for),
-                  onPressed: (){
-                    Navigator.of(context).pushNamed("/ui/tags");
-                  },
-                ),
-                (currentUser != null && isEurekoinAlreadyRegistered != null)
-                    ? IconButton(
-                        icon: Image(
-                            image: AssetImage("images/QRIcon.png"),
-                            color: Colors.black),
-                        onPressed: () {
-                          if (isEurekoinAlreadyRegistered == 1) {
-                            scanQR();
-                          } else if (isEurekoinAlreadyRegistered == 0) {
-                            scanQR();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EurekoinHomePage()),
-                            ).then((onReturn) {
-                              getUser();
-                            });
-                          }}
-                      )
-                        :
-                        Container(),
-                      //   SizedBox(width:10),
-                      // IconButton(
-                      //   icon:Icon(Icons.account_box),
-                      //   onPressed: (){
-                      //     _logout();
-                      //   },
-                      //   ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.0),
+        child: AppBar(
+          elevation: 0,
+          brightness: Brightness.light,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          textTheme: TextTheme(
+              title: TextStyle(
+            color: Colors.black,
+            fontSize: 20.0,
+          )),
+          title: Text("Aarohan"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.youtube_searched_for),
+              onPressed: () {
+                Navigator.of(context).pushNamed("/ui/tags");
+              },
+            ),
+            (currentUser != null && isEurekoinAlreadyRegistered != null)
+                ? IconButton(
+                    icon: Image(
+                        image: AssetImage("images/QRIcon.png"),
+                        color: Colors.black),
+                    onPressed: () {
+                      if (isEurekoinAlreadyRegistered == 1) {
+                        scanQR();
+                      } else if (isEurekoinAlreadyRegistered == 0) {
+                        scanQR();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EurekoinHomePage()),
+                        ).then((onReturn) {
+                          getUser();
+                        });
+                      }
+                    })
+                : Container(),
+            //   SizedBox(width:10),
+            // IconButton(
+            //   icon:Icon(Icons.account_box),
+            //   onPressed: (){
+            //     _logout();
+            //   },
+            //   ),
 
-                      SizedBox(width:10),
-                  ],
-                )
+            SizedBox(width: 10),
+          ],
+        ),
       ),
       drawer: NavigationDrawer(),
       body: Stack(
-        children: <Widget> [
+        children: <Widget>[
           DashBoardLayout(),
           SlidingUpPanel(
-              minHeight: 65.0,
-              maxHeight: MediaQuery.of(context).size.height * 0.85,
-              panel: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            color: Colors.grey[100],
+            minHeight: 65.0,
+            maxHeight: MediaQuery.of(context).size.height * 0.85,
+            panel: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(height: 5.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height: 5.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          width: 35,
-                          height: 8,
-                          decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12.0))),
-                        )
+                    Container(
+                      width: 35,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(12.0))),
+                    )
+                  ],
+                ),
+                SizedBox(height: 13.0),
+                Center(
+                  child: Text(
+                    "Newsfeed",
+                    style: TextStyle(
+                      fontSize: 21.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                      shadows: [
+                        BoxShadow(
+                            color: Colors.grey[800],
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                        BoxShadow(
+                            color: Colors.white,
+                            offset: Offset(-4.0, -4.0),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
                       ],
                     ),
-                    SizedBox(height: 13.0),
-                    Center(child: Text("Newsfeed")),
-                    SizedBox(height: 20.0),
-                    Container(
-                        padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-                        height: MediaQuery.of(context).size.height * 0.75,
-                        child: Newsfeed()),
-                  ]))
-        ]));
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Container(
+                    padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    child: Newsfeed()),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Future getUser() async {
@@ -224,69 +249,93 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-
-
   Future<void> _logout() async {
-  return showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return Dialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0)),
-            child: Container(
-    height: 300,
-    decoration: BoxDecoration(
-      color: Colors.indigo[400],
-      shape: BoxShape.rectangle,
-      borderRadius: BorderRadius.all(Radius.circular(12))
-    ),
-    child: Column(
-      children: <Widget>[
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Image.asset('assets/sad.png', height: 120, width: 120,),
-          ),
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12))
-          ),
-        ),
-        SizedBox(height: 24,),
-        Text('Do you want to Logout?', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
-        SizedBox(height: 10,),
-        // Padding(
-        //   padding: const EdgeInsets.only(right: 16, left: 16),
-        //   child: Text('Email: ${currentUser.email}', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
-        // ),
-        SizedBox(height: 20,),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            FlatButton(onPressed: (){
-              Navigator.of(context).pop();
-            }, child: Text('CANCEL'),color: Colors.white, textColor: Colors.indigo[400],),
-            SizedBox(width: 8,),
-            RaisedButton(onPressed: ()
-            {
-                          if (currentUser!=null && userProfile==null)
-                            _gSignOut();
-                          else if(userProfile!=null && currentUser==null)
-                          {  _fSignOut();
-                          print("Logout!");}
-                        },
-         child: Text('LOGOUT'),textColor: Colors.indigo[400],color: Colors.white, )
-          ],
-        )
-      ],
-    ),
-  )
-            
-            );
-      });
+    return showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              child: Container(
+                height: 300,
+                decoration: BoxDecoration(
+                    color: Colors.indigo[400],
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.all(Radius.circular(12))),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Image.asset(
+                          'assets/sad.png',
+                          height: 120,
+                          width: 120,
+                        ),
+                      ),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12))),
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    Text(
+                      'Do you want to Logout?',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(right: 16, left: 16),
+                    //   child: Text('Email: ${currentUser.email}', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
+                    // ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('CANCEL'),
+                          color: Colors.white,
+                          textColor: Colors.indigo[400],
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            if (currentUser != null && userProfile == null)
+                              _gSignOut();
+                            else if (userProfile != null &&
+                                currentUser == null) {
+                              _fSignOut();
+                              print("Logout!");
+                            }
+                          },
+                          child: Text('LOGOUT'),
+                          textColor: Colors.indigo[400],
+                          color: Colors.white,
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ));
+        });
   }
 
   _gSignOut() async {
@@ -295,10 +344,12 @@ class _DashboardState extends State<Dashboard> {
     setState(() {
       previouslyLoggedIn = true;
       setState(() {
-      previouslyLoggedIn = true;
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LogInPage()),);
-            
-    });
+        previouslyLoggedIn = true;
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LogInPage()),
+        );
+      });
     });
   }
 
@@ -307,12 +358,13 @@ class _DashboardState extends State<Dashboard> {
     _auth.signOut();
     setState(() {
       previouslyLoggedIn = true;
-      _isLoggedIn=false;
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LogInPage()),);
-
+      _isLoggedIn = false;
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LogInPage()),
+      );
     });
   }
-  
 
   Future _gSignIn() async {
     GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
@@ -339,14 +391,15 @@ class _DashboardState extends State<Dashboard> {
     FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
     final accessToken = facebookLoginResult.accessToken.token;
     if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
-      final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${accessToken}');
+      final graphResponse = await http.get(
+          'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${accessToken}');
       final profile = JSON.jsonDecode(graphResponse.body);
       print(profile);
       setState(() {
-          userProfile = profile;
-          _isLoggedIn = true;
-        });
-    
+        userProfile = profile;
+        _isLoggedIn = true;
+      });
+
       print("User : ");
       return 1;
     } else
