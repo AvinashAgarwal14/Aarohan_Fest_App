@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/gestures.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,8 @@ class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
 }
+
+PageController controller;
 
 class _DashboardState extends State<Dashboard> {
   bool darkThemeEnabled = false;
@@ -56,6 +60,8 @@ class _DashboardState extends State<Dashboard> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    controller = PageController();
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.white,
@@ -126,7 +132,7 @@ class _DashboardState extends State<Dashboard> {
         children: <Widget>[
           DashBoardLayout(),
           SlidingUpPanel(
-            color: Colors.grey[100],
+            color: Colors.white,
             minHeight: 65.0,
             maxHeight: MediaQuery.of(context).size.height * 0.85,
             panel: Column(
@@ -154,18 +160,18 @@ class _DashboardState extends State<Dashboard> {
                       fontSize: 21.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[800],
-                      shadows: [
-                        BoxShadow(
-                            color: Colors.grey[800],
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                        BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                      ],
+                      // shadows: [
+                      //   BoxShadow(
+                      //       color: Colors.grey[800],
+                      //       offset: Offset(4.0, 4.0),
+                      //       blurRadius: 15.0,
+                      //       spreadRadius: 1.0),
+                      //   BoxShadow(
+                      //       color: Colors.white,
+                      //       offset: Offset(-4.0, -4.0),
+                      //       blurRadius: 15.0,
+                      //       spreadRadius: 1.0),
+                      // ],
                     ),
                   ),
                 ),
