@@ -8,7 +8,7 @@ class Background {
   Sprite bgSprite;
 
   Background(this.gameController) {
-    bgSprite = Sprite('gamebackground.jpg');
+    bgSprite = Sprite('GameBG.png');
     bgRect = Rect.fromLTWH(0, 0, gameController.screenSize.width,
         gameController.screenSize.height);
   }

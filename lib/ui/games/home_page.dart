@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
     print("c: $currentValue");
     if (currentValue < -(xValue / 2))
       fix = 1;
-    else if (currentValue > xValue / 2)
+    else if (currentValue > (xValue / 2))
       fix = -1;
     else
       fix = 0;

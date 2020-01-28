@@ -74,6 +74,7 @@ class _AuthPageState extends State<AuthPage> {
       user["token"] = data["token"];
       user["isAuthenticated"] = true;
       user["password"] = _loginFormData["password"];
+      print(user["token"]);
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("username", user["username"]);
