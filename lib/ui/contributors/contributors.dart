@@ -25,6 +25,7 @@ Map contributors = {
     "Avinash Agarwal",
     "Akshat Jain",
     "Sudipta Pandit",
+    "Mayank Tayal",
     "Aritra Karmakar",
     "Revanth Reddy"
   ],
@@ -35,6 +36,7 @@ Map contributors = {
     "https://www.facebook.com/avinash.agarwal.1614",
     "https://www.facebook.com/akshat.jain.336333",
     "",
+    "https://www.facebook.com/mayank.tayal.7",
     "https://www.facebook.com/aritra.karmakar.3",
     "https://www.facebook.com/revanth.m"
   ],
@@ -45,6 +47,7 @@ Map contributors = {
     "https://github.com/AvinashAgarwal14",
     "https://github.com/Akshat7321",
     "https://github.com/realsdx",
+    "https://github.com/MTnes",
     "https://github.com/gravitydestroyer",
     "https://github.com/revanth-reddy/",
   ],
@@ -55,13 +58,14 @@ Map contributors = {
     "https://www.linkedin.com/in/agarwalavinash14/",
     "https://www.linkedin.com/in/akshat-jain-007365a2/",
     "",
+    "https://www.linkedin.com/in/mayank-tayal-9372a216b",
     "https://www.facebook.com/aritra.karmakar.3",
     "https://www.linkedin.com/in/revanth--reddy/",
   ],
   "Contact": [
     "+91 9163479911",
+    "+91 6295722469",
     "+91 7595932690",
-    "+91 62957224629",
     "+91 8981866219",
     "+91 8004937056",
     "+91 7501479332",
@@ -75,6 +79,7 @@ Map contributors = {
     "images/Contributors/avinash.jpeg",
     "images/Contributors/akshat.jpg",
     "images/Contributors/",
+    "images/Contributors/Tayal.jpg",
     "images/Contributors/aritrabhaiya.jpg",
     "images/Contributors/revanth_reddy.jpg"
   ],
