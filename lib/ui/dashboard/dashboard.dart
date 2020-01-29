@@ -15,12 +15,8 @@ import '../eurekoin/eurekoin.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:aavishkarapp/ui/account/login.dart';
-import 'package:aavishkarapp/ui/account/account_page.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:flutter/animation.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as JSON;
+import 'package:url_launcher/url_launcher.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -199,7 +195,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future isEurekoinUserRegistered() async {
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
 
@@ -219,6 +215,19 @@ class _DashboardState extends State<Dashboard> {
   Future scanQR() async {
     try {
       String hiddenString = await BarcodeScanner.scan();
+      if(hiddenString.contains("arhn")){
+        hiddenString = hiddenString.substring(11,hiddenString.length);
+
+          await launch(hiddenString);
+          hiddenString = hiddenString.substring(0,hiddenString.length - 15)+"2"+hiddenString.substring(hiddenString.length-14);
+          await launch(hiddenString);
+          hiddenString = hiddenString.substring(0,hiddenString.length - 15)+"3"+hiddenString.substring(hiddenString.length-14);
+          await launch(hiddenString);
+//        } else {
+//          throw 'Could not launch $hiddenString';
+//        }
+      }
+      else{
       setState(() {
         barcodeString = hiddenString;
         print(barcodeString);
@@ -247,187 +256,13 @@ class _DashboardState extends State<Dashboard> {
             });
         });
       });
+      }
     } on PlatformException catch (e) {
       setState(() {
         barcodeString = 'The user did not grant the camera permission!';
         showDialogBox(barcodeString);
       });
     }
-  }
-
-  Future<void> _logout() async {
-    return showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (BuildContext context) {
-          return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-              child: Container(
-                height: 300,
-                decoration: BoxDecoration(
-                    color: Colors.indigo[400],
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.all(Radius.circular(12))),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Image.asset(
-                          'assets/sad.png',
-                          height: 120,
-                          width: 120,
-                        ),
-                      ),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              topRight: Radius.circular(12))),
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Text(
-                      'Do you want to Logout?',
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(right: 16, left: 16),
-                    //   child: Text('Email: ${currentUser.email}', style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
-                    // ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('CANCEL'),
-                          color: Colors.white,
-                          textColor: Colors.indigo[400],
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        RaisedButton(
-                          onPressed: () {
-                            if (currentUser != null && userProfile == null)
-                              _gSignOut();
-                            else if (userProfile != null &&
-                                currentUser == null) {
-                              _fSignOut();
-                              print("Logout!");
-                            }
-                          },
-                          child: Text('LOGOUT'),
-                          textColor: Colors.indigo[400],
-                          color: Colors.white,
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ));
-        });
-  }
-
-  _gSignOut() async {
-    await _googleSignIn.signOut();
-    await _auth.signOut();
-    setState(() {
-      previouslyLoggedIn = true;
-      setState(() {
-        previouslyLoggedIn = true;
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LogInPage()),
-        );
-      });
-    });
-  }
-
-  _fSignOut() async {
-    _facebookLogin.logOut();
-    _auth.signOut();
-    setState(() {
-      previouslyLoggedIn = true;
-      _isLoggedIn = false;
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => LogInPage()),
-      );
-    });
-  }
-
-  Future _gSignIn() async {
-    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
-
-    final FirebaseUser user =
-        (await _auth.signInWithCredential(credential)).user;
-    currentUser = user;
-    database
-        .reference()
-        .child("Profiles")
-        .update({"${user.uid}": "${user.email}"});
-    print("User: $user");
-    return user;
-  }
-
-  Future<int> _fSignIn() async {
-    FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
-    final accessToken = facebookLoginResult.accessToken.token;
-    if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
-      final graphResponse = await http.get(
-          'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${accessToken}');
-      final profile = JSON.jsonDecode(graphResponse.body);
-      print(profile);
-      setState(() {
-        userProfile = profile;
-        _isLoggedIn = true;
-      });
-
-      print("User : ");
-      return 1;
-    } else
-      return 0;
-  }
-
-  Future<FacebookLoginResult> _handleFBSignIn() async {
-    FacebookLogin facebookLogin = FacebookLogin();
-    FacebookLoginResult facebookLoginResult =
-        await facebookLogin.logInWithReadPermissions(['email']);
-    switch (facebookLoginResult.status) {
-      case FacebookLoginStatus.cancelledByUser:
-        print("Cancelled");
-        break;
-      case FacebookLoginStatus.error:
-        print("error");
-        break;
-      case FacebookLoginStatus.loggedIn:
-        print("Logged In");
-        break;
-    }
-    return facebookLoginResult;
   }
 
   void showDialogBox(String message) {
@@ -455,7 +290,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<int> couponEurekoin(String coupon) async {
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl =

@@ -27,8 +27,9 @@ class _MyAppState extends State<MyApp> {
       _isLoading = true;
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.clear();  //remove this to save user data
+    prefs.clear();  //remove this to save user data
     var _token = prefs.getString("token");
+    print(_token);
     if (_token != null) {
       setState(() {
         user["isAuthenticated"] = true;
@@ -46,15 +47,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
-    // autoAuthenticate();
+    autoAuthenticate();
 
     super.initState();
   }
@@ -69,8 +69,9 @@ class _MyAppState extends State<MyApp> {
           primaryColor: Colors.red,
           accentColor: Colors.black),
       routes: {
-        "/": (BuildContext context) =>
-            _isLoading ? Container() : user["isAuthenticated"] ? HomePage(user) : AuthPage(user),
+        "/": (BuildContext context) => _isLoading
+            ? Container()
+            : user["isAuthenticated"] ? HomePage(user) : AuthPage(user),
       },
     );
   }

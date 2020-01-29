@@ -57,7 +57,7 @@ Map contributors = {
     "https://www.linkedin.com/in/simran-singh-aa4bb5184",
     "https://www.linkedin.com/in/agarwalavinash14/",
     "https://www.linkedin.com/in/akshat-jain-007365a2/",
-    "",
+    "https://www.linkedin.com/in/sudipta-pandit-69a848171/",
     "https://www.linkedin.com/in/mayank-tayal-9372a216b",
     "https://www.facebook.com/aritra.karmakar.3",
     "https://www.linkedin.com/in/revanth--reddy/",
@@ -78,7 +78,7 @@ Map contributors = {
     "images/Contributors/simran.jpeg",
     "images/Contributors/avinash.jpeg",
     "images/Contributors/akshat.jpg",
-    "images/Contributors/",
+    "images/Contributors/pandit.jpeg",
     "images/Contributors/Tayal.jpg",
     "images/Contributors/aritrabhaiya.jpg",
     "images/Contributors/revanth_reddy.jpg"

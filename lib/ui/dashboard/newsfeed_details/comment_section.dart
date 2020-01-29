@@ -207,12 +207,12 @@ class _CommentItemState extends State<CommentItem> {
               child: new Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: columnChildren)),
-          (currentUser != null && currentUser.uid == widget.authorId)
+          (currentUser != null && currentUser.providerData[1].uid == widget.authorId)
               ? IconButton(
                   icon: Icon(Icons.edit, color: Color(0xFF505194)),
                   onPressed: _editOption)
               : Container(),
-          (currentUser != null && currentUser.uid == widget.authorId)
+          (currentUser != null && currentUser.providerData[1].uid == widget.authorId)
               ? IconButton(
                   icon: Icon(Icons.delete, color: Color(0xFF505194)),
                   onPressed: _deleteOption)
@@ -384,9 +384,9 @@ class _AddNewCommentState extends State<AddNewComment> {
                         } else {
                           PostsCommentItem comment =
                               new PostsCommentItem('', '', '', '', '', '');
-                          comment.authorId = widget.user.uid;
-                          comment.authorImage = widget.user.photoUrl;
-                          comment.authorName = widget.user.displayName;
+                          comment.authorId = widget.user.providerData[1].uid;
+                          comment.authorImage = widget.user.providerData[1].photoUrl;
+                          comment.authorName = widget.user.providerData[1].displayName;
                           comment.createdDate = new DateFormat.yMMMd()
                               .add_jm()
                               .format(new DateTime.now());

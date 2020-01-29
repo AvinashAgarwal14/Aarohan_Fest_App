@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future isEurekoinUserRegistered() async {
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl = "https://ekoin.nitdgplug.org/api/exists/?token=$encoded";
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _eurekoinLoading = true;
     });
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl = "https://ekoin.nitdgplug.org/api/coins/?token=$encoded";
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
     print("c: $currentValue");
     if (currentValue < -(xValue / 2))
       fix = 1;
-    else if (currentValue > xValue / 2)
+    else if (currentValue > (xValue / 2))
       fix = -1;
     else
       fix = 0;

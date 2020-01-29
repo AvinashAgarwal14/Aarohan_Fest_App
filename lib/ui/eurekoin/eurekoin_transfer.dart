@@ -391,7 +391,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
 
 Widget PaymentSuccessDialog(context, message, amount, to) {
   final TextStyle subtitle = TextStyle(fontSize: 12.0, color: Colors.grey);
-  final TextStyle label = TextStyle(fontSize: 14.0, color: Colors.grey);
+  final TextStyle label = TextStyle(fontSize: 14.0, color: Colors.white);
   final List<String> months = [
     "January",
     "February",
@@ -416,6 +416,7 @@ Widget PaymentSuccessDialog(context, message, amount, to) {
       child: SizedBox(
         height: 280,
         child: Dialog(
+          backgroundColor: message == "Successful!" ? Colors.green : Colors.red,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           child: Padding(

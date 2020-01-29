@@ -38,14 +38,12 @@ void main() async {
   // await flameUtil.fullScreen();
   await flameUtil.setOrientation(DeviceOrientation.portraitUp);
   Flame.images.loadAll([
-    "gamebackground.jpg",
-    "chip.png",
-    "virus.png",
-    "virusdamaged.png",
-    "greenvirus.png",
-    "greenvirusdamaged.png",
-    "malware.png",
-    "malwaredamaged.png",
+    "GameBG.png",
+    "c",
+    "bomb1Green.png",
+    "bomb1Red.png",
+    "bomb2Green.png",
+    "bomb2Red.png",
   ]);
   intro() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();

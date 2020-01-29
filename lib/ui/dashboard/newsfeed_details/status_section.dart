@@ -152,7 +152,7 @@ class _StatusCategoryState extends State<StatusCategory> {
       if (choice == 1) {
         if (currentUser != null) {
           for (var id in likeIds)
-            if (id == currentUser.uid) {
+            if (id == currentUser.providerData[1].uid) {
               setState(() {
                 currentLike = true;
               });
@@ -173,7 +173,7 @@ class _StatusCategoryState extends State<StatusCategory> {
       numberOfLikes++;
       likeIds.add(event.snapshot.value['authorId']);
       if (currentUser != null &&
-          event.snapshot.value['authorId'] == currentUser.uid) {
+          event.snapshot.value['authorId'] == currentUser.providerData[1].uid) {
         currentLike = true;
         likeId = event.snapshot.key;
       }
@@ -182,7 +182,7 @@ class _StatusCategoryState extends State<StatusCategory> {
 
   void _addUserToPostLikes() {
     PostsLikeItem user = new PostsLikeItem('', '');
-    user.authorId = currentUser.uid;
+    user.authorId = currentUser.providerData[1].uid;
     user.date = new DateFormat.yMMMd().add_jm().format(new DateTime.now());
     _databaseReferenceForPostsLikes.push().set(user.toJson());
   }

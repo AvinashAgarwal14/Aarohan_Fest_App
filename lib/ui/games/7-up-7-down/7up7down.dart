@@ -51,7 +51,7 @@ class _UpDownGameState extends State<UpDownGame> {
     setState(() {
       _eurekoinLoading = true;
     });
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl = "https://ekoin.nitdgplug.org/api/coins/?token=$encoded";
@@ -158,14 +158,15 @@ class _UpDownGameState extends State<UpDownGame> {
         ),
       );
     });
+
     result == "winner"
         ? transferEurekoin(
-            betAmount, currentUser.email, "singhsimrananshu@gmail.com")
+            betAmount, currentUser.providerData[1].email, "seven@eurekoin.com")
         : transferEurekoin(
-            betAmount, "singhsimrananshu@gmail.com", currentUser.email);
+            betAmount, "seven@eurekoin.com", currentUser.providerData[1].email);
 
     var gameStatus = {
-      "name": currentUser.displayName,
+      "name": currentUser.providerData[1].displayName,
       "status": result,
       "type": "sevenup",
       "amount": betAmount
@@ -300,35 +301,36 @@ class _UpDownGameState extends State<UpDownGame> {
                     child: help == "false"
                         ? Scrollbar(
                             child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(15),
-                                margin: EdgeInsets.all(5),
-                                child: Text(
-                                  "\nINSTRUCTIONS:\n\n\n🎲 choose 7↑ or 7↓\n\n🎲 if the sum of the dice faces is according to your bet, you win back twice the amount\n\n🎲 otherwise you lose your bet",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(15),
+                                  margin: EdgeInsets.all(5),
+                                  child: Text(
+                                    "\nINSTRUCTIONS:\n\n\n🎲 choose 7↑ or 7↓\n\n🎲 if the sum of the dice faces is according to your bet, you win back twice the amount\n\n🎲 otherwise you lose your bet",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                              ),
-                              FlatButton(
-                                color: Color(0xFF0187F8),
-                                child: Text(
-                                  "PROCEED",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    help = "true";
-                                    setHelp();
-                                  });
-                                },
-                              )
-                            ],
-                          ))
+                                FlatButton(
+                                  color: Color(0xFF0187F8),
+                                  child: Text(
+                                    "PROCEED",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      help = "true";
+                                      setHelp();
+                                    });
+                                  },
+                                )
+                              ],
+                            ),
+                          )
                         : Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[

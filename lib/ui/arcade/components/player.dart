@@ -25,8 +25,8 @@ class Player {
 
   Player(this.gameController) {
     maxHealth = currentHealth = 300;
-    final size = gameController.tileSize * 3;
-    playerSprite = Sprite('chip.png');
+    final size = gameController.tileSize * 4;
+    playerSprite = Sprite('player.png');
     playerRect = Rect.fromLTWH(
       gameController.screenSize.width / 2 - size / 2,
       gameController.screenSize.height / 2 - size / 2,

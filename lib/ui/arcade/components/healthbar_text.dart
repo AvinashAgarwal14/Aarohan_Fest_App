@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../game_controller.dart';
 
-class StartText {
+class HealthText {
   final GameController gameController;
   TextPainter painter;
   Offset position;
 
-  StartText(this.gameController) {
+  HealthText(this.gameController) {
     painter = TextPainter(
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
@@ -20,7 +20,7 @@ class StartText {
 
   void update(double t) {
     painter.text = TextSpan(
-      text: 'Start',
+      text: 'HEALTH',
       style: TextStyle(
         color: Color(0xFFF8EA8C),
         fontSize: 50.0,
