@@ -232,7 +232,7 @@ class _HomePageState extends State<HomePage>
   Widget drawerClues() {
     return _isLoading
         ? Container(
-            child: LinearProgressIndicator(),
+            child: CircularProgressIndicator(),
           )
         : Material(
             color: Colors.white.withOpacity(0),

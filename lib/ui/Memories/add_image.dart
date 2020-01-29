@@ -219,6 +219,7 @@ class _SendImageEntryState extends State<SendImageEntry> {
     });
     setState(() {
       uploading = false;
+      alreadyUploaded = true;
     });
     print('File Uploaded');
   }
