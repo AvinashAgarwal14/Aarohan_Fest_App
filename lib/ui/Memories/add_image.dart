@@ -116,12 +116,6 @@ class _SendImageEntryState extends State<SendImageEntry> {
                               : null,
                           color: Colors.cyan,
                         ),
-                        SizedBox(width: 10.0),
-                        RaisedButton(
-                          child: Text('Clear Selection'),
-                          onPressed: (_image != null) ? clearSelection : null,
-                          color: Colors.red,
-                        )
                       ]),
                   Container(
                     padding: EdgeInsets.all(20),
@@ -180,8 +174,8 @@ class _SendImageEntryState extends State<SendImageEntry> {
         .then((image) {
       setState(() {
         _image = image;
-        savedImageURL = null;
         alreadyUploaded = false;
+        savedImageURL = null;
       });
     });
   }
@@ -192,8 +186,8 @@ class _SendImageEntryState extends State<SendImageEntry> {
       print(image);
       setState(() {
         _image = image;
-        savedImageURL = null;
         alreadyUploaded = false;
+        savedImageURL = null;
       });
     });
   }
@@ -218,17 +212,10 @@ class _SendImageEntryState extends State<SendImageEntry> {
       saveImage(fileURL);
     });
     setState(() {
+      alreadyUploaded = false;
       uploading = false;
-      alreadyUploaded = true;
     });
     print('File Uploaded');
-  }
-
-  clearSelection() {
-    setState(() {
-      _image = null;
-    });
-    loadSavedImage();
   }
 
   Future _getUser() async {
@@ -239,23 +226,28 @@ class _SendImageEntryState extends State<SendImageEntry> {
     loadSavedImage();
   }
 
-  loadSavedImage() async {
+  loadSavedImage() {
     var bytes =
     utf8.encode("${currentUser.email}" + "${currentUser.displayName}");
     var encoded = sha1.convert(bytes);
     print("jhuihihuhiu");
     _databaseReferenceForMemories.child('$encoded').onValue.listen((Event event) {
       if(event.snapshot.value == null) {
-        savedImageURL = null;
-        alreadyUploaded = false;
+        setState((){
+          savedImageURL = null;
+          alreadyUploaded = false;
+        });
       } else {
-        savedImageURL = event.snapshot.value['imageURL'];
-        alreadyUploaded = true;
+        setState((){
+          savedImageURL = event.snapshot.value['imageURL'];
+          alreadyUploaded = true;
+        });
+        print(savedImageURL);
       }
     });
   }
 
-  saveImage(value) async {
+  saveImage(value) {
     setState(() {
       savedImageURL = value;
     });
