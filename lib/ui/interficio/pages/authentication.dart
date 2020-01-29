@@ -41,7 +41,7 @@ class _AuthPageState extends State<AuthPage> {
 
   bool _isLoading = false;
 
-  String api_url = "phoenix7139.pythonanywhere.com";
+  String api_url = "romitkarmakar.pythonanywhere.com";
 
   AuthMode _authmode = AuthMode.login;
 
@@ -74,6 +74,7 @@ class _AuthPageState extends State<AuthPage> {
       user["token"] = data["token"];
       user["isAuthenticated"] = true;
       user["password"] = _loginFormData["password"];
+      print(user["token"]);
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("username", user["username"]);

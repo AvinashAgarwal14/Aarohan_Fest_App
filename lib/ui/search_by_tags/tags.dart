@@ -62,8 +62,6 @@ class _SearchByTagsState extends State<SearchByTags> {
       'Workshops': new List()
     };
 
-    database.setPersistenceEnabled(true);
-    database.setPersistenceCacheSizeBytes(15000000);
     databaseReference = database.reference().child("Events");
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
@@ -145,7 +143,8 @@ class _SearchByTagsState extends State<SearchByTags> {
                                         eventCard: eventsByTags[_selectedTag]
                                         [position])));
                           }),
-                    ))
+                    )),
+                SizedBox(height: 55.0),
               ],
             ),
             SlidingUpPanel(
@@ -174,7 +173,7 @@ class _SearchByTagsState extends State<SearchByTags> {
                       Container(
                           padding: const EdgeInsets.only(left: 14.0, right: 14.0),
                           height: MediaQuery.of(context).size.height * 0.75,
-                          child: SearchTab()),
+                          child: SearchTab(eventsList: eventsByTags['All'])),
                     ]))
           ]),
     );

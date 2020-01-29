@@ -17,17 +17,14 @@ class Enemy {
   Enemy(this.gameController, double x, double y) {
     health = 2;
     damage = 1;
-    speed = gameController.tileSize * 2;
-    var enemychoice = Random().nextInt(3);
+    speed = gameController.tileSize * 1.5;
+    var enemychoice = Random().nextInt(2);
     if (enemychoice == 0) {
-      enemySprite = Sprite('virus.png');
-      damagedEnemy = Sprite('virusdamaged.png');
-    } else if (enemychoice == 1) {
-      enemySprite = Sprite('greenvirus.png');
-      damagedEnemy = Sprite('greenvirusdamaged.png');
-    } else {
-      enemySprite = Sprite('malware.png');
-      damagedEnemy = Sprite('malwaredamaged.png');
+      enemySprite = Sprite('bomb1Green.png');
+      damagedEnemy = Sprite('bomb1Red.png');
+    } else  {
+      enemySprite = Sprite('bomb2Green.png');
+      damagedEnemy = Sprite('bomb2Red.png');
     }
     enemyRect = Rect.fromLTWH(
       x,

@@ -17,7 +17,7 @@ class HealthBar {
       // barWidth,
       // gameController.tileSize * 0.5,
       0,
-      gameController.screenSize.height - gameController.tileSize * 0.5,
+      gameController.screenSize.height - gameController.tileSize,
       barWidth,
       gameController.tileSize,
     );
@@ -27,7 +27,7 @@ class HealthBar {
       // barWidth,
       // gameController.tileSize * 0.5,
       0,
-      gameController.screenSize.height - gameController.tileSize * 0.5,
+      gameController.screenSize.height - gameController.tileSize,
       barWidth,
       gameController.tileSize,
     );
@@ -46,9 +46,9 @@ class HealthBar {
         gameController.player.currentHealth / gameController.player.maxHealth;
     remainingHealthRect = Rect.fromLTWH(
       0,
-      gameController.screenSize.height - gameController.tileSize * 0.5,
+      gameController.screenSize.height - gameController.tileSize,
       barWidth * percentHealth,
-      gameController.tileSize * 0.5,
+      gameController.tileSize,
     );
   }
 }

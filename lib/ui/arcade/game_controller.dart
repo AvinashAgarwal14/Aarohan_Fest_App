@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:aavishkarapp/ui/arcade/components/healthbar_text.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/gestures.dart';
@@ -30,6 +31,7 @@ class GameController extends Game {
   HighscoreText highscoreText;
   StartText startText;
   Background background;
+  HealthText healthText;
 
   GameController(this.storage) {
     initialize();
@@ -48,6 +50,7 @@ class GameController extends Game {
     highscoreText = HighscoreText(this);
     startText = StartText(this);
     background = Background(this);
+    healthText = HealthText(this);
   }
 
   void render(Canvas c) {
