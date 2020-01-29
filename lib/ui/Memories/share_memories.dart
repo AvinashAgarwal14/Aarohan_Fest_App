@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import './day_memories.dart';
 import './add_image.dart';
@@ -11,6 +12,10 @@ class _ShareMemoriesState extends State<ShareMemories> {
 
   var _currentIndex = 0;
   final pageController = PageController();
+  bool comingSoon;
+  final FirebaseDatabase _database = FirebaseDatabase.instance;
+  DatabaseReference _databaseReferenceForComingSoon;
+
 
   List TabViews = <Widget>[
     SendImageEntry(),
@@ -30,12 +35,26 @@ class _ShareMemoriesState extends State<ShareMemories> {
   @override
   void initState() {
     // TODO: implement initState
+    comingSoon = null;
+    _databaseReferenceForComingSoon = _database.reference().child("comingsoon");
+    _databaseReferenceForComingSoon.onValue.listen(onComingSoonAdded);
     super.initState();
+  }
+
+  void onComingSoonAdded(Event event) {
+    setState(() {
+      comingSoon = event.snapshot.value["share-memory"];
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return (comingSoon==null)?
+    Center(child: Image.asset('loader')):
+    (comingSoon == true)?
+    Center(child: Image.asset('comingsoon'))
+        :
+    Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
         centerTitle: true,

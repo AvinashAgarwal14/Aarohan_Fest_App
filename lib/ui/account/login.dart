@@ -14,6 +14,7 @@ import '../../util/drawer.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
+import 'package:shared_preferences/shared_preferences.dart';
 
 var kFontFam = 'CustomFonts';
 var firebaseAuth = FirebaseAuth.instance;
@@ -89,6 +90,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
         print("BLOCK 31");
         setState(() {});
       } else if (n == 2) {
+        print("BLOCK 331");
         await _flogInButtonController.forward();
         setState(() {});
       }
@@ -174,7 +176,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                                   animationStatus = 1;
                                                 });
                                               },
-                                              child: SignIn(
+                                              child: signIn(
                                                   "Sign in with Google")),
                                         ),
                                         Padding(
@@ -195,7 +197,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                                   animationStatus = 2;
                                                 });
                                               },
-                                              child: SignIn(
+                                              child: signIn(
                                                   "Sign in with Facebook!")),
                                         ),
                                       ])))
@@ -240,12 +242,14 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     if (user == null) {
       setState(() {
         currentUser = user;
+
         animationStatus = 0;
       });
     } else {
       setState(() {
         currentUser = user;
         if (user.providerData[1].providerId == "google.com") {
+          //print(user.providerData[1]);
           animationStatus = 1;
           _playAnimation(1);
         } else {
@@ -265,11 +269,10 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   }
 
   _fSignOut() async {
-    _facebookLogin.logOut();
-    _auth.signOut();
+    await _facebookLogin.logOut();
+    await _auth.signOut();
     setState(() {
       previouslyLoggedIn = true;
-      _isLoggedIn=false;
     });
   }
   
@@ -290,23 +293,24 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     database
         .reference()
         .child("Profiles")
-        .update({"${user.uid}": "${user.email}"});
+        .update({"${user.providerData[1].uid}": "${user.providerData[1].email}"});
     print("User: $user");
     return user;
   }
 
   Future<int> _fSignIn() async {
     FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
-    final accessToken = facebookLoginResult.accessToken.token;
+    AuthCredential cred = FacebookAuthProvider.getCredential(
+        accessToken: facebookLoginResult.accessToken.token
+    );
+    AuthResult authResult = await _auth.signInWithCredential(cred);
+    FirebaseUser user = authResult.user;
     if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
-      final graphResponse = await http.get('https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${accessToken}');
-      final profile = JSON.jsonDecode(graphResponse.body);
-      print(profile);
-      setState(() {
-          userProfile = profile;
-          _isLoggedIn = true;
-        });
-    
+          currentUser = user ;
+          database
+          .reference()
+          .child("Profiles")
+          .update({"${user.providerData[1].uid}": "${user.providerData[1].email}"});
       print("User : ");
       return 1;
     } else
@@ -316,7 +320,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   Future<FacebookLoginResult> _handleFBSignIn() async {
     FacebookLogin facebookLogin = FacebookLogin();
     FacebookLoginResult facebookLoginResult =
-        await facebookLogin.logInWithReadPermissions(['email']);
+        await facebookLogin.logIn(['email']);
     switch (facebookLoginResult.status) {
       case FacebookLoginStatus.cancelledByUser:
         print("Cancelled");
@@ -330,7 +334,15 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     }
     return facebookLoginResult;
   }
-  SignIn(String str) {
+
+
+//  addStringToSF() async {
+//    SharedPreferences prefs = await SharedPreferences.getInstance();
+//    prefs.setString("email id", "abc");
+//  }
+
+
+  signIn(String str) {
     return (new Container(
       width: MediaQuery.of(context).size.width - 80.0,
       height: 60.0,

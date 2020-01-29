@@ -51,7 +51,7 @@ class _UpDownGameState extends State<UpDownGame> {
     setState(() {
       _eurekoinLoading = true;
     });
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl = "https://ekoin.nitdgplug.org/api/coins/?token=$encoded";
@@ -158,14 +158,15 @@ class _UpDownGameState extends State<UpDownGame> {
         ),
       );
     });
+
     result == "winner"
         ? transferEurekoin(
-            betAmount, currentUser.email, "seven@eurekoin.com")
+            betAmount, currentUser.providerData[1].email, "seven@eurekoin.com")
         : transferEurekoin(
-            betAmount, "seven@eurekoin.com", currentUser.email);
+            betAmount, "seven@eurekoin.com", currentUser.providerData[1].email);
 
     var gameStatus = {
-      "name": currentUser.displayName,
+      "name": currentUser.providerData[1].displayName,
       "status": result,
       "type": "sevenup",
       "amount": betAmount

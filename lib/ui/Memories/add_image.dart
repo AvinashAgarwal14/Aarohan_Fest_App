@@ -65,7 +65,8 @@ class _SendImageEntryState extends State<SendImageEntry> {
 //    if(month == 2 && day>=7 && day<=10) {
 //      comingSoon = false;
 //      if(day == 7)
-//        dayNumber = 0;
+//        dayNumber = 0;import 'dart:convert' as JSON;
+
 //      if(day == 8)
 //        dayNumber = 1;
 //      if(day == 9)
@@ -202,22 +203,23 @@ class _SendImageEntryState extends State<SendImageEntry> {
       uploading = true;
     });
     StorageReference storageReference = FirebaseStorage.instance.ref().child(
-        'Memories/Day-${dayNumber}/${currentUser.displayName}-${currentUser.email}');
+        'Memories/Day-${dayNumber}/${currentUser.providerData[1].displayName}-${currentUser.providerData[1].email}');
     StorageUploadTask uploadTask = storageReference.putFile(_image);
     await uploadTask.onComplete;
     storageReference.getDownloadURL().then((fileURL) {
       var format = new DateFormat.yMd();
       var dateString = format.format(DateTime.now());
       MemoryItem newImage = new MemoryItem(
-          currentUser.displayName, dateString, currentUser.email, fileURL);
+          currentUser.providerData[1].displayName, dateString, currentUser.providerData[1].email, fileURL);
       var bytes =
-          utf8.encode("${currentUser.email}" + "${currentUser.displayName}");
+          utf8.encode("${currentUser.providerData[1].email}" + "${currentUser.providerData[1].displayName}");
       var encoded = sha1.convert(bytes);
       _databaseReferenceForMemories.child("$encoded").set(newImage.toJson());
       saveImage(fileURL);
     });
     setState(() {
       uploading = false;
+      alreadyUploaded = true;
     });
     print('File Uploaded');
   }
