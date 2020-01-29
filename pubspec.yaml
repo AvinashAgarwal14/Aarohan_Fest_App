@@ -39,6 +39,7 @@ dependencies:
   image_picker: ^0.6.0+17
   flutter_staggered_grid_view: ^0.3.0
   flutter_speed_dial: ^1.2.5
+  intro_slider: ^1.0.6
 
 
 dev_dependencies:
@@ -91,7 +92,14 @@ flutter:
     - images/Contributors/
     - assets/
     - assets/images/
-    - assets/Aarohan_logo.jpg
+    - assets/Aarohan_logo.jpg    
+    - assets/INTRO1.png
+    - assets/INTRO2.png
+    - assets/INTRO3.png
+    - assets/AU1.png
+    - assets/AU2.png
+    - assets/AU3.png
+    - assets/AU4.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

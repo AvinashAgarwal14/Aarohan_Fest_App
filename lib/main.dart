@@ -21,6 +21,7 @@ import './ui/about_us/about_us.dart';
 import './ui/interficio/interficio.dart';
 import './ui/games/home_page.dart';
 import 'package:flame/flame.dart';
+import 'package:aavishkarapp/ui/Intro.dart';
 import './ui/Memories/share_memories.dart';
 
 void main() async {
@@ -44,7 +45,16 @@ void main() async {
     "bomb2Green.png",
     "bomb2Red.png",
   ]);
-
+  intro() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  //Return bool
+  bool boolValue = prefs.getBool('boolValue');
+  return boolValue;
+}
+  intro_bool() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('boolValue', true);
+}
   SharedPreferences storage = await SharedPreferences.getInstance();
   GameController gameController = GameController(storage);
 
@@ -68,8 +78,10 @@ class Aavishkar_App extends StatelessWidget {
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Color(0xFF505194)),
-      initialRoute: "/ui/account/login",
+      initialRoute: "/splash",
       routes: <String, WidgetBuilder>{
+        "/intro":(BuildContext context)=> IntroScreen(),
+        "/splash":(BuildContext context)=> SplashScreen(),
         "/ui/dashboard": (BuildContext context) => Dashboard(),
         "/ui/tags": (BuildContext context) => SearchByTags(),
         "/ui/schedule": (BuildContext context) => Schedule(),
