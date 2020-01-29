@@ -6,8 +6,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import '../../util/event_details.dart';
 import '../../model/event.dart';
 import 'package:firebase_database/firebase_database.dart';
-// import '../collapsing_drawer/custom_navigation_drawer.dart';
-import '../collapsing_drawer/custom_navigation_drawer.dart';
 
 List<T> map<T>(List list, Function handler) {
   List<T> result = new List();
@@ -23,7 +21,7 @@ class DashBoardLayout extends StatefulWidget {
 }
 
 class _DashBoardLayoutState extends State<DashBoardLayout>
-    with SingleTickerProviderStateMixin {
+    {
   CarouselSlider instance;
   int j = 0;
   double maxWidth = 180;
@@ -45,6 +43,8 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
     }
   }
 
+  ScrollController _scrollController;
+
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -53,10 +53,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
         systemNavigationBarIconBrightness: Brightness.dark));
 
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    widthAnimation = Tween<double>(begin: minWidth, end: maxWidth)
-        .animate(_animationController);
+    _scrollController = ScrollController();
     eventsByCategories = {
       'All': new List(),
       'On-site': new List(),
@@ -277,7 +274,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
                       height: 250.0,
                       // width: MediaQuery.of(context).size.width-10.0,
                       child: ListView.builder(
-                        
+                        controller: _scrollController,
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                         cacheExtent: 1350.0,
@@ -552,13 +549,13 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
                                     boxShadow: [
                                       BoxShadow(
                                           color: Colors.grey[800],
-                                          offset: Offset(4.0, 4.0),
-                                          blurRadius: 10.0,
+                                          offset: Offset(3.0, 3.0),
+                                          blurRadius: 7.0,
                                           spreadRadius: 1.0),
                                       BoxShadow(
                                           color: Colors.white,
-                                          offset: Offset(-4.0, -4.0),
-                                          blurRadius: 10.0,
+                                          offset: Offset(-3.0, -3.0),
+                                          blurRadius: 7.0,
                                           spreadRadius: 1.0),
                                     ],
                                   ),
@@ -667,13 +664,13 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
                                     boxShadow: [
                                       BoxShadow(
                                           color: Colors.grey[800],
-                                          offset: Offset(4.0, 4.0),
-                                          blurRadius: 10.0,
+                                          offset: Offset(3.0, 3.0),
+                                          blurRadius: 7.0,
                                           spreadRadius: 1.0),
                                       BoxShadow(
                                           color: Colors.white,
-                                          offset: Offset(-4.0, -4.0),
-                                          blurRadius: 10.0,
+                                          offset: Offset(-3.0, -3.0),
+                                          blurRadius: 7.0,
                                           spreadRadius: 1.0),
                                     ],
                                   ),
