@@ -10,7 +10,6 @@ import '../../util/event_details.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'search_box.dart';
 
-
 Map<String, List<EventItem>> eventsByTags;
 
 class SearchByTags extends StatefulWidget {
@@ -38,13 +37,12 @@ class _SearchByTagsState extends State<SearchByTags> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -78,7 +76,7 @@ class _SearchByTagsState extends State<SearchByTags> {
   Widget build(BuildContext context) {
     final List<Widget> choiceChips = _tags.map<Widget>((String name) {
       Color chipColor;
-      chipColor = _nameToColor(name);
+      chipColor = Colors.blue.withOpacity(0.8);
       return ChoiceChip(
         key: new ValueKey<String>(name),
         backgroundColor: chipColor,
@@ -95,12 +93,13 @@ class _SearchByTagsState extends State<SearchByTags> {
 
     final List<Widget> cardChildren = <Widget>[
       new Wrap(
-        children: choiceChips.map((Widget chip) {
-      return new Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: chip,
-      );
-    }).toList())];
+          children: choiceChips.map((Widget chip) {
+        return new Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: chip,
+        );
+      }).toList())
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -108,74 +107,83 @@ class _SearchByTagsState extends State<SearchByTags> {
       ),
       drawer: NavigationDrawer(),
       body: Stack(
-          children: <Widget> [
-            Column(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 10.0),
+              ),
+              Container(
+                child: new Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: cardChildren,
+                ),
+              ),
+              Divider(
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.grey
+                    : Color(0xFF505194),
+              ),
+              Container(
+                  child: Expanded(
+                child: ListView.builder(
+                    cacheExtent: MediaQuery.of(context).size.height * 3,
+                    itemCount: eventsByTags[_selectedTag].length,
+                    itemBuilder: (context, position) {
+                      return Container(
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => new EventDetails(
+                                          item: eventsByTags[_selectedTag]
+                                              [position])),
+                                );
+                              },
+                              child: SearchByTagsCards(
+                                  eventCard: eventsByTags[_selectedTag]
+                                      [position])));
+                    }),
+              )),
+              SizedBox(height: 55.0),
+            ],
+          ),
+          SlidingUpPanel(
+            minHeight: 65.0,
+            maxHeight: MediaQuery.of(context).size.height * 0.85,
+            panel: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 10.0),
+                SizedBox(height: 5.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 35,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(12.0))),
+                    )
+                  ],
                 ),
+                SizedBox(height: 13.0),
+                Center(child: Text("Search")),
+                SizedBox(height: 20.0),
                 Container(
-                    child: new Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: cardChildren,
-                    )),
-                Divider(
-                  color: Theme.of(context).brightness==Brightness.light ?Colors.grey:Color(0xFF505194),
+                  padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  child: SearchTab(
+                    eventsList: eventsByTags['All'],
+                  ),
                 ),
-                Container(
-                    child: Expanded(
-                      child: ListView.builder(
-                          cacheExtent: MediaQuery.of(context).size.height*3,
-                          itemCount: eventsByTags[_selectedTag].length,
-                          itemBuilder: (context, position) {
-                            return Container(
-                                child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => new EventDetails(
-                                                item: eventsByTags[_selectedTag]
-                                                [position])),
-                                      );
-                                    },
-                                    child: SearchByTagsCards(
-                                        eventCard: eventsByTags[_selectedTag]
-                                        [position])));
-                          }),
-                    )),
-                SizedBox(height: 55.0),
               ],
             ),
-            SlidingUpPanel(
-                minHeight: 65.0,
-                maxHeight: MediaQuery.of(context).size.height * 0.85,
-                panel: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 5.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: 35,
-                            height: 8,
-                            decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(12.0))),
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 13.0),
-                      Center(child: Text("Search")),
-                      SizedBox(height: 20.0),
-                      Container(
-                          padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-                          height: MediaQuery.of(context).size.height * 0.75,
-                          child: SearchTab(eventsList: eventsByTags['All'])),
-                    ]))
-          ]),
+          ),
+        ],
+      ),
     );
   }
 
@@ -218,14 +226,15 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
   DatabaseReference databaseReferenceForUpdate;
   Color cardColor;
 
-
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     if (widget.eventCard.color != 'invalid') {
       if (widget.eventCard.color == 'null')
-        cardColor = Theme.of(context).brightness==Brightness.light ?Colors.white:Color(0xFF505194);
+        cardColor = Theme.of(context).brightness == Brightness.light
+            ? Colors.white
+            : Color(0xFF505194);
       else {
         String valueString = widget.eventCard.color
             .split('(0x')[1]
@@ -239,7 +248,6 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     Widget cardItem = new Card(
@@ -249,25 +257,22 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
         child: new Column(
           children: <Widget>[
             new ClipRRect(
-                  borderRadius: new BorderRadius.only(
-                      topLeft: new Radius.circular(5.0),
-                      topRight: new Radius.circular(5.0)
-                  ),
-                  child:
-                  Container(
+                borderRadius: new BorderRadius.only(
+                    topLeft: new Radius.circular(5.0),
+                    topRight: new Radius.circular(5.0)),
+                child: Container(
                   height: 256.0,
                   child: SizedBox.expand(
                     child: Hero(
                         tag: widget.eventCard.title,
                         child: CachedNetworkImage(
-                            placeholder:  (context, url) => Image.asset("images/imageplaceholder.png"),
+                            placeholder: (context, url) =>
+                                Image.asset("images/imageplaceholder.png"),
                             imageUrl: widget.eventCard.imageUrl,
                             fit: BoxFit.cover,
-                            height: 256.0)
-                    ),
+                            height: 256.0)),
                   ),
-                  )
-            ),
+                )),
             ListTile(
               title: new Text(widget.eventCard.title),
               subtitle: new Text(widget.eventCard.date),

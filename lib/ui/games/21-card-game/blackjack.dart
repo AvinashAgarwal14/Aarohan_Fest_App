@@ -178,9 +178,9 @@ class _BlackJackState extends State<BlackJack> {
 
     result == "winner"
         ? transferEurekoin(
-            betAmount, currentUser.email, "singhsimrananshu@gmail.com")
+            betAmount, currentUser.email, "blackjack@eurekoin.com")
         : transferEurekoin(
-            betAmount, "singhsimrananshu@gmail.com", currentUser.email);
+            betAmount, "blackjack@eurekoin.com", currentUser.email);
 
     var gameStatus = {
       "name": currentUser.displayName,
