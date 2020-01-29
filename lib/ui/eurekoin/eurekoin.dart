@@ -343,8 +343,8 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                                     right: 10.0),
                                                 child: EurekoinTransfer(
                                                     name:
-                                                        currentUser.displayName,
-                                                    email: currentUser.email,
+                                                        currentUser.providerData[1].displayName,
+                                                    email: currentUser.providerData[1].email,
                                                     parent: this)),
                                           )
                                         ],
@@ -360,8 +360,8 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                                     right: 10.0),
                                                 child: EurekoinCoupon(
                                                     name:
-                                                        currentUser.displayName,
-                                                    email: currentUser.email,
+                                                        currentUser.providerData[1].displayName,
+                                                    email: currentUser.providerData[1].email,
                                                     parent: this)),
                                           )
                                         ],
@@ -464,7 +464,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
   }
 
   Future isEurekoinUserRegistered() async {
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl = "https://ekoin.nitdgplug.org/api/exists/?token=$encoded";
@@ -483,11 +483,11 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
   }
 
   Future registerEurekoinUser(var referalCode) async {
-    var email = currentUser.email;
-    var name = currentUser.displayName;
+    var email = currentUser.providerData[1].email;
+    var name = currentUser.providerData[1].displayName;
 
     String apiUrl =
-        "https://ekoin.nitdgplug.org/api/register?name=$name&email=$email&referred_invite_code=$referalCode&image=${currentUser.photoUrl}";
+        "https://ekoin.nitdgplug.org/api/register?name=$name&email=$email&referred_invite_code=$referalCode&image=${currentUser.providerData[1].photoUrl}";
     http.Response response = await http.get(apiUrl);
     var status = json.decode(response.body)['status'];
     if (status == '0') {
@@ -502,7 +502,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
   }
 
   Future getUserEurekoin() async {
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl = "https://ekoin.nitdgplug.org/api/coins/?token=$encoded";
@@ -516,7 +516,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
   }
 
   Future getReferralCode() async {
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl =
@@ -667,7 +667,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
   }
 
   Future<int> couponEurekoin(String coupon) async {
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl =
@@ -685,7 +685,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
   }
 
   Future transactionsHistory() async {
-    var email = currentUser.email;
+    var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
 

@@ -14,6 +14,7 @@ import '../../util/drawer.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
+import 'package:shared_preferences/shared_preferences.dart';
 
 var kFontFam = 'CustomFonts';
 var firebaseAuth = FirebaseAuth.instance;
@@ -175,7 +176,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                                   animationStatus = 1;
                                                 });
                                               },
-                                              child: SignIn(
+                                              child: signIn(
                                                   "Sign in with Google")),
                                         ),
                                         Padding(
@@ -196,7 +197,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                                   animationStatus = 2;
                                                 });
                                               },
-                                              child: SignIn(
+                                              child: signIn(
                                                   "Sign in with Facebook!")),
                                         ),
                                       ])))
@@ -241,12 +242,14 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     if (user == null) {
       setState(() {
         currentUser = user;
+
         animationStatus = 0;
       });
     } else {
       setState(() {
         currentUser = user;
         if (user.providerData[1].providerId == "google.com") {
+          //print(user.providerData[1]);
           animationStatus = 1;
           _playAnimation(1);
         } else {
@@ -290,7 +293,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     database
         .reference()
         .child("Profiles")
-        .update({"${user.uid}": "${user.email}"});
+        .update({"${user.providerData[1].uid}": "${user.providerData[1].email}"});
     print("User: $user");
     return user;
   }
@@ -307,7 +310,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
           database
           .reference()
           .child("Profiles")
-          .update({"${user.uid}": "${user.email}"});
+          .update({"${user.providerData[1].uid}": "${user.providerData[1].email}"});
       print("User : ");
       return 1;
     } else
@@ -331,7 +334,15 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     }
     return facebookLoginResult;
   }
-  SignIn(String str) {
+
+
+//  addStringToSF() async {
+//    SharedPreferences prefs = await SharedPreferences.getInstance();
+//    prefs.setString("email id", "abc");
+//  }
+
+
+  signIn(String str) {
     return (new Container(
       width: MediaQuery.of(context).size.width - 80.0,
       height: 60.0,

@@ -30,7 +30,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Map userProfile;
 
   bool previouslyLoggedIn = false;
-  bool _isLoggedIn = false;
+
 
   @override
   void setState(fn) {
@@ -47,7 +47,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 
   initUser() async {
     currentUser = await _auth.currentUser();
-    setState(() {});
+    setState(() {
+
+    });
   }
 
   @override
@@ -67,10 +69,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 child: Image.asset("images/gifs/pacman.gif", fit: BoxFit.cover),
               ),
               ListTile(
-                title: Text('${currentUser.displayName}'),
-                leading: Icon(Icons.person),
+                title: Text('${currentUser.providerData[1].displayName}'),
+                leading: CircleAvatar(child:Image.network(currentUser.providerData[1].photoUrl)),
                 subtitle: Text(
-                  "${currentUser.email}",
+                  "${currentUser.providerData[1].email}",
                 ),
               ),
               SizedBox(
@@ -289,70 +291,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     _auth.signOut();
     setState(() {
       previouslyLoggedIn = true;
-      _isLoggedIn = false;
+
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => LogInPage()),
       );
     });
-  }
-
-  Future _gSignIn() async {
-    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
-
-    final FirebaseUser user =
-        (await _auth.signInWithCredential(credential)).user;
-    currentUser = user;
-    database
-        .reference()
-        .child("Profiles")
-        .update({"${user.uid}": "${user.email}"});
-    print("User: $user");
-    return user;
-  }
-
-  Future<int> _fSignIn() async {
-    FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
-    final accessToken = facebookLoginResult.accessToken.token;
-    if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
-      final graphResponse = await http.get(
-          'https://graph.facebook.com/v2.12/me?fields=name,picture,email&access_token=${accessToken}');
-      final profile = JSON.jsonDecode(graphResponse.body);
-      print(profile);
-      setState(() {
-        userProfile = profile;
-        _isLoggedIn = true;
-      });
-
-      print("User : ");
-      return 1;
-    } else
-      return 0;
-  }
-
-  Future<FacebookLoginResult> _handleFBSignIn() async {
-    FacebookLogin facebookLogin = FacebookLogin();
-    FacebookLoginResult facebookLoginResult =
-        await facebookLogin.logInWithReadPermissions(['email']);
-    switch (facebookLoginResult.status) {
-      case FacebookLoginStatus.cancelledByUser:
-        print("Cancelled");
-        break;
-      case FacebookLoginStatus.error:
-        print("error");
-        break;
-      case FacebookLoginStatus.loggedIn:
-        print("Logged In");
-        break;
-    }
-    return facebookLoginResult;
   }
 
   Future<void> _logout() async {
@@ -428,7 +372,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                                   color: Colors.green,
                                   colorBrightness: Brightness.dark,
                                   onPressed: () {
-                                    _gSignOut();
+                                    (currentUser.providerData[1].providerId == "google.com")?_gSignOut():_fSignOut();
                                   },
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
