@@ -543,7 +543,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
               PaymentSuccessDialog(context, barcodeString);
             });
             getUserEurekoin();
-            showDialogBox(barcodeString);
+            PaymentSuccessDialog(context, barcodeString);
           } else if (value == 2)
             setState(() {
               barcodeString = "Invalid Coupon";
@@ -567,14 +567,14 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     } on PlatformException catch (e) {
       setState(() {
         barcodeString = 'The user did not grant the camera permission!';
-        showDialogBox(barcodeString);
+        PaymentSuccessDialog(context, barcodeString);
       });
     }
   }
 
   Widget PaymentSuccessDialog(context, message) {
     final TextStyle subtitle = TextStyle(fontSize: 12.0, color: Colors.grey);
-    final TextStyle label = TextStyle(fontSize: 14.0, color: Colors.grey);
+    final TextStyle label = TextStyle(fontSize: 14.0, color: Colors.white);
     final List<String> months = [
       "January",
       "February",
@@ -599,6 +599,8 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
         child: SizedBox(
           height: 370,
           child: Dialog(
+            backgroundColor:
+                message == "Successful!" ? Colors.green : Colors.red,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             child: Padding(

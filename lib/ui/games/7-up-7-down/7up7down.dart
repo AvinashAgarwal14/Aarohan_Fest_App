@@ -160,9 +160,9 @@ class _UpDownGameState extends State<UpDownGame> {
     });
     result == "winner"
         ? transferEurekoin(
-            betAmount, currentUser.email, "singhsimrananshu@gmail.com")
+            betAmount, currentUser.email, "seven@eurekoin.com")
         : transferEurekoin(
-            betAmount, "singhsimrananshu@gmail.com", currentUser.email);
+            betAmount, "seven@eurekoin.com", currentUser.email);
 
     var gameStatus = {
       "name": currentUser.displayName,
