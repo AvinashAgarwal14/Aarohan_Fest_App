@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../util/drawer.dart';
 import './day1.dart';
 import './day2.dart';
@@ -34,32 +35,35 @@ class _ScheduleState extends State<Schedule> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.white.withOpacity(0),
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark));
     setState(() {
       presentKey = 0;
     });
   }
 
-
   @override
-
   Widget build(BuildContext context) {
-    ThemeData themeData=Theme.of(context);
+    ThemeData themeData = Theme.of(context);
     return new Theme(
-        data: themeData,
-        child: new Scaffold(
-            key: _scaffoldKeyForSchedule,
-            drawer: NavigationDrawer(),
-            body: new CustomScrollView(slivers: <Widget>[
+      data: themeData,
+      child: SafeArea(
+        child: Scaffold(
+          key: _scaffoldKeyForSchedule,
+          drawer: NavigationDrawer(),
+          body: new CustomScrollView(
+            slivers: <Widget>[
               new SliverAppBar(
                 expandedHeight: _appBarHeight,
                 pinned: _appBarBehavior == AppBarBehavior.pinned,
@@ -72,7 +76,7 @@ class _ScheduleState extends State<Schedule> {
                     fit: StackFit.expand,
                     children: <Widget>[
                       new Image.asset(
-                        "images/schedule.jpg",
+                        "assets/schedule.png",
                         fit: BoxFit.cover,
                         height: _appBarHeight,
                       ),
@@ -95,8 +99,9 @@ class _ScheduleState extends State<Schedule> {
                 ),
               ),
               new SliverList(
-                delegate: new SliverChildListDelegate(<Widget>[
-                  new Container(
+                delegate: new SliverChildListDelegate(
+                  <Widget>[
+                    new Container(
                       margin: margin,
                       alignment: Alignment.center,
                       padding: new EdgeInsets.only(left: 30.0, top: 20.0),
@@ -106,81 +111,88 @@ class _ScheduleState extends State<Schedule> {
                         border: new Border(
                           bottom: new BorderSide(
                               width: 0.5,
-                              color: const Color.fromRGBO(204, 204, 204, 1.0)
-                          ),
+                              color: const Color.fromRGBO(204, 204, 204, 1.0)),
                         ),
                       ),
                       child: new ListView.builder(
-                          cacheExtent: MediaQuery.of(context).size.height*5,
-                          itemCount: week.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (BuildContext context, int index) {
-                            return new GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    print(presentKey);
-                                    presentKey = index;
-                                  });
-                                },
-                                child: SizedBox(
-                                    width: 80.0,
-                                    child: Column(children: <Widget>[
-                                      new Text(
-                                        week[index],
-                                        style: new TextStyle(
-                                            color: const Color.fromRGBO(
-                                                204, 204, 204, 1.0),
-                                            fontSize: 12.0,
-                                            fontWeight: FontWeight.w400),
+                        cacheExtent: MediaQuery.of(context).size.height * 5,
+                        itemCount: week.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return new GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                print(presentKey);
+                                presentKey = index;
+                              });
+                            },
+                            child: SizedBox(
+                              width: 80.0,
+                              child: Column(
+                                children: <Widget>[
+                                  new Text(
+                                    week[index],
+                                    style: new TextStyle(
+                                        color: const Color.fromRGBO(
+                                            204, 204, 204, 1.0),
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  new Padding(
+                                    padding: new EdgeInsets.only(
+                                        top: 10.0, bottom: 5.0),
+                                    child: new Container(
+                                      width: 40.0,
+                                      height: 40.0,
+                                      alignment: Alignment.center,
+                                      decoration: new BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: (presentKey == index)
+                                              ? const Color.fromRGBO(
+                                                  204, 204, 204, 0.3)
+                                              : Colors.transparent),
+                                      child: new Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          new Text(
+                                            arrayDay[index].toString(),
+                                            style: new TextStyle(
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          (presentKey == index)
+                                              ? new Container(
+                                                  padding: new EdgeInsets.only(
+                                                      top: 3.0),
+                                                  width: 3.0,
+                                                  height: 3.0,
+                                                  decoration: new BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Color(0xFF505194)),
+                                                )
+                                              : new Container()
+                                        ],
                                       ),
-                                      new Padding(
-                                        padding: new EdgeInsets.only(
-                                            top: 10.0, bottom: 5.0),
-                                        child: new Container(
-                                              width: 40.0,
-                                              height: 40.0,
-                                              alignment: Alignment.center,
-                                              decoration: new BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: (presentKey == index)
-                                                      ? const Color.fromRGBO(
-                                                          204, 204, 204, 0.3)
-                                                      : Colors.transparent),
-                                              child: new Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  new Text(
-                                                    arrayDay[index].toString(),
-                                                    style: new TextStyle(
-                                                        fontSize: 12.0,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  ),
-                                                  (presentKey == index)
-                                                      ? new Container(
-                                                          padding:
-                                                              new EdgeInsets
-                                                                      .only(
-                                                                  top: 3.0),
-                                                          width: 3.0,
-                                                          height: 3.0,
-                                                          decoration: new BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color: Color(0xFF505194)),
-                                                        )
-                                                      : new Container()
-                                                ],
-                                              )),
-                                      )
-                                    ])));
-                          })),
-                  Container(
-                     // color: Colors.white,
-                      child: selectDaySchedule[presentKey])
-                ]),
-              )
-            ])));
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                        // color: Colors.white,
+                        child: selectDaySchedule[presentKey])
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
