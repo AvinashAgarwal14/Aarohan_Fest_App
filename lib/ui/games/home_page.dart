@@ -239,9 +239,12 @@ class _HomePageState extends State<HomePage> {
       },
       child: (isEurekoinAlreadyRegistered == null || _enterLoading)
           ? Scaffold(
-              backgroundColor: Color(0xFFFFA594),
-              body: Center(
-                child: Image.asset("assets/loading.gif"),
+              body: Container(
+                height: MediaQuery.of(context).size.height,
+                child: Image.asset(
+                  "assets/loading.gif",
+                  fit: BoxFit.cover,
+                ),
               ),
             )
           : (isEurekoinAlreadyRegistered == 1)
@@ -304,9 +307,10 @@ class _HomePageState extends State<HomePage> {
                   body: Builder(
                     builder: (context) => _isLoading
                         ? Container(
-                            color: Color(0xFFFFA594),
-                            child: Center(
-                              child: Image.asset("assets/loading.gif"),
+                            height: MediaQuery.of(context).size.height,
+                            child: Image.asset(
+                              "assets/loading.gif",
+                              fit: BoxFit.cover,
                             ),
                           )
                         : Column(
@@ -804,12 +808,11 @@ class _HomePageState extends State<HomePage> {
                                                     color: Colors.black,
                                                     thickness: 3,
                                                   ),
-                                                  recentResult[index]
-                                                              ["name"] !=
+                                                  recentResult[index]["name"] !=
                                                           null
                                                       ? Text(
-                                                          recentResult[index][
-                                                                  "name"],
+                                                          recentResult[index]
+                                                              ["name"],
                                                           style: GoogleFonts
                                                               .signika(
                                                                   fontSize: 20,

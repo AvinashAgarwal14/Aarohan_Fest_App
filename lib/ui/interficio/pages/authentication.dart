@@ -41,7 +41,7 @@ class _AuthPageState extends State<AuthPage> {
 
   bool _isLoading = false;
 
-  String api_url = "romitkarmakar.pythonanywhere.com";
+  String api_url = "jd.nitdgplug.org";
 
   AuthMode _authmode = AuthMode.login;
 
@@ -55,20 +55,28 @@ class _AuthPageState extends State<AuthPage> {
     setState(() {
       _isLoading = true;
     });
+    print(_loginFormData);
     http.Response response = await http.post(
-        Uri.encodeFull("http://$api_url/api/auth/login/"),
+        Uri.encodeFull("https://$api_url/api/auth/login/"),
         headers: {"Content-Type": "application/json"},
         body: json.encode(_loginFormData));
+    print("sgrgeg${response.body}");
+    var res = response.body;
     var data = json.decode(response.body);
+    print(response.body);
     print(data);
     if (data.length == 1) {
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text("unable to log in with provided credentials"),
-        duration: Duration(seconds: 1),
-      ));
-      setState(() {
-        _isLoading = false;
-      });
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text("unable to log in with provided credentials"),
+          duration: Duration(seconds: 1),
+        ),
+      );
+      setState(
+        () {
+          _isLoading = false;
+        },
+      );
     } else {
       user["username"] = data["user"]["username"];
       user["token"] = data["token"];
@@ -82,23 +90,26 @@ class _AuthPageState extends State<AuthPage> {
       prefs.setString("password", user["password"]);
       prefs.setString("email", user["email"]);
 
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text("Logged in"),
-        duration: Duration(seconds: 1),
-      ));
-      setState(() {
-        _isLoading = false;
-      });
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text("Logged in"),
+          duration: Duration(seconds: 1),
+        ),
+      );
+      setState(
+        () {
+          _isLoading = false;
+        },
+      );
       Navigator.pushReplacementNamed(context, '/');
     }
   }
-
   Future userRegister(final Map<String, dynamic> user) async {
     setState(() {
       _isLoading = true;
     });
     http.Response response = await http.post(
-        Uri.encodeFull("http://$api_url/api/auth/register/"),
+        Uri.encodeFull("https://$api_url/api/auth/register/"),
         headers: {"Content-Type": "application/json"},
         body: json.encode(_registerFormData));
     var data = json.decode(response.body);

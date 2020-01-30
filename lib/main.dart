@@ -28,10 +28,10 @@ void main() async {
   // debugPaintSizeEnabled = true;
   // debugPaintBaselinesEnabled = true;
   // debugPaintPointersEnabled = true;
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarIconBrightness: Brightness.dark));
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarIconBrightness: Brightness.dark));
 
   WidgetsFlutterBinding.ensureInitialized();
   Util flameUtil = Util();
@@ -39,22 +39,24 @@ void main() async {
   await flameUtil.setOrientation(DeviceOrientation.portraitUp);
   Flame.images.loadAll([
     "GameBG.png",
-    "c",
+    "player.png",
     "bomb1Green.png",
     "bomb1Red.png",
     "bomb2Green.png",
     "bomb2Red.png",
   ]);
   intro() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  //Return bool
-  bool boolValue = prefs.getBool('boolValue');
-  return boolValue;
-}
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return bool
+    bool boolValue = prefs.getBool('boolValue');
+    return boolValue;
+  }
+
   intro_bool() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setBool('boolValue', true);
-}
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('boolValue', true);
+  }
+
   SharedPreferences storage = await SharedPreferences.getInstance();
   GameController gameController = GameController(storage);
 
@@ -77,11 +79,11 @@ class Aavishkar_App extends StatelessWidget {
       title: "Aarohan App",
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primaryColor: Color(0xFF505194)),
+      theme: ThemeData(primaryColor: Color(0xFF6B872B),),
       initialRoute: "/splash",
       routes: <String, WidgetBuilder>{
-        "/intro":(BuildContext context)=> IntroScreen(),
-        "/splash":(BuildContext context)=> SplashScreen(),
+        "/intro": (BuildContext context) => IntroScreen(),
+        "/splash": (BuildContext context) => SplashScreen(),
         "/ui/dashboard": (BuildContext context) => Dashboard(),
         "/ui/tags": (BuildContext context) => SearchByTags(),
         "/ui/schedule": (BuildContext context) => Schedule(),

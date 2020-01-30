@@ -414,9 +414,9 @@ Widget PaymentSuccessDialog(context, message, amount, to) {
     context: context,
     child: Center(
       child: SizedBox(
-        height: 280,
+        height: 310,
         child: Dialog(
-          backgroundColor: message == "Successful!" ? Colors.green : Colors.red,
+          // backgroundColor:
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
           child: Padding(
@@ -427,9 +427,22 @@ Widget PaymentSuccessDialog(context, message, amount, to) {
                   )
                 : Column(
                     children: <Widget>[
-                      Text(
-                        message,
-                        style: label,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: message == "Successful!"
+                              ? Colors.green
+                              : Colors.red,
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20),
+                          ),
+                        ),
+                        alignment: Alignment.bottomCenter,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                        child: Text(
+                          message,
+                          style: label,
+                        ),
                       ),
                       Divider(),
                       Row(

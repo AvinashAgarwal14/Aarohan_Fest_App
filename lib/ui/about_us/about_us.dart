@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../util/drawer.dart';
 
 class AboutUsPage extends StatefulWidget {
@@ -40,6 +42,9 @@ class _AboutUsPageState extends State<AboutUsPage>
       _updateAnimatedBoxTwoEnterAnimation();
       _updateAnimatedBoxThreeEnterAnimation();
     });
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF6D7650),
+        systemNavigationBarIconBrightness: Brightness.dark));
   }
 
   static const enterAnimationMinHeight = 100.0;
@@ -126,153 +131,210 @@ class _AboutUsPageState extends State<AboutUsPage>
     final boxPositionThree = Tween(begin: Offset(-1.0, 0.0), end: Offset.zero)
         .chain(CurveTween(curve: Curves.elasticOut))
         .animate(animatedBoxThreeEnterAnimationController);
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
 
-    return new Scaffold(
-      drawer: NavigationDrawer(),
-      appBar: AppBar(
-        title: Text("About Aavishkar"),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () {
+          SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle(
+                statusBarColor: Colors.white,
+                systemNavigationBarIconBrightness: Brightness.dark),
+          );
+          Navigator.pop(context);
+        },
+        child: Scaffold(
+          key: _scaffoldKey,
+          drawer: NavigationDrawer(),
+          // appBar: AppBar(
+          //   elevation: 0,
+          //   title: Text("About Aavishkar"),
+          // ),
 
+          body: Container(
+            decoration: BoxDecoration(
                 color: Colors.black54,
-            image: DecorationImage(
-                image: AssetImage(""),
-                fit: BoxFit.fill)),
-        child: new ListView(
-          key: listViewKey,
-          controller: scrollController,
-          children: <Widget>[
-            new Container(
-              padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 0.0),
-              child: new ClipRRect(
-                  borderRadius: new BorderRadius.circular(10.0),
-                  child: new Image.asset("assets/AU1.png")),
-            ),
-            new Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(23.0, 0.0, 23.0, 23.0),
-              child: Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: new Text(
-                  'Aavishkar, as its name suggests a blend of innovation, team work and a geeky love for technology, is a tech fest that is not just an arena to exhibit but also an environment to learn. Our motto is to unveil in this college a fantasy world of bytes. From organising prestigious events like Hackathon, to creating an entire tournament for the cricket and football fans, this fest is known for its diverse nature. Aavishkar is  a innovation of the future, learning from the past and progressing with the present',
-                  style: TextStyle(fontSize: 20.0, color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-            new FadeTransition(
-              opacity: boxOpacityOne,
-              child: new SlideTransition(
-                position: boxPositionOne,
-                child: new Container(
-                    key: animatedBoxOneKey,
-//                  height: 750.0,
-                    padding: EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
-                    child: Column(
-                      children: <Widget>[
-                        new ClipRRect(
-                            borderRadius: new BorderRadius.circular(10.0),
-                            child: new Image.asset(
-                              "assets/AU2.png",
-                              fit: BoxFit.fill,
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: new Text(
-                            'This time around, Aavishkar has a lot more in store than just technology. With a number of attractions like one of the first digital currency mediums, Eurekoins, which can be used to redeem goodies and privileges, a lot of fun and technology awaits. For all the innovative techies out there, brain wracking events like the Hackathon, ScienceX, Capture the Flag, Transmission and Codecracker with exciting cash prizes await. With special attractions like the Army Vehicle Display and the Robotics arena for the automobile and robotics enthusiasts, Cycle stunts for adrenaline junkies and exciting treasure hunts like Terrorist Takedown, we have something for everyone!',
-                            style:
-                                TextStyle(fontSize: 20.0, color: Colors.white),
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
-                    )),
-              ),
-            ),
-            new FadeTransition(
-              opacity: boxOpacityTwo,
-              child: new SlideTransition(
-                position: boxPositionTwo,
-                child: new Container(
-                    key: animatedBoxTwoKey,
-//                  height: 500.0,
-                    padding: EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0.0),
-                    child: Column(
-                      children: <Widget>[
-                        new ClipRRect(
-                            borderRadius: new BorderRadius.circular(10.0),
-                            child: new Image.asset(
-                              "assets/AU3.png",
-                              fit: BoxFit.fill,
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.all(0.0),
-                          child: new Text(
-                            ' Inviting students to the battle ground to prove their mettle, Aavishkar has a theme that veils a world that an engineer can call home. The four days will be exhausted by counter strikes at the opponents and backing your teams. In the midst of rifles, crates and Pokemons, Aavishkar brings to you overnight gaming events and many more that will need you all armed. Through the theme of gaming, this Aavishkar, we welcome you to the next level.',
-                            style:
-                                TextStyle(fontSize: 20.0, color: Colors.white),
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
-                    )),
-              ),
-            ),
-            new FadeTransition(
-              opacity: boxOpacityThree,
-              child: new SlideTransition(
-                position: boxPositionThree,
-                child: new Container(
-                    key: animatedBoxThreeKey,
-//                  height: 700.0,
-                    padding: EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0.0),
-                    child: Column(
-                      children: <Widget>[
-                        new ClipRRect(
-                            borderRadius: new BorderRadius.circular(10.0),
-                            child: new Image.asset(
-                                "assets/AU4.png",
-                                fit: BoxFit.fill)),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: new Text(
-                            " With technology taking centre stage and striking the perfect balance between innovation and fun, Aavishkar is here to give you an enthralling experience and break the confines of a technical fest. From workshops on trending technologies to fun events like Human Foosball and Laser Tag, there's something to cater to all your whimsies. So don’t miss out and come on down this Aavishkar and prepare to be enchanted by the myriad brain wracking events, exciting performances, inspiring speeches and enlightening workshops. Get ready to transcend to the next level.",
-                            style:
-                                TextStyle(fontSize: 20.0, color: Colors.white),
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
-                    )),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 30.0),
-              child: new FlatButton(
-                  onPressed: () {
-                    scrollController.jumpTo(0.0);
-                    animatedBoxOneEnterAnimationController.reset();
-                    animatedBoxTwoEnterAnimationController.reset();
-                   animatedBoxThreeEnterAnimationController.reset();
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Text(
-                        "Move Up",
-                        style: TextStyle(
+                image: DecorationImage(
+                    image: AssetImage("images/AboutUs.png"), fit: BoxFit.fill)),
+            child: Stack(
+              children: <Widget>[
+                ListView(
+                  key: listViewKey,
+                  controller: scrollController,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
+                      child: Text(
+                        "About Aarohan",
+                        style: GoogleFonts.ubuntu(
+                          fontSize: 30,
                           color: Colors.white,
                         ),
                       ),
-                      new Icon(
-                        Icons.arrow_upward,
-                        color: Colors.white,
-                      )
-                    ],
-                  )),
-            )
-          ],
+                    ),
+                    new Container(
+                      padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 0.0),
+                      child: new ClipRRect(
+                          borderRadius: new BorderRadius.circular(10.0),
+                          child: new Image.asset("assets/AU1.png")),
+                    ),
+                    new Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.fromLTRB(23.0, 0.0, 23.0, 23.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'Aavishkar, as its name suggests a blend of innovation, team work and a geeky love for technology, is a tech fest that is not just an arena to exhibit but also an environment to learn. Our motto is to unveil in this college a fantasy world of bytes. From organising prestigious events like Hackathon, to creating an entire tournament for the cricket and football fans, this fest is known for its diverse nature. Aavishkar is  a innovation of the future, learning from the past and progressing with the present',
+                          style: TextStyle(fontSize: 20.0, color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    new FadeTransition(
+                      opacity: boxOpacityOne,
+                      child: new SlideTransition(
+                        position: boxPositionOne,
+                        child: new Container(
+                            key: animatedBoxOneKey,
+//                  height: 750.0,
+                            padding: EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
+                            child: Column(
+                              children: <Widget>[
+                                new ClipRRect(
+                                  borderRadius: new BorderRadius.circular(10.0),
+                                  child: new Image.asset(
+                                    "assets/AU2.png",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                  padding: EdgeInsets.all(20),
+                                  child: Text(
+                                    'This time around, Aavishkar has a lot more in store than just technology. With a number of attractions like one of the first digital currency mediums, Eurekoins, which can be used to redeem goodies and privileges, a lot of fun and technology awaits. For all the innovative techies out there, brain wracking events like the Hackathon, ScienceX, Capture the Flag, Transmission and Codecracker with exciting cash prizes await. With special attractions like the Army Vehicle Display and the Robotics arena for the automobile and robotics enthusiasts, Cycle stunts for adrenaline junkies and exciting treasure hunts like Terrorist Takedown, we have something for everyone!',
+                                    style: TextStyle(
+                                        fontSize: 20.0, color: Colors.white),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                    new FadeTransition(
+                      opacity: boxOpacityTwo,
+                      child: new SlideTransition(
+                        position: boxPositionTwo,
+                        child: new Container(
+                          key: animatedBoxTwoKey,
+//                  height: 500.0,
+                          padding: EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0.0),
+                          child: Column(
+                            children: <Widget>[
+                              new ClipRRect(
+                                borderRadius: new BorderRadius.circular(10.0),
+                                child: new Image.asset(
+                                  "assets/AU3.png",
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.black.withOpacity(0.5),
+                                ),
+                                padding: EdgeInsets.all(20),
+                                child: Text(
+                                  ' Inviting students to the battle ground to prove their mettle, Aavishkar has a theme that veils a world that an engineer can call home. The four days will be exhausted by counter strikes at the opponents and backing your teams. In the midst of rifles, crates and Pokemons, Aavishkar brings to you overnight gaming events and many more that will need you all armed. Through the theme of gaming, this Aavishkar, we welcome you to the next level.',
+                                  style: TextStyle(
+                                      fontSize: 20.0, color: Colors.white),
+                                  textAlign: TextAlign.center,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    new FadeTransition(
+                      opacity: boxOpacityThree,
+                      child: new SlideTransition(
+                        position: boxPositionThree,
+                        child: new Container(
+                            key: animatedBoxThreeKey,
+//                  height: 700.0,
+                            padding: EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0.0),
+                            child: Column(
+                              children: <Widget>[
+                                new ClipRRect(
+                                    borderRadius:
+                                        new BorderRadius.circular(10.0),
+                                    child: new Image.asset("assets/AU4.png",
+                                        fit: BoxFit.fill)),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                  padding: EdgeInsets.all(20),
+                                  child: Text(
+                                    " With technology taking centre stage and striking the perfect balance between innovation and fun, Aavishkar is here to give you an enthralling experience and break the confines of a technical fest. From workshops on trending technologies to fun events like Human Foosball and Laser Tag, there's something to cater to all your whimsies. So don’t miss out and come on down this Aavishkar and prepare to be enchanted by the myriad brain wracking events, exciting performances, inspiring speeches and enlightening workshops. Get ready to transcend to the next level.",
+                                    style: TextStyle(
+                                        fontSize: 20.0, color: Colors.white),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30.0),
+                      child: new FlatButton(
+                          onPressed: () {
+                            scrollController.jumpTo(0.0);
+                            animatedBoxOneEnterAnimationController.reset();
+                            animatedBoxTwoEnterAnimationController.reset();
+                            animatedBoxThreeEnterAnimationController.reset();
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              new Text(
+                                "Move Up",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              new Icon(
+                                Icons.arrow_upward,
+                                color: Colors.white,
+                              )
+                            ],
+                          )),
+                    )
+                  ],
+                ),
+                FloatingActionButton(
+                  elevation: 0,
+                  foregroundColor: Color(0xFF233327),
+                  backgroundColor: Colors.transparent,
+                  onPressed: () {
+                    _scaffoldKey.currentState.openDrawer();
+                  },
+                  child: Icon(Icons.menu),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -68,118 +68,120 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
-        child: AppBar(
-          elevation: 0,
-          brightness: Brightness.light,
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(
-            color: Colors.black,
-          ),
-          textTheme: TextTheme(
-              title: TextStyle(
-            color: Colors.black,
-            fontSize: 20.0,
-          )),
-          title: Text("Aarohan"),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.youtube_searched_for),
-              onPressed: () {
-                Navigator.of(context).pushNamed("/ui/tags");
-              },
+    return SafeArea(
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar(
+            elevation: 0,
+            brightness: Brightness.light,
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(
+              color: Colors.black,
             ),
-            (currentUser != null && isEurekoinAlreadyRegistered != null)
-                ? IconButton(
-                    icon: Image(
-                        image: AssetImage("images/QRIcon.png"),
-                        color: Colors.black),
-                    onPressed: () {
-                      if (isEurekoinAlreadyRegistered == 1) {
-                        scanQR();
-                      } else if (isEurekoinAlreadyRegistered == 0) {
-                        scanQR();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EurekoinHomePage()),
-                        ).then((onReturn) {
-                          getUser();
-                        });
-                      }
-                    })
-                : Container(),
-            //   SizedBox(width:10),
-            // IconButton(
-            //   icon:Icon(Icons.account_box),
-            //   onPressed: (){
-            //     _logout();
-            //   },
-            //   ),
+            textTheme: TextTheme(
+                title: TextStyle(
+              color: Colors.black,
+              fontSize: 20.0,
+            )),
+            title: Text("Aarohan"),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.youtube_searched_for),
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/ui/tags");
+                },
+              ),
+              (currentUser != null && isEurekoinAlreadyRegistered != null)
+                  ? IconButton(
+                      icon: Image(
+                          image: AssetImage("images/QRIcon.png"),
+                          color: Colors.black),
+                      onPressed: () {
+                        if (isEurekoinAlreadyRegistered == 1) {
+                          scanQR();
+                        } else if (isEurekoinAlreadyRegistered == 0) {
+                          scanQR();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EurekoinHomePage()),
+                          ).then((onReturn) {
+                            getUser();
+                          });
+                        }
+                      })
+                  : Container(),
+              //   SizedBox(width:10),
+              // IconButton(
+              //   icon:Icon(Icons.account_box),
+              //   onPressed: (){
+              //     _logout();
+              //   },
+              //   ),
 
-            SizedBox(width: 10),
-          ],
+              SizedBox(width: 10),
+            ],
+          ),
         ),
-      ),
-      drawer: NavigationDrawer(),
-      body: Stack(
-        children: <Widget>[
-          DashBoardLayout(),
-          SlidingUpPanel(
-            color: Colors.white,
-            minHeight: 65.0,
-            maxHeight: MediaQuery.of(context).size.height * 0.85,
-            panel: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 5.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      width: 35,
-                      height: 8,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(12.0))),
-                    )
-                  ],
-                ),
-                SizedBox(height: 13.0),
-                Center(
-                  child: Text(
-                    "Newsfeed",
-                    style: TextStyle(
-                      fontSize: 21.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[800],
-                      // shadows: [
-                      //   BoxShadow(
-                      //       color: Colors.grey[800],
-                      //       offset: Offset(4.0, 4.0),
-                      //       blurRadius: 15.0,
-                      //       spreadRadius: 1.0),
-                      //   BoxShadow(
-                      //       color: Colors.white,
-                      //       offset: Offset(-4.0, -4.0),
-                      //       blurRadius: 15.0,
-                      //       spreadRadius: 1.0),
-                      // ],
+        drawer: NavigationDrawer(),
+        body: Stack(
+          children: <Widget>[
+            DashBoardLayout(),
+            SlidingUpPanel(
+              color: Colors.white,
+              minHeight: 65.0,
+              maxHeight: MediaQuery.of(context).size.height * 0.85,
+              panel: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 5.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 35,
+                        height: 8,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12.0))),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 13.0),
+                  Center(
+                    child: Text(
+                      "Newsfeed",
+                      style: TextStyle(
+                        fontSize: 21.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[800],
+                        // shadows: [
+                        //   BoxShadow(
+                        //       color: Colors.grey[800],
+                        //       offset: Offset(4.0, 4.0),
+                        //       blurRadius: 15.0,
+                        //       spreadRadius: 1.0),
+                        //   BoxShadow(
+                        //       color: Colors.white,
+                        //       offset: Offset(-4.0, -4.0),
+                        //       blurRadius: 15.0,
+                        //       spreadRadius: 1.0),
+                        // ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20.0),
-                Container(
-                    padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-                    height: MediaQuery.of(context).size.height * 0.75,
-                    child: Newsfeed()),
-              ],
+                  SizedBox(height: 20.0),
+                  Container(
+                      padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+                      height: MediaQuery.of(context).size.height * 0.75,
+                      child: Newsfeed()),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -215,47 +217,62 @@ class _DashboardState extends State<Dashboard> {
   Future scanQR() async {
     try {
       String hiddenString = await BarcodeScanner.scan();
-      if(hiddenString.contains("arhn")){
-        hiddenString = hiddenString.substring(11,hiddenString.length);
+      if (hiddenString.contains("arhn")) {
+        hiddenString = hiddenString.substring(11, hiddenString.length);
 
-          await launch(hiddenString);
-          hiddenString = hiddenString.substring(0,hiddenString.length - 15)+"2"+hiddenString.substring(hiddenString.length-14);
-          await launch(hiddenString);
-          hiddenString = hiddenString.substring(0,hiddenString.length - 15)+"3"+hiddenString.substring(hiddenString.length-14);
-          await launch(hiddenString);
+        await launch(hiddenString);
+        hiddenString = hiddenString.substring(0, hiddenString.length - 15) +
+            "2" +
+            hiddenString.substring(hiddenString.length - 14);
+        await launch(hiddenString);
+        hiddenString = hiddenString.substring(0, hiddenString.length - 15) +
+            "3" +
+            hiddenString.substring(hiddenString.length - 14);
+        await launch(hiddenString);
 //        } else {
 //          throw 'Could not launch $hiddenString';
 //        }
-      }
-      else{
-      setState(() {
-        barcodeString = hiddenString;
-        print(barcodeString);
-        Future<int> result = couponEurekoin(barcodeString);
-        result.then((value) {
-          print(value);
-          if (value == 0) {
-            setState(() {
-              barcodeString = "Successful!";
-            });
-            showDialogBox(barcodeString);
-          } else if (value == 2)
-            setState(() {
-              barcodeString = "Invalid Coupon";
-              showDialogBox(barcodeString);
-            });
-          else if (value == 3)
-            setState(() {
-              barcodeString = "Already Used";
-              showDialogBox(barcodeString);
-            });
-          else if (value == 4)
-            setState(() {
-              barcodeString = "Coupon Expired";
-              showDialogBox(barcodeString);
-            });
-        });
-      });
+      } else {
+        setState(
+          () {
+            barcodeString = hiddenString;
+            print(barcodeString);
+            Future<int> result = couponEurekoin(barcodeString);
+            result.then(
+              (value) {
+                print(value);
+                if (value == 0) {
+                  setState(
+                    () {
+                      barcodeString = "Successful!";
+                    },
+                  );
+                  showDialogBox(barcodeString);
+                } else if (value == 2)
+                  setState(
+                    () {
+                      barcodeString = "Invalid Coupon";
+                      showDialogBox(barcodeString);
+                    },
+                  );
+                else if (value == 3)
+                  setState(
+                    () {
+                      barcodeString = "Already Used";
+                      showDialogBox(barcodeString);
+                    },
+                  );
+                else if (value == 4)
+                  setState(
+                    () {
+                      barcodeString = "Coupon Expired";
+                      showDialogBox(barcodeString);
+                    },
+                  );
+              },
+            );
+          },
+        );
       }
     } on PlatformException catch (e) {
       setState(() {

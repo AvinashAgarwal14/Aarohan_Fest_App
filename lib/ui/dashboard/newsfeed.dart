@@ -95,85 +95,112 @@ class NewsfeedCards extends StatefulWidget {
 class _NewsfeedCardsState extends State<NewsfeedCards> {
   @override
   Widget build(BuildContext context) {
-    Widget card = new Card(
+    Widget card = new Container(
+      margin: EdgeInsets.all(20),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(30), boxShadow: [
+        BoxShadow(
+            color: Colors.grey[800],
+            offset: Offset(3.0, 3.0),
+            blurRadius: 10.0,
+            spreadRadius: 1.0),
+        BoxShadow(
+            color: Colors.white,
+            offset: Offset(-3.0, -3.0),
+            blurRadius: 10.0,
+            spreadRadius: 1.0),
+      ]),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
         child: new Column(
-      children: <Widget>[
-        new ClipRRect(
-            borderRadius: new BorderRadius.only(
-                topLeft: new Radius.circular(5.0),
-                topRight: new Radius.circular(5.0)),
-            child: Container(
+          children: <Widget>[
+            new ClipRRect(
+              borderRadius: new BorderRadius.only(
+                  topLeft: new Radius.circular(30.0),
+                  topRight: new Radius.circular(30.0)),
+              child: Container(
                 height: 256.0,
                 child: SizedBox.expand(
-                    child: Hero(
-                        tag: widget.cardItem.key,
-                        child: CachedNetworkImage(
-                            placeholder: (context, url) =>
-                                Image.asset("images/imageplaceholder.png"),
-                            imageUrl: widget.cardItem.imageUrl,
-                            fit: BoxFit.cover,
-                            height: 256.0))))),
-        ListTile(
-            title: new Padding(
-              padding: EdgeInsets.fromLTRB(0.0, 5.0, 5.0, 5.0),
-              child: new Text(widget.cardItem.title),
-            ),
-            subtitle: new Column(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.fromLTRB(0.0, 5.0, 5.0, 5.0),
-                  alignment: Alignment.topLeft,
-                  child:
-                      new Text("${widget.cardItem.body.substring(0, 45)}..."),
+                  child: Hero(
+                    tag: widget.cardItem.key,
+                    child: CachedNetworkImage(
+                        placeholder: (context, url) =>
+                            Image.asset("images/imageplaceholder.png"),
+                        imageUrl: widget.cardItem.imageUrl,
+                        fit: BoxFit.cover,
+                        height: 256.0),
+                  ),
                 ),
-                new Row(children: <Widget>[
-                  new Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: new Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.thumb_up,
-                          size: 20.0,
-                          color: Color(0xFF505194),
-                        ),
-                        Padding(padding: EdgeInsets.only(left: 3.0)),
-                        Text("${widget.cardItem.likesCount}")
-                      ],
-                    ),
+              ),
+            ),
+            ListTile(
+              title: new Padding(
+                padding: EdgeInsets.fromLTRB(0.0, 5.0, 5.0, 5.0),
+                child: new Text(widget.cardItem.title),
+              ),
+              subtitle: new Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0.0, 5.0, 5.0, 5.0),
+                    alignment: Alignment.topLeft,
+                    child:
+                        new Text("${widget.cardItem.body.substring(0, 45)}..."),
                   ),
-                  new Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: new Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.comment,
-                          size: 20.0,
-                          color: Color(0xFF505194),
+                  new Row(
+                    children: <Widget>[
+                      new Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: new Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.thumb_up,
+                              size: 20.0,
+                              color: Color(0xFF505194),
+                            ),
+                            Padding(padding: EdgeInsets.only(left: 3.0)),
+                            Text("${widget.cardItem.likesCount}")
+                          ],
                         ),
-                        Padding(padding: EdgeInsets.only(left: 3.0)),
-                        Text("${widget.cardItem.commentsCount}")
-                      ],
-                    ),
-                  ),
-                  new Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: new Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.date_range,
-                          size: 20.0,
-                          color: Color(0xFF505194),
+                      ),
+                      new Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: new Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.comment,
+                              size: 20.0,
+                              color: Color(0xFF505194),
+                            ),
+                            Padding(padding: EdgeInsets.only(left: 3.0)),
+                            Text("${widget.cardItem.commentsCount}")
+                          ],
                         ),
-                        Padding(padding: EdgeInsets.only(left: 3.0)),
-                        Text(widget.cardItem.date)
-                      ],
-                    ),
+                      ),
+                      new Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: new Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.date_range,
+                              size: 20.0,
+                              color: Color(0xFF505194),
+                            ),
+                            Padding(padding: EdgeInsets.only(left: 3.0)),
+                            Text(widget.cardItem.date)
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ])
-              ],
-            ))
-      ],
-    ));
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
     return card;
   }
 }

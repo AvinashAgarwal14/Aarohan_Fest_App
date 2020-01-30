@@ -20,8 +20,7 @@ class DashBoardLayout extends StatefulWidget {
   _DashBoardLayoutState createState() => _DashBoardLayoutState();
 }
 
-class _DashBoardLayoutState extends State<DashBoardLayout>
-    {
+class _DashBoardLayoutState extends State<DashBoardLayout> {
   CarouselSlider instance;
   int j = 0;
   double maxWidth = 180;
@@ -65,7 +64,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
     };
 
     database.setPersistenceEnabled(true);
-    database.setPersistenceCacheSizeBytes(150000);
+    database.setPersistenceCacheSizeBytes(1500);
     databaseReference = database.reference().child("Events");
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
@@ -354,6 +353,198 @@ class _DashBoardLayoutState extends State<DashBoardLayout>
                         },
                       ),
                     ),
+                  ],
+                ),
+              ),
+              Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed("/ui/eurekoin");
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              padding: EdgeInsets.all(15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Icon(Icons.monetization_on),
+                                  Text("Eurekoin Wallet"),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF4AC5F1),
+                                    Color(0xFF6B8BD8)
+                                  ],
+                                  stops: [0.3, 1],
+                                ),
+                                // color: Colors.green,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey[800],
+                                      offset: Offset(3.0, 3.0),
+                                      blurRadius: 7.0,
+                                      spreadRadius: 1.0),
+                                  BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(-3.0, -3.0),
+                                      blurRadius: 7.0,
+                                      spreadRadius: 1.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                            flex: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed("/ui/eurekoin_casino");
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Icon(Icons.casino),
+                                    Text("Eurekoin Casino"),
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  // color: Colors.yellow,
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF4AC5F1),
+                                      Color(0xFF6B8BD8)
+                                    ],
+                                    stops: [0.3, 1],
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey[800],
+                                        offset: Offset(3.0, 3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                    BoxShadow(
+                                        color: Colors.white,
+                                        offset: Offset(-3.0, -3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                  ],
+                                ),
+                              ),
+                            )),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                            flex: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed("/interficio/interficio.dart");
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Icon(Icons.search),
+                                    Text("Journo Detective"),
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  // color: Colors.white,
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF4AC5F1),
+                                      Color(0xFF6B8BD8)
+                                    ],
+                                    stops: [0.3, 1],
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey[800],
+                                        offset: Offset(3.0, 3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                    BoxShadow(
+                                        color: Colors.white,
+                                        offset: Offset(-3.0, -3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                  ],
+                                ),
+                              ),
+                            )),
+                        Expanded(
+                            flex: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed("/ui/share_memories");
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Icon(Icons.linked_camera),
+                                    Text("Share Memories"),
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  // color: Colors.white,
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF4AC5F1),
+                                      Color(0xFF6B8BD8)
+                                    ],
+                                    stops: [0.3, 1],
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey[800],
+                                        offset: Offset(3.0, 3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                    BoxShadow(
+                                        color: Colors.white,
+                                        offset: Offset(-3.0, -3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                  ],
+                                ),
+                              ),
+                            )),
+                      ],
+                    )
                   ],
                 ),
               ),
