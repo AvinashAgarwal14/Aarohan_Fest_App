@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
     return WillPopScope(
       onWillPop: () {
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
+            statusBarColor: Colors.transparent,
             systemNavigationBarIconBrightness: Brightness.dark));
         Navigator.pop(context);
       },

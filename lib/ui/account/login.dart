@@ -61,7 +61,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   @override
   void initState() {
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+        statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark));
     super.initState();

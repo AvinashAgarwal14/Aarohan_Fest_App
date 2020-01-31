@@ -101,7 +101,7 @@ class _UpDownGameState extends State<UpDownGame> {
           Navigator.pop(context);
 
           SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
+              statusBarColor: Colors.transparent,
               systemNavigationBarIconBrightness: Brightness.dark));
         },
         child: Container(
@@ -140,7 +140,7 @@ class _UpDownGameState extends State<UpDownGame> {
                       onPressed: () {
                         SystemChrome.setSystemUIOverlayStyle(
                             SystemUiOverlayStyle(
-                                statusBarColor: Colors.white,
+                                statusBarColor: Colors.transparent,
                                 systemNavigationBarIconBrightness:
                                     Brightness.dark));
                         Navigator.pop(context);
@@ -278,7 +278,7 @@ class _UpDownGameState extends State<UpDownGame> {
       onWillPop: () {
         Navigator.pop(context);
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
+            statusBarColor: Colors.transparent,
             systemNavigationBarIconBrightness: Brightness.dark));
       },
       child: Scaffold(
@@ -366,7 +366,7 @@ class _UpDownGameState extends State<UpDownGame> {
                     onPressed: () {
                       Navigator.pop(context);
                       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                          statusBarColor: Colors.white,
+                          statusBarColor: Colors.transparent,
                           systemNavigationBarIconBrightness: Brightness.dark));
                     },
                     child: Icon(

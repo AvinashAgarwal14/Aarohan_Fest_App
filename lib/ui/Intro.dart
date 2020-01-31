@@ -40,11 +40,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 4, milliseconds: 250), () {
       if (introScreen == null) {
         saveData();
-        Navigator.of(context).pushNamedAndRemoveUntil(
-              '/intro', (Route<dynamic> route) => false);
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/intro', (Route<dynamic> route) => false);
       } else {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              '/ui/account/login', (Route<dynamic> route) => false);
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/ui/account/login', (Route<dynamic> route) => false);
       }
     });
   }
@@ -52,9 +52,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/SplashScreen.gif"), fit: BoxFit.fill)));
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/SplashScreen.gif"), fit: BoxFit.fill),
+      ),
+    );
   }
 
   loadSavedData() async {
@@ -71,15 +73,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-
-
 class IntroScreen extends StatefulWidget {
   @override
   _IntroScreenState createState() => _IntroScreenState();
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-
   List<Slide> slides = new List();
 
   @override
@@ -102,19 +101,18 @@ class _IntroScreenState extends State<IntroScreen> {
         backgroundImage: "assets/INTRO3.png",
       ),
     );
-
   }
 
   void onDonePress() {
     // TODO: go to next screen
     Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/ui/account/login', (Route<dynamic> route) => false);
+        '/ui/account/login', (Route<dynamic> route) => false);
   }
 
   void onSkipPress() {
     // TODO: go to next screen
     Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/ui/account/login', (Route<dynamic> route) => false);
+        '/ui/account/login', (Route<dynamic> route) => false);
   }
 
   @override

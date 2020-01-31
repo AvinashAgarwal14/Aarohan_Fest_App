@@ -93,7 +93,7 @@ class _ContributorsState extends State<Contributors> {
   void initState() {
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF6B872B),
+        statusBarColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.dark));
   }
 
