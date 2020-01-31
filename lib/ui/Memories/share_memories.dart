@@ -50,9 +50,9 @@ class _ShareMemoriesState extends State<ShareMemories> {
   @override
   Widget build(BuildContext context) {
     return (comingSoon==null)?
-    Center(child: Image.asset('loader')):
+    Center(child: Image.asset('images/gifs/loaderlight.gif')):
     (comingSoon == true)?
-    Center(child: Image.asset('comingsoon'))
+    Center(child: Image.asset('images/comingsoon.png'))
         :
     Scaffold(
         backgroundColor: Colors.white,
