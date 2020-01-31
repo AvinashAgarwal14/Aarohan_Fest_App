@@ -315,7 +315,7 @@ class _AuthPageState extends State<AuthPage> {
   DecorationImage _buildBackgroundImage() {
     return DecorationImage(
       fit: BoxFit.cover,
-      image: AssetImage('assets/authpage.jpg'),
+      image: AssetImage('assets/JournoDetective.jpg'),
     );
   }
 
@@ -348,13 +348,13 @@ class _AuthPageState extends State<AuthPage> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    Text(
-                      "JOURNO DETECTIVE",
-                      style: GoogleFonts.zhiMangXing(
-                          fontSize: 59,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
+                    // Text(
+                    //   "JOURNO   DETECTIVE",
+                    //   style: GoogleFonts.yanoneKaffeesatz(
+                    //       fontSize: 53,
+                    //       color: Colors.white,
+                    //       fontWeight: FontWeight.bold),
+                    // ),
                     SizedBox(
                         height: _authmode == AuthMode.login
                             ? MediaQuery.of(context).size.height / 6

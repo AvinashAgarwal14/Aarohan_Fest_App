@@ -152,9 +152,9 @@ class _ScoreboardState extends State<Scoreboard> {
     //Selected="None";
     createUserList("none");
     print("In initstate");
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF6B872B),
-        systemNavigationBarIconBrightness: Brightness.dark));
+    //   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //       statusBarColor: Color(0xFF6B872B),
+    //       systemNavigationBarIconBrightness: Brightness.dark));
   }
 
   void _onEntryAdded(Event event) {
@@ -210,35 +210,35 @@ class _ScoreboardState extends State<Scoreboard> {
           getData();
           firsttimeDatafetched = true;
         }
-        return SafeArea(
-          child: WillPopScope(
-            onWillPop: () {
-              SystemChrome.setSystemUIOverlayStyle(
-                SystemUiOverlayStyle(
-                    statusBarColor: Colors.white,
-                    systemNavigationBarIconBrightness: Brightness.dark),
-              );
-              Navigator.pop(context);
-            },
-            child: Scaffold(
-              key: _scaffoldKey,
-              drawer: NavigationDrawer(),
-              // appBar: AppBar(
-              //   title: const Text('Live Scoreboard'),
-              //   elevation: 10.0,
-              // ),
-              body: Container(
-                //height: MediaQuery.of(context).size.height,
-                //width: MediaQuery.of(context).size.width/2,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("images/gifs/medal.gif"),
-                        fit: BoxFit.cover)),
-                child: RefreshIndicator(
-                  displacement: 100.0,
-                  backgroundColor: Colors.white,
-                  key: _refreshIndicatorKey,
-                  onRefresh: getDataOnRefresh,
+        return WillPopScope(
+          onWillPop: () {
+            // SystemChrome.setSystemUIOverlayStyle(
+            //   SystemUiOverlayStyle(
+            //       statusBarColor: Colors.white,
+            //       systemNavigationBarIconBrightness: Brightness.dark),
+            // );
+            Navigator.pop(context);
+          },
+          child: Scaffold(
+            key: _scaffoldKey,
+            drawer: NavigationDrawer(),
+            // appBar: AppBar(
+            //   title: const Text('Live Scoreboard'),
+            //   elevation: 10.0,
+            // ),
+            body: Container(
+              //height: MediaQuery.of(context).size.height,
+              //width: MediaQuery.of(context).size.width/2,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/gifs/medal.gif"),
+                      fit: BoxFit.cover)),
+              child: RefreshIndicator(
+                displacement: 100.0,
+                backgroundColor: Colors.white,
+                key: _refreshIndicatorKey,
+                onRefresh: getDataOnRefresh,
+                child: SafeArea(
                   child: Stack(
                     children: <Widget>[
                       ListView(
@@ -248,8 +248,8 @@ class _ScoreboardState extends State<Scoreboard> {
                             padding: EdgeInsets.fromLTRB(50.0, 0.0, 30.0, 0.0),
                             child: Text(
                               "Live Scoreboard",
-                              style: GoogleFonts.ubuntu(
-                                fontSize: 30,
+                              style: GoogleFonts.josefinSans(
+                                fontSize: 35,
                                 color: Color(0xFF6B872B),
                               ),
                             ),

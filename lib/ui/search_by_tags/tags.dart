@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../util/drawer.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
@@ -72,6 +73,8 @@ class _SearchByTagsState extends State<SearchByTags> {
     return HSVColor.fromAHSV(1.0, hue, 0.4, 0.90).toColor();
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> choiceChips = _tags.map<Widget>((String name) {
@@ -102,75 +105,27 @@ class _SearchByTagsState extends State<SearchByTags> {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Tags"),
-      ),
+      key: _scaffoldKey,
+      // appBar: AppBar(
+      //   title: Text("Tags"),
+      // ),
       drawer: NavigationDrawer(),
-      body: Stack(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 10.0),
-              ),
-              Container(
-                child: new Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: cardChildren,
-                ),
-              ),
-              Divider(
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.grey
-                    : Color(0xFF505194),
-              ),
-              Container(
-                  child: Expanded(
-                child: ListView.builder(
-                    cacheExtent: MediaQuery.of(context).size.height * 3,
-                    itemCount: eventsByTags[_selectedTag].length,
-                    itemBuilder: (context, position) {
-                      return Container(
-                          child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => new EventDetails(
-                                          item: eventsByTags[_selectedTag]
-                                              [position])),
-                                );
-                              },
-                              child: SearchByTagsCards(
-                                  eventCard: eventsByTags[_selectedTag]
-                                      [position])));
-                    }),
-              )),
-              SizedBox(height: 55.0),
-            ],
-          ),
-          SlidingUpPanel(
-            minHeight: 65.0,
-            maxHeight: MediaQuery.of(context).size.height * 0.85,
-            panel: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            ListView(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 5.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      width: 35,
-                      height: 8,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(12.0))),
-                    )
-                  ],
+                Container(
+                  padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
+                  child: Text(
+                    "Search",
+                    style: GoogleFonts.josefinSans(
+                      fontSize: 35,
+                      color: Color(0xFF6B872B),
+                    ),
+                  ),
                 ),
-                SizedBox(height: 13.0),
-                Center(child: Text("Search")),
                 SizedBox(height: 20.0),
                 Container(
                   padding: const EdgeInsets.only(left: 14.0, right: 14.0),
@@ -181,8 +136,79 @@ class _SearchByTagsState extends State<SearchByTags> {
                 ),
               ],
             ),
-          ),
-        ],
+            SlidingUpPanel(
+              minHeight: 65.0,
+              maxHeight: MediaQuery.of(context).size.height * 0.85,
+              panel: Column(
+                children: <Widget>[
+                  SizedBox(height: 5.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 35,
+                        height: 8,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12.0))),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 13.0),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                  ),
+                  Container(
+                    child: new Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: cardChildren,
+                    ),
+                  ),
+                  Divider(
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.grey
+                        : Color(0xFF505194),
+                  ),
+                  Container(
+                      child: Expanded(
+                    child: ListView.builder(
+                        cacheExtent: MediaQuery.of(context).size.height * 3,
+                        itemCount: eventsByTags[_selectedTag].length,
+                        itemBuilder: (context, position) {
+                          return Container(
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              new EventDetails(
+                                                  item:
+                                                      eventsByTags[_selectedTag]
+                                                          [position])),
+                                    );
+                                  },
+                                  child: SearchByTagsCards(
+                                      eventCard: eventsByTags[_selectedTag]
+                                          [position])));
+                        }),
+                  )),
+                  SizedBox(height: 55.0),
+                ],
+              ),
+            ),
+            FloatingActionButton(
+              elevation: 0,
+              foregroundColor: Color(0xFF6B872B),
+              backgroundColor: Colors.transparent,
+              onPressed: () {
+                _scaffoldKey.currentState.openDrawer();
+              },
+              child: Icon(Icons.menu),
+            ),
+          ],
+        ),
       ),
     );
   }

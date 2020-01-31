@@ -63,136 +63,135 @@ class _DashboardState extends State<Dashboard> {
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark));
     getUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50.0),
-          child: AppBar(
-            elevation: 0,
-            brightness: Brightness.light,
-            backgroundColor: Colors.white,
-            iconTheme: IconThemeData(
-              color: Color(0xFF6B872B),
-            ),
-            textTheme: TextTheme(
-              title: TextStyle(
-                color: Colors.black,
-                fontSize: 20.0,
-              ),
-            ),
-            title: Text(
-              "Aarohan",
-              style: GoogleFonts.ubuntu(
-                fontSize: 25,
-                color: Color(0xFF6B872B),
-              ),
-            ),
-            actions: <Widget>[
-              IconButton(
-                color: Color(0xFF6B872B),
-                icon: Icon(Icons.youtube_searched_for),
-                onPressed: () {
-                  Navigator.of(context).pushNamed("/ui/tags");
-                },
-              ),
-              (currentUser != null && isEurekoinAlreadyRegistered != null)
-                  ? IconButton(
-                      color: Color(0xFF6B872B),
-                      icon: Image(
-                          image: AssetImage("images/QRIcon.png"),
-                          color: Color(0xFF6B872B)),
-                      onPressed: () {
-                        if (isEurekoinAlreadyRegistered == 1) {
-                          scanQR();
-                        } else if (isEurekoinAlreadyRegistered == 0) {
-                          scanQR();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EurekoinHomePage()),
-                          ).then((onReturn) {
-                            getUser();
-                          });
-                        }
-                      })
-                  : Container(),
-              //   SizedBox(width:10),
-              // IconButton(
-              //   icon:Icon(Icons.account_box),
-              //   onPressed: (){
-              //     _logout();
-              //   },
-              //   ),
-
-              SizedBox(width: 10),
-            ],
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50.0),
+        child: AppBar(
+          elevation: 0,
+          brightness: Brightness.light,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.black,
           ),
-        ),
-        drawer: NavigationDrawer(),
-        body: Stack(
-          children: <Widget>[
-            DashBoardLayout(),
-            SlidingUpPanel(
-              color: Colors.white,
-              minHeight: 65.0,
-              maxHeight: MediaQuery.of(context).size.height * 0.85,
-              panel: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(height: 5.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        width: 35,
-                        height: 8,
-                        decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12.0))),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 13.0),
-                  Center(
-                    child: Text(
-                      "Newsfeed",
-                      style: TextStyle(
-                        fontSize: 21.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
-                        // shadows: [
-                        //   BoxShadow(
-                        //       color: Colors.grey[800],
-                        //       offset: Offset(4.0, 4.0),
-                        //       blurRadius: 15.0,
-                        //       spreadRadius: 1.0),
-                        //   BoxShadow(
-                        //       color: Colors.white,
-                        //       offset: Offset(-4.0, -4.0),
-                        //       blurRadius: 15.0,
-                        //       spreadRadius: 1.0),
-                        // ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  Container(
-                      padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-                      height: MediaQuery.of(context).size.height * 0.75,
-                      child: Newsfeed()),
-                ],
-              ),
+          textTheme: TextTheme(
+            title: TextStyle(
+              color: Colors.black,
+              fontSize: 20.0,
             ),
+          ),
+          title: Text(
+            "Aarohan",
+            style: GoogleFonts.ubuntu(
+              fontSize: 25,
+              color: Colors.black,
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              color: Colors.black,
+              icon: Icon(Icons.youtube_searched_for),
+              onPressed: () {
+                Navigator.of(context).pushNamed("/ui/tags");
+              },
+            ),
+            (currentUser != null && isEurekoinAlreadyRegistered != null)
+                ? IconButton(
+                    color: Colors.black,
+                    icon: Image(
+                      image: AssetImage("images/QRIcon.png"),
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      if (isEurekoinAlreadyRegistered == 1) {
+                        scanQR();
+                      } else if (isEurekoinAlreadyRegistered == 0) {
+                        scanQR();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EurekoinHomePage()),
+                        ).then((onReturn) {
+                          getUser();
+                        });
+                      }
+                    })
+                : Container(),
+            //   SizedBox(width:10),
+            // IconButton(
+            //   icon:Icon(Icons.account_box),
+            //   onPressed: (){
+            //     _logout();
+            //   },
+            //   ),
+
+            SizedBox(width: 10),
           ],
         ),
+      ),
+      drawer: NavigationDrawer(),
+      body: Stack(
+        children: <Widget>[
+          DashBoardLayout(),
+          SlidingUpPanel(
+            color: Colors.white,
+            minHeight: 65.0,
+            maxHeight: MediaQuery.of(context).size.height * 0.85,
+            panel: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(height: 5.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 35,
+                      height: 8,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(12.0))),
+                    )
+                  ],
+                ),
+                SizedBox(height: 13.0),
+                Center(
+                  child: Text(
+                    "Newsfeed",
+                    style: TextStyle(
+                      fontSize: 21.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                      // shadows: [
+                      //   BoxShadow(
+                      //       color: Colors.grey[800],
+                      //       offset: Offset(4.0, 4.0),
+                      //       blurRadius: 15.0,
+                      //       spreadRadius: 1.0),
+                      //   BoxShadow(
+                      //       color: Colors.white,
+                      //       offset: Offset(-4.0, -4.0),
+                      //       blurRadius: 15.0,
+                      //       spreadRadius: 1.0),
+                      // ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Container(
+                    padding: const EdgeInsets.only(left: 14.0, right: 14.0),
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    child: Newsfeed()),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
