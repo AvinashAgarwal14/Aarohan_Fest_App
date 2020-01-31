@@ -1,4 +1,7 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../util/drawer.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -86,117 +89,178 @@ Map contributors = {
 };
 
 class _ContributorsState extends State<Contributors> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF6B872B),
+        systemNavigationBarIconBrightness: Brightness.dark));
+  }
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   Widget separator;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: NavigationDrawer(),
-        appBar: AppBar(
-          title: Text("Contributors"),
-        ),
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: () {
+          SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle(
+                statusBarColor: Colors.white,
+                systemNavigationBarIconBrightness: Brightness.dark),
+          );
+          Navigator.pop(context);
+        },
+        child: Scaffold(
+          key: _scaffoldKey,
+          drawer: NavigationDrawer(),
+          // appBar: AppBar(
+          //   title: Text("Contributors"),
+          // ),
 //      backgroundColor: Theme.of(context).brightness==Brightness.light?Colors.white70:Colors.black ,
-        body: ListView.builder(
-            itemCount: 8,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Stack(
-                    // fit: StackFit.expand,
-                    children: <Widget>[
-                      Container(
-                          //color: Colors.black,
-                          height: MediaQuery.of(context).size.height / 3,
-                          width: MediaQuery.of(context).size.width,
-                          child: Image.asset(
-                            contributors["Image"][index],
-                            fit: BoxFit.contain,
-                          )),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.rectangle,
-                            gradient: new LinearGradient(
-                              colors: <Color>[
-                                const Color.fromRGBO(255, 255, 255, 0.2),
-                                const Color.fromRGBO(0, 0, 0, 0.7),
-                              ],
-                              stops: [0.2, 1.0],
-                              begin: const FractionalOffset(0.0, 0.0),
-                              end: const FractionalOffset(0.0, 1.0),
-                            )),
-                        height: MediaQuery.of(context).size.height / 3,
-                        width: MediaQuery.of(context).size.width,
+          body: Stack(
+            children: <Widget>[
+              ListView.builder(
+                itemCount: 9,
+                itemBuilder: (context, index) {
+                  if (index == 0)
+                    return Container(
+                      padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
+                      child: Text(
+                        "Contributors",
+                        style: GoogleFonts.ubuntu(
+                          fontSize: 30,
+                          color: Color(0xFF6B872B),
+                        ),
                       ),
-                      Container(
-                        height: 80.0,
-                        margin: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height / 3 - 80.0),
-                        color: Color.fromRGBO(0, 0, 0, 0.5),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: Text(
-                                contributors["Name"][index],
-                                style: TextStyle(
-                                    fontSize: 18.0, color: Colors.white),
+                    );
+                  else {
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Stack(
+                        // fit: StackFit.expand,
+                        children: <Widget>[
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            //color: Colors.black,
+                            height: MediaQuery.of(context).size.height / 3,
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.asset(
+                              contributors["Image"][index - 1],
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.rectangle,
+                              gradient: new LinearGradient(
+                                colors: <Color>[
+                                  const Color.fromRGBO(255, 255, 255, 0.2),
+                                  const Color.fromRGBO(0, 0, 0, 0.7),
+                                ],
+                                stops: [0.2, 1.0],
+                                begin: const FractionalOffset(0.0, 0.0),
+                                end: const FractionalOffset(0.0, 1.0),
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            height: MediaQuery.of(context).size.height / 3,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                          Container(
+                            height: 80.0,
+                            margin: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height / 3 -
+                                    80.0),
+                            color: Color.fromRGBO(0, 0, 0, 0.5),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Flexible(
-                                  child: IconButton(
-                                    icon: Icon(
-                                      facebook,
+                                Center(
+                                  child: Text(
+                                    contributors["Name"][index - 1],
+                                    style: TextStyle(
+                                        fontSize: 18.0, color: Colors.white),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: IconButton(
+                                        icon: Icon(
+                                          facebook,
+                                        ),
+                                        disabledColor: Colors.black,
+                                        color: Colors.blueAccent,
+                                        onPressed: () {
+                                          _launchURL(
+                                              contributors["ProfilesFacebook"]
+                                                  [index - 1]);
+                                        },
+                                      ),
                                     ),
-                                    disabledColor: Colors.black,
-                                    color: Colors.blueAccent,
-                                    onPressed: () {
-                                      _launchURL(
-                                          contributors["ProfilesFacebook"]
-                                              [index]);
-                                    },
-                                  ),
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    linkedin,
-                                    color: Colors.blue,
-                                  ),
-                                  onPressed: () {
-                                    _launchURL(contributors["ProfilesLinkedin"]
-                                        [index]);
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    github_circled,
-                                    color: Color.fromRGBO(201, 81, 12, 1.0),
-                                  ),
-                                  onPressed: () {
-                                    _launchURL(
-                                        contributors["ProfilesGithub"][index]);
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.call),
-                                  color: Colors.green,
-                                  onPressed: () {
-                                    launch("tel:" +
-                                        contributors["Contact"][index]);
-                                  },
+                                    IconButton(
+                                      icon: Icon(
+                                        linkedin,
+                                        color: Colors.blue,
+                                      ),
+                                      onPressed: () {
+                                        _launchURL(
+                                            contributors["ProfilesLinkedin"]
+                                                [index - 1]);
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(
+                                        github_circled,
+                                        color: Color.fromRGBO(201, 81, 12, 1.0),
+                                      ),
+                                      onPressed: () {
+                                        _launchURL(
+                                            contributors["ProfilesGithub"]
+                                                [index - 1]);
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.call),
+                                      color: Colors.green,
+                                      onPressed: () {
+                                        launch("tel:" +
+                                            contributors["Contact"][index - 1]);
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      )
-                    ]),
-              );
-            }));
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+              ),
+              FloatingActionButton(
+                elevation: 0,
+                foregroundColor: Color(0xFF6B872B),
+                backgroundColor: Colors.transparent,
+                onPressed: () {
+                  _scaffoldKey.currentState.openDrawer();
+                },
+                child: Icon(Icons.menu),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   _launchURL(String str) async {

@@ -72,8 +72,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   child: ListTile(
                     title: Text(
                       '${currentUser.providerData[1].displayName}',
-                      style:
-                          GoogleFonts.ubuntu(fontSize: 17, color: Colors.blue),
+                      style: GoogleFonts.ubuntu(
+                        fontSize: 17,
+                        color: Color(0xFF6B872B),
+                      ),
                     ),
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
