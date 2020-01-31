@@ -23,10 +23,10 @@ class User {
 List<dynamic> ctfUsers = List();
 List<dynamic> digitalfortressUsers = List();
 List<dynamic> freemexUsers = List();
-List<dynamic> freeplUsers = List();
-List<dynamic> interficioUsers = List();
+//List<dynamic> freeplUsers = List();
+//List<dynamic> interficioUsers = List();
 List<dynamic> othUsers = List();
-List<dynamic> roadrangerUsers = List();
+//List<dynamic> roadrangerUsers = List();
 
 List<User> _uSeR = List();
 List<DropdownMenuItem<String>> eventList = [
@@ -46,23 +46,23 @@ List<DropdownMenuItem<String>> eventList = [
     child: Text("Freemex", style: TextStyle(fontWeight: FontWeight.bold)),
     value: "Freemex",
   ),
-  DropdownMenuItem(
-    child: Text("Freepl", style: TextStyle(fontWeight: FontWeight.bold)),
-    value: "Freepl",
-  ),
-  DropdownMenuItem(
-    child: Text("Interficio", style: TextStyle(fontWeight: FontWeight.bold)),
-    value: "Interficio",
-  ),
+//  DropdownMenuItem(
+//    child: Text("Freepl", style: TextStyle(fontWeight: FontWeight.bold)),
+//    value: "Freepl",
+//  ),
+//  DropdownMenuItem(
+//    child: Text("Interficio", style: TextStyle(fontWeight: FontWeight.bold)),
+//    value: "Interficio",
+//  ),
   DropdownMenuItem(
     child: Text("Online Treasure Hunt",
         style: TextStyle(fontWeight: FontWeight.bold)),
     value: "OTH",
   ),
-  DropdownMenuItem(
-    child: Text("Roadranger", style: TextStyle(fontWeight: FontWeight.bold)),
-    value: "Roadranger",
-  ),
+//  DropdownMenuItem(
+//    child: Text("Roadranger", style: TextStyle(fontWeight: FontWeight.bold)),
+//    value: "Roadranger",
+//  ),
 ];
 
 class UserDataSource extends DataTableSource {
@@ -120,10 +120,11 @@ class _ScoreboardState extends State<Scoreboard> {
       ctf,
       digitalfortress,
       freemex,
-      freepl,
-      interficio,
-      oth,
-      roadranger;
+   //   freepl,
+   //   interficio,
+      oth
+   //   roadranger
+  ;
   UserDataSource _userDataSource = UserDataSource();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
@@ -162,10 +163,10 @@ class _ScoreboardState extends State<Scoreboard> {
       ctf = event.snapshot.value['ctf'];
       digitalfortress = event.snapshot.value['digitalfortress'];
       freemex = event.snapshot.value['freemex'];
-      freepl = event.snapshot.value['freepl'];
-      interficio = event.snapshot.value['interficio'];
+   //   freepl = event.snapshot.value['freepl'];
+   //   interficio = event.snapshot.value['interficio'];
       oth = event.snapshot.value['oth'];
-      roadranger = event.snapshot.value['roadranger'];
+   //   roadranger = event.snapshot.value['roadranger'];
     });
   }
 
@@ -176,10 +177,10 @@ class _ScoreboardState extends State<Scoreboard> {
       ctf = event.snapshot.value['ctf'];
       digitalfortress = event.snapshot.value['digitalfortress'];
       freemex = event.snapshot.value['freemex'];
-      freepl = event.snapshot.value['freepl'];
-      interficio = event.snapshot.value['interficio'];
+  //    freepl = event.snapshot.value['freepl'];
+  //    interficio = event.snapshot.value['interficio'];
       oth = event.snapshot.value['oth'];
-      roadranger = event.snapshot.value['roadranger'];
+   //   roadranger = event.snapshot.value['roadranger'];
     });
   }
 
@@ -197,11 +198,12 @@ class _ScoreboardState extends State<Scoreboard> {
     if (comingsoon != null &&
         digitalfortress != null &&
         freemex != null &&
-        freepl != null &&
+    //    freepl != null &&
         oth != null &&
-        ctf != null &&
-        roadranger != null &&
-        interficio != null) {
+        ctf != null
+       // && roadranger != null
+       // && interficio != null
+    ) {
       print("comming soon: $comingsoon");
       if (comingsoon == false) {
         if (!firsttimeDatafetched) {
@@ -390,7 +392,7 @@ class _ScoreboardState extends State<Scoreboard> {
   }
 
   Future<dynamic> getfreemexScoreData() async {
-    String apiUrl = "https://freemex.nitdgplug.org/api/scoreboard";
+    String apiUrl = "https://freemex.arhn.co.in/api/scoreboard";
     http.Response response = await http.get(apiUrl);
     return json.decode(response.body);
   }
@@ -422,10 +424,10 @@ class _ScoreboardState extends State<Scoreboard> {
   Future<Null> getData() async {
     _refreshIndicatorKey.currentState?.show();
     if (comingsoon == false) {
-      if (roadranger == true)
-        roadrangerUsers = await getroadrangerScoreData();
-      else
-        roadrangerUsers = List();
+//      if (roadranger == true)
+//        roadrangerUsers = await getroadrangerScoreData();
+//      else
+//        roadrangerUsers = List();
 
       if (ctf == true)
         ctfUsers = await getctfScoreData();
@@ -437,20 +439,20 @@ class _ScoreboardState extends State<Scoreboard> {
       else
         digitalfortressUsers = List();
 
-      if (freepl == true)
-        freeplUsers = await getfreeplScoreData();
-      else
-        freeplUsers = List();
+//      if (freepl == true)
+//        freeplUsers = await getfreeplScoreData();
+//      else
+//        freeplUsers = List();
 
       if (freemex == true)
         freemexUsers = await getfreemexScoreData();
       else
-        othUsers = List();
+        freemexUsers = List();
 
-      if (interficio == true)
-        interficioUsers = await getinterficioScoreData();
-      else
-        interficioUsers = List();
+//      if (interficio == true)
+//        interficioUsers = await getinterficioScoreData();
+//      else
+//        interficioUsers = List();
 
       if (oth == true)
         othUsers = await getothScoreData();
@@ -465,10 +467,10 @@ class _ScoreboardState extends State<Scoreboard> {
   }
 
   Future<Null> getDataOnRefresh() async {
-    if (roadranger == true)
-      roadrangerUsers = await getroadrangerScoreData();
-    else
-      roadrangerUsers = List();
+//    if (roadranger == true)
+//      roadrangerUsers = await getroadrangerScoreData();
+//    else
+//      roadrangerUsers = List();
 
     if (ctf == true)
       ctfUsers = await getctfScoreData();
@@ -480,20 +482,20 @@ class _ScoreboardState extends State<Scoreboard> {
     else
       digitalfortressUsers = List();
 
-    if (freepl == true)
-      freeplUsers = await getfreeplScoreData();
-    else
-      freeplUsers = List();
+//    if (freepl == true)
+//      freeplUsers = await getfreeplScoreData();
+//    else
+//      freeplUsers = List();
 
     if (freemex == true)
       freemexUsers = await getfreemexScoreData();
     else
-      othUsers = List();
+      freemexUsers = List();
 
-    if (interficio == true)
-      interficioUsers = await getinterficioScoreData();
-    else
-      interficioUsers = List();
+//    if (interficio == true)
+//      interficioUsers = await getinterficioScoreData();
+//    else
+//      interficioUsers = List();
 
     if (oth == true)
       othUsers = await getothScoreData();
@@ -509,17 +511,17 @@ class _ScoreboardState extends State<Scoreboard> {
   //optimize by calling setState once
   createUserList(String s) {
     switch (s) {
-      case "Roadranger":
-        _uSeR = List();
-        for (int i = 0; i < roadrangerUsers.length; i++) {
-          User temp = new User(
-              roadrangerUsers[i]["rank"],
-              roadrangerUsers[i]["name"],
-              roadrangerUsers[i]["email"],
-              roadrangerUsers[i]["score"]);
-          _uSeR.add(temp);
-        }
-        break;
+//      case "Roadranger":
+//        _uSeR = List();
+//        for (int i = 0; i < roadrangerUsers.length; i++) {
+//          User temp = new User(
+//              roadrangerUsers[i]["rank"],
+//              roadrangerUsers[i]["name"],
+//              roadrangerUsers[i]["email"],
+//              roadrangerUsers[i]["score"]);
+//          _uSeR.add(temp);
+//        }
+//        break;
 
       case "CTF":
         _uSeR = List();
@@ -551,26 +553,26 @@ class _ScoreboardState extends State<Scoreboard> {
         }
         break;
 
-      case "Freepl":
-        _uSeR = List();
-        for (int i = 0; i < freeplUsers.length; i++) {
-          User temp = new User(i + 1, freeplUsers[i]["name"],
-              freeplUsers[i]["email"], freeplUsers[i]["score"]);
-          _uSeR.add(temp);
-        }
-        break;
+//      case "Freepl":
+//        _uSeR = List();
+//        for (int i = 0; i < freeplUsers.length; i++) {
+//          User temp = new User(i + 1, freeplUsers[i]["name"],
+//              freeplUsers[i]["email"], freeplUsers[i]["score"]);
+//          _uSeR.add(temp);
+//        }
+//        break;
 
-      case "Interficio":
-        _uSeR = List();
-        for (int i = 0; i < interficioUsers.length; i++) {
-          User temp = new User(
-              interficioUsers[i]["rank"],
-              interficioUsers[i]["name"],
-              interficioUsers[i]["email"],
-              interficioUsers[i]["score"]);
-          _uSeR.add(temp);
-        }
-        break;
+//      case "Interficio":
+//        _uSeR = List();
+//        for (int i = 0; i < interficioUsers.length; i++) {
+//          User temp = new User(
+//              interficioUsers[i]["rank"],
+//              interficioUsers[i]["name"],
+//              interficioUsers[i]["email"],
+//              interficioUsers[i]["score"]);
+//          _uSeR.add(temp);
+//        }
+//        break;
       case "OTH":
         _uSeR = List();
         for (int i = 0; i < othUsers.length; i++) {

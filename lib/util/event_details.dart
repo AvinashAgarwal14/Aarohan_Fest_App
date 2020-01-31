@@ -105,7 +105,7 @@ class EventDetailsState extends State<EventDetails> {
               )),
               SlidingUpPanel(
                   minHeight: 65.0,
-                  maxHeight: (widget.item.link != "nil")?MediaQuery.of(context).size.height * 0.45:MediaQuery.of(context).size.height * 0.35,
+                  maxHeight: (widget.item.link != "nil")?MediaQuery.of(context).size.height * 0.50:MediaQuery.of(context).size.height * 0.35,
                   panel: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
