@@ -266,7 +266,7 @@ class _HomePageState extends State<HomePage>
         // fillColor: Colors.white.withOpacity(0.7),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFFa94064), //Color of the border
+            color: Color(0xFF0059B3), //Color of the border
             style: BorderStyle.solid, //Style of the border
             width: 1, //width of the border
           ),
@@ -274,7 +274,7 @@ class _HomePageState extends State<HomePage>
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xFFa94064), //Color of the border
+            color: Color(0xFF0059B3), //Color of the border
             style: BorderStyle.solid, //Style of the border
             width: 1, //width of the border
           ),
@@ -382,7 +382,7 @@ class _HomePageState extends State<HomePage>
                           itemBuilder: (BuildContext context, int index) {
                             return Container(
                               decoration: BoxDecoration(
-                                  color: Color(0xFF191970),
+                                  color: Color(0xFF0b0b31),
                                   boxShadow: [
                                     BoxShadow(
                                         color: Colors.black,
@@ -406,7 +406,7 @@ class _HomePageState extends State<HomePage>
                                 leading: IconButton(
                                   color: clueData["data"][index][2] != null
                                       ? Colors.green
-                                      : Color(0xFFa94064),
+                                      : Color(0xFF0059B3),
                                   onPressed: clueData["data"][index][2] == null
                                       ? () {
                                           showDialog(
@@ -416,7 +416,7 @@ class _HomePageState extends State<HomePage>
                                                   Colors.white.withOpacity(0),
                                               child: Container(
                                                 decoration: BoxDecoration(
-                                                  color: Color(0xFFa94064),
+                                                  color: Color(0xFF0059B3),
                                                   borderRadius:
                                                       BorderRadius.circular(30),
                                                 ),
@@ -430,9 +430,11 @@ class _HomePageState extends State<HomePage>
                                                   children: <Widget>[
                                                     Text(
                                                       "Are you sure you want to unlock this clue?",
-                                                      style: GoogleFonts.ubuntu(
-                                                          fontSize: 20,
-                                                          color: Colors.white),
+                                                      style: GoogleFonts
+                                                          .josefinSans(
+                                                              fontSize: 20,
+                                                              color:
+                                                                  Colors.white),
                                                     ),
                                                     ButtonBar(
                                                       children: <Widget>[
@@ -449,7 +451,7 @@ class _HomePageState extends State<HomePage>
                                                           child: Text(
                                                             "UNLOCK",
                                                             style: GoogleFonts
-                                                                .ubuntu(),
+                                                                .josefinSans(),
                                                           ),
                                                           onPressed: () {
                                                             setState(() {
@@ -477,7 +479,7 @@ class _HomePageState extends State<HomePage>
                                                           child: Text(
                                                             "GO BACK",
                                                             style: GoogleFonts
-                                                                .ubuntu(),
+                                                                .josefinSans(),
                                                           ),
                                                           onPressed: () {
                                                             Navigator.of(
@@ -507,20 +509,20 @@ class _HomePageState extends State<HomePage>
                                         children: <Widget>[
                                           Text(
                                             "${clueData["data"][index][1]} \n\n ",
-                                            style: GoogleFonts.ubuntu(
-                                                color: Color(0xFFa94064)),
+                                            style: GoogleFonts.josefinSans(
+                                                color: Color(0xFF0059B3)),
                                           ),
                                           Text(
                                             "${clueData["data"][index][2]}",
-                                            style: GoogleFonts.ubuntu(
+                                            style: GoogleFonts.josefinSans(
                                                 color: Colors.white),
                                           ),
                                         ],
                                       )
                                     : Text(
                                         clueData["data"][index][1],
-                                        style: GoogleFonts.ubuntu(
-                                          color: Color(0xFFa94064),
+                                        style: GoogleFonts.josefinSans(
+                                          color: Color(0xFF0059B3),
                                         ),
                                       ),
                               ),
@@ -551,7 +553,7 @@ class _HomePageState extends State<HomePage>
                         if (unlockedClueData["data"][index][2] != null)
                           return Container(
                             decoration: BoxDecoration(
-                                color: Color(0xFF191970),
+                                color: Color(0xFF0b0b31),
                                 boxShadow: [
                                   BoxShadow(
                                       color: Colors.black,
@@ -582,13 +584,13 @@ class _HomePageState extends State<HomePage>
                                 children: <Widget>[
                                   Text(
                                     "${unlockedClueData["data"][index][1]} \n\n ",
-                                    style: GoogleFonts.ubuntu(
-                                        color: Color(0xFFa94064)),
+                                    style: GoogleFonts.josefinSans(
+                                        color: Color(0xFF0059B3)),
                                   ),
                                   Text(
                                     "${unlockedClueData["data"][index][2]}",
-                                    style:
-                                        GoogleFonts.ubuntu(color: Colors.white),
+                                    style: GoogleFonts.josefinSans(
+                                        color: Colors.white),
                                   ),
                                 ],
                               ),
@@ -619,38 +621,62 @@ class _HomePageState extends State<HomePage>
     var right4 = 20.0;
 
     return levelData["level_no"] == 1 && intro == false
-        ? SafeArea(
-            child: Scaffold(
-              body: FittedBox(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      _isLoading
-                          ? CircularProgressIndicator()
-                          : Text(mainQues["data"]),
-                      FlatButton(
-                        child: Text("proceed"),
-                        onPressed: () {
-                          setState(() {
-                            intro = true;
-                            setIntro();
-                          });
-                        },
-                      )
-                    ],
+        ? _isLoading
+            ? Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height,
+                child: Image.asset("assets/loader1.gif"),
+              )
+            : SafeArea(
+                child: Scaffold(
+                  body: Container(
+                    padding: EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF0b0b31),
+                    ),
+                    child: Center(
+                      child: ListView(
+                        children: <Widget>[
+                          Center(
+                            child: Text(
+                              "The Mystery",
+                              style: GoogleFonts.uncialAntiqua(
+                                  color: Colors.red, fontSize: 37),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            mainQues["data"],
+                            style: GoogleFonts.josefinSans(
+                                color: Color(0xFF0059B3), fontSize: 27),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          FlatButton(
+                            color: Colors.red,
+                            child: Text("proceed"),
+                            onPressed: () {
+                              setState(() {
+                                intro = true;
+                                setIntro();
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          )
+              )
         : WillPopScope(
             onWillPop: () {
               SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF6B872B),
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarIconBrightness: Brightness.dark));
+                  statusBarColor: Color(0xFF6B872B),
+                  statusBarIconBrightness: Brightness.light,
+                  systemNavigationBarIconBrightness: Brightness.dark));
               Navigator.pop(context);
             },
             child: SafeArea(
@@ -682,7 +708,7 @@ class _HomePageState extends State<HomePage>
 
                 // Color(0xFFa94064).withOpacity(0.8),
                 // Color(0xFF191970).withOpacity(0.7)
-                backgroundColor: Color(0xFF191970).withOpacity(0.8),
+                backgroundColor: Color(0xFF0b0b31),
 
                 onDragUpdate: (double val, InnerDrawerDirection direction) {
                   print(val);
@@ -716,7 +742,7 @@ class _HomePageState extends State<HomePage>
                                 : _animationController.reverse();
                           },
                           icon: AnimatedIcon(
-                              color: Color(0xFFa94064),
+                              color: Color(0xFF0059B3),
                               progress: _animationController,
                               icon: AnimatedIcons.menu_close),
                         ),
@@ -799,7 +825,7 @@ class _HomePageState extends State<HomePage>
                                         blurRadius: 10,
                                         spreadRadius: 5),
                                   ],
-                                  color: Color(0xFF191970),
+                                  color: Color(0xFF0b0b31),
                                   borderRadius: BorderRadius.circular(17),
                                 ),
                                 child: Stack(
@@ -855,7 +881,8 @@ class _HomePageState extends State<HomePage>
                                                         ),
                                                         Text(
                                                           "level number: ${levelData["level_no"]}",
-                                                          style: TextStyle(
+                                                          style: GoogleFonts
+                                                              .josefinSans(
                                                             color: _isOpen
                                                                 ? Color(
                                                                     0xFFa94064)
@@ -905,7 +932,7 @@ class _HomePageState extends State<HomePage>
                                               children: <Widget>[
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    color: Color(0xFFa94064),
+                                                    color: Color(0xFF0059B3),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             20),
@@ -918,8 +945,8 @@ class _HomePageState extends State<HomePage>
                                                       horizontal: 10),
                                                   child: Text(
                                                     mainQues["data"],
-                                                    style: GoogleFonts
-                                                        .mysteryQuest(
+                                                    style:
+                                                        GoogleFonts.josefinSans(
                                                             color: _isOpen
                                                                 ? Colors.white
                                                                 : Colors.white,
@@ -941,7 +968,7 @@ class _HomePageState extends State<HomePage>
                                                     width:
                                                         1, //width of the border
                                                   ),
-                                                  color: Color(0xFFa94064),
+                                                  color: Color(0xFF0059B3),
                                                   child: Text(
                                                     "SUBMIT ANSWER",
                                                     style: GoogleFonts
@@ -961,7 +988,7 @@ class _HomePageState extends State<HomePage>
                                               children: <Widget>[
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                    color: Color(0xFFa94064),
+                                                    color: Color(0xFF0059B3),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             20),
@@ -974,8 +1001,8 @@ class _HomePageState extends State<HomePage>
                                                       horizontal: 10),
                                                   child: Text(
                                                     levelData["ques"],
-                                                    style: GoogleFonts
-                                                        .mysteryQuest(
+                                                    style:
+                                                        GoogleFonts.josefinSans(
                                                             color: _isOpen
                                                                 ? Colors.white
                                                                 : Colors.white,
@@ -1038,13 +1065,13 @@ class _HomePageState extends State<HomePage>
                                                     OutlineButton(
                                                       borderSide: BorderSide(
                                                         color: Color(
-                                                            0xFFa94064), //Color of the border
+                                                            0xFF0059B3), //Color of the border
                                                         style: BorderStyle
                                                             .solid, //Style of the border
                                                         width:
                                                             1, //width of the border
                                                       ),
-                                                      color: Color(0xFFa94064),
+                                                      color: Color(0xFF0059B3),
                                                       child: Text(
                                                         "GET CLUES",
                                                         style: GoogleFonts
@@ -1059,7 +1086,7 @@ class _HomePageState extends State<HomePage>
                                                     OutlineButton(
                                                       borderSide: BorderSide(
                                                         color: Color(
-                                                            0xFFa94064), //Color of the border
+                                                            0xFF0059B3), //Color of the border
                                                         style: BorderStyle
                                                             .solid, //Style of the border
                                                         width:
@@ -1124,18 +1151,19 @@ class _HomePageState extends State<HomePage>
                                         blurRadius: 10,
                                         spreadRadius: 5),
                                   ],
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    stops: [0.3, 1.0],
-                                    // Color(0xFFa94064).withOpacity(0.8),
-                                    // Color(0xFF191970).withOpacity(0.7)
-                                    // Color(0xFF0091FF), Color(0xFF0059FF)
-                                    colors: [
-                                      Color(0xFF191970),
-                                      Color(0xFFa94064),
-                                    ],
-                                  ),
+                                  color: Color(0xFF0b0b31),
+                                  // gradient: LinearGradient(
+                                  //   begin: Alignment.topCenter,
+                                  //   end: Alignment.bottomCenter,
+                                  //   stops: [0.3, 1.0],
+                                  //   // Color(0xFFa94064).withOpacity(0.8),
+                                  //   // Color(0xFF191970).withOpacity(0.7)
+                                  //   // Color(0xFF0091FF), Color(0xFF0059FF)
+                                  //   colors: [
+                                  //     Color(0xFF191970),
+                                  //     Color(0xFFa94064),
+                                  //   ],
+                                  // ),
                                   borderRadius: BorderRadius.circular(17),
                                 ),
                                 child: Center(
@@ -1248,7 +1276,7 @@ class _HomePageState extends State<HomePage>
                             setState(() {
                               print("he");
                               _isUp = !_isUp;
-                              getScoreboard();
+                              // getScoreboard();
                             });
                           },
                           // onVerticalDragStart: (context) {

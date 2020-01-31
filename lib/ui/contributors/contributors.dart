@@ -102,24 +102,24 @@ class _ContributorsState extends State<Contributors> {
   Widget separator;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: WillPopScope(
-        onWillPop: () {
-          SystemChrome.setSystemUIOverlayStyle(
-            SystemUiOverlayStyle(
-                statusBarColor: Colors.white,
-                systemNavigationBarIconBrightness: Brightness.dark),
-          );
-          Navigator.pop(context);
-        },
-        child: Scaffold(
-          key: _scaffoldKey,
-          drawer: NavigationDrawer(),
-          // appBar: AppBar(
-          //   title: Text("Contributors"),
-          // ),
+    return WillPopScope(
+      onWillPop: () {
+        // SystemChrome.setSystemUIOverlayStyle(
+        //   SystemUiOverlayStyle(
+        //       statusBarColor: Colors.white,
+        //       systemNavigationBarIconBrightness: Brightness.dark),
+        // );
+        Navigator.pop(context);
+      },
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: NavigationDrawer(),
+        // appBar: AppBar(
+        //   title: Text("Contributors"),
+        // ),
 //      backgroundColor: Theme.of(context).brightness==Brightness.light?Colors.white70:Colors.black ,
-          body: Stack(
+        body: SafeArea(
+          child: Stack(
             children: <Widget>[
               ListView.builder(
                 itemCount: 9,
@@ -129,8 +129,8 @@ class _ContributorsState extends State<Contributors> {
                       padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
                       child: Text(
                         "Contributors",
-                        style: GoogleFonts.ubuntu(
-                          fontSize: 30,
+                        style: GoogleFonts.josefinSans(
+                          fontSize: 35,
                           color: Color(0xFF6B872B),
                         ),
                       ),

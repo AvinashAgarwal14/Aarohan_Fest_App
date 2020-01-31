@@ -57,7 +57,7 @@ class _CommentCategoryState extends State<CommentCategory> {
           top: false,
           bottom: false,
           child: new ListView(
-            cacheExtent: MediaQuery.of(context).size.height*5,
+            cacheExtent: MediaQuery.of(context).size.height * 5,
             children: <Widget>[
               (commentItems.length > 0)
                   ? new Stack(
@@ -207,14 +207,16 @@ class _CommentItemState extends State<CommentItem> {
               child: new Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: columnChildren)),
-          (currentUser != null && currentUser.providerData[1].uid == widget.authorId)
+          (currentUser != null &&
+                  currentUser.providerData[1].uid == widget.authorId)
               ? IconButton(
-                  icon: Icon(Icons.edit, color: Color(0xFF505194)),
+                  icon: Icon(Icons.edit, color: Colors.black),
                   onPressed: _editOption)
               : Container(),
-          (currentUser != null && currentUser.providerData[1].uid == widget.authorId)
+          (currentUser != null &&
+                  currentUser.providerData[1].uid == widget.authorId)
               ? IconButton(
-                  icon: Icon(Icons.delete, color: Color(0xFF505194)),
+                  icon: Icon(Icons.delete, color: Colors.black),
                   onPressed: _deleteOption)
               : Container()
         ],
@@ -228,6 +230,8 @@ class _CommentItemState extends State<CommentItem> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           title: new Text('Edit'),
           content: new SingleChildScrollView(
               child: new TextFormField(
@@ -263,6 +267,8 @@ class _CommentItemState extends State<CommentItem> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return new AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           title: new Text('Delete'),
           content: new SingleChildScrollView(
               child: new Text('Are you sure you want to delete ?')),
@@ -353,7 +359,7 @@ class _AddNewCommentState extends State<AddNewComment> {
                 ),
                 Expanded(
                   child: IconButton(
-                      icon: Icon(Icons.play_arrow, color: Colors.black),
+                      icon: Icon(Icons.play_arrow, color: Color(0xFF6B872B)),
                       onPressed: () {
                         if (widget.user == null) {
                           Navigator.of(context)
@@ -385,8 +391,10 @@ class _AddNewCommentState extends State<AddNewComment> {
                           PostsCommentItem comment =
                               new PostsCommentItem('', '', '', '', '', '');
                           comment.authorId = widget.user.providerData[1].uid;
-                          comment.authorImage = widget.user.providerData[1].photoUrl;
-                          comment.authorName = widget.user.providerData[1].displayName;
+                          comment.authorImage =
+                              widget.user.providerData[1].photoUrl;
+                          comment.authorName =
+                              widget.user.providerData[1].displayName;
                           comment.createdDate = new DateFormat.yMMMd()
                               .add_jm()
                               .format(new DateTime.now());

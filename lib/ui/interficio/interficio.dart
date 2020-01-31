@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './pages/home_page.dart';
 import './pages/authentication.dart';
 
+import 'package:firebase_database/firebase_database.dart';
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -46,6 +48,9 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  final FirebaseDatabase _database = FirebaseDatabase.instance;
+  DatabaseReference _databaseReference;
+
   @override
   void setState(fn) {
     if (mounted) {
@@ -53,9 +58,27 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  bool comingsoon = true;
+
+  void _onEntryUpdated(Event event) {
+    setState(() {
+      print(event.snapshot.value);
+      comingsoon = event.snapshot.value;
+      print(comingsoon);
+    });
+  }
+
   @override
   void initState() {
     autoAuthenticate();
+    _databaseReference = _database.reference().child("comingsoon");
+    _databaseReference.onChildChanged.listen(_onEntryUpdated);
+    _databaseReference.child("JD").once().then((snapshot) {
+      setState(() {
+        comingsoon = snapshot.value;
+      });
+      print(comingsoon);
+    });
 
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -82,7 +105,17 @@ class _MyAppState extends State<MyApp> {
         routes: {
           "/": (BuildContext context) => _isLoading
               ? Container()
-              : user["isAuthenticated"] ? HomePage(user) : AuthPage(user),
+              : comingsoon
+                  ? Scaffold(
+                      body: Material(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          child: Image.asset("images/comingsoon.png",
+                              fit: BoxFit.cover),
+                        ),
+                      ),
+                    )
+                  : user["isAuthenticated"] ? HomePage(user) : AuthPage(user),
         },
       ),
     );

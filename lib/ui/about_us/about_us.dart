@@ -134,14 +134,13 @@ class _AboutUsPageState extends State<AboutUsPage>
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
-    return SafeArea(
-      child: WillPopScope(
+    return WillPopScope(
         onWillPop: () {
-          SystemChrome.setSystemUIOverlayStyle(
-            SystemUiOverlayStyle(
-                statusBarColor: Colors.white,
-                systemNavigationBarIconBrightness: Brightness.dark),
-          );
+          // SystemChrome.setSystemUIOverlayStyle(
+          //   SystemUiOverlayStyle(
+          //       statusBarColor: Colors.white,
+          //       systemNavigationBarIconBrightness: Brightness.dark),
+          // );
           Navigator.pop(context);
         },
         child: Scaffold(
@@ -157,7 +156,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                 color: Colors.black54,
                 image: DecorationImage(
                     image: AssetImage("images/AboutUs.png"), fit: BoxFit.fill)),
-            child: Stack(
+            child: SafeArea(child: Stack(
               children: <Widget>[
                 ListView(
                   key: listViewKey,
@@ -167,7 +166,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                       padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
                       child: Text(
                         "About Aarohan",
-                        style: GoogleFonts.ubuntu(
+                        style: GoogleFonts.josefinSans(
                           fontSize: 30,
                           color: Colors.white,
                         ),

@@ -268,31 +268,31 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.monetization_on,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                   Text(
                                     "Eurekoin Wallet",
                                     style:
-                                        GoogleFonts.ubuntu(color: Colors.white),
+                                        GoogleFonts.ubuntu(color: Colors.black),
                                   ),
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFF6B872B),
-                                    Color(0xFF4B5E1D),
-                                    // Color(0xFF4AC5F1),
-                                    // Color(0xFF6B8BD8)
-                                  ],
-                                  stops: [0.3, 1],
-                                ),
-                                // color: Colors.green,
+                                // gradient: LinearGradient(
+                                //   colors: [
+                                //     Color(0xFF6B872B),
+                                //     Color(0xFF4B5E1D),
+                                //     // Color(0xFF4AC5F1),
+                                //     // Color(0xFF6B8BD8)
+                                //   ],
+                                //   stops: [0.3, 1],
+                                // ),
+                                color: Colors.white,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Color(0xFF4B5E1D),
+                                      color: Colors.grey[700],
                                       offset: Offset(3.0, 3.0),
                                       blurRadius: 7.0,
                                       spreadRadius: 1.0),
@@ -322,29 +322,29 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                   children: <Widget>[
                                     Icon(
                                       Icons.casino,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ),
                                     Text(
                                       "Eurekoin Casino",
                                       style: GoogleFonts.ubuntu(
-                                          color: Colors.white),
+                                          color: Colors.black),
                                     ),
                                   ],
                                 ),
                                 decoration: BoxDecoration(
-                                  // color: Colors.yellow,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF6B872B),
-                                      Color(0xFF4B5E1D),
-                                    ],
-                                    stops: [0.3, 1],
-                                  ),
+                                  color: Colors.white,
+                                  // gradient: LinearGradient(
+                                  //   colors: [
+                                  //     Color(0xFF6B872B),
+                                  //     Color(0xFF4B5E1D),
+                                  //   ],
+                                  //   stops: [0.3, 1],
+                                  // ),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Color(0xFF4B5E1D),
+                                        color: Colors.grey[700],
                                         offset: Offset(3.0, 3.0),
                                         blurRadius: 7.0,
                                         spreadRadius: 1.0),
@@ -377,29 +377,29 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                   children: <Widget>[
                                     Icon(
                                       Icons.search,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ),
                                     Text(
                                       "Journo Detective",
                                       style: GoogleFonts.ubuntu(
-                                          color: Colors.white),
+                                          color: Colors.black),
                                     ),
                                   ],
                                 ),
                                 decoration: BoxDecoration(
-                                  // color: Colors.white,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF6B872B),
-                                      Color(0xFF4B5E1D),
-                                    ],
-                                    stops: [0.3, 1],
-                                  ),
+                                  color: Colors.white,
+                                  // gradient: LinearGradient(
+                                  //   colors: [
+                                  //     Color(0xFF6B872B),
+                                  //     Color(0xFF4B5E1D),
+                                  //   ],
+                                  //   stops: [0.3, 1],
+                                  // ),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Color(0xFF4B5E1D),
+                                        color: Colors.grey[700],
                                         offset: Offset(3.0, 3.0),
                                         blurRadius: 7.0,
                                         spreadRadius: 1.0),
@@ -428,29 +428,29 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.linked_camera,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                   Text(
                                     "Share Memories",
                                     style:
-                                        GoogleFonts.ubuntu(color: Colors.white),
+                                        GoogleFonts.ubuntu(color: Colors.black),
                                   ),
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                // color: Colors.white,
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFF6B872B),
-                                    Color(0xFF4B5E1D),
-                                  ],
-                                  stops: [0.3, 1],
-                                ),
+                                color: Colors.white,
+                                // gradient: LinearGradient(
+                                //   colors: [
+                                //     Color(0xFF6B872B),
+                                //     Color(0xFF4B5E1D),
+                                //   ],
+                                //   stops: [0.3, 1],
+                                // ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Color(0xFF4B5E1D),
+                                      color: Colors.grey[700],
                                       offset: Offset(3.0, 3.0),
                                       blurRadius: 7.0,
                                       spreadRadius: 1.0),
@@ -966,9 +966,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: Theme.of(context).brightness == Brightness.light
-                    ? AssetImage("images/gifs/loaderlight.gif")
-                    : AssetImage("images/gifs/loaderdark.gif"),
+                image: AssetImage("images/gifs/loaderlight.gif"),
                 fit: BoxFit.fill)),
       );
     }
