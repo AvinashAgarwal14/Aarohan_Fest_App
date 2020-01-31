@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../util/event_details.dart';
 import '../../model/event.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -46,10 +47,10 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
 
   @override
   void initState() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarIconBrightness: Brightness.dark));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //     statusBarColor: Color(0xFF6B872B),
+    //     statusBarIconBrightness: Brightness.dark,
+    //     systemNavigationBarIconBrightness: Brightness.dark));
 
     super.initState();
     _scrollController = ScrollController();
@@ -64,7 +65,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
     };
 
     database.setPersistenceEnabled(true);
-    database.setPersistenceCacheSizeBytes(1500);
+    database.setPersistenceCacheSizeBytes(150000);
     databaseReference = database.reference().child("Events");
     databaseReference.onChildAdded.listen(_onEntryAdded);
     databaseReference.onChildChanged.listen(_onEntryChanged);
@@ -110,70 +111,26 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                       child: CarouselSlider(
                         height: 250.0,
                         //TODO add the upcoming events as per the date
-                        items: map<Widget>(carouselImageList, (index, i) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EventDetails(
-                                        item: eventsByCategories["All"]
-                                            [index])),
-                              );
-                            },
-                            child: Stack(
-                              children: <Widget>[
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.height / 4,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey[800],
-                                          offset: Offset(4.0, 4.0),
-                                          blurRadius: 15.0,
-                                          spreadRadius: 1.0),
-                                      BoxShadow(
-                                          color: Colors.white,
-                                          offset: Offset(-4.0, -4.0),
-                                          blurRadius: 15.0,
-                                          spreadRadius: 1.0),
-                                    ],
-                                  ),
-                                  margin: new EdgeInsets.all(10.0),
-                                  child: new ClipRRect(
-                                    borderRadius: new BorderRadius.all(
-                                        new Radius.circular(10.0)),
-                                    child: new Stack(
-                                      children: <Widget>[
-                                        CachedNetworkImage(
-                                            placeholder: (context, url) =>
-                                                Image.asset(
-                                                    "images/imageplaceholder.png"),
-                                            imageUrl: eventsByCategories["All"]
-                                                    [index]
-                                                .imageUrl,
-                                            fit: BoxFit.cover,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width -
-                                                10.0),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                new Positioned(
-                                  bottom: 0.0,
-                                  left: 30.0,
-                                  right: 30.0,
-                                  child: Container(
-                                    height: 100.0,
-                                    width: 200.0,
+                        items: map<Widget>(
+                          carouselImageList,
+                          (index, i) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EventDetails(
+                                          item: eventsByCategories["All"]
+                                              [index])),
+                                );
+                              },
+                              child: Stack(
+                                children: <Widget>[
+                                  Container(
+                                    height:
+                                        MediaQuery.of(context).size.height / 4,
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Colors.grey[300],
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(10)),
                                       boxShadow: [
@@ -189,50 +146,325 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                             spreadRadius: 1.0),
                                       ],
                                     ),
-                                    margin: new EdgeInsets.all(5.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 10, horizontal: 10),
-                                            child: Text(
-                                                eventsByCategories["All"][index]
-                                                    .title,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                ))),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 0.0, horizontal: 10),
-                                          child: Text(
-                                            eventsByCategories["All"][index]
-                                                    .body
-                                                    .substring(0, 50) +
-                                                " ...",
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              color: Colors.black38,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    margin: new EdgeInsets.all(10.0),
+                                    child: new ClipRRect(
+                                      borderRadius: new BorderRadius.all(
+                                          new Radius.circular(10.0)),
+                                      child: new Stack(
+                                        children: <Widget>[
+                                          CachedNetworkImage(
+                                              placeholder: (context, url) =>
+                                                  Image.asset(
+                                                      "images/imageplaceholder.png"),
+                                              imageUrl:
+                                                  'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                              // eventsByCategories["All"]
+                                              //         [index]
+                                              //     .imageUrl,
+                                              fit: BoxFit.cover,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  10.0),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
+                                  new Positioned(
+                                    bottom: 0.0,
+                                    left: 30.0,
+                                    right: 30.0,
+                                    child: Container(
+                                      height: 100.0,
+                                      width: 200.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey[800],
+                                              offset: Offset(4.0, 4.0),
+                                              blurRadius: 15.0,
+                                              spreadRadius: 1.0),
+                                          BoxShadow(
+                                              color: Colors.white,
+                                              offset: Offset(-4.0, -4.0),
+                                              blurRadius: 15.0,
+                                              spreadRadius: 1.0),
+                                        ],
+                                      ),
+                                      margin: new EdgeInsets.all(5.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 10),
+                                              child: Text(
+                                                  eventsByCategories["All"]
+                                                          [index]
+                                                      .title,
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18,
+                                                  ))),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 0.0, horizontal: 10),
+                                            child: Text(
+                                              eventsByCategories["All"][index]
+                                                      .body
+                                                      .substring(0, 50) +
+                                                  " ...",
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                color: Colors.black38,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ).toList(),
                         autoPlay: true,
                         viewportFraction: 0.85,
                         aspectRatio: 16 / 9,
                         pauseAutoPlayOnTouch: Duration(seconds: 2),
                       ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed("/ui/eurekoin");
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              padding: EdgeInsets.all(15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.monetization_on,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    "Eurekoin Wallet",
+                                    style:
+                                        GoogleFonts.ubuntu(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF6B872B),
+                                    Color(0xFF4B5E1D),
+                                    // Color(0xFF4AC5F1),
+                                    // Color(0xFF6B8BD8)
+                                  ],
+                                  stops: [0.3, 1],
+                                ),
+                                // color: Colors.green,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Color(0xFF4B5E1D),
+                                      offset: Offset(3.0, 3.0),
+                                      blurRadius: 7.0,
+                                      spreadRadius: 1.0),
+                                  BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(-3.0, -3.0),
+                                      blurRadius: 7.0,
+                                      spreadRadius: 1.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                            flex: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed("/ui/eurekoin_casino");
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.casino,
+                                      color: Colors.white,
+                                    ),
+                                    Text(
+                                      "Eurekoin Casino",
+                                      style: GoogleFonts.ubuntu(
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  // color: Colors.yellow,
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF6B872B),
+                                      Color(0xFF4B5E1D),
+                                    ],
+                                    stops: [0.3, 1],
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xFF4B5E1D),
+                                        offset: Offset(3.0, 3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                    BoxShadow(
+                                        color: Colors.white,
+                                        offset: Offset(-3.0, -3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                  ],
+                                ),
+                              ),
+                            )),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                            flex: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed("/interficio/interficio.dart");
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                    ),
+                                    Text(
+                                      "Journo Detective",
+                                      style: GoogleFonts.ubuntu(
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                  // color: Colors.white,
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF6B872B),
+                                      Color(0xFF4B5E1D),
+                                    ],
+                                    stops: [0.3, 1],
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xFF4B5E1D),
+                                        offset: Offset(3.0, 3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                    BoxShadow(
+                                        color: Colors.white,
+                                        offset: Offset(-3.0, -3.0),
+                                        blurRadius: 7.0,
+                                        spreadRadius: 1.0),
+                                  ],
+                                ),
+                              ),
+                            )),
+                        Expanded(
+                          flex: 1,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed("/ui/share_memories");
+                            },
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              padding: EdgeInsets.all(15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.linked_camera,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    "Share Memories",
+                                    style:
+                                        GoogleFonts.ubuntu(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                // color: Colors.white,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF6B872B),
+                                    Color(0xFF4B5E1D),
+                                  ],
+                                  stops: [0.3, 1],
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Color(0xFF4B5E1D),
+                                      offset: Offset(3.0, 3.0),
+                                      blurRadius: 7.0,
+                                      spreadRadius: 1.0),
+                                  BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(-3.0, -3.0),
+                                      blurRadius: 7.0,
+                                      spreadRadius: 1.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),
@@ -356,198 +588,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                   ],
                 ),
               ),
-              Container(
-                color: Colors.white,
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("/ui/eurekoin");
-                            },
-                            child: Container(
-                              margin: EdgeInsets.all(10),
-                              padding: EdgeInsets.all(15),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Icon(Icons.monetization_on),
-                                  Text("Eurekoin Wallet"),
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFF4AC5F1),
-                                    Color(0xFF6B8BD8)
-                                  ],
-                                  stops: [0.3, 1],
-                                ),
-                                // color: Colors.green,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey[800],
-                                      offset: Offset(3.0, 3.0),
-                                      blurRadius: 7.0,
-                                      spreadRadius: 1.0),
-                                  BoxShadow(
-                                      color: Colors.white,
-                                      offset: Offset(-3.0, -3.0),
-                                      blurRadius: 7.0,
-                                      spreadRadius: 1.0),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                            flex: 1,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed("/ui/eurekoin_casino");
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.all(15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Icon(Icons.casino),
-                                    Text("Eurekoin Casino"),
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  // color: Colors.yellow,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF4AC5F1),
-                                      Color(0xFF6B8BD8)
-                                    ],
-                                    stops: [0.3, 1],
-                                  ),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey[800],
-                                        offset: Offset(3.0, 3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-3.0, -3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                  ],
-                                ),
-                              ),
-                            )),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            flex: 1,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed("/interficio/interficio.dart");
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.all(15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Icon(Icons.search),
-                                    Text("Journo Detective"),
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  // color: Colors.white,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF4AC5F1),
-                                      Color(0xFF6B8BD8)
-                                    ],
-                                    stops: [0.3, 1],
-                                  ),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey[800],
-                                        offset: Offset(3.0, 3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-3.0, -3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                  ],
-                                ),
-                              ),
-                            )),
-                        Expanded(
-                            flex: 1,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed("/ui/share_memories");
-                              },
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.all(15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Icon(Icons.linked_camera),
-                                    Text("Share Memories"),
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  // color: Colors.white,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF4AC5F1),
-                                      Color(0xFF6B8BD8)
-                                    ],
-                                    stops: [0.3, 1],
-                                  ),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey[800],
-                                        offset: Offset(3.0, 3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-3.0, -3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                  ],
-                                ),
-                              ),
-                            )),
-                      ],
-                    )
-                  ],
-                ),
-              ),
+
               //TODO Workshop And Games
               Container(
                 color: Colors.white,
@@ -627,10 +668,12 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                               placeholder: (context, url) =>
                                                   Image.asset(
                                                       "images/imageplaceholder.png"),
-                                              imageUrl: eventsByCategories[
-                                                          "Workshops and Special Attractions"]
-                                                      [index]
-                                                  .imageUrl,
+                                              imageUrl:
+                                                  'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                              // eventsByCategories[
+                                              //             "Workshops and Special Attractions"]
+                                              //         [index]
+                                              //     .imageUrl,
                                               fit: BoxFit.cover)),
                                       height: 150.0,
                                     ),
@@ -767,9 +810,11 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                   placeholder: (context, url) =>
                                                       Image.asset(
                                                           "images/imageplaceholder.png"),
-                                                  imageUrl: eventsByCategories[
-                                                          "On-site"][index]
-                                                      .imageUrl,
+                                                  imageUrl:
+                                                      'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                                  //  eventsByCategories[
+                                                  //         "On-site"][index]
+                                                  //     .imageUrl,
                                                   height: double.infinity,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover))),
@@ -883,9 +928,10 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                       Image.asset(
                                                           "images/imageplaceholder.png"),
                                                   imageUrl:
-                                                      eventsByCategories["Talk"]
-                                                              [index]
-                                                          .imageUrl,
+                                                      'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                                  // eventsByCategories["Talk"]
+                                                  //         [index]
+                                                  //     .imageUrl,
                                                   height: double.infinity,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover))),

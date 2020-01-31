@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter/rendering.dart';
 
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
       _isLoading = true;
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();  //remove this to save user data
+    prefs.clear(); //remove this to save user data
     var _token = prefs.getString("token");
     print(_token);
     if (_token != null) {
@@ -57,22 +58,33 @@ class _MyAppState extends State<MyApp> {
     autoAuthenticate();
 
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark));
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      //debugShowMaterialGrid: true,
-      theme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Colors.red,
-          accentColor: Colors.black),
-      routes: {
-        "/": (BuildContext context) => _isLoading
-            ? Container()
-            : user["isAuthenticated"] ? HomePage(user) : AuthPage(user),
+    return WillPopScope(
+      onWillPop: () {
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+            systemNavigationBarIconBrightness: Brightness.dark));
+        Navigator.pop(context);
       },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        //debugShowMaterialGrid: true,
+        theme: ThemeData(
+            brightness: Brightness.dark,
+            primaryColor: Colors.red,
+            accentColor: Colors.black),
+        routes: {
+          "/": (BuildContext context) => _isLoading
+              ? Container()
+              : user["isAuthenticated"] ? HomePage(user) : AuthPage(user),
+        },
+      ),
     );
   }
 }

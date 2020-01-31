@@ -1,47 +1,71 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import '../../util/drawer.dart';
 import 'package:flutter/rendering.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-
-class User{
-  User(this.rank,this.username,this.email,this.score);
+class User {
+  User(this.rank, this.username, this.email, this.score);
   int rank;
   String username;
   String email;
   int score;
-  set setRank(num value) => rank=value;
-  set setUsername(String value) => username=value;
-  set setEmail(String value) => email=value;
-  set setScore(num value) => score=value;
+  set setRank(num value) => rank = value;
+  set setUsername(String value) => username = value;
+  set setEmail(String value) => email = value;
+  set setScore(num value) => score = value;
 }
 
-List <dynamic> ctfUsers=List();
-List <dynamic> digitalfortressUsers=List();
-List <dynamic> freemexUsers=List();
-List <dynamic> freeplUsers=List();
-List <dynamic> interficioUsers=List();
-List <dynamic> othUsers=List();
-List <dynamic> roadrangerUsers=List();
+List<dynamic> ctfUsers = List();
+List<dynamic> digitalfortressUsers = List();
+List<dynamic> freemexUsers = List();
+List<dynamic> freeplUsers = List();
+List<dynamic> interficioUsers = List();
+List<dynamic> othUsers = List();
+List<dynamic> roadrangerUsers = List();
 
-List <User> _uSeR=List();
-List <DropdownMenuItem<String>> eventList=[
-
-  DropdownMenuItem(child: Text("Capture The Flag",style: TextStyle(fontWeight: FontWeight.bold),),value: "CTF",),
-  DropdownMenuItem(child: Text("Digital Fortress",style: TextStyle(fontWeight: FontWeight.bold)),value: "Digitalfortress",),
-  DropdownMenuItem(child: Text("Freemex",style: TextStyle(fontWeight: FontWeight.bold)),value: "Freemex",),
-  DropdownMenuItem(child: Text("Freepl",style: TextStyle(fontWeight: FontWeight.bold)),value: "Freepl",),
-  DropdownMenuItem(child: Text("Interficio",style: TextStyle(fontWeight: FontWeight.bold)),value: "Interficio",),
-  DropdownMenuItem(child: Text("Online Treasure Hunt",style: TextStyle(fontWeight: FontWeight.bold)),value: "OTH",),
-  DropdownMenuItem(child: Text("Roadranger",style: TextStyle(fontWeight: FontWeight.bold)),value: "Roadranger",),
+List<User> _uSeR = List();
+List<DropdownMenuItem<String>> eventList = [
+  DropdownMenuItem(
+    child: Text(
+      "Capture The Flag",
+      style: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    value: "CTF",
+  ),
+  DropdownMenuItem(
+    child:
+        Text("Digital Fortress", style: TextStyle(fontWeight: FontWeight.bold)),
+    value: "Digitalfortress",
+  ),
+  DropdownMenuItem(
+    child: Text("Freemex", style: TextStyle(fontWeight: FontWeight.bold)),
+    value: "Freemex",
+  ),
+  DropdownMenuItem(
+    child: Text("Freepl", style: TextStyle(fontWeight: FontWeight.bold)),
+    value: "Freepl",
+  ),
+  DropdownMenuItem(
+    child: Text("Interficio", style: TextStyle(fontWeight: FontWeight.bold)),
+    value: "Interficio",
+  ),
+  DropdownMenuItem(
+    child: Text("Online Treasure Hunt",
+        style: TextStyle(fontWeight: FontWeight.bold)),
+    value: "OTH",
+  ),
+  DropdownMenuItem(
+    child: Text("Roadranger", style: TextStyle(fontWeight: FontWeight.bold)),
+    value: "Roadranger",
+  ),
 ];
 
-
 class UserDataSource extends DataTableSource {
-
   void _sort<T>(Comparable<T> getField(User d), bool ascending) {
     _uSeR.sort((User a, User b) {
       if (!ascending) {
@@ -59,10 +83,9 @@ class UserDataSource extends DataTableSource {
   @override
   DataRow getRow(int index) {
     assert(index >= 0);
-    if (index >= _uSeR.length)
-      return null;
-    final User temp=_uSeR[index];
-    return DataRow.byIndex( index: index,cells: <DataCell>[
+    if (index >= _uSeR.length) return null;
+    final User temp = _uSeR[index];
+    return DataRow.byIndex(index: index, cells: <DataCell>[
       DataCell(Text('${temp.rank}')),
       DataCell(Text('${temp.username}')),
       DataCell(Text('${temp.score}')),
@@ -80,43 +103,47 @@ class UserDataSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-
 class Scoreboard extends StatefulWidget {
   // static const String routeName = '/material/data-table';
   @override
   _ScoreboardState createState() => _ScoreboardState();
 }
 
-
-
 class _ScoreboardState extends State<Scoreboard> {
-
   String Selected;
   int _rowsPerPage = PaginatedDataTable.defaultRowsPerPage;
   int _sortColumnIndex;
-  bool _sortAscending = true, dataRecieved=false,firsttimeDatafetched=false;
-  bool comingsoon,ctf,digitalfortress,freemex,freepl,interficio,oth,roadranger;
+  bool _sortAscending = true,
+      dataRecieved = false,
+      firsttimeDatafetched = false;
+  bool comingsoon,
+      ctf,
+      digitalfortress,
+      freemex,
+      freepl,
+      interficio,
+      oth,
+      roadranger;
   UserDataSource _userDataSource = UserDataSource();
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
 
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   DatabaseReference _databaseReferenceForScoreboard;
-  
+
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Selected=null;
+    Selected = null;
     _databaseReferenceForScoreboard = _database.reference().child("Scoreboard");
     _databaseReferenceForScoreboard.onChildAdded.listen(_onEntryAdded);
     _databaseReferenceForScoreboard.onChildChanged.listen(_onEntryUpdated);
@@ -124,39 +151,40 @@ class _ScoreboardState extends State<Scoreboard> {
     //Selected="None";
     createUserList("none");
     print("In initstate");
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF6B872B),
+        systemNavigationBarIconBrightness: Brightness.dark));
   }
 
-  void _onEntryAdded(Event event)
-  {
+  void _onEntryAdded(Event event) {
     setState(() {
       comingsoon = event.snapshot.value['comingsoon'];
-      ctf=event.snapshot.value['ctf'];
-      digitalfortress=event.snapshot.value['digitalfortress'];
-      freemex=event.snapshot.value['freemex'];
-      freepl=event.snapshot.value['freepl'];
-      interficio=event.snapshot.value['interficio'];
-      oth=event.snapshot.value['oth'];
-      roadranger=event.snapshot.value['roadranger'];
+      ctf = event.snapshot.value['ctf'];
+      digitalfortress = event.snapshot.value['digitalfortress'];
+      freemex = event.snapshot.value['freemex'];
+      freepl = event.snapshot.value['freepl'];
+      interficio = event.snapshot.value['interficio'];
+      oth = event.snapshot.value['oth'];
+      roadranger = event.snapshot.value['roadranger'];
     });
   }
 
-  void _onEntryUpdated(Event event)
-  {
+  void _onEntryUpdated(Event event) {
     setState(() {
       print(event.snapshot.value);
       comingsoon = event.snapshot.value['comingsoon'];
-      ctf=event.snapshot.value['ctf'];
-      digitalfortress=event.snapshot.value['digitalfortress'];
-      freemex=event.snapshot.value['freemex'];
-      freepl=event.snapshot.value['freepl'];
-      interficio=event.snapshot.value['interficio'];
-      oth=event.snapshot.value['oth'];
-      roadranger=event.snapshot.value['roadranger'];
+      ctf = event.snapshot.value['ctf'];
+      digitalfortress = event.snapshot.value['digitalfortress'];
+      freemex = event.snapshot.value['freemex'];
+      freepl = event.snapshot.value['freepl'];
+      interficio = event.snapshot.value['interficio'];
+      oth = event.snapshot.value['oth'];
+      roadranger = event.snapshot.value['roadranger'];
     });
-
   }
 
-  void _sort<T>(Comparable<T> getField(User d), int columnIndex, bool ascending) {
+  void _sort<T>(
+      Comparable<T> getField(User d), int columnIndex, bool ascending) {
     _userDataSource._sort<T>(getField, ascending);
     setState(() {
       _sortColumnIndex = columnIndex;
@@ -166,238 +194,268 @@ class _ScoreboardState extends State<Scoreboard> {
 
   @override
   Widget build(BuildContext context) {
-    if(comingsoon!=null&&digitalfortress!=null&&
-    freemex!=null&&freepl!=null&&oth!=null&&ctf!=null
-    && roadranger!=null&&interficio!=null) {
-      print ("comming soon: $comingsoon");
-      if(comingsoon==false) {
-        if(!firsttimeDatafetched){
+    if (comingsoon != null &&
+        digitalfortress != null &&
+        freemex != null &&
+        freepl != null &&
+        oth != null &&
+        ctf != null &&
+        roadranger != null &&
+        interficio != null) {
+      print("comming soon: $comingsoon");
+      if (comingsoon == false) {
+        if (!firsttimeDatafetched) {
           getData();
-          firsttimeDatafetched=true;
+          firsttimeDatafetched = true;
         }
-        return Scaffold(
-            key: _scaffoldKey,
-            drawer: NavigationDrawer(),
-            appBar: AppBar(
-              title: const Text('Live Scoreboard'), elevation: 10.0,),
-            body:
-            Container(
-              //height: MediaQuery.of(context).size.height,
-              //width: MediaQuery.of(context).size.width/2,
+        return SafeArea(
+          child: WillPopScope(
+            onWillPop: () {
+              SystemChrome.setSystemUIOverlayStyle(
+                SystemUiOverlayStyle(
+                    statusBarColor: Colors.white,
+                    systemNavigationBarIconBrightness: Brightness.dark),
+              );
+              Navigator.pop(context);
+            },
+            child: Scaffold(
+              key: _scaffoldKey,
+              drawer: NavigationDrawer(),
+              // appBar: AppBar(
+              //   title: const Text('Live Scoreboard'),
+              //   elevation: 10.0,
+              // ),
+              body: Container(
+                //height: MediaQuery.of(context).size.height,
+                //width: MediaQuery.of(context).size.width/2,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: Theme
-                            .of(context)
-                            .brightness == Brightness.light ? AssetImage(
-                            "images/gifs/scorecard.gif") : AssetImage(
-                            "images/gifs/scorecarddark.gif"), fit: BoxFit.cover)
-                ),
+                        image: AssetImage("images/gifs/medal.gif"),
+                        fit: BoxFit.cover)),
                 child: RefreshIndicator(
                   displacement: 100.0,
                   backgroundColor: Colors.white,
                   key: _refreshIndicatorKey,
                   onRefresh: getDataOnRefresh,
-                  child: ListView(
-                      padding: const EdgeInsets.all(10.0),
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.only(top: 12.0),
-                          alignment: Alignment.topCenter,
-                          child: DropdownButton(value: Selected,
-                            iconSize: 13.0,
-                            hint: Text("Select Event"),
-                            items: eventList,
-                            elevation: 20,
-                            onChanged: ((value) {
-                              setState(() {
-                                Selected = value;
-                                dataRecieved = false;
-                              });
-                              createUserList(value);
-                            }),
+                  child: Stack(
+                    children: <Widget>[
+                      ListView(
+                        padding: const EdgeInsets.all(10.0),
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.fromLTRB(50.0, 0.0, 30.0, 0.0),
+                            child: Text(
+                              "Live Scoreboard",
+                              style: GoogleFonts.ubuntu(
+                                fontSize: 30,
+                                color: Color(0xFF6B872B),
+                              ),
+                            ),
                           ),
-                        ),
-                  ((Selected != null) ?
-                        Stack(alignment: AlignmentDirectional.topCenter,
-                            children: <Widget>[
-                              Opacity(
-                                opacity: 0.8,
-                                child: PaginatedDataTable(
-                                    header: Center(
-                                        child: const Text('Score Card')),
-                                    rowsPerPage: _rowsPerPage,
-                                    onRowsPerPageChanged: (int value) {
-                                      setState(() {
-                                        _rowsPerPage = value;
-                                      });
-                                    },
-                                    sortColumnIndex: _sortColumnIndex,
-                                    sortAscending: _sortAscending,
-                                    columns: <DataColumn>[
-                                      DataColumn(
-                                          label: const Text('Rank'),
-                                          numeric: true,
-                                          onSort: (int columnIndex,
-                                              bool ascending) =>
-                                              _sort<num>((User d) => d.rank,
-                                                  columnIndex, ascending)
-                                      ),
-                                      DataColumn(
-                                        label: const Text('User'),
-                                        // tooltip: d.email,
-                                        numeric: true,
-                                      ),
-                                      DataColumn(
-                                          label: const Text('Score'),
-                                          numeric: true,
-                                          onSort: (int columnIndex,
-                                              bool ascending) =>
-                                              _sort<num>((User d) => d.score,
-                                                  columnIndex, ascending)
-                                      ),
-                                      DataColumn(
-                                        label: const Text('Email'),
-                                      ),
-                                    ],
-                                    source: _userDataSource
-                                ),
-                              )
-                            ]) :
-                        Center(child: Text("Choose Your Event")))
-                      ]
+                          Container(
+                            padding: EdgeInsets.only(top: 12.0),
+                            alignment: Alignment.topCenter,
+                            child: DropdownButton(
+                              value: Selected,
+                              iconSize: 13.0,
+                              hint: Text("Select Event"),
+                              items: eventList,
+                              elevation: 20,
+                              onChanged: ((value) {
+                                setState(() {
+                                  Selected = value;
+                                  dataRecieved = false;
+                                });
+                                createUserList(value);
+                              }),
+                            ),
+                          ),
+                          ((Selected != null)
+                              ? Stack(
+                                  alignment: AlignmentDirectional.topCenter,
+                                  children: <Widget>[
+                                    Opacity(
+                                      opacity: 0.8,
+                                      child: PaginatedDataTable(
+                                          header: Center(
+                                              child: const Text('Score Card')),
+                                          rowsPerPage: _rowsPerPage,
+                                          onRowsPerPageChanged: (int value) {
+                                            setState(() {
+                                              _rowsPerPage = value;
+                                            });
+                                          },
+                                          sortColumnIndex: _sortColumnIndex,
+                                          sortAscending: _sortAscending,
+                                          columns: <DataColumn>[
+                                            DataColumn(
+                                                label: const Text('Rank'),
+                                                numeric: true,
+                                                onSort: (int columnIndex,
+                                                        bool ascending) =>
+                                                    _sort<num>(
+                                                        (User d) => d.rank,
+                                                        columnIndex,
+                                                        ascending)),
+                                            DataColumn(
+                                              label: const Text('User'),
+                                              // tooltip: d.email,
+                                              numeric: true,
+                                            ),
+                                            DataColumn(
+                                                label: const Text('Score'),
+                                                numeric: true,
+                                                onSort: (int columnIndex,
+                                                        bool ascending) =>
+                                                    _sort<num>(
+                                                        (User d) => d.score,
+                                                        columnIndex,
+                                                        ascending)),
+                                            DataColumn(
+                                              label: const Text('Email'),
+                                            ),
+                                          ],
+                                          source: _userDataSource),
+                                    ),
+                                  ],
+                                )
+                              : Center(child: Text("Choose Your Event")))
+                        ],
+                      ),
+                      FloatingActionButton(
+                        elevation: 0,
+                        foregroundColor: Color(0xFF6B872B),
+                        backgroundColor: Colors.transparent,
+                        onPressed: () {
+                          _scaffoldKey.currentState.openDrawer();
+                        },
+                        child: Icon(Icons.menu),
+                      ),
+                    ],
                   ),
-                )
-            )
-        );
-      }
-      else{
-      return Scaffold(
-    drawer: NavigationDrawer(),
-    body: Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: Theme
-                  .of(context)
-                  .brightness == Brightness.light ? AssetImage(
-                  "images/gifs/scorecard.gif") : AssetImage(
-                  "images/gifs/scorecarddark.gif"), fit: BoxFit.cover)
-      ),
-          child: Padding(
-            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/3,top: 80.0),
-            child: Text("Coming Soon!",
-              style: TextStyle(
-                  fontSize: 24.0,)),
+                ),
+              ),
             ),
           ),
-      );
-     }
-    }
-    else
-      {
+        );
+      } else {
         return Scaffold(
+          drawer: NavigationDrawer(),
           body: Container(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: Theme
-                        .of(context)
-                        .brightness == Brightness.light ?
-                    AssetImage("images/gifs/loaderlight.gif") :
-                    AssetImage("images/gifs/loaderdark.gif"),
-                    fit: BoxFit.fill)
+              image: DecorationImage(
+                  image: AssetImage("images/comingsoon.png"),
+                  fit: BoxFit.cover),
             ),
-
+            // child:
+            //  Padding(
+            //   padding: EdgeInsets.only(
+            //       left: MediaQuery.of(context).size.width / 3, top: 80.0),
+            //   child: Text("Coming Soon!",
+            //       style: TextStyle(
+            //         fontSize: 24.0,
+            //       )),
+            // ),
           ),
         );
       }
-
+    } else {
+      return Scaffold(
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: Theme.of(context).brightness == Brightness.light
+                      ? AssetImage("images/gifs/loaderlight.gif")
+                      : AssetImage("images/gifs/loaderdark.gif"),
+                  fit: BoxFit.fill)),
+        ),
+      );
+    }
   }
 
-  
-  
-  Future <dynamic> getctfScoreData() async{
-    String apiUrl="https://ctf.nitdgplug.org/api/scoreboard";
-    http.Response response= await http.get(apiUrl);
-    return json.decode(response.body);
-  }
-  Future <dynamic> getdigitalfortressScoreData() async{
-    String apiUrl="https://digitalfortress.nitdgplug.org/api/scoreboard";
-    http.Response response= await http.get(apiUrl);
-    return json.decode(response.body);
-  }
-  Future <dynamic> getfreemexScoreData() async{
-    String apiUrl="https://freemex.nitdgplug.org/api/scoreboard";
-    http.Response response= await http.get(apiUrl);
-    return json.decode(response.body);
-  }
-  Future <dynamic> getfreeplScoreData() async{
-    String apiUrl="https://freepl.nitdgplug.org/api/scoreboard";
-    http.Response response= await http.get(apiUrl);
-    return json.decode(response.body);
-  }
-  Future <dynamic> getinterficioScoreData() async{
-    String apiUrl="https://interficio.nitdgplug.org/api/scoreboard";
-    http.Response response= await http.get(apiUrl);
-    return json.decode(response.body);
-  }
-  Future <dynamic> getothScoreData() async{
-    String apiUrl="https://oth.nitdgplug.org/api/scoreboard";
-    http.Response response= await http.get(apiUrl);
-    return json.decode(response.body);
-  }
-  Future <dynamic> getroadrangerScoreData() async{
-    String apiUrl="https://roadranger.avskr.in/api/scoreboard";
-    http.Response response= await http.get(apiUrl);
+  Future<dynamic> getctfScoreData() async {
+    String apiUrl = "https://ctf.nitdgplug.org/api/scoreboard";
+    http.Response response = await http.get(apiUrl);
     return json.decode(response.body);
   }
 
+  Future<dynamic> getdigitalfortressScoreData() async {
+    String apiUrl = "https://digitalfortress.nitdgplug.org/api/scoreboard";
+    http.Response response = await http.get(apiUrl);
+    return json.decode(response.body);
+  }
 
-  Future <Null> getData()async{
+  Future<dynamic> getfreemexScoreData() async {
+    String apiUrl = "https://freemex.nitdgplug.org/api/scoreboard";
+    http.Response response = await http.get(apiUrl);
+    return json.decode(response.body);
+  }
+
+  Future<dynamic> getfreeplScoreData() async {
+    String apiUrl = "https://freepl.nitdgplug.org/api/scoreboard";
+    http.Response response = await http.get(apiUrl);
+    return json.decode(response.body);
+  }
+
+  Future<dynamic> getinterficioScoreData() async {
+    String apiUrl = "https://interficio.nitdgplug.org/api/scoreboard";
+    http.Response response = await http.get(apiUrl);
+    return json.decode(response.body);
+  }
+
+  Future<dynamic> getothScoreData() async {
+    String apiUrl = "https://oth.nitdgplug.org/api/scoreboard";
+    http.Response response = await http.get(apiUrl);
+    return json.decode(response.body);
+  }
+
+  Future<dynamic> getroadrangerScoreData() async {
+    String apiUrl = "https://roadranger.avskr.in/api/scoreboard";
+    http.Response response = await http.get(apiUrl);
+    return json.decode(response.body);
+  }
+
+  Future<Null> getData() async {
     _refreshIndicatorKey.currentState?.show();
-    if(comingsoon==false) {
-      if(roadranger==true)
+    if (comingsoon == false) {
+      if (roadranger == true)
         roadrangerUsers = await getroadrangerScoreData();
       else
-        roadrangerUsers=List();
+        roadrangerUsers = List();
 
-      if(ctf==true)
+      if (ctf == true)
         ctfUsers = await getctfScoreData();
       else
-        ctfUsers=List();
+        ctfUsers = List();
 
-      if(digitalfortress==true)
+      if (digitalfortress == true)
         digitalfortressUsers = await getdigitalfortressScoreData();
       else
-        digitalfortressUsers=List();
+        digitalfortressUsers = List();
 
-      if(freepl==true)
+      if (freepl == true)
         freeplUsers = await getfreeplScoreData();
       else
-        freeplUsers=List();
+        freeplUsers = List();
 
-      if(freemex==true)
+      if (freemex == true)
         freemexUsers = await getfreemexScoreData();
       else
-        othUsers=List();
+        othUsers = List();
 
-      if(interficio==true)
+      if (interficio == true)
         interficioUsers = await getinterficioScoreData();
       else
-        interficioUsers=List();
+        interficioUsers = List();
 
-      if(oth==true)
+      if (oth == true)
         othUsers = await getothScoreData();
       else
-        othUsers=List();
+        othUsers = List();
 
       await Future.delayed(Duration(seconds: 4));
       setState(() {
@@ -405,123 +463,133 @@ class _ScoreboardState extends State<Scoreboard> {
       });
     }
   }
-  Future <Null> getDataOnRefresh()async{
-    if(roadranger==true)
+
+  Future<Null> getDataOnRefresh() async {
+    if (roadranger == true)
       roadrangerUsers = await getroadrangerScoreData();
     else
-      roadrangerUsers=List();
+      roadrangerUsers = List();
 
-    if(ctf==true)
+    if (ctf == true)
       ctfUsers = await getctfScoreData();
     else
-      ctfUsers=List();
+      ctfUsers = List();
 
-    if(digitalfortress==true)
+    if (digitalfortress == true)
       digitalfortressUsers = await getdigitalfortressScoreData();
     else
-      digitalfortressUsers=List();
+      digitalfortressUsers = List();
 
-    if(freepl==true)
+    if (freepl == true)
       freeplUsers = await getfreeplScoreData();
     else
-      freeplUsers=List();
+      freeplUsers = List();
 
-    if(freemex==true)
+    if (freemex == true)
       freemexUsers = await getfreemexScoreData();
     else
-      othUsers=List();
+      othUsers = List();
 
-    if(interficio==true)
+    if (interficio == true)
       interficioUsers = await getinterficioScoreData();
     else
-      interficioUsers=List();
+      interficioUsers = List();
 
-    if(oth==true)
+    if (oth == true)
       othUsers = await getothScoreData();
     else
-      othUsers=List();
+      othUsers = List();
 
     createUserList(Selected);
     setState(() {
-      dataRecieved=true;
+      dataRecieved = true;
     });
   }
 
-
   //optimize by calling setState once
-  createUserList(String s){
-    switch(s){
-
+  createUserList(String s) {
+    switch (s) {
       case "Roadranger":
-        _uSeR=List();
-        for(int i=0;i<roadrangerUsers.length;i++){
-          User temp= new User(roadrangerUsers[i]["rank"], roadrangerUsers[i]["name"], roadrangerUsers[i]["email"], roadrangerUsers[i]["score"]);
+        _uSeR = List();
+        for (int i = 0; i < roadrangerUsers.length; i++) {
+          User temp = new User(
+              roadrangerUsers[i]["rank"],
+              roadrangerUsers[i]["name"],
+              roadrangerUsers[i]["email"],
+              roadrangerUsers[i]["score"]);
           _uSeR.add(temp);
         }
         break;
 
       case "CTF":
-        _uSeR=List();
-        for(int i=0;i<ctfUsers.length;i++){
-          User temp= new User(ctfUsers[i]["rank"], ctfUsers[i]["name"], ctfUsers[i]["email"], ctfUsers[i]["score"]);
+        _uSeR = List();
+        for (int i = 0; i < ctfUsers.length; i++) {
+          User temp = new User(ctfUsers[i]["rank"], ctfUsers[i]["name"],
+              ctfUsers[i]["email"], ctfUsers[i]["score"]);
           _uSeR.add(temp);
         }
         break;
 
       case "Digitalfortress":
-        _uSeR=List();
-        for(int i=0;i<digitalfortressUsers.length;i++){
-          User temp= new User(digitalfortressUsers[i]["rank"], digitalfortressUsers[i]["name"], digitalfortressUsers[i]["email"], digitalfortressUsers[i]["score"]);
+        _uSeR = List();
+        for (int i = 0; i < digitalfortressUsers.length; i++) {
+          User temp = new User(
+              digitalfortressUsers[i]["rank"],
+              digitalfortressUsers[i]["name"],
+              digitalfortressUsers[i]["email"],
+              digitalfortressUsers[i]["score"]);
           _uSeR.add(temp);
         }
         break;
 
       case "Freemex":
-        _uSeR=List();
-        for(int i=0;i<freemexUsers.length;i++){
-          User temp= new User(i+1, freemexUsers[i]["name"], freemexUsers[i]["email"], freemexUsers[i]["score"]);
+        _uSeR = List();
+        for (int i = 0; i < freemexUsers.length; i++) {
+          User temp = new User(i + 1, freemexUsers[i]["name"],
+              freemexUsers[i]["email"], freemexUsers[i]["score"]);
           _uSeR.add(temp);
         }
         break;
 
       case "Freepl":
-        _uSeR=List();
-        for(int i=0;i<freeplUsers.length;i++){
-          User temp= new User(i+1, freeplUsers[i]["name"], freeplUsers[i]["email"], freeplUsers[i]["score"]);
+        _uSeR = List();
+        for (int i = 0; i < freeplUsers.length; i++) {
+          User temp = new User(i + 1, freeplUsers[i]["name"],
+              freeplUsers[i]["email"], freeplUsers[i]["score"]);
           _uSeR.add(temp);
         }
         break;
 
       case "Interficio":
-        _uSeR=List();
-        for(int i=0;i<interficioUsers.length;i++){
-          User temp= new User(interficioUsers[i]["rank"], interficioUsers[i]["name"], interficioUsers[i]["email"], interficioUsers[i]["score"]);
+        _uSeR = List();
+        for (int i = 0; i < interficioUsers.length; i++) {
+          User temp = new User(
+              interficioUsers[i]["rank"],
+              interficioUsers[i]["name"],
+              interficioUsers[i]["email"],
+              interficioUsers[i]["score"]);
           _uSeR.add(temp);
         }
         break;
       case "OTH":
-        _uSeR=List();
-        for(int i=0;i<othUsers.length;i++){
-          User temp= new User(othUsers[i]["rank"], othUsers[i]["name"], othUsers[i]["rank"], othUsers[i]["score"]);
+        _uSeR = List();
+        for (int i = 0; i < othUsers.length; i++) {
+          User temp = new User(othUsers[i]["rank"], othUsers[i]["name"],
+              othUsers[i]["rank"], othUsers[i]["score"]);
           _uSeR.add(temp);
         }
         break;
       case "None":
-        _uSeR=List ();
+        _uSeR = List();
         break;
       default:
         break;
     }
     setState(() {
-      _userDataSource =UserDataSource();
-      dataRecieved=true;
+      _userDataSource = UserDataSource();
+      dataRecieved = true;
     });
   }
 }
 
-
 //  Add another Item in DropDownMenu --> Add one more Future Function--> Add another entry in createUserList
-
-	
-	
-	

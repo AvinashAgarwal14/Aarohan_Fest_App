@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,6 +26,12 @@ class _AuthPageState extends State<AuthPage> {
     if (mounted) {
       super.setState(fn);
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   final Map<String, dynamic> _loginFormData = {
@@ -104,6 +111,7 @@ class _AuthPageState extends State<AuthPage> {
       Navigator.pushReplacementNamed(context, '/');
     }
   }
+
   Future userRegister(final Map<String, dynamic> user) async {
     setState(() {
       _isLoading = true;
@@ -341,10 +349,10 @@ class _AuthPageState extends State<AuthPage> {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      "INTERFICIO",
-                      style: TextStyle(
+                      "JOURNO DETECTIVE",
+                      style: GoogleFonts.zhiMangXing(
                           fontSize: 59,
-                          color: Color(0xFFC84407),
+                          color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -390,7 +398,9 @@ class _AuthPageState extends State<AuthPage> {
                           _isLoading
                               ? Container(
                                   padding: EdgeInsets.only(right: 20),
-                                  child: CircularProgressIndicator())
+                                  child: CircularProgressIndicator(
+                                    backgroundColor: Colors.red,
+                                  ))
                               : FlatButton(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),

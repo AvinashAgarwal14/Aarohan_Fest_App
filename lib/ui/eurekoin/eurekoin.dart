@@ -150,11 +150,15 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
             ? new Scaffold(
                 drawer: NavigationDrawer(),
                 body: new Container(
-                    padding: EdgeInsets.only(bottom: 50.0),
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("images/eurekoin.png"),
-                            fit: BoxFit.fill))))
+                  padding: EdgeInsets.only(bottom: 50.0),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    image: DecorationImage(
+                        image: AssetImage("images/eurekoin.png"),
+                        fit: BoxFit.contain),
+                  ),
+                ),
+              )
             : (isEurekoinAlreadyRegistered == 0)
                 ? new Scaffold(
                     drawer: NavigationDrawer(),
@@ -163,9 +167,11 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                         new Container(
                             padding: EdgeInsets.only(bottom: 50.0),
                             decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage("images/eurekoin.png"),
-                                    fit: BoxFit.fill)),
+                              color: Colors.black,
+                              image: DecorationImage(
+                                  image: AssetImage("images/eurekoin.png"),
+                                  fit: BoxFit.contain),
+                            ),
                             alignment: Alignment.bottomCenter,
                             child: (registerWithReferralCode == true)
                                 ? Column(
@@ -342,9 +348,11 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                                     top: 10.0,
                                                     right: 10.0),
                                                 child: EurekoinTransfer(
-                                                    name:
-                                                        currentUser.providerData[1].displayName,
-                                                    email: currentUser.providerData[1].email,
+                                                    name: currentUser
+                                                        .providerData[1]
+                                                        .displayName,
+                                                    email: currentUser
+                                                        .providerData[1].email,
                                                     parent: this)),
                                           )
                                         ],
@@ -359,9 +367,11 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                                     top: 10.0,
                                                     right: 10.0),
                                                 child: EurekoinCoupon(
-                                                    name:
-                                                        currentUser.providerData[1].displayName,
-                                                    email: currentUser.providerData[1].email,
+                                                    name: currentUser
+                                                        .providerData[1]
+                                                        .displayName,
+                                                    email: currentUser
+                                                        .providerData[1].email,
                                                     parent: this)),
                                           )
                                         ],

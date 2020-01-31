@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:aavishkarapp/ui/account/login.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/gestures.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -77,16 +79,24 @@ class _DashboardState extends State<Dashboard> {
             brightness: Brightness.light,
             backgroundColor: Colors.white,
             iconTheme: IconThemeData(
-              color: Colors.black,
+              color: Color(0xFF6B872B),
             ),
             textTheme: TextTheme(
-                title: TextStyle(
-              color: Colors.black,
-              fontSize: 20.0,
-            )),
-            title: Text("Aarohan"),
+              title: TextStyle(
+                color: Colors.black,
+                fontSize: 20.0,
+              ),
+            ),
+            title: Text(
+              "Aarohan",
+              style: GoogleFonts.ubuntu(
+                fontSize: 25,
+                color: Color(0xFF6B872B),
+              ),
+            ),
             actions: <Widget>[
               IconButton(
+                color: Color(0xFF6B872B),
                 icon: Icon(Icons.youtube_searched_for),
                 onPressed: () {
                   Navigator.of(context).pushNamed("/ui/tags");
@@ -94,9 +104,10 @@ class _DashboardState extends State<Dashboard> {
               ),
               (currentUser != null && isEurekoinAlreadyRegistered != null)
                   ? IconButton(
+                      color: Color(0xFF6B872B),
                       icon: Image(
                           image: AssetImage("images/QRIcon.png"),
-                          color: Colors.black),
+                          color: Color(0xFF6B872B)),
                       onPressed: () {
                         if (isEurekoinAlreadyRegistered == 1) {
                           scanQR();

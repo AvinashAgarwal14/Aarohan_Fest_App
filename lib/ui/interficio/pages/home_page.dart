@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:aavishkarapp/util/inner_drawer.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,6 +22,7 @@ GoogleMapController mapController;
 String api_url = "jd.nitdgplug.org";
 
 bool header = false;
+bool intro = false;
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
@@ -35,6 +36,8 @@ class _HomePageState extends State<HomePage>
   Map<String, dynamic> levelData = {}; //stores data of current level of user
   Map<String, dynamic> clueData = {};
   Map<String, dynamic> unlockedClueData = {};
+  var mainQues;
+  var finalAns;
 
   List<dynamic> leaderboard; //stores the current leaderboard
 
@@ -81,7 +84,10 @@ class _HomePageState extends State<HomePage>
 
     if (levelData["level"] == "ALLDONE")
       clueData = {"data": "finished"};
-    else {
+    else if (levelData["pause_bool"] == true) {
+      levelData["level"] = "More Levels Coming Soon";
+      clueData = {"data": "finished"};
+    } else {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("currentLevel", "${levelData["level_no"]}");
       http.Response clues = await http.get(
@@ -102,24 +108,62 @@ class _HomePageState extends State<HomePage>
       _isLoading = true;
     });
     print("start");
-    print(levelData["level_no"]);
-    if (levelData["level_no"] == null) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      levelData["level_no"] = leaderboard[0]["current_level"];
-
-      print(levelData["level_no"]);
-    }
-    http.Response response = await http.get(
-        Uri.encodeFull(
-            "https://$api_url/api/getclues/?level_no=${levelData["level_no"]}"),
-        headers: {
-          "Authorization": "Token ${user["token"]}",
-          "Content-type": "application/json"
-        });
+    http.Response response = await http
+        .get(Uri.encodeFull("https://$api_url/api/getclues/"), headers: {
+      "Authorization": "Token ${user["token"]}",
+      "Content-type": "application/json"
+    });
     print("done");
 
     unlockedClueData = json.decode(response.body);
     print(" fdbdfbetne $unlockedClueData");
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  Future getMainQuestion() async {
+    setState(() {
+      _isLoading = true;
+    });
+    print("main");
+    http.Response response = await http
+        .get(Uri.encodeFull("https://$api_url/api/finaltext/"), headers: {
+      "Authorization": "Token ${user["token"]}",
+      "Content-type": "application/json"
+    });
+    mainQues = json.decode(response.body);
+    print(mainQues);
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  Future submitFinalAnswer(answer) async {
+    setState(() {
+      _isLoading = true;
+    });
+    http.Response response = await http.post(
+        Uri.encodeFull("https://$api_url/api/finaltext/"),
+        headers: {
+          "Authorization": "Token ${user["token"]}",
+          "Content-type": "application/json"
+        },
+        body: json.encode({"ans": answer}));
+    print(response.body);
+    finalAns = json.decode(response.body);
+    if (finalAns["success"] == false)
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text("Answer already submitted once"),
+          duration: Duration(seconds: 1),
+        ),
+      );
+    // else if (finalAns["success"] == true) {
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   prefs.setString("success", "true");
+    // }
     setState(() {
       _isLoading = false;
     });
@@ -163,7 +207,7 @@ class _HomePageState extends State<HomePage>
     setState(() {
       _isLoading = true;
     });
-    if (accuracy > 25) {
+    if (accuracy > 250) {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text("location not accurate enough. please try again"),
         duration: Duration(seconds: 1),
@@ -196,6 +240,60 @@ class _HomePageState extends State<HomePage>
     });
   }
 
+  void setIntro() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("intro", "true");
+  }
+
+  void getIntro() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var temp = prefs.getString("intro");
+    if (temp == "true") intro = true;
+  }
+
+  Widget _answerTextField() {
+    return TextFormField(
+      controller: _answerFieldController,
+      style: TextStyle(
+        color: Colors.white.withOpacity(0.7),
+      ),
+      decoration: InputDecoration(
+        suffixIcon: Icon(
+          Icons.question_answer,
+          color: Colors.white.withOpacity(0.7),
+        ),
+        // filled: true,
+        // fillColor: Colors.white.withOpacity(0.7),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xFFa94064), //Color of the border
+            style: BorderStyle.solid, //Style of the border
+            width: 1, //width of the border
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xFFa94064), //Color of the border
+            style: BorderStyle.solid, //Style of the border
+            width: 1, //width of the border
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        labelText: "answer",
+        labelStyle: TextStyle(
+          color: Colors.white.withOpacity(0.7),
+        ),
+      ),
+      validator: (String value) {
+        if (value.trim().isEmpty) {
+          return "Please enter a valid answer";
+        }
+      },
+      onSaved: (String value) {},
+    );
+  }
+
   @override
   void dispose() {
     _answerFieldController.dispose();
@@ -216,16 +314,21 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
 
+    getIntro();
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
     getLocation();
+    // getMainQuestion();
     getLevelData().then((val) {
       getScoreboard().then((onValue) {
-        getUnclockedClues();
+        getUnclockedClues().then((onValue) {
+          getMainQuestion();
+        });
       });
     });
+    // getMainQuestion();
   }
 
   final LabeledGlobalKey<InnerDrawerState> _innerDrawerKey =
@@ -273,7 +376,9 @@ class _HomePageState extends State<HomePage>
                         child: ListView.builder(
                           physics: ScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: clueData["data"].length,
+                          itemCount: clueData["data"].length != null
+                              ? clueData["data"].length
+                              : 0,
                           itemBuilder: (BuildContext context, int index) {
                             return Container(
                               decoration: BoxDecoration(
@@ -439,7 +544,9 @@ class _HomePageState extends State<HomePage>
                   child: ListView.builder(
                       shrinkWrap: true,
                       physics: ScrollPhysics(),
-                      itemCount: unlockedClueData["data"].length,
+                      itemCount: unlockedClueData.length != null
+                          ? unlockedClueData["data"].length
+                          : 0,
                       itemBuilder: (BuildContext context, int index) {
                         if (unlockedClueData["data"][index][2] != null)
                           return Container(
@@ -511,514 +618,658 @@ class _HomePageState extends State<HomePage>
     var bottom4 = _isUp ? 10.0 : deviceSize.height - 80;
     var right4 = 20.0;
 
-    return SafeArea(
-      child: InnerDrawer(
-        key: _innerDrawerKey,
-        onTapClose: true, // default false
-        swipe: true, // default true
-        colorTransition: Color(0xFF87ceeb), // default Color.black54
-
-        // DEPRECATED: use offset
-        leftOffset: 0.3, // Will be removed in 0.6.0 version
-        // rightOffset: 0.6, // Will be removed in 0.6.0 version
-
-        //When setting the vertical offset, be sure to use only top or bottom
-        offset: IDOffset.only(bottom: 0.2, right: 0.5, left: 0.5),
-
-        // DEPRECATED:  use scale
-        leftScale: 0.9, // Will be removed in 0.6.0 version
-        rightScale: 0.9, // Will be removed in 0.6.0 version
-
-        scale: IDOffset.horizontal(0.8), // set the offset in both directions
-
-        proportionalChildArea: true, // default true
-        borderRadius: 50, // default 0
-        leftAnimationType: InnerDrawerAnimation.static, // default static
-        rightAnimationType: InnerDrawerAnimation.quadratic,
-
-        // Color(0xFFa94064).withOpacity(0.8),
-        // Color(0xFF191970).withOpacity(0.7)
-        backgroundColor: Color(0xFF191970).withOpacity(0.8),
-
-        onDragUpdate: (double val, InnerDrawerDirection direction) {
-          print(val);
-          print(direction == InnerDrawerDirection.start);
-        },
-        innerDrawerCallback: (a) {
-          _animationController.value == 0
-              ? _animationController.forward()
-              : _animationController.reverse();
-        },
-        leftChild: Container(
-          color: Colors.white.withOpacity(0),
-          child: _isLoading ? Container() : drawerClues(),
-        ),
-
-        scaffold: Scaffold(
-          key: _scaffoldKey,
-          resizeToAvoidBottomPadding: true,
-          // drawer: AppBar(automaticallyImplyLeading: false,),
-          body: Stack(
-            children: <Widget>[
-              GameMap(),
-              Padding(
-                padding: EdgeInsets.all(15),
-                child: IconButton(
-                  iconSize: 35,
-                  onPressed: () {
-                    _toggle();
-                    _animationController.value == 1
-                        ? _animationController.forward()
-                        : _animationController.reverse();
-                  },
-                  icon: AnimatedIcon(
-                      color: Color(0xFFa94064),
-                      progress: _animationController,
-                      icon: AnimatedIcons.menu_close),
-                ),
-              ), //google map as main background of the app
-              AnimatedPositioned(
-                //top instructions panel
-                bottom: bottom3,
-                right: 0.0,
-                left: 0.0,
-                top: -15.0,
-                duration: Duration(milliseconds: 900),
-                curve: Curves.easeOutQuart,
+    return levelData["level_no"] == 1 && intro == false
+        ? SafeArea(
+            child: Scaffold(
+              body: FittedBox(
                 child: Center(
-                  child: AnimatedOpacity(
-                    duration: Duration(milliseconds: 900),
-                    curve: Curves.easeOutQuart,
-                    opacity: _isUp ? 0.5 : 0.8,
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.5),
-                              offset: Offset.zero,
-                              blurRadius: 10,
-                              spreadRadius: 5),
-                        ],
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0.5, 0.8, 1.0],
-                          colors: [
-                            Colors.grey[900],
-                            Colors.grey[600],
-                            Colors.grey
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(17),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "INSTRUCTIONS",
-                          style: GoogleFonts.uncialAntiqua(
-                              fontSize: 32, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              AnimatedPositioned(
-                //level box displayed on home page
-                bottom: bottom,
-                right: 10.0,
-                left: 10.0,
-                top: top,
-                duration: Duration(milliseconds: 900),
-                curve: Curves.bounceOut,
-                child: Center(
-                  child: AnimatedOpacity(
-                    duration: Duration(milliseconds: 900),
-                    curve: Curves.easeOutQuart,
-                    opacity: _isUp ? (_isOpen ? 1 : 0.8) : 0.0,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _isOpen = !_isOpen;
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.5),
-                                offset: Offset.zero,
-                                blurRadius: 10,
-                                spreadRadius: 5),
-                          ],
-                          color: Color(0xFF191970),
-                          borderRadius: BorderRadius.circular(17),
-                        ),
-                        child: Stack(
-                          children: <Widget>[
-                            Positioned(
-                              top: 0.0,
-                              left: 0.0,
-                              child: _isLoading
-                                  ? Container(
-                                      padding: EdgeInsets.only(right: 20),
-                                      child: CircularProgressIndicator())
-                                  : levelData["level"] == "ALLDONE"
-                                      ? Text("All done!")
-                                      : Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: <Widget>[
-                                            Text(
-                                              "${levelData["title"]}  🚩",
-                                              style: GoogleFonts.uncialAntiqua(
-                                                color: _isOpen
-                                                    ? Color(0xFF0059B3)
-                                                    : Colors.white,
-                                                fontSize: 32,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              "level number: ${levelData["level_no"]}",
-                                              style: TextStyle(
-                                                color: _isOpen
-                                                    ? Color(0xFFa94064)
-                                                    : Color(0xFFa94064),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              _isLoading || levelData["title"] == null
-                  ? Container(
-                      // padding: EdgeInsets.only(right: 20),
-                      // child: CircularProgressIndicator(),
-                      )
-                  : AnimatedPositioned(
-                      //question along with textfield for answer and submit button
-                      top: _isOpen && _isUp
-                          ? deviceSize.height / 2.5
-                          : deviceSize.height + 5.0,
-                      bottom: _isOpen && _isUp ? 75.0 : -5.0,
-                      left: 20.0,
-                      right: 20.0,
-                      duration: Duration(milliseconds: 900),
-                      curve: Curves.easeOutQuart,
-                      child: GestureDetector(
-                        onTap: () {
-                          FocusScope.of(context).requestFocus(new FocusNode());
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      _isLoading
+                          ? CircularProgressIndicator()
+                          : Text(mainQues["data"]),
+                      FlatButton(
+                        child: Text("proceed"),
+                        onPressed: () {
+                          setState(() {
+                            intro = true;
+                            setIntro();
+                          });
                         },
-                        child: Container(
-                          child: Center(
-                            child: ScrollConfiguration(
-                              behavior: MyBehavior(),
-                              child: ListView(
-                                children: <Widget>[
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFa94064),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 7, horizontal: 15),
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 10),
-                                    child: Text(
-                                      levelData["ques"],
-                                      style: GoogleFonts.mysteryQuest(
-                                          color: _isOpen
-                                              ? Colors.white
-                                              : Colors.white,
-                                          fontSize: 17,
-                                          fontStyle: FontStyle.italic),
-                                    ),
-                                  ),
-                                  ListTile(
-                                    // title: levelData["map_hint"]
-                                    //     ?
-                                    title: Container(
-                                      child: Center(
-                                        child: Column(
-                                          children: <Widget>[
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Text(
-                                              "YOUR CURRENT LOCATION",
-                                              style: GoogleFonts.uncialAntiqua(
-                                                  color: Colors.white,
-                                                  fontSize: 21,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            ListTile(
-                                              leading: Icon(Icons
-                                                  .subdirectory_arrow_left),
-                                              title: Text("LATITUDE: $lat",
-                                                  style: GoogleFonts
-                                                      .josefinSans()),
-                                            ),
-                                            ListTile(
-                                              leading: Icon(Icons
-                                                  .subdirectory_arrow_right),
-                                              title: Text(
-                                                "LONGITUDE: $long",
-                                                style:
-                                                    GoogleFonts.josefinSans(),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  ButtonBar(
-                                    alignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      OutlineButton(
-                                        borderSide: BorderSide(
-                                          color: Color(
-                                              0xFFa94064), //Color of the border
-                                          style: BorderStyle
-                                              .solid, //Style of the border
-                                          width: 1, //width of the border
-                                        ),
-                                        color: Color(0xFFa94064),
-                                        child: Text(
-                                          "GET CLUES",
-                                          style: GoogleFonts.uncialAntiqua(),
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            _toggle();
-                                          });
-                                        },
-                                      ),
-                                      OutlineButton(
-                                        borderSide: BorderSide(
-                                          color: Color(
-                                              0xFFa94064), //Color of the border
-                                          style: BorderStyle
-                                              .solid, //Style of the border
-                                          width: 1, //width of the border
-                                        ),
-                                        child: Text(
-                                          "SUBMIT",
-                                          style: GoogleFonts.uncialAntiqua(),
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            submitLocation();
-                                          });
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
+        : WillPopScope(
+            onWillPop: () {
+              SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF6B872B),
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarIconBrightness: Brightness.dark));
+              Navigator.pop(context);
+            },
+            child: SafeArea(
+              child: InnerDrawer(
+                key: _innerDrawerKey,
+                onTapClose: true, // default false
+                swipe: true, // default true
+                colorTransition: Color(0xFF87ceeb), // default Color.black54
+
+                // DEPRECATED: use offset
+                leftOffset: 0.3, // Will be removed in 0.6.0 version
+                // rightOffset: 0.6, // Will be removed in 0.6.0 version
+
+                //When setting the vertical offset, be sure to use only top or bottom
+                offset: IDOffset.only(bottom: 0.2, right: 0.5, left: 0.5),
+
+                // DEPRECATED:  use scale
+                leftScale: 0.9, // Will be removed in 0.6.0 version
+                rightScale: 0.9, // Will be removed in 0.6.0 version
+
+                scale: IDOffset.horizontal(
+                    0.8), // set the offset in both directions
+
+                proportionalChildArea: true, // default true
+                borderRadius: 50, // default 0
+                leftAnimationType:
+                    InnerDrawerAnimation.static, // default static
+                rightAnimationType: InnerDrawerAnimation.quadratic,
+
+                // Color(0xFFa94064).withOpacity(0.8),
+                // Color(0xFF191970).withOpacity(0.7)
+                backgroundColor: Color(0xFF191970).withOpacity(0.8),
+
+                onDragUpdate: (double val, InnerDrawerDirection direction) {
+                  print(val);
+                  print(direction == InnerDrawerDirection.start);
+                },
+                innerDrawerCallback: (a) {
+                  _animationController.value == 0
+                      ? _animationController.forward()
+                      : _animationController.reverse();
+                },
+                leftChild: Container(
+                  color: Colors.white.withOpacity(0),
+                  child: _isLoading ? Container() : drawerClues(),
+                ),
+
+                scaffold: Scaffold(
+                  key: _scaffoldKey,
+                  resizeToAvoidBottomPadding: true,
+                  // drawer: AppBar(automaticallyImplyLeading: false,),
+                  body: Stack(
+                    children: <Widget>[
+                      GameMap(),
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: IconButton(
+                          iconSize: 35,
+                          onPressed: () {
+                            _toggle();
+                            _animationController.value == 1
+                                ? _animationController.forward()
+                                : _animationController.reverse();
+                          },
+                          icon: AnimatedIcon(
+                              color: Color(0xFFa94064),
+                              progress: _animationController,
+                              icon: AnimatedIcons.menu_close),
+                        ),
+                      ), //google map as main background of the app
+                      AnimatedPositioned(
+                        //top instructions panel
+                        bottom: bottom3,
+                        right: 0.0,
+                        left: 0.0,
+                        top: -15.0,
+                        duration: Duration(milliseconds: 900),
+                        curve: Curves.easeOutQuart,
+                        child: Center(
+                          child: AnimatedOpacity(
+                            duration: Duration(milliseconds: 900),
+                            curve: Curves.easeOutQuart,
+                            opacity: _isUp ? 0.5 : 0.8,
+                            child: Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black.withOpacity(0.5),
+                                      offset: Offset.zero,
+                                      blurRadius: 10,
+                                      spreadRadius: 5),
                                 ],
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  stops: [0.5, 0.8, 1.0],
+                                  colors: [
+                                    Colors.grey[900],
+                                    Colors.grey[600],
+                                    Colors.grey
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(17),
+                              ),
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  "INSTRUCTIONS",
+                                  style: GoogleFonts.uncialAntiqua(
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-              AnimatedPositioned(
-                //leaderboard generated dynamically using listview.builder
-                bottom: -15.0,
-                right: 0.0,
-                left: 0.0,
-                top: top2,
-                duration: Duration(milliseconds: 900),
-                curve: Curves.easeOutQuart,
-                child: Center(
-                  child: AnimatedOpacity(
-                    duration: Duration(milliseconds: 900),
-                    curve: Curves.easeOutQuart,
-                    opacity: _isUp ? 0.8 : 1,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          print("leader");
-                          _isUp = !_isUp;
-                          getScoreboard();
-                        });
-                      },
-                      onVerticalDragStart: (context) {
-                        setState(() {
-                          print("leader");
-                          _isUp = !_isUp;
-                          getScoreboard();
-                        });
-                      },
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.5),
-                                offset: Offset.zero,
-                                blurRadius: 10,
-                                spreadRadius: 5),
-                          ],
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            stops: [0.3, 1.0],
-                            // Color(0xFFa94064).withOpacity(0.8),
-                            // Color(0xFF191970).withOpacity(0.7)
-                            // Color(0xFF0091FF), Color(0xFF0059FF)
-                            colors: [
-                              Color(0xFF191970),
-                              Color(0xFFa94064),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(17),
-                        ),
+                      AnimatedPositioned(
+                        //level box displayed on home page
+                        bottom: bottom,
+                        right: 10.0,
+                        left: 10.0,
+                        top: top,
+                        duration: Duration(milliseconds: 900),
+                        curve: Curves.bounceOut,
                         child: Center(
-                          child: ListView.builder(
-                            itemCount: leaderboard == null
-                                ? 0
-                                : leaderboard.length + 1,
-                            itemBuilder: (BuildContext context, int index) {
-                              if (index == 0) {
-                                return Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: <Widget>[
-                                          SizedBox(width: 40),
-                                          Text(
-                                            "name",
-                                            style: TextStyle(
-                                                fontSize: 31,
-                                                fontStyle: FontStyle.italic,
-                                                color: Color(0xFFFFE000)),
-                                          )
-                                        ]),
-                                    Text(
-                                      "score",
-                                      style: TextStyle(
-                                          fontSize: 31,
-                                          fontStyle: FontStyle.italic,
-                                          color: Color(0xFFFFE000)),
-                                    )
+                          child: AnimatedOpacity(
+                            duration: Duration(milliseconds: 900),
+                            curve: Curves.easeOutQuart,
+                            opacity: _isUp ? (_isOpen ? 1 : 0.8) : 0.0,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _isOpen = !_isOpen;
+                                });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.5),
+                                        offset: Offset.zero,
+                                        blurRadius: 10,
+                                        spreadRadius: 5),
                                   ],
-                                );
-                              } else {
-                                return Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  color: Color(0xFF191970),
+                                  borderRadius: BorderRadius.circular(17),
+                                ),
+                                child: Stack(
                                   children: <Widget>[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          "$index",
-                                          style: TextStyle(
-                                              fontSize: 23,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          width: 20,
-                                        ),
-                                        Text(
-                                          leaderboard[index - 1]["name"],
-                                          style: TextStyle(
-                                              fontSize: 23,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
+                                    Positioned(
+                                      top: 0.0,
+                                      left: 0.0,
+                                      right: 0.0,
+                                      child: _isLoading
+                                          ? Container(
+                                              padding:
+                                                  EdgeInsets.only(right: 20),
+                                              child: Center(
+                                                  child:
+                                                      CircularProgressIndicator()))
+                                          : levelData["level"] == "ALLDONE"
+                                              ? Center(
+                                                  child:
+                                                      Text("Solve the mystery"),
+                                                )
+                                              : levelData["level"] ==
+                                                      "More Levels Coming Soon"
+                                                  ? Center(
+                                                      child: Text(
+                                                          "More Levels Coming Soon"))
+                                                  : Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: <Widget>[
+                                                        SingleChildScrollView(
+                                                          child: Text(
+                                                            "${levelData["title"]}  🚩",
+                                                            style: GoogleFonts
+                                                                .uncialAntiqua(
+                                                              color: _isOpen
+                                                                  ? Color(
+                                                                      0xFF0059B3)
+                                                                  : Colors
+                                                                      .white,
+                                                              fontSize: 24,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Text(
+                                                          "level number: ${levelData["level_no"]}",
+                                                          style: TextStyle(
+                                                            color: _isOpen
+                                                                ? Color(
+                                                                    0xFFa94064)
+                                                                : Color(
+                                                                    0xFFa94064),
+                                                            fontSize: 17,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
                                     ),
-                                    Text(
-                                      "${leaderboard[index - 1]["current_level"]}",
-                                      style: TextStyle(
-                                          fontSize: 23,
-                                          fontWeight: FontWeight.bold),
-                                    )
                                   ],
-                                );
-                              }
-                            },
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                      _isLoading
+                          ? Container(
+                              // padding: EdgeInsets.only(right: 20),
+                              // child: CircularProgressIndicator(),
+                              )
+                          : AnimatedPositioned(
+                              //question along with textfield for answer and submit button
+                              top: _isOpen && _isUp
+                                  ? deviceSize.height / 2.5
+                                  : deviceSize.height + 5.0,
+                              bottom: _isOpen && _isUp ? 75.0 : -5.0,
+                              left: 20.0,
+                              right: 20.0,
+                              duration: Duration(milliseconds: 900),
+                              curve: Curves.easeOutQuart,
+                              child: GestureDetector(
+                                onTap: () {
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
+                                },
+                                child: Container(
+                                  child: Center(
+                                    child: ScrollConfiguration(
+                                      behavior: MyBehavior(),
+                                      child: levelData["level"] == "ALLDONE"
+                                          ? ListView(
+                                              children: <Widget>[
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xFFa94064),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                  ),
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 7,
+                                                      horizontal: 15),
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 10,
+                                                      horizontal: 10),
+                                                  child: Text(
+                                                    mainQues["data"],
+                                                    style: GoogleFonts
+                                                        .mysteryQuest(
+                                                            color: _isOpen
+                                                                ? Colors.white
+                                                                : Colors.white,
+                                                            fontSize: 17,
+                                                            fontStyle: FontStyle
+                                                                .italic),
+                                                  ),
+                                                ),
+                                                _answerTextField(),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                OutlineButton(
+                                                  borderSide: BorderSide(
+                                                    color: Color(
+                                                        0xFFa94064), //Color of the border
+                                                    style: BorderStyle
+                                                        .solid, //Style of the border
+                                                    width:
+                                                        1, //width of the border
+                                                  ),
+                                                  color: Color(0xFFa94064),
+                                                  child: Text(
+                                                    "SUBMIT ANSWER",
+                                                    style: GoogleFonts
+                                                        .uncialAntiqua(),
+                                                  ),
+                                                  onPressed: () {
+                                                    submitFinalAnswer(
+                                                        _answerFieldController
+                                                            .value.text);
+                                                    _answerFieldController
+                                                        .clear();
+                                                  },
+                                                ),
+                                              ],
+                                            )
+                                          : ListView(
+                                              children: <Widget>[
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xFFa94064),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                  ),
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 7,
+                                                      horizontal: 15),
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                      horizontal: 10),
+                                                  child: Text(
+                                                    levelData["ques"],
+                                                    style: GoogleFonts
+                                                        .mysteryQuest(
+                                                            color: _isOpen
+                                                                ? Colors.white
+                                                                : Colors.white,
+                                                            fontSize: 17,
+                                                            fontStyle: FontStyle
+                                                                .italic),
+                                                  ),
+                                                ),
+                                                ListTile(
+                                                  // title: levelData["map_hint"]
+                                                  //     ?
+                                                  title: Container(
+                                                    child: Center(
+                                                      child: Column(
+                                                        children: <Widget>[
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Text(
+                                                            "YOUR CURRENT LOCATION",
+                                                            style: GoogleFonts
+                                                                .uncialAntiqua(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        21,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          ListTile(
+                                                            leading: Icon(Icons
+                                                                .subdirectory_arrow_left),
+                                                            title: Text(
+                                                                "LATITUDE: $lat",
+                                                                style: GoogleFonts
+                                                                    .josefinSans()),
+                                                          ),
+                                                          ListTile(
+                                                            leading: Icon(Icons
+                                                                .subdirectory_arrow_right),
+                                                            title: Text(
+                                                              "LONGITUDE: $long",
+                                                              style: GoogleFonts
+                                                                  .josefinSans(),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                ButtonBar(
+                                                  alignment: MainAxisAlignment
+                                                      .spaceEvenly,
+                                                  children: [
+                                                    OutlineButton(
+                                                      borderSide: BorderSide(
+                                                        color: Color(
+                                                            0xFFa94064), //Color of the border
+                                                        style: BorderStyle
+                                                            .solid, //Style of the border
+                                                        width:
+                                                            1, //width of the border
+                                                      ),
+                                                      color: Color(0xFFa94064),
+                                                      child: Text(
+                                                        "GET CLUES",
+                                                        style: GoogleFonts
+                                                            .uncialAntiqua(),
+                                                      ),
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          _toggle();
+                                                        });
+                                                      },
+                                                    ),
+                                                    OutlineButton(
+                                                      borderSide: BorderSide(
+                                                        color: Color(
+                                                            0xFFa94064), //Color of the border
+                                                        style: BorderStyle
+                                                            .solid, //Style of the border
+                                                        width:
+                                                            1, //width of the border
+                                                      ),
+                                                      child: Text(
+                                                        "SUBMIT",
+                                                        style: GoogleFonts
+                                                            .uncialAntiqua(),
+                                                      ),
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          submitLocation();
+                                                        });
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                      AnimatedPositioned(
+                        //leaderboard generated dynamically using listview.builder
+                        bottom: -15.0,
+                        right: 0.0,
+                        left: 0.0,
+                        top: top2,
+                        duration: Duration(milliseconds: 900),
+                        curve: Curves.easeOutQuart,
+                        child: Center(
+                          child: AnimatedOpacity(
+                            duration: Duration(milliseconds: 900),
+                            curve: Curves.easeOutQuart,
+                            opacity: _isUp ? 0.8 : 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  print("leader");
+                                  _isUp = !_isUp;
+                                  // getScoreboard();
+                                });
+                              },
+                              onVerticalDragStart: (context) {
+                                setState(() {
+                                  print("leader");
+                                  _isUp = !_isUp;
+                                  // getScoreboard();
+                                });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 50, horizontal: 20),
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.5),
+                                        offset: Offset.zero,
+                                        blurRadius: 10,
+                                        spreadRadius: 5),
+                                  ],
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    stops: [0.3, 1.0],
+                                    // Color(0xFFa94064).withOpacity(0.8),
+                                    // Color(0xFF191970).withOpacity(0.7)
+                                    // Color(0xFF0091FF), Color(0xFF0059FF)
+                                    colors: [
+                                      Color(0xFF191970),
+                                      Color(0xFFa94064),
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(17),
+                                ),
+                                child: Center(
+                                  child: ListView.builder(
+                                    itemCount: leaderboard == null
+                                        ? 0
+                                        : leaderboard.length + 1,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      if (index == 0) {
+                                        return Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: <Widget>[
+                                                  SizedBox(width: 40),
+                                                  Text(
+                                                    "name \n",
+                                                    style: TextStyle(
+                                                        fontSize: 31,
+                                                        fontStyle:
+                                                            FontStyle.italic,
+                                                        color:
+                                                            Color(0xFFFFE000)),
+                                                  )
+                                                ]),
+                                            Text(
+                                              "current \n level",
+                                              style: TextStyle(
+                                                  fontSize: 31,
+                                                  fontStyle: FontStyle.italic,
+                                                  color: Color(0xFFFFE000)),
+                                            )
+                                          ],
+                                        );
+                                      } else {
+                                        return Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  "$index",
+                                                  style: TextStyle(
+                                                      fontSize: 23,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Text(
+                                                  leaderboard[index - 1]
+                                                      ["name"],
+                                                  style: TextStyle(
+                                                      fontSize: 23,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              "${leaderboard[index - 1]["current_level"]}",
+                                              style: TextStyle(
+                                                  fontSize: 23,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      AnimatedPositioned(
+                        //leaderboard icon that triggers animation
+                        bottom: deviceSize.height - top2 - 25,
+                        left: 20,
+                        top: top2 - 35,
+                        duration: Duration(milliseconds: 1200),
+                        curve: Curves.easeOutQuart,
+                        child: GestureDetector(
+                          onVerticalDragStart: (context) {
+                            setState(() {
+                              _isUp = !_isUp;
+                              getScoreboard();
+                            });
+                          },
+                          child: Image.asset("assets/leaderboard.png"),
+                        ),
+                      ),
+                      AnimatedPositioned(
+                        //info icon that triggers animation
+                        bottom: bottom4,
+                        right: right4,
+                        duration: Duration(milliseconds: 1200),
+                        curve: Curves.easeOutQuart,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              print("he");
+                              _isUp = !_isUp;
+                              getScoreboard();
+                            });
+                          },
+                          // onVerticalDragStart: (context) {
+                          //   setState(() {
+                          //     print("he");
+                          //     _isUp = !_isUp;
+                          //     getScoreboard();
+                          //   });
+                          // },
+                          child: Icon(
+                            Icons.info,
+                            size: 70,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              AnimatedPositioned(
-                //leaderboard icon that triggers animation
-                bottom: deviceSize.height - top2 - 25,
-                left: 20,
-                top: top2 - 35,
-                duration: Duration(milliseconds: 1200),
-                curve: Curves.easeOutQuart,
-                child: GestureDetector(
-                  onVerticalDragStart: (context) {
-                    setState(() {
-                      _isUp = !_isUp;
-                      getScoreboard();
-                    });
-                  },
-                  child: Image.asset("assets/leaderboard.png"),
-                ),
-              ),
-              AnimatedPositioned(
-                //info icon that triggers animation
-                bottom: bottom4,
-                right: right4,
-                duration: Duration(milliseconds: 1200),
-                curve: Curves.easeOutQuart,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      print("he");
-                      _isUp = !_isUp;
-                      getScoreboard();
-                    });
-                  },
-                  // onVerticalDragStart: (context) {
-                  //   setState(() {
-                  //     print("he");
-                  //     _isUp = !_isUp;
-                  //     getScoreboard();
-                  //   });
-                  // },
-                  child: Icon(
-                    Icons.info,
-                    size: 70,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 }
 
