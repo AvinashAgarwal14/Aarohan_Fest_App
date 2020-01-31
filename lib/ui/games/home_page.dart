@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     getRecent();
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+        statusBarColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.dark));
   }
 
@@ -177,10 +177,10 @@ class _HomePageState extends State<HomePage> {
           });
     game == "7up7down"
         ? SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            statusBarColor: Color(0xFF0187F8),
+            statusBarColor: Colors.transparent,
             systemNavigationBarIconBrightness: Brightness.dark))
         : SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            statusBarColor: Color(0xFFD3A372),
+            statusBarColor: Colors.transparent,
             systemNavigationBarIconBrightness: Brightness.dark));
 
     setState(() {
@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () {
         Navigator.pop(context);
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
+            statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.dark,
             systemNavigationBarIconBrightness: Brightness.light));
       },
@@ -260,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.pop(context);
                           SystemChrome.setSystemUIOverlayStyle(
                               SystemUiOverlayStyle(
-                                  statusBarColor: Colors.white,
+                                  statusBarColor: Colors.transparent,
                                   systemNavigationBarIconBrightness:
                                       Brightness.dark));
                         });

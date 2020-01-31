@@ -29,7 +29,7 @@ void main() async {
   // debugPaintBaselinesEnabled = true;
   // debugPaintPointersEnabled = true;
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
+      statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
       systemNavigationBarIconBrightness: Brightness.dark));
 

@@ -674,7 +674,7 @@ class _HomePageState extends State<HomePage>
         : WillPopScope(
             onWillPop: () {
               SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-                  statusBarColor: Color(0xFF6B872B),
+                  statusBarColor: Colors.transparent,
                   statusBarIconBrightness: Brightness.light,
                   systemNavigationBarIconBrightness: Brightness.dark));
               Navigator.pop(context);

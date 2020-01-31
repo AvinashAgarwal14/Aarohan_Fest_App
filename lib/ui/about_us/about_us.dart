@@ -42,9 +42,11 @@ class _AboutUsPageState extends State<AboutUsPage>
       _updateAnimatedBoxTwoEnterAnimation();
       _updateAnimatedBoxThreeEnterAnimation();
     });
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF6D7650),
-        systemNavigationBarIconBrightness: Brightness.dark));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          systemNavigationBarIconBrightness: Brightness.dark),
+    );
   }
 
   static const enterAnimationMinHeight = 100.0;
@@ -135,28 +137,29 @@ class _AboutUsPageState extends State<AboutUsPage>
         new GlobalKey<ScaffoldState>();
 
     return WillPopScope(
-        onWillPop: () {
-          // SystemChrome.setSystemUIOverlayStyle(
-          //   SystemUiOverlayStyle(
-          //       statusBarColor: Colors.white,
-          //       systemNavigationBarIconBrightness: Brightness.dark),
-          // );
-          Navigator.pop(context);
-        },
-        child: Scaffold(
-          key: _scaffoldKey,
-          drawer: NavigationDrawer(),
-          // appBar: AppBar(
-          //   elevation: 0,
-          //   title: Text("About Aavishkar"),
-          // ),
+      onWillPop: () {
+        // SystemChrome.setSystemUIOverlayStyle(
+        //   SystemUiOverlayStyle(
+        //       statusBarColor: Colors.white,
+        //       systemNavigationBarIconBrightness: Brightness.dark),
+        // );
+        Navigator.pop(context);
+      },
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: NavigationDrawer(),
+        // appBar: AppBar(
+        //   elevation: 0,
+        //   title: Text("About Aavishkar"),
+        // ),
 
-          body: Container(
-            decoration: BoxDecoration(
-                color: Colors.black54,
-                image: DecorationImage(
-                    image: AssetImage("images/AboutUs.png"), fit: BoxFit.fill)),
-            child: SafeArea(child: Stack(
+        body: Container(
+          decoration: BoxDecoration(
+              color: Colors.black54,
+              image: DecorationImage(
+                  image: AssetImage("images/AboutUs.png"), fit: BoxFit.fill)),
+          child: SafeArea(
+            child: Stack(
               children: <Widget>[
                 ListView(
                   key: listViewKey,
@@ -188,7 +191,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                         ),
                         padding: EdgeInsets.all(20),
                         child: Text(
-                          'Aavishkar, as its name suggests a blend of innovation, team work and a geeky love for technology, is a tech fest that is not just an arena to exhibit but also an environment to learn. Our motto is to unveil in this college a fantasy world of bytes. From organising prestigious events like Hackathon, to creating an entire tournament for the cricket and football fans, this fest is known for its diverse nature. Aavishkar is  a innovation of the future, learning from the past and progressing with the present',
+                          ' Early morning classes, assignments, surprise tests, semesters, interviews. In short a typical mundane college routine. Amidst this monotonous and draining lifestyle, we all forget to discover that tiny flicker of alacrity to do what we love. This Aarohan, we bring to you a unique opportunity to rediscover that spark, to reignite that flicker and to unearth the inner “you” ! Aarohan, over the past decade years has grown at an exorbitant rate, from being a humble platform for students to get together and show case their skills to one of Eastern India\'s largest techno management fests, witnessing participation from across the country. "Teamwork is the ability to work together toward a common vision." With a bid to make Aarohan scale greater heights, the five biggest techno management clubs of NIT Durgapur, have come together as Team Aavishkar, the core organising team of Aarohan 2020. With over 200 committee members, we promise that this Aarohan will be bigger than ever before.',
                           style: TextStyle(fontSize: 20.0, color: Colors.white),
                           textAlign: TextAlign.center,
                         ),
@@ -218,7 +221,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                                   ),
                                   padding: EdgeInsets.all(20),
                                   child: Text(
-                                    'This time around, Aavishkar has a lot more in store than just technology. With a number of attractions like one of the first digital currency mediums, Eurekoins, which can be used to redeem goodies and privileges, a lot of fun and technology awaits. For all the innovative techies out there, brain wracking events like the Hackathon, ScienceX, Capture the Flag, Transmission and Codecracker with exciting cash prizes await. With special attractions like the Army Vehicle Display and the Robotics arena for the automobile and robotics enthusiasts, Cycle stunts for adrenaline junkies and exciting treasure hunts like Terrorist Takedown, we have something for everyone!',
+                                    ' Aarohan 2020 presents before you some unique opportunities to prove yourselves on a global scale, with its series of flagship events. We provide you with you with an opportunity to prove your mettle and compete with the best with our hardware and software hackathons and CodeCracker. Solve mind boggling puzzles in Transmission or unravel murder mysteries in Call Out Sherlock. Are you Engineer Enough?   Put your frugal innovation (read \'jugaad\') skills and aptitude  to test with Junkyard, Constructo and Invictus. Finally for all the future scientists and innovators out there, TechMela is your platform to portray what you are capable of. Never knew you could gain so much at a fest? Aarohan is the place you would love to be.',
                                     style: TextStyle(
                                         fontSize: 20.0, color: Colors.white),
                                     textAlign: TextAlign.center,
@@ -252,7 +255,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                                 ),
                                 padding: EdgeInsets.all(20),
                                 child: Text(
-                                  ' Inviting students to the battle ground to prove their mettle, Aavishkar has a theme that veils a world that an engineer can call home. The four days will be exhausted by counter strikes at the opponents and backing your teams. In the midst of rifles, crates and Pokemons, Aavishkar brings to you overnight gaming events and many more that will need you all armed. Through the theme of gaming, this Aavishkar, we welcome you to the next level.',
+                                  ' For those who believe that weekends are just for lazy people who prefer no work and all play, you were right. Jack will never be a dull boy because he would know how to have fun the right way. Team Aavishkar is ecstatic to announce a plethora of special attractions and fun activities during Aarohan 2020. From gaming zones to stand up comedy nights we have it all covered. Laser shows, music and dance performances, army vehicles display and cycle stunts shall add to the resplendence of the occasion. Well to add to that, we have our own virtual currency which you can exchange for exciting goodies! We also proudly present our flagship talk shows - Inspiratie and Ignitia, a platform which invites inspirational personalities from all walks of life to share their experiences and motivate us to be better each day. Get ready for the most happening four days of your college life.',
                                   style: TextStyle(
                                       fontSize: 20.0, color: Colors.white),
                                   textAlign: TextAlign.center,
@@ -285,7 +288,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                                   ),
                                   padding: EdgeInsets.all(20),
                                   child: Text(
-                                    " With technology taking centre stage and striking the perfect balance between innovation and fun, Aavishkar is here to give you an enthralling experience and break the confines of a technical fest. From workshops on trending technologies to fun events like Human Foosball and Laser Tag, there's something to cater to all your whimsies. So don’t miss out and come on down this Aavishkar and prepare to be enchanted by the myriad brain wracking events, exciting performances, inspiring speeches and enlightening workshops. Get ready to transcend to the next level.",
+                                    " The theme for Aarohan 2020 is \"Advancements in Defense Technologies\", with the idea of bringing to the fore, the breathtaking progress made in the field. Be it the Agni V's or the Rafale's, these advancements have gone a long way in ensuring our safety. The mascot for Aarohan 2020 is Avani, inspired by Avani Chaturvedi, the first Indian woman to fly a MiG -21 Bison solo. another inspirational story which forms the spirit and vision behind Aarohan 2020.",
                                     style: TextStyle(
                                         fontSize: 20.0, color: Colors.white),
                                     textAlign: TextAlign.center,

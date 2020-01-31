@@ -92,7 +92,7 @@ class _ArcadeGameState extends State<ArcadeGame> {
     return WillPopScope(
       onWillPop: () {
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
+            statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.dark,
             systemNavigationBarIconBrightness: Brightness.light));
         Navigator.pop(context);

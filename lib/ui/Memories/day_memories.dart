@@ -81,30 +81,32 @@ class _DayMemoriesState extends State<DayMemories>
                           crossAxisCount: 3,
                           itemCount: sharedImages.length,
                           itemBuilder: (context, index) => GestureDetector(
-                            child: new ClipRRect(
-                              borderRadius: new BorderRadius.all(
-                                  new Radius.circular(10.0)),
-                              child: new Hero(
-                                tag: "$index",
+                              child: new ClipRRect(
+                                borderRadius: new BorderRadius.all(
+                                    new Radius.circular(10.0)),
                                 child: CachedNetworkImage(
                                     placeholder: (context, url) => Image.asset(
                                         "images/imageplaceholder.png"),
                                     imageUrl: sharedImages[index].imageURL,
                                     fit: BoxFit.cover),
                               ),
-                            ),
-                            onTap: () => Navigator.of(context).push(
-                              new MaterialPageRoute(
-                                  fullscreenDialog: true,
-                                  builder: (BuildContext context) {
-                                    return Scaffold(
-                                      body: Column(
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: Container(
-                                              width: double.infinity,
-                                              child: Hero(
-                                                tag: "$index",
+                              onTap: () => showDialog(
+                                    context: context,
+                                    child: Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Scaffold(
+                                        body: Column(
+                                          children: <Widget>[
+                                            Expanded(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30)),
+                                                width: double.infinity,
                                                 child: CachedNetworkImage(
                                                     placeholder: (context,
                                                             url) =>
@@ -116,41 +118,95 @@ class _DayMemoriesState extends State<DayMemories>
                                                     fit: BoxFit.contain),
                                               ),
                                             ),
-                                          ),
-                                          Column(
-                                            children: <Widget>[
-                                              Text(
-                                                sharedImages[index].name,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 21),
-                                              ),
-                                              Text(
-                                                sharedImages[index].email,
-                                                style: TextStyle(
-                                                    fontStyle: FontStyle.italic,
-                                                    fontSize: 13),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  IconButton(
-                                                    color: Colors.black,
-                                                    icon: Icon(Icons.close),
-                                                    onPressed: () =>
-                                                        Navigator.pop(context),
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          )
-                                        ],
+                                            Column(
+                                              children: <Widget>[
+                                                Text(
+                                                  sharedImages[index].name,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 21),
+                                                ),
+                                                Text(
+                                                  sharedImages[index].email,
+                                                  style: TextStyle(
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                      fontSize: 13),
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    IconButton(
+                                                      color: Colors.black,
+                                                      icon: Icon(Icons.close),
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              context),
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    );
-                                  }),
-                            ),
-                          ),
+                                    ),
+                                  )
+                              //  Navigator.of(context).push(
+                              //   new MaterialPageRoute(
+                              //       fullscreenDialog: true,
+                              //       builder: (BuildContext context) {
+                              //         return Scaffold(
+                              //           body: Column(
+                              //             children: <Widget>[
+                              //               Expanded(
+                              //                 child: Container(
+                              //                   width: double.infinity,
+                              //                   child: CachedNetworkImage(
+                              //                       placeholder: (context, url) =>
+                              //                           Image.asset(
+                              //                               "images/imageplaceholder.png"),
+                              //                       imageUrl: sharedImages[index]
+                              //                           .imageURL,
+                              //                       fit: BoxFit.contain),
+                              //                 ),
+                              //               ),
+                              //               Column(
+                              //                 children: <Widget>[
+                              //                   Text(
+                              //                     sharedImages[index].name,
+                              //                     style: TextStyle(
+                              //                         fontWeight: FontWeight.bold,
+                              //                         fontSize: 21),
+                              //                   ),
+                              //                   Text(
+                              //                     sharedImages[index].email,
+                              //                     style: TextStyle(
+                              //                         fontStyle: FontStyle.italic,
+                              //                         fontSize: 13),
+                              //                   ),
+                              //                   Row(
+                              //                     mainAxisAlignment:
+                              //                         MainAxisAlignment.center,
+                              //                     children: <Widget>[
+                              //                       IconButton(
+                              //                         color: Colors.black,
+                              //                         icon: Icon(Icons.close),
+                              //                         onPressed: () =>
+                              //                             Navigator.pop(context),
+                              //                       )
+                              //                     ],
+                              //                   ),
+                              //                 ],
+                              //               )
+                              //             ],
+                              //           ),
+                              //         );
+                              //       }),
+                              // ),
+                              ),
                           staggeredTileBuilder: (index) =>
                               _staggeredTiles[index % _staggeredTiles.length],
                           mainAxisSpacing: 8.0,
