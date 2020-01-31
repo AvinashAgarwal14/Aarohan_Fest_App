@@ -263,15 +263,13 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
                 child: Container(
                   height: 256.0,
                   child: SizedBox.expand(
-                    child: Hero(
-                        tag: widget.eventCard.title,
-                        child: CachedNetworkImage(
+                    child:
+                         CachedNetworkImage(
                             placeholder: (context, url) =>
                                 Image.asset("images/imageplaceholder.png"),
                             imageUrl: widget.eventCard.imageUrl,
                             fit: BoxFit.cover,
                             height: 256.0)),
-                  ),
                 )),
             ListTile(
               title: new Text(widget.eventCard.title),
