@@ -27,7 +27,6 @@ dependencies:
   intl: ^0.15.7
   palette_generator: ^0.2.0
   path_provider: ^1.5.1
-  #intro_slider: ^1.0.7
   share: ^0.6.3+5
   google_maps_flutter: ^0.5.20+6
   location: ^2.3.5
@@ -39,7 +38,7 @@ dependencies:
   image_picker: ^0.6.0+17
   flutter_staggered_grid_view: ^0.3.0
   flutter_speed_dial: ^1.2.5
-  intro_slider: ^1.0.6
+  intro_slider: ^2.2.8
 
 
 dev_dependencies:
