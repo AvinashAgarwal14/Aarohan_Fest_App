@@ -29,6 +29,7 @@ Map contributors = {
     "Akshat Jain",
     "Sudipta Pandit",
     "Mayank Tayal",
+    "Diganta Mitra",
     "Aritra Karmakar",
     "Revanth Reddy"
   ],
@@ -40,6 +41,7 @@ Map contributors = {
     "https://www.facebook.com/akshat.jain.336333",
     "",
     "https://www.facebook.com/mayank.tayal.7",
+    "https://www.facebook.com/diganta.mitra.39",
     "https://www.facebook.com/aritra.karmakar.3",
     "https://www.facebook.com/revanth.m"
   ],
@@ -51,6 +53,7 @@ Map contributors = {
     "https://github.com/Akshat7321",
     "https://github.com/realsdx",
     "https://github.com/MTnes",
+    "https://www.facebook.com/diganta.mitra.39",
     "https://github.com/gravitydestroyer",
     "https://github.com/revanth-reddy/",
   ],
@@ -62,6 +65,7 @@ Map contributors = {
     "https://www.linkedin.com/in/akshat-jain-007365a2/",
     "https://www.linkedin.com/in/sudipta-pandit-69a848171/",
     "https://www.linkedin.com/in/mayank-tayal-9372a216b",
+    "https://www.facebook.com/diganta.mitra.39",
     "https://www.facebook.com/aritra.karmakar.3",
     "https://www.linkedin.com/in/revanth--reddy/",
   ],
@@ -72,6 +76,7 @@ Map contributors = {
     "+91 8981866219",
     "+91 8004937056",
     "+91 7501479332",
+    "+91 9163626815",
     "+91 8759579260",
     "+91 9398562859"
   ],
@@ -83,6 +88,7 @@ Map contributors = {
     "images/Contributors/akshat.jpg",
     "images/Contributors/pandit.jpeg",
     "images/Contributors/Tayal.jpg",
+    "images/Contributors/diganta.jpeg",
     "images/Contributors/aritrabhaiya.jpg",
     "images/Contributors/revanth_reddy.jpg"
   ],
@@ -122,7 +128,7 @@ class _ContributorsState extends State<Contributors> {
           child: Stack(
             children: <Widget>[
               ListView.builder(
-                itemCount: 9,
+                itemCount: 11,
                 itemBuilder: (context, index) {
                   if (index == 0)
                     return Container(

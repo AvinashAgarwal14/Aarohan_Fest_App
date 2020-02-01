@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../model/sponsor.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,13 +20,12 @@ class _SponsorsState extends State<Sponsors> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     super.initState();
 
@@ -36,13 +36,23 @@ class _SponsorsState extends State<Sponsors> {
 
   @override
   Widget build(BuildContext context) {
-    indexOfWidget=0;
+    indexOfWidget = 0;
     return Scaffold(
-      appBar: AppBar(title: Text("Sponsors")),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Color(0xFF6B872B),
+        ),
+        backgroundColor: Colors.white,
+        title: Text(
+          "Sponsors",
+          style:
+              GoogleFonts.josefinSans(color: Color(0xFF6B872B), fontSize: 30),
+        ),
+      ),
       drawer: NavigationDrawer(),
       body: sponsorList.length > 0
           ? ListView.builder(
-              cacheExtent: MediaQuery.of(context).size.height*5,
+              cacheExtent: MediaQuery.of(context).size.height * 5,
               itemCount: sponsorList.length,
               padding: EdgeInsets.all(8.0),
               itemBuilder: (context, index) {
@@ -63,17 +73,15 @@ class _SponsorsState extends State<Sponsors> {
                   return majorSponsor(sponsorList[indexOfWidget++], b);
               })
           : Container(
-
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: Theme.of(context).brightness==Brightness.light?
-                AssetImage("images/gifs/loaderlight.gif"):
-                AssetImage("images/gifs/loaderdark.gif"),
-                fit: BoxFit.fill)
-        ),
-      ),
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: Theme.of(context).brightness == Brightness.light
+                          ? AssetImage("images/gifs/loaderlight.gif")
+                          : AssetImage("images/gifs/loaderdark.gif"),
+                      fit: BoxFit.fill)),
+            ),
     );
   }
 
@@ -103,15 +111,16 @@ class _SponsorsState extends State<Sponsors> {
     else {
       return Column(children: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
-          children: <Widget>[
-          Flexible(child:prioritySponsor(indexOfWidget)),
-         // Expanded(child:SizedBox()),
-        Padding(
-          padding: EdgeInsets.all(5.0),
-          child: prioritySponsor(c),
-        )
-      ])]);
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Flexible(child: prioritySponsor(indexOfWidget)),
+              // Expanded(child:SizedBox()),
+              Padding(
+                padding: EdgeInsets.all(5.0),
+                child: prioritySponsor(c),
+              )
+            ])
+      ]);
     }
   }
 
@@ -126,18 +135,23 @@ class _SponsorsState extends State<Sponsors> {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: s.description==""?EdgeInsets.all(0.0):EdgeInsets.all(12.0),
+                  padding: s.description == ""
+                      ? EdgeInsets.all(0.0)
+                      : EdgeInsets.all(12.0),
                   child: Center(
-                      child:s.description!=""? Text(
-                    s.description,
-                    style: TextStyle(fontSize: 20.0),
-                  ):Container()),
+                      child: s.description != ""
+                          ? Text(
+                              s.description,
+                              style: TextStyle(fontSize: 20.0),
+                            )
+                          : Container()),
                 ),
                 Expanded(
                   child: ClipRRect(
                       borderRadius: BorderRadius.all(new Radius.circular(15.0)),
                       child: CachedNetworkImage(
-                        placeholder:  (context, url) => Image.asset("images/imageplaceholder.png"),
+                        placeholder: (context, url) =>
+                            Image.asset("images/imageplaceholder.png"),
                         imageUrl: s.imageUrl,
                         fit: BoxFit.fill,
                       )),
@@ -154,18 +168,23 @@ class _SponsorsState extends State<Sponsors> {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: s.description==""?EdgeInsets.all(0.0):EdgeInsets.all(12.0),
+                  padding: s.description == ""
+                      ? EdgeInsets.all(0.0)
+                      : EdgeInsets.all(12.0),
                   child: Center(
-                      child: s.description!=""?Text(
-                    s.description,
-                    style: TextStyle(fontSize: 20.0),
-                  ):Container()),
+                      child: s.description != ""
+                          ? Text(
+                              s.description,
+                              style: TextStyle(fontSize: 20.0),
+                            )
+                          : Container()),
                 ),
                 Expanded(
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(new Radius.circular(15.0)),
                     child: CachedNetworkImage(
-                      placeholder:  (context, url) => Image.asset("images/imageplaceholder.png"),
+                      placeholder: (context, url) =>
+                          Image.asset("images/imageplaceholder.png"),
                       imageUrl: s.imageUrl,
                       fit: BoxFit.fill,
                     ),
@@ -185,7 +204,8 @@ class _SponsorsState extends State<Sponsors> {
             child: ClipRRect(
                 borderRadius: BorderRadius.all(new Radius.circular(15.0)),
                 child: CachedNetworkImage(
-                  placeholder: (context, url) =>  Image.asset("images/imageplaceholder.png"),
+                  placeholder: (context, url) =>
+                      Image.asset("images/imageplaceholder.png"),
                   imageUrl: s.imageUrl,
                   fit: BoxFit.fill,
                 )),
@@ -200,7 +220,8 @@ class _SponsorsState extends State<Sponsors> {
             child: ClipRRect(
                 borderRadius: BorderRadius.all(new Radius.circular(15.0)),
                 child: CachedNetworkImage(
-                  placeholder: (context, url) => Image.asset("images/imageplaceholder.png"),
+                  placeholder: (context, url) =>
+                      Image.asset("images/imageplaceholder.png"),
                   imageUrl: s.imageUrl,
                   fit: BoxFit.fill,
                 )),

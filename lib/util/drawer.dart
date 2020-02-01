@@ -324,83 +324,56 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               elevation: 0,
               backgroundColor: Colors.transparent,
               child: Container(
-                padding: EdgeInsets.only(right: 16.0),
+                
+                padding: EdgeInsets.all(15),
                 height: 150,
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(75),
-                        bottomLeft: Radius.circular(75),
-                        topRight: Radius.circular(10),
-                        bottomRight: Radius.circular(10))),
-                child: Row(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(width: 20.0),
-                    CircleAvatar(
-                      radius: 55,
-                      backgroundColor: Colors.grey.shade200,
-                      child: Material(
-                          color: Colors.transparent,
-                          child: Padding(
-                            padding: EdgeInsets.all(0),
-                            child: ClipOval(
-                              child: Image.asset(
-                                  'assets/Aarohan_logo.jpg'), //network image
-                            ),
-                          )),
+                    Text(
+                      "Alert!",
+                      style: Theme.of(context).textTheme.title,
                     ),
-                    // Image.asset('assets/Aarohan_logo.jpg', width: 60,),),
-                    SizedBox(width: 20.0),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Alert!",
-                            style: Theme.of(context).textTheme.title,
+                    SizedBox(height: 10.0),
+                    Flexible(
+                      child: Text("Do you want to Logout?"),
+                    ),
+                    SizedBox(height: 10.0),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: RaisedButton(
+                            child: Text("Cancel"),
+                            color: Colors.red,
+                            colorBrightness: Brightness.dark,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
                           ),
-                          SizedBox(height: 10.0),
-                          Flexible(
-                            child: Text("Do you want to Logout?"),
+                        ),
+                        SizedBox(width: 10.0),
+                        Expanded(
+                          child: RaisedButton(
+                            child: Text("Logout"),
+                            color: Colors.green,
+                            colorBrightness: Brightness.dark,
+                            onPressed: () {
+                              (currentUser.providerData[1].providerId ==
+                                      "google.com")
+                                  ? _gSignOut()
+                                  : _fSignOut();
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
                           ),
-                          SizedBox(height: 10.0),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: RaisedButton(
-                                  child: Text("Cancel"),
-                                  color: Colors.red,
-                                  colorBrightness: Brightness.dark,
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(20.0)),
-                                ),
-                              ),
-                              SizedBox(width: 10.0),
-                              Expanded(
-                                child: RaisedButton(
-                                  child: Text("Logout"),
-                                  color: Colors.green,
-                                  colorBrightness: Brightness.dark,
-                                  onPressed: () {
-                                    (currentUser.providerData[1].providerId ==
-                                            "google.com")
-                                        ? _gSignOut()
-                                        : _fSignOut();
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(20.0)),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                        ),
+                      ],
                     )
                   ],
                 ),

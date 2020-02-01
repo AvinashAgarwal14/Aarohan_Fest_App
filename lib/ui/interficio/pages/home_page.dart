@@ -441,8 +441,8 @@ class _HomePageState extends State<HomePage>
                                                         OutlineButton(
                                                           borderSide:
                                                               BorderSide(
-                                                            color: Color(
-                                                                0xFFa94064), //Color of the border
+                                                            color: Colors
+                                                                .white, //Color of the border
                                                             style: BorderStyle
                                                                 .solid, //Style of the border
                                                             width:
@@ -469,8 +469,8 @@ class _HomePageState extends State<HomePage>
                                                         OutlineButton(
                                                           borderSide:
                                                               BorderSide(
-                                                            color: Color(
-                                                                0xFFa94064), //Color of the border
+                                                            color: Colors
+                                                                .white, //Color of the border
                                                             style: BorderStyle
                                                                 .solid, //Style of the border
                                                             width:
@@ -510,20 +510,22 @@ class _HomePageState extends State<HomePage>
                                           Text(
                                             "${clueData["data"][index][1]} \n\n ",
                                             style: GoogleFonts.josefinSans(
-                                                color: Color(0xFF0059B3)),
+                                                color: Color(0xFF0059B3),
+                                                fontSize: 17),
                                           ),
                                           Text(
                                             "${clueData["data"][index][2]}",
                                             style: GoogleFonts.josefinSans(
-                                                color: Colors.white),
+                                                color: Colors.white,
+                                                fontSize: 17),
                                           ),
                                         ],
                                       )
                                     : Text(
                                         clueData["data"][index][1],
                                         style: GoogleFonts.josefinSans(
-                                          color: Color(0xFF0059B3),
-                                        ),
+                                            color: Color(0xFF0059B3),
+                                            fontSize: 17),
                                       ),
                               ),
                             );
@@ -585,12 +587,12 @@ class _HomePageState extends State<HomePage>
                                   Text(
                                     "${unlockedClueData["data"][index][1]} \n\n ",
                                     style: GoogleFonts.josefinSans(
-                                        color: Color(0xFF0059B3)),
+                                        color: Color(0xFF0059B3), fontSize: 17),
                                   ),
                                   Text(
                                     "${unlockedClueData["data"][index][2]}",
                                     style: GoogleFonts.josefinSans(
-                                        color: Colors.white),
+                                        color: Colors.white, fontSize: 17),
                                   ),
                                 ],
                               ),
@@ -627,14 +629,14 @@ class _HomePageState extends State<HomePage>
                 height: MediaQuery.of(context).size.height,
                 child: Image.asset("assets/loader1.gif"),
               )
-            : SafeArea(
-                child: Scaffold(
-                  body: Container(
-                    padding: EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF0b0b31),
-                    ),
-                    child: Center(
+            : Scaffold(
+                body: Container(
+                  padding: EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF0b0b31),
+                  ),
+                  child: Center(
+                    child: SafeArea(
                       child: ListView(
                         children: <Widget>[
                           Center(
