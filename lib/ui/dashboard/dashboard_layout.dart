@@ -152,11 +152,11 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                           new Radius.circular(10.0)),
                                       child: new Stack(
                                         children: <Widget>[
-                                          CachedNetworkImage(
-                                              placeholder: (context, url) =>
-                                                  Image.asset(
-                                                      "images/imageplaceholder.png"),
-                                              imageUrl:
+                                          Image.network(
+//                                              placeholder: (context, url) =>
+//                                                  Image.asset(
+//                                                      "images/imageplaceholder.png"),
+//                                              imageUrl:
                                              //     'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
                                                eventsByCategories["All"]
                                                        [index]
@@ -554,11 +554,11 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                             topLeft: Radius.circular(10),
                                             topRight: Radius.circular(10),
                                           ),
-                                          child: CachedNetworkImage(
-                                              placeholder: (context, url) =>
-                                                  Image.asset(
-                                                      "images/imageplaceholder.png"),
-                                              imageUrl:
+                                          child: Image.network(
+//                                              placeholder: (context, url) =>
+//                                                  Image.asset(
+//                                                      "images/imageplaceholder.png"),
+//                                              imageUrl:
                                                     eventsByCategories["Online"]
                                                             [index]
                                                         .imageUrl,
@@ -664,11 +664,11 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                       child: new ClipRRect(
                                           borderRadius: new BorderRadius.all(
                                               new Radius.circular(5.0)),
-                                          child: CachedNetworkImage(
-                                              placeholder: (context, url) =>
-                                                  Image.asset(
-                                                      "images/imageplaceholder.png"),
-                                              imageUrl:
+                                          child: Image.network(
+//                                              placeholder: (context, url) =>
+//                                                  Image.asset(
+//                                                      "images/imageplaceholder.png"),
+//                                              imageUrl:
                                                   'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
                                               // eventsByCategories[
                                               //             "Workshops and Special Attractions"]
@@ -806,11 +806,11 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                 topLeft: Radius.circular(10),
                                                 topRight: Radius.circular(10),
                                               ),
-                                              child: CachedNetworkImage(
-                                                  placeholder: (context, url) =>
-                                                      Image.asset(
-                                                          "images/imageplaceholder.png"),
-                                                  imageUrl:
+                                              child: Image.network(
+//                                                  placeholder: (context, url) =>
+//                                                      Image.asset(
+//                                                          "images/imageplaceholder.png"),
+//                                                  imageUrl:
                                                     //  'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
                                                     eventsByCategories[
                                                            "On-site"][index]

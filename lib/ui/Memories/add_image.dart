@@ -170,7 +170,7 @@ class _SendImageEntryState extends State<SendImageEntry> {
   }
 
   Future chooseFileCamera() async {
-    await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 20)
+    await ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 10)
         .then((image) {
       setState(() {
         _image = image;
@@ -181,7 +181,7 @@ class _SendImageEntryState extends State<SendImageEntry> {
   }
 
   Future chooseFileGallery() async {
-    await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 20)
+    await ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 10)
         .then((image) {
       print(image);
       setState(() {
