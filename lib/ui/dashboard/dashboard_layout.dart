@@ -152,12 +152,14 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                           new Radius.circular(10.0)),
                                       child: new Stack(
                                         children: <Widget>[
+
                                           CachedNetworkImage(
                                               placeholder: (context, url) =>
                                                   Image.asset(
                                                       "images/imageplaceholder.png"),
                                               imageUrl:
                                                   // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+
                                                eventsByCategories["All"]
                                                        [index]
                                                    .imageUrl,
@@ -554,6 +556,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                             topLeft: Radius.circular(10),
                                             topRight: Radius.circular(10),
                                           ),
+
                                           child: CachedNetworkImage(
                                               placeholder: (context, url) =>
                                                   Image.asset(
@@ -562,6 +565,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                   eventsByCategories["Online"]
                                                           [index]
                                                       .imageUrl,
+
 //                                                'https://www.hcsa.org.sg/wp-content/uploads/2018/10/181015-HCSA-Res-03-Events-banner.jpg',
                                                   // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
                                               height: double.infinity,
@@ -664,6 +668,8 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                       child: new ClipRRect(
                                           borderRadius: new BorderRadius.all(
                                               new Radius.circular(5.0)),
+
+
                                           child: CachedNetworkImage(
                                               placeholder: (context, url) =>
                                                   Image.asset(
@@ -674,6 +680,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                           "Workshops and Special Attractions"]
                                                       [index]
                                                   .imageUrl,
+
                                               fit: BoxFit.cover)),
                                       height: 150.0,
                                     ),
@@ -806,6 +813,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                 topLeft: Radius.circular(10),
                                                 topRight: Radius.circular(10),
                                               ),
+
                                               child: CachedNetworkImage(
                                                   placeholder: (context, url) =>
                                                       Image.asset(

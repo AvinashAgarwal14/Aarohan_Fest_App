@@ -290,10 +290,10 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
                   height: 256.0,
                   child: SizedBox.expand(
                     child:
-                         CachedNetworkImage(
-                            placeholder: (context, url) =>
-                                Image.asset("images/imageplaceholder.png"),
-                            imageUrl: widget.eventCard.imageUrl,
+                         Image.network(
+                            //placeholder: (context, url) =>
+                           //     Image.asset("images/imageplaceholder.png"),
+                            widget.eventCard.imageUrl,
                             fit: BoxFit.cover,
                             height: 256.0)),
                 )),

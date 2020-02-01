@@ -2,6 +2,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:intro_slider/slide_object.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
