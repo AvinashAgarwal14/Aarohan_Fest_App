@@ -619,7 +619,7 @@ class _HomePageState extends State<HomePage>
     double top2 =
         _isUp ? (deviceSize.height - 80) : ((deviceSize.height) / 2) + 10;
     var bottom3 = _isUp ? deviceSize.height : ((deviceSize.height) / 2) + 10;
-    var bottom4 = _isUp ? 10.0 : deviceSize.height - 80;
+    var bottom4 = _isUp ? 10.0 : deviceSize.height - 110;
     var right4 = 20.0;
 
     return levelData["level_no"] == 1 && intro == false
@@ -787,11 +787,42 @@ class _HomePageState extends State<HomePage>
                               child: Container(
                                 padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
                                 alignment: Alignment.topLeft,
-                                child: Text(
-                                  "INSTRUCTIONS",
-                                  style: GoogleFonts.uncialAntiqua(
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold),
+                                child: ListView(
+                                  children: <Widget>[
+                                    Text(
+                                      "INSTRUCTIONS",
+                                      style: GoogleFonts.uncialAntiqua(
+                                          color: Color(0xFF0059B3),
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      "The rules of Journo Detective are as follows: \n\n\n 1) Participants need to solve a murder mystery with the help of an available storyline and clues provided to them.\n\n 2) Each level comprises of a clue to the next location at which the participant can move to the next level. You need to go to the location which the clue indicates and then click on submit. If you are at the right location, you progress the the next level.\n\n 3) At every level, there will be a set of clues. You can unlock clues as you desire at a particular location.\n\n 4) A clue that has not been unlocked cannot be unlocked once you pass that level.\n\n 5) The final level requires you to write the name of the criminal with a justification for the same.\n\n 6) The dynamic scoreboard will be based on the level a participant is at and the time he/she takes to reach there.\n\n 7) The final standing will be subjected to three parameters: The correct answer and justification, time taken and number of clues unlocked to come to a conclusion.",
+                                      style:
+                                          GoogleFonts.josefinSans(fontSize: 17),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      "The Mystery",
+                                      style: GoogleFonts.uncialAntiqua(
+                                          color: Colors.red, fontSize: 29),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    _isLoading
+                                        ? Container()
+                                        : Text(
+                                            mainQues["data"],
+                                            style: GoogleFonts.josefinSans(
+                                                fontSize: 19),
+                                          ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -1261,10 +1292,13 @@ class _HomePageState extends State<HomePage>
                           onVerticalDragStart: (context) {
                             setState(() {
                               _isUp = !_isUp;
-                              getScoreboard();
+                              // getScoreboard();
                             });
                           },
-                          child: Image.asset("assets/leaderboard.png"),
+                          child: Icon(
+                            Icons.assessment,
+                            size: 70,
+                          ),
                         ),
                       ),
                       AnimatedPositioned(

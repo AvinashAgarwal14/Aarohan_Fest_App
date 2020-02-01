@@ -269,10 +269,10 @@ class _BlackJackState extends State<BlackJack> {
     blackJack = new BlackJackModel(fix);
     setState(() {
       blackJack.start();
-      if (blackJack.winner != -1) {
-        showDialog(context, blackJack.winner);
-      }
     });
+    if (blackJack.winner != -1) {
+      showDialog(context, blackJack.winner);
+    }
   }
 
   @override
