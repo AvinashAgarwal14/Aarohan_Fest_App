@@ -1,4 +1,4 @@
-package com.app.aavishkar.aavishkarapp;
+package com.app.aarohan.aarohanapp;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
