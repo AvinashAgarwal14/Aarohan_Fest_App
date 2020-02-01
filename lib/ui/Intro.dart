@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -61,6 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   loadSavedData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
+    // preferences.clear();
 
     setState(() {
       introScreen = preferences.getString('display');
@@ -88,16 +90,23 @@ class _IntroScreenState extends State<IntroScreen> {
 
     slides.add(
       new Slide(
+        title: "TARGET IN SIGHT",
+        styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
         backgroundImage: "assets/INTRO1.png",
       ),
     );
     slides.add(
       new Slide(
+        title: "FIRE IN THE HOLE",
+        styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
         backgroundImage: "assets/INTRO2.png",
       ),
     );
     slides.add(
       new Slide(
+        maxLineTitle: 2,
+        title: "MISSION \n ACCOMPLISHED",
+        styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
         backgroundImage: "assets/INTRO3.png",
       ),
     );

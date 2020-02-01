@@ -22,7 +22,6 @@ import './ui/interficio/interficio.dart';
 import './ui/games/home_page.dart';
 import 'package:flame/flame.dart';
 import 'package:aavishkarapp/ui/Intro.dart';
-import './ui/Memories/share_memories.dart';
 
 void main() async {
   // debugPaintSizeEnabled = true;
