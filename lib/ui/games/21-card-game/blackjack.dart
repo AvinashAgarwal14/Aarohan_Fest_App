@@ -108,7 +108,7 @@ class _BlackJackState extends State<BlackJack> {
           Navigator.pop(context);
 
           SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
+              statusBarColor: Colors.transparent,
               systemNavigationBarIconBrightness: Brightness.dark));
         },
         child: Container(
@@ -149,7 +149,7 @@ class _BlackJackState extends State<BlackJack> {
                       onPressed: () {
                         SystemChrome.setSystemUIOverlayStyle(
                             SystemUiOverlayStyle(
-                                statusBarColor: Colors.white,
+                                statusBarColor: Colors.transparent,
                                 systemNavigationBarIconBrightness:
                                     Brightness.dark));
                         Navigator.pop(context);
@@ -269,10 +269,10 @@ class _BlackJackState extends State<BlackJack> {
     blackJack = new BlackJackModel(fix);
     setState(() {
       blackJack.start();
-      if (blackJack.winner != -1) {
-        showDialog(context, blackJack.winner);
-      }
     });
+    if (blackJack.winner != -1) {
+      showDialog(context, blackJack.winner);
+    }
   }
 
   @override
@@ -281,7 +281,7 @@ class _BlackJackState extends State<BlackJack> {
       onWillPop: () {
         Navigator.pop(context);
         SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-            statusBarColor: Colors.white,
+            statusBarColor: Colors.transparent,
             systemNavigationBarIconBrightness: Brightness.dark));
       },
       child: Scaffold(
@@ -461,7 +461,7 @@ class _BlackJackState extends State<BlackJack> {
                               Navigator.pop(context);
                               SystemChrome.setSystemUIOverlayStyle(
                                   SystemUiOverlayStyle(
-                                      statusBarColor: Colors.white,
+                                      statusBarColor: Colors.transparent,
                                       systemNavigationBarIconBrightness:
                                           Brightness.dark));
                             },

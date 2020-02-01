@@ -99,7 +99,22 @@ flutter:
     - assets/AU2.png
     - assets/AU3.png
     - assets/AU4.png
-
+    - assets/SplashScreen.gif
+    - assets/SSinghal.jpeg
+    - assets/Pjain.jpeg
+    - assets/SChak.jpeg
+    - assets/DRoy.jpeg
+    - assets/VA.jpeg
+    - assets/SM.jpeg
+    - assets/SNayak.jpeg
+    - assets/AB.jpeg
+    - assets/AshA.jpeg
+    - assets/DDas.jpeg
+    - assets/PSG.jpeg
+    - assets/ST.jpeg
+    - assets/PB.jpeg
+    - assets/SRay.jpeg
+    - assets/Shr.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

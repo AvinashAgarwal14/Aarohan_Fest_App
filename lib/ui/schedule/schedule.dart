@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../util/drawer.dart';
 import './day1.dart';
 import './day2.dart';
@@ -45,7 +46,7 @@ class _ScheduleState extends State<Schedule> {
     // TODO: implement initState
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white.withOpacity(0),
+        statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark));
     setState(() {
@@ -58,20 +59,31 @@ class _ScheduleState extends State<Schedule> {
     ThemeData themeData = Theme.of(context);
     return new Theme(
       data: themeData,
-      child: SafeArea(
-        child: Scaffold(
-          key: _scaffoldKeyForSchedule,
-          drawer: NavigationDrawer(),
-          body: new CustomScrollView(
+      child: Scaffold(
+        key: _scaffoldKeyForSchedule,
+        drawer: NavigationDrawer(),
+        body: SafeArea(
+          child: CustomScrollView(
             slivers: <Widget>[
               new SliverAppBar(
+                iconTheme: IconThemeData(
+                  color: Color(0xFF6B872B),
+                ),
+                elevation: 0,
+                backgroundColor: Colors.white,
                 expandedHeight: _appBarHeight,
                 pinned: _appBarBehavior == AppBarBehavior.pinned,
                 floating: _appBarBehavior == AppBarBehavior.floating ||
                     _appBarBehavior == AppBarBehavior.snapping,
                 snap: _appBarBehavior == AppBarBehavior.snapping,
-                flexibleSpace: new FlexibleSpaceBar(
-                  title: Text('Schedule'),
+                flexibleSpace: FlexibleSpaceBar(
+                  title: Text(
+                    'Schedule',
+                    style: GoogleFonts.josefinSans(
+                      fontSize: 30,
+                      color: Color(0xFF6B872B),
+                    ),
+                  ),
                   background: new Stack(
                     fit: StackFit.expand,
                     children: <Widget>[

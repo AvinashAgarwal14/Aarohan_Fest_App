@@ -17,14 +17,12 @@ class EventDetails extends StatefulWidget {
 enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class EventDetailsState extends State<EventDetails> {
-
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
-
 
   @override
   void initState() {
@@ -32,7 +30,7 @@ class EventDetailsState extends State<EventDetails> {
     super.initState();
   }
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
@@ -41,144 +39,147 @@ class EventDetailsState extends State<EventDetails> {
             height: double.infinity,
             child: CachedNetworkImage(
               placeholder: (context, url) =>
-                  Image.asset(
-                      "images/imageplaceholder.png"),
+                  Image.asset("images/imageplaceholder.png"),
               imageUrl: widget.item.imageUrl,
               fit: BoxFit.cover,
             )),
         SafeArea(
-          child: Column(
-            children: <Widget>[
-              Padding(
+            child: Column(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(children: [
+              MaterialButton(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(children: [
-                  MaterialButton(
-                    padding: const EdgeInsets.all(8.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Icon(Icons.arrow_back_ios),
-                    color: Colors.white,
-                    textColor: Colors.black,
-                    minWidth: 0,
-                    height: 40,
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ]),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Icon(Icons.arrow_back_ios),
+                color: Colors.white,
+                textColor: Colors.black,
+                minWidth: 0,
+                height: 40,
+                onPressed: () => Navigator.pop(context),
               ),
-              Spacer(flex: 1),
-              Expanded(
-                  child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Colors.white),
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(height: 20.0),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ListTile(
-                                title: Text(
-                              widget.item.title,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 26.0),
-                            )),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0, vertical: 8.0),
-                              child: Text(
-                                widget.item.body,
-                                style: TextStyle(color: Colors.grey.shade600, fontSize: 15.0),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-              SlidingUpPanel(
-                  minHeight: 65.0,
-                  maxHeight: (widget.item.link != "nil")?MediaQuery.of(context).size.height * 0.50:MediaQuery.of(context).size.height * 0.35,
-                  panel: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            ]),
+          ),
+          Spacer(flex: 1),
+          Expanded(
+              child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0), color: Colors.white),
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 20.0),
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        SizedBox(height: 5.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              width: 35,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[300],
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12.0))),
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 13.0),
-                        Center(child: Text("Show Details")),
-                        SizedBox(height: 20.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Icon(Icons.date_range, color: Colors.grey),
-                              Padding(
-                                padding: EdgeInsets.only(top: 10.0),
-                              ),
-                              Text(widget.item.date)
-                            ],
+                        ListTile(
+                            title: Text(
+                          widget.item.title,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 26.0),
+                        )),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 8.0),
+                          child: Text(
+                            widget.item.body,
+                            style: TextStyle(
+                                color: Colors.grey.shade600, fontSize: 15.0),
                           ),
-                          (widget.item.location != "nil") ?
-                          Column(
-                            children: <Widget>[
-                              Icon(Icons.location_on, color: Colors.grey),
-                              Padding(
-                                padding: EdgeInsets.only(top: 10.0),
-                              ),
-                              Text(widget.item.location)
-                            ],
-                          ):Container(),
-                          Column(
-                            children: <Widget>[
-                              Icon(Icons.category, color: Colors.grey),
-                              Padding(
-                                padding: EdgeInsets.only(top: 10.0),
-                              ),
-                              Text(widget.item.tag)
-                            ],
-                          )
-                          ],
                         ),
-                        SizedBox(height: 20.0),
-                        Divider(),
-                        (widget.item.contact != null)?
-                        new DetailCategory(
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )),
+          SlidingUpPanel(
+            minHeight: 65.0,
+            maxHeight: (widget.item.link != "nil")
+                ? MediaQuery.of(context).size.height * 0.50
+                : MediaQuery.of(context).size.height * 0.35,
+            panel: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 5.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        width: 35,
+                        height: 8,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12.0))),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 13.0),
+                  Center(child: Text("Show Details")),
+                  SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Icon(Icons.date_range, color: Colors.grey),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0),
+                          ),
+                          Text(widget.item.date)
+                        ],
+                      ),
+                      (widget.item.location != "nil")
+                          ? Column(
+                              children: <Widget>[
+                                Icon(Icons.location_on, color: Colors.grey),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10.0),
+                                ),
+                                Text(widget.item.location)
+                              ],
+                            )
+                          : Container(),
+                      Column(
+                        children: <Widget>[
+                          Icon(Icons.category, color: Colors.grey),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0),
+                          ),
+                          Text(widget.item.tag)
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 20.0),
+                  Divider(),
+                  (widget.item.contact != null)
+                      ? new DetailCategory(
                           icon: Icons.call,
                           children: <Widget>[
                             new DetailItem(
                               tooltip: 'Send message',
                               onPressed: () {
-                                launch("tel:+91${widget.item.contact.substring(0,10)}");
+                                launch(
+                                    "tel:+91${widget.item.contact.substring(0, 10)}");
                               },
                               lines: <String>[
-                                '+91 ${widget.item.contact.substring(0,10)}',
+                                '+91 ${widget.item.contact.substring(0, 10)}',
                                 '${widget.item.contact.substring(11)}',
                               ],
                             )
                           ],
-                        ):Container(),
-                        (widget.item.link != "nil")?
-                        new DetailCategory(
+                        )
+                      : Container(),
+                  (widget.item.link != "nil")
+                      ? new DetailCategory(
                           icon: Icons.link,
                           children: <Widget>[
                             new DetailItem(
@@ -186,20 +187,20 @@ class EventDetailsState extends State<EventDetails> {
                               onPressed: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => new WebRender(link: widget.item.link)),
+                                  MaterialPageRoute(
+                                      builder: (context) => new WebRender(
+                                          link: widget.item.link)),
                                 );
                               },
-                              lines: <String>[
-                                "${widget.item.link}",
-                                "Link"
-                              ],
+                              lines: <String>["${widget.item.link}", "Link"],
                             ),
                           ],
-                        ):Container()
-                    ]),
-                  ),
-                      ]))
-            ],
+                        )
+                      : Container()
+                ]),
+          ),
+        ]))
+      ],
     ));
   }
 }

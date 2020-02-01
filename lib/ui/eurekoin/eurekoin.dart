@@ -130,7 +130,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+        statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark));
     // TODO: implement initState
@@ -155,7 +155,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                     color: Colors.black,
                     image: DecorationImage(
                         image: AssetImage("images/eurekoin.png"),
-                        fit: BoxFit.contain),
+                        fit: BoxFit.cover),
                   ),
                 ),
               )
@@ -170,7 +170,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                               color: Colors.black,
                               image: DecorationImage(
                                   image: AssetImage("images/eurekoin.png"),
-                                  fit: BoxFit.contain),
+                                  fit: BoxFit.cover),
                             ),
                             alignment: Alignment.bottomCenter,
                             child: (registerWithReferralCode == true)

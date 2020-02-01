@@ -152,12 +152,14 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                           new Radius.circular(10.0)),
                                       child: new Stack(
                                         children: <Widget>[
-                                          Image.network(
-//                                              placeholder: (context, url) =>
-//                                                  Image.asset(
-//                                                      "images/imageplaceholder.png"),
-//                                              imageUrl:
-                                             //     'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+
+                                          CachedNetworkImage(
+                                              placeholder: (context, url) =>
+                                                  Image.asset(
+                                                      "images/imageplaceholder.png"),
+                                              imageUrl:
+                                                  // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+
                                                eventsByCategories["All"]
                                                        [index]
                                                    .imageUrl,
@@ -268,31 +270,31 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.monetization_on,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                   Text(
                                     "Eurekoin Wallet",
                                     style:
-                                        GoogleFonts.ubuntu(color: Colors.white),
+                                        GoogleFonts.ubuntu(color: Colors.black),
                                   ),
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFF6B872B),
-                                    Color(0xFF4B5E1D),
-                                    // Color(0xFF4AC5F1),
-                                    // Color(0xFF6B8BD8)
-                                  ],
-                                  stops: [0.3, 1],
-                                ),
-                                // color: Colors.green,
+                                // gradient: LinearGradient(
+                                //   colors: [
+                                //     Color(0xFF6B872B),
+                                //     Color(0xFF4B5E1D),
+                                //     // Color(0xFF4AC5F1),
+                                //     // Color(0xFF6B8BD8)
+                                //   ],
+                                //   stops: [0.3, 1],
+                                // ),
+                                color: Colors.white,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Color(0xFF4B5E1D),
+                                      color: Colors.grey[700],
                                       offset: Offset(3.0, 3.0),
                                       blurRadius: 7.0,
                                       spreadRadius: 1.0),
@@ -322,29 +324,29 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                   children: <Widget>[
                                     Icon(
                                       Icons.casino,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ),
                                     Text(
                                       "Eurekoin Casino",
                                       style: GoogleFonts.ubuntu(
-                                          color: Colors.white),
+                                          color: Colors.black),
                                     ),
                                   ],
                                 ),
                                 decoration: BoxDecoration(
-                                  // color: Colors.yellow,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF6B872B),
-                                      Color(0xFF4B5E1D),
-                                    ],
-                                    stops: [0.3, 1],
-                                  ),
+                                  color: Colors.white,
+                                  // gradient: LinearGradient(
+                                  //   colors: [
+                                  //     Color(0xFF6B872B),
+                                  //     Color(0xFF4B5E1D),
+                                  //   ],
+                                  //   stops: [0.3, 1],
+                                  // ),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Color(0xFF4B5E1D),
+                                        color: Colors.grey[700],
                                         offset: Offset(3.0, 3.0),
                                         blurRadius: 7.0,
                                         spreadRadius: 1.0),
@@ -377,29 +379,29 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                   children: <Widget>[
                                     Icon(
                                       Icons.search,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ),
                                     Text(
                                       "Journo Detective",
                                       style: GoogleFonts.ubuntu(
-                                          color: Colors.white),
+                                          color: Colors.black),
                                     ),
                                   ],
                                 ),
                                 decoration: BoxDecoration(
-                                  // color: Colors.white,
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF6B872B),
-                                      Color(0xFF4B5E1D),
-                                    ],
-                                    stops: [0.3, 1],
-                                  ),
+                                  color: Colors.white,
+                                  // gradient: LinearGradient(
+                                  //   colors: [
+                                  //     Color(0xFF6B872B),
+                                  //     Color(0xFF4B5E1D),
+                                  //   ],
+                                  //   stops: [0.3, 1],
+                                  // ),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Color(0xFF4B5E1D),
+                                        color: Colors.grey[700],
                                         offset: Offset(3.0, 3.0),
                                         blurRadius: 7.0,
                                         spreadRadius: 1.0),
@@ -428,29 +430,29 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                 children: <Widget>[
                                   Icon(
                                     Icons.linked_camera,
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                   Text(
                                     "Share Memories",
                                     style:
-                                        GoogleFonts.ubuntu(color: Colors.white),
+                                        GoogleFonts.ubuntu(color: Colors.black),
                                   ),
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                // color: Colors.white,
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFF6B872B),
-                                    Color(0xFF4B5E1D),
-                                  ],
-                                  stops: [0.3, 1],
-                                ),
+                                color: Colors.white,
+                                // gradient: LinearGradient(
+                                //   colors: [
+                                //     Color(0xFF6B872B),
+                                //     Color(0xFF4B5E1D),
+                                //   ],
+                                //   stops: [0.3, 1],
+                                // ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Color(0xFF4B5E1D),
+                                      color: Colors.grey[700],
                                       offset: Offset(3.0, 3.0),
                                       blurRadius: 7.0,
                                       spreadRadius: 1.0),
@@ -554,16 +556,18 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                             topLeft: Radius.circular(10),
                                             topRight: Radius.circular(10),
                                           ),
-                                          child: Image.network(
-//                                              placeholder: (context, url) =>
-//                                                  Image.asset(
-//                                                      "images/imageplaceholder.png"),
-//                                              imageUrl:
-                                                    eventsByCategories["Online"]
-                                                            [index]
-                                                        .imageUrl,
+
+                                          child: CachedNetworkImage(
+                                              placeholder: (context, url) =>
+                                                  Image.asset(
+                                                      "images/imageplaceholder.png"),
+                                              imageUrl:
+                                                  eventsByCategories["Online"]
+                                                          [index]
+                                                      .imageUrl,
+
 //                                                'https://www.hcsa.org.sg/wp-content/uploads/2018/10/181015-HCSA-Res-03-Events-banner.jpg',
- //                                                 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                                  // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
                                               height: double.infinity,
                                               width: double.infinity,
                                               fit: BoxFit.cover))),
@@ -664,16 +668,19 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                       child: new ClipRRect(
                                           borderRadius: new BorderRadius.all(
                                               new Radius.circular(5.0)),
-                                          child: Image.network(
-//                                              placeholder: (context, url) =>
-//                                                  Image.asset(
-//                                                      "images/imageplaceholder.png"),
-//                                              imageUrl:
-                                                  'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
-                                              // eventsByCategories[
-                                              //             "Workshops and Special Attractions"]
-                                              //         [index]
-                                              //     .imageUrl,
+
+
+                                          child: CachedNetworkImage(
+                                              placeholder: (context, url) =>
+                                                  Image.asset(
+                                                      "images/imageplaceholder.png"),
+                                              imageUrl:
+                                                  // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                              eventsByCategories[
+                                                          "Workshops and Special Attractions"]
+                                                      [index]
+                                                  .imageUrl,
+
                                               fit: BoxFit.cover)),
                                       height: 150.0,
                                     ),
@@ -806,15 +813,16 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                 topLeft: Radius.circular(10),
                                                 topRight: Radius.circular(10),
                                               ),
-                                              child: Image.network(
-//                                                  placeholder: (context, url) =>
-//                                                      Image.asset(
-//                                                          "images/imageplaceholder.png"),
-//                                                  imageUrl:
-                                                    //  'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
-                                                    eventsByCategories[
-                                                           "On-site"][index]
-                                                       .imageUrl,
+
+                                              child: CachedNetworkImage(
+                                                  placeholder: (context, url) =>
+                                                      Image.asset(
+                                                          "images/imageplaceholder.png"),
+                                                  imageUrl:
+                                                      // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                                  eventsByCategories[
+                                                         "On-site"][index]
+                                                     .imageUrl,
                                                   height: double.infinity,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover))),
@@ -928,7 +936,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                       Image.asset(
                                                           "images/imageplaceholder.png"),
                                                   imageUrl:
-                                                 //     'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                                      // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
                                                    eventsByCategories["Talk"]
                                                            [index]
                                                        .imageUrl,
@@ -966,9 +974,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: Theme.of(context).brightness == Brightness.light
-                    ? AssetImage("images/gifs/loaderlight.gif")
-                    : AssetImage("images/gifs/loaderdark.gif"),
+                image: AssetImage("images/gifs/loaderlight.gif"),
                 fit: BoxFit.fill)),
       );
     }
