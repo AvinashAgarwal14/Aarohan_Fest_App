@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage>
     setState(() {
       _isLoading = true;
     });
-    if (accuracy > 250) {
+    if (accuracy > 25) {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text("location not accurate enough. please try again"),
         duration: Duration(seconds: 1),
