@@ -30,7 +30,8 @@ class _SearchByTagsState extends State<SearchByTags> {
     'Coding',
     'Sports',
     'Robotics',
-    'Workshops'
+    'Workshops',
+    'Buisness'
   ];
 
   final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -58,7 +59,8 @@ class _SearchByTagsState extends State<SearchByTags> {
       'Coding': new List(),
       'Sports': new List(),
       'Robotics': new List(),
-      'Workshops': new List()
+      'Workshops': new List(),
+      'Buisness': new List()
     };
 
     databaseReference = database.reference().child("Events");

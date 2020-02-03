@@ -64,7 +64,7 @@ class _SearchTabState extends State<SearchTab> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: searchController,
-              autofocus: false,
+              autofocus: true,
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(),
