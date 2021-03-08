@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../util/drawer.dart';
-import 'package:palette_generator/palette_generator.dart';
+// import 'package:palette_generator/palette_generator.dart';
 import 'package:flutter/rendering.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -249,7 +249,7 @@ class SearchByTagsCards extends StatefulWidget {
 }
 
 class _SearchByTagsCardsState extends State<SearchByTagsCards> {
-  PaletteGenerator paletteGenerator;
+  // PaletteGenerator paletteGenerator;
   final FirebaseDatabase database = FirebaseDatabase.instance;
   DatabaseReference databaseReferenceForUpdate;
   Color cardColor;
@@ -279,9 +279,9 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
   @override
   Widget build(BuildContext context) {
     Widget cardItem = new Card(
-        color: (paletteGenerator != null)
-            ? paletteGenerator.lightVibrantColor?.color
-            : cardColor,
+        color: //(paletteGenerator != null)
+            // ? paletteGenerator.lightVibrantColor?.color:
+            cardColor,
         child: new Column(
           children: <Widget>[
             new ClipRRect(
@@ -291,13 +291,12 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
                 child: Container(
                   height: 256.0,
                   child: SizedBox.expand(
-                    child:
-                         Image.network(
-                            //placeholder: (context, url) =>
-                           //     Image.asset("images/imageplaceholder.png"),
-                            widget.eventCard.imageUrl,
-                            fit: BoxFit.cover,
-                            height: 256.0)),
+                      child: Image.network(
+                          //placeholder: (context, url) =>
+                          //     Image.asset("images/imageplaceholder.png"),
+                          widget.eventCard.imageUrl,
+                          fit: BoxFit.cover,
+                          height: 256.0)),
                 )),
             ListTile(
               title: new Text(widget.eventCard.title),
@@ -310,12 +309,12 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
   }
 
   Future<void> updatePaletteGenerator() async {
-    paletteGenerator = await PaletteGenerator.fromImageProvider(
-      NetworkImage(widget.eventCard.imageUrl),
-      maximumColorCount: 5,
-    );
-    setState(() {});
-    updateNewsFeedPostColor(paletteGenerator.lightVibrantColor?.color);
+    // paletteGenerator = await PaletteGenerator.fromImageProvider(
+    //   NetworkImage(widget.eventCard.imageUrl),
+    //   maximumColorCount: 5,
+    // );
+    // setState(() {});
+    // updateNewsFeedPostColor(paletteGenerator.lightVibrantColor?.color);
   }
 
   void updateNewsFeedPostColor(Color color) {

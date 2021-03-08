@@ -1,4 +1,0 @@
-enum States {
-  menu,
-  playing,
-}
