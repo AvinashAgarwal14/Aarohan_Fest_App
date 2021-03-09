@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:aavishkarapp/util/inner_drawer.dart';
+import 'package:arhn_app_2021/util/inner_drawer.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage>
   bool _isLoading = false;
 
   void getLocation() async {
-    bool perm = await location.hasPermission();
+    PermissionStatus perm = await location.hasPermission();
     print(perm);
     LocationData currentLocation = await location.getLocation();
     location.changeSettings(accuracy: LocationAccuracy.HIGH);
@@ -411,7 +411,7 @@ class _HomePageState extends State<HomePage>
                                       ? () {
                                           showDialog(
                                             context: context,
-                                            child: Dialog(
+                                            builder: (context) => Dialog(
                                               backgroundColor:
                                                   Colors.white.withOpacity(0),
                                               child: Container(
@@ -728,7 +728,7 @@ class _HomePageState extends State<HomePage>
 
                 scaffold: Scaffold(
                   key: _scaffoldKey,
-                  resizeToAvoidBottomPadding: true,
+                  resizeToAvoidBottomInset: true,
                   // drawer: AppBar(automaticallyImplyLeading: false,),
                   body: Stack(
                     children: <Widget>[

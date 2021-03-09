@@ -6,11 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
+import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as JSON;
-import 'package:aavishkarapp/ui/account/login.dart';
+import 'package:arhn_app_2021/ui/account/login.dart';
 
 class NavigationDrawer extends StatefulWidget {
   @override
@@ -324,7 +324,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               elevation: 0,
               backgroundColor: Colors.transparent,
               child: Container(
-                
                 padding: EdgeInsets.all(15),
                 height: 150,
                 decoration: BoxDecoration(

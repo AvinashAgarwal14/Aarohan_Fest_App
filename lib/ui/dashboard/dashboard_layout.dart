@@ -22,7 +22,7 @@ class DashBoardLayout extends StatefulWidget {
 }
 
 class _DashBoardLayoutState extends State<DashBoardLayout> {
-  CarouselSlider instance;
+  CarouselController _carouselController;
   int j = 0;
   double maxWidth = 180;
   double minWidth = 70;
@@ -72,12 +72,12 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
   }
 
   nextSlider() {
-    instance.nextPage(
+    _carouselController.nextPage(
         duration: new Duration(milliseconds: 300), curve: Curves.linear);
   }
 
   prevSlider() {
-    instance.previousPage(
+    _carouselController.previousPage(
         duration: new Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
@@ -103,84 +103,40 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                        padding: new EdgeInsets.symmetric(vertical: 0.0),
-                        child: instance),
-                    new Container(
-                      height: 340,
-                      color: Colors.white,
-                      child: CarouselSlider(
-                        height: 250.0,
-                        //TODO add the upcoming events as per the date
-                        items: map<Widget>(
-                          carouselImageList,
-                          (index, i) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => EventDetails(
-                                          item: eventsByCategories["All"]
-                                              [index])),
-                                );
-                              },
-                              child: Stack(
-                                children: <Widget>[
-                                  Container(
-                                    height:
-                                        MediaQuery.of(context).size.height / 4,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[300],
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey[800],
-                                            offset: Offset(4.0, 4.0),
-                                            blurRadius: 15.0,
-                                            spreadRadius: 1.0),
-                                        BoxShadow(
-                                            color: Colors.white,
-                                            offset: Offset(-4.0, -4.0),
-                                            blurRadius: 15.0,
-                                            spreadRadius: 1.0),
-                                      ],
-                                    ),
-                                    margin: new EdgeInsets.all(10.0),
-                                    child: new ClipRRect(
-                                      borderRadius: new BorderRadius.all(
-                                          new Radius.circular(10.0)),
-                                      child: new Stack(
-                                        children: <Widget>[
-
-                                          CachedNetworkImage(
-                                              placeholder: (context, url) =>
-                                                  Image.asset(
-                                                      "images/imageplaceholder.png"),
-                                              imageUrl:
-                                                  // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
-
-                                               eventsByCategories["All"]
-                                                       [index]
-                                                   .imageUrl,
-                                              fit: BoxFit.cover,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width -
-                                                  10.0),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  new Positioned(
-                                    bottom: 0.0,
-                                    left: 30.0,
-                                    right: 30.0,
-                                    child: Container(
-                                      height: 100.0,
-                                      width: 200.0,
+                      padding: new EdgeInsets.symmetric(vertical: 0.0),
+                      child: new Container(
+                        height: 340,
+                        color: Colors.white,
+                        child: CarouselSlider(
+                          options: CarouselOptions(
+                            autoPlay: true,
+                            height: 250.0,
+                            viewportFraction: 0.85,
+                            aspectRatio: 16 / 9,
+                            pauseAutoPlayOnTouch: false,
+                          ),
+                          //TODO add the upcoming events as per the date
+                          items: map<Widget>(
+                            carouselImageList,
+                            (index, i) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EventDetails(
+                                            item: eventsByCategories["All"]
+                                                [index])),
+                                  );
+                                },
+                                child: Stack(
+                                  children: <Widget>[
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              4,
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
+                                        color: Colors.grey[300],
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10)),
                                         boxShadow: [
@@ -196,55 +152,104 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                               spreadRadius: 1.0),
                                         ],
                                       ),
-                                      margin: new EdgeInsets.all(5.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10,
-                                                      horizontal: 10),
-                                              child: Text(
-                                                  eventsByCategories["All"]
-                                                          [index]
-                                                      .title,
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
-                                                  ))),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 0.0, horizontal: 10),
-                                            child: Text(
-                                              eventsByCategories["All"][index]
-                                                      .body
-                                                      .substring(0, 50) +
-                                                  " ...",
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                color: Colors.black38,
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                      margin: new EdgeInsets.all(10.0),
+                                      child: new ClipRRect(
+                                        borderRadius: new BorderRadius.all(
+                                            new Radius.circular(10.0)),
+                                        child: new Stack(
+                                          children: <Widget>[
+                                            CachedNetworkImage(
+                                                placeholder: (context, url) =>
+                                                    Image.asset(
+                                                        "images/imageplaceholder.png"),
+                                                imageUrl:
+                                                    // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+
+                                                    eventsByCategories["All"]
+                                                            [index]
+                                                        .imageUrl,
+                                                fit: BoxFit.cover,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    10.0),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ).toList(),
-                        autoPlay: true,
-                        viewportFraction: 0.85,
-                        aspectRatio: 16 / 9,
-                        pauseAutoPlayOnTouch: Duration(seconds: 2),
+                                    new Positioned(
+                                      bottom: 0.0,
+                                      left: 30.0,
+                                      right: 30.0,
+                                      child: Container(
+                                        height: 100.0,
+                                        width: 200.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey[800],
+                                                offset: Offset(4.0, 4.0),
+                                                blurRadius: 15.0,
+                                                spreadRadius: 1.0),
+                                            BoxShadow(
+                                                color: Colors.white,
+                                                offset: Offset(-4.0, -4.0),
+                                                blurRadius: 15.0,
+                                                spreadRadius: 1.0),
+                                          ],
+                                        ),
+                                        margin: new EdgeInsets.all(5.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 10,
+                                                        horizontal: 10),
+                                                child: Text(
+                                                    eventsByCategories["All"]
+                                                            [index]
+                                                        .title,
+                                                    textAlign: TextAlign.left,
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 18,
+                                                    ))),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 0.0,
+                                                      horizontal: 10),
+                                              child: Text(
+                                                eventsByCategories["All"][index]
+                                                        .body
+                                                        .substring(0, 50) +
+                                                    " ...",
+                                                textAlign: TextAlign.left,
+                                                style: TextStyle(
+                                                  color: Colors.black38,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ).toList(),
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -556,7 +561,6 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                             topLeft: Radius.circular(10),
                                             topRight: Radius.circular(10),
                                           ),
-
                                           child: CachedNetworkImage(
                                               placeholder: (context, url) =>
                                                   Image.asset(
@@ -567,7 +571,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                       .imageUrl,
 
 //                                                'https://www.hcsa.org.sg/wp-content/uploads/2018/10/181015-HCSA-Res-03-Events-banner.jpg',
-                                                  // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
+                                              // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
                                               height: double.infinity,
                                               width: double.infinity,
                                               fit: BoxFit.cover))),
@@ -668,19 +672,16 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                       child: new ClipRRect(
                                           borderRadius: new BorderRadius.all(
                                               new Radius.circular(5.0)),
-
-
                                           child: CachedNetworkImage(
                                               placeholder: (context, url) =>
                                                   Image.asset(
                                                       "images/imageplaceholder.png"),
                                               imageUrl:
                                                   // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
-                                              eventsByCategories[
-                                                          "Workshops and Special Attractions"]
-                                                      [index]
-                                                  .imageUrl,
-
+                                                  eventsByCategories[
+                                                              "Workshops and Special Attractions"]
+                                                          [index]
+                                                      .imageUrl,
                                               fit: BoxFit.cover)),
                                       height: 150.0,
                                     ),
@@ -813,16 +814,15 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                 topLeft: Radius.circular(10),
                                                 topRight: Radius.circular(10),
                                               ),
-
                                               child: CachedNetworkImage(
                                                   placeholder: (context, url) =>
                                                       Image.asset(
                                                           "images/imageplaceholder.png"),
                                                   imageUrl:
                                                       // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
-                                                  eventsByCategories[
-                                                         "On-site"][index]
-                                                     .imageUrl,
+                                                      eventsByCategories[
+                                                              "On-site"][index]
+                                                          .imageUrl,
                                                   height: double.infinity,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover))),
@@ -937,9 +937,9 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                           "images/imageplaceholder.png"),
                                                   imageUrl:
                                                       // 'https://blog.socedo.com/wp-content/uploads/2016/09/Events.jpg',
-                                                   eventsByCategories["Talk"]
-                                                           [index]
-                                                       .imageUrl,
+                                                      eventsByCategories["Talk"]
+                                                              [index]
+                                                          .imageUrl,
                                                   height: double.infinity,
                                                   width: double.infinity,
                                                   fit: BoxFit.cover))),

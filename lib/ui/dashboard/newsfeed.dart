@@ -2,7 +2,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import '../../model/newsfeed.dart';
-import 'package:aavishkarapp/ui/dashboard/newsfeed_details/feed_details.dart';
+import 'package:arhn_app_2021/ui/dashboard/newsfeed_details/feed_details.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class Newsfeed extends StatefulWidget {

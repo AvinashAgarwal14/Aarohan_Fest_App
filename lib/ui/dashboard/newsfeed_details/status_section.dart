@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:aavishkarapp/model/newsfeed.dart';
+import 'package:arhn_app_2021/model/newsfeed.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,8 +7,7 @@ import '../../../model/post_likes.dart';
 import 'package:intl/intl.dart';
 
 class StatusCategory extends StatefulWidget {
-  StatusCategory({Key key, this.postKey, this.date})
-      : super(key: key);
+  StatusCategory({Key key, this.postKey, this.date}) : super(key: key);
   final postKey;
   final String date;
 
@@ -33,13 +32,12 @@ class _StatusCategoryState extends State<StatusCategory> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -74,70 +72,67 @@ class _StatusCategoryState extends State<StatusCategory> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      IconButton(
-                          icon: likeButton,
-                          onPressed: () {
-                            if (currentUser == null) {
-                              Navigator.of(context)
-                                  .pushNamed("/ui/account/login")
-                                  .then((onReturn) {
-                                getUser(1);
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    IconButton(
+                        icon: likeButton,
+                        onPressed: () {
+                          if (currentUser == null) {
+                            Navigator.of(context)
+                                .pushNamed("/ui/account/login")
+                                .then((onReturn) {
+                              getUser(1);
+                            });
+                          } else {
+                            if (likeButton == likeOptions[0]) {
+                              setState(() {
+                                currentLike = true;
                               });
+                              _addUserToPostLikes();
+                              _updatePost(numberOfLikes + 1);
                             } else {
-                              if (likeButton == likeOptions[0]) {
-                                setState(() {
-                                  currentLike = true;
-                                });
-                                _addUserToPostLikes();
-                                _updatePost(numberOfLikes + 1);
-                              } else {
-                                setState(() {
-                                  currentLike = false;
-                                  numberOfLikes--;
-                                });
-                                _deleteUserFromPostLikes();
-                                _updatePost(numberOfLikes);
-                              }
+                              setState(() {
+                                currentLike = false;
+                                numberOfLikes--;
+                              });
+                              _deleteUserFromPostLikes();
+                              _updatePost(numberOfLikes);
                             }
-                          }),
-                      Padding(
-                        padding: EdgeInsets.only(top: 2.0),
-                      ),
-                      Text("$numberOfLikes")
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      IconButton(
-                          icon: Icon(Icons.comment, color: Colors.grey),
-                          onPressed: () {
-                          }),
-                      Padding(
-                        padding: EdgeInsets.only(top: 2.0),
-                      ),
-                      Text("$numberOfComments")
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      IconButton(
-                          icon: Icon(Icons.date_range, color: Colors.grey),
-                          onPressed: () {
-                          }),
-                      Padding(
-                        padding: EdgeInsets.only(top: 2.0),
-                      ),
-                      Text(widget.date)
-                    ],
-                  )
-                ],
-              )
-            )
+                          }
+                        }),
+                    Padding(
+                      padding: EdgeInsets.only(top: 2.0),
+                    ),
+                    Text("$numberOfLikes")
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(Icons.comment, color: Colors.grey),
+                        onPressed: () {}),
+                    Padding(
+                      padding: EdgeInsets.only(top: 2.0),
+                    ),
+                    Text("$numberOfComments")
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(Icons.date_range, color: Colors.grey),
+                        onPressed: () {}),
+                    Padding(
+                      padding: EdgeInsets.only(top: 2.0),
+                    ),
+                    Text(widget.date)
+                  ],
+                )
+              ],
+            ))
           ],
         ),
       ),

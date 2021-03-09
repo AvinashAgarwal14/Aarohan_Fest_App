@@ -9,7 +9,7 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-import 'package:aavishkarapp/ui/games/21-card-game/model.dart';
+import 'package:arhn_app_2021/ui/games/21-card-game/model.dart';
 import 'package:http/http.dart' as http;
 
 class BlackJack extends StatefulWidget {

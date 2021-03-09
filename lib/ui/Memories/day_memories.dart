@@ -92,7 +92,7 @@ class _DayMemoriesState extends State<DayMemories>
                               ),
                               onTap: () => showDialog(
                                     context: context,
-                                    child: Dialog(
+                                    builder: (context) => Dialog(
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
@@ -102,7 +102,6 @@ class _DayMemoriesState extends State<DayMemories>
                                             Expanded(
                                               child: Container(
                                                 decoration: BoxDecoration(
-                                                  
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             30)),

@@ -1,12 +1,11 @@
-import 'package:aavishkarapp/model/event.dart';
+import 'package:arhn_app_2021/model/event.dart';
 import 'package:flutter/material.dart';
-import 'package:aavishkarapp/util/event_details.dart';
+import 'package:arhn_app_2021/util/event_details.dart';
 import '../search_by_tags/tags.dart';
 
 class SearchTab extends StatefulWidget {
   final eventsList;
-  const SearchTab({Key key, this.eventsList})
-      : super(key: key);
+  const SearchTab({Key key, this.eventsList}) : super(key: key);
 
   @override
   _SearchTabState createState() => _SearchTabState();
@@ -71,24 +70,26 @@ class _SearchTabState extends State<SearchTab> {
                   labelText: "Search Events"),
             ),
           ),
-          (filteredFeed.length != 0) ? Expanded(
-                      child: ListView.builder(
-              cacheExtent: MediaQuery.of(context).size.height * 3,
-              itemCount: filteredFeed.length,
-              itemBuilder: (BuildContext context, position) {
-                return GestureDetector(
-                  onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => new EventDetails(
-                                                item: filteredFeed
-                                                [position])),
-                                      );
-                                    },
-                    child: SearchByTagsCards(eventCard: filteredFeed[position]));
-              }),
-          ) : Expanded(child:Center(child: Text('There is no such event!')))
+          (filteredFeed.length != 0)
+              ? Expanded(
+                  child: ListView.builder(
+                      cacheExtent: MediaQuery.of(context).size.height * 3,
+                      itemCount: filteredFeed.length,
+                      itemBuilder: (BuildContext context, position) {
+                        return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => new EventDetails(
+                                        item: filteredFeed[position])),
+                              );
+                            },
+                            child: SearchByTagsCards(
+                                eventCard: filteredFeed[position]));
+                      }),
+                )
+              : Expanded(child: Center(child: Text('There is no such event!')))
         ],
       ),
     );

@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:aavishkarapp/ui/dashboard/dashboard_layout.dart';
+import 'package:arhn_app_2021/ui/dashboard/dashboard_layout.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,8 +10,8 @@ import 'package:flutter/services.dart';
 import '../../util/drawer.dart';
 
 import 'dart:async';
-import 'package:aavishkarapp/ui/games/7-up-7-down/7up7down.dart';
-import 'package:aavishkarapp/ui/games/21-card-game/blackjack.dart';
+import 'package:arhn_app_2021/ui/games/7-up-7-down/7up7down.dart';
+import 'package:arhn_app_2021/ui/games/21-card-game/blackjack.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -796,6 +796,15 @@ class _HomePageState extends State<HomePage> {
                                           recentResult.length <= 0
                                       ? Container()
                                       : CarouselSlider(
+                                          options: CarouselOptions(
+                                            viewportFraction: 1.0,
+                                            autoPlayAnimationDuration:
+                                                Duration(milliseconds: 700),
+                                            autoPlayCurve: Curves.easeIn,
+                                            autoPlay: true,
+                                            autoPlayInterval:
+                                                Duration(milliseconds: 100),
+                                          ),
                                           items: map<Widget>(
                                             recentResult,
                                             (index, i) {
@@ -838,13 +847,6 @@ class _HomePageState extends State<HomePage> {
                                               );
                                             },
                                           ),
-                                          viewportFraction: 1.0,
-                                          autoPlayAnimationDuration:
-                                              Duration(milliseconds: 700),
-                                          autoPlayCurve: Curves.easeIn,
-                                          autoPlay: true,
-                                          autoPlayInterval:
-                                              Duration(milliseconds: 100),
                                         ),
                                 ),
                               )

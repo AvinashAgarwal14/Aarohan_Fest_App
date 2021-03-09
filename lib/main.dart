@@ -1,6 +1,6 @@
-// import 'package:aavishkarapp/ui/arcade/arcade_game.dart';
-// import 'package:aavishkarapp/ui/arcade/game_controller.dart';
-import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
+// import 'package:arhn_app_2021/ui/arcade/arcade_game.dart';
+// import 'package:arhn_app_2021/ui/arcade/game_controller.dart';
+import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
 // import 'package:flame/util.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ import './ui/about_us/about_us.dart';
 import './ui/interficio/interficio.dart';
 import './ui/games/home_page.dart';
 // import 'package:flame/flame.dart';
-import 'package:aavishkarapp/ui/Intro.dart';
+import 'package:arhn_app_2021/ui/Intro.dart';
 
 void main() async {
   // debugPaintSizeEnabled = true;

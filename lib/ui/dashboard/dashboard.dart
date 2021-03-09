@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:aavishkarapp/ui/account/login.dart';
+import 'package:arhn_app_2021/ui/account/login.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/gestures.dart';
@@ -12,7 +12,7 @@ import '../../util/drawer.dart';
 import './dashboard_layout.dart';
 import './newsfeed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan_fix/barcode_scan.dart';
 import '../eurekoin/eurekoin.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:firebase_database/firebase_database.dart';

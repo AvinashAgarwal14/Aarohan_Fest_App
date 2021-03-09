@@ -9,7 +9,7 @@ import './loginAnimation.dart';
 import 'package:flutter/animation.dart';
 import './styles.dart';
 import '../../util/event_details.dart';
-import 'package:aavishkarapp/ui/dashboard/dashboard.dart';
+import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
 import '../../util/drawer.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -39,8 +39,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   final _facebookLogin = new FacebookLogin();
   FirebaseUser currentUser;
   Map userProfile;
-  bool _isLoggedIn=false;
-
+  bool _isLoggedIn = false;
 
   bool previouslyLoggedIn = false;
   AnimationController _glogInButtonController;
@@ -60,7 +59,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark));
@@ -122,19 +121,19 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (currentUser == null && userProfile==null) {
+    if (currentUser == null && userProfile == null) {
       return new Scaffold(
           body: WillPopScope(
-            onWillPop: _exit,
-            child: Container(
-              decoration: new BoxDecoration(
-                image: backgroundImage,
-              ),
-              child: new Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-   //               decoration: new BoxDecoration(
-             //         gradient: new LinearGradient(
+              onWillPop: _exit,
+              child: Container(
+                  decoration: new BoxDecoration(
+                    image: backgroundImage,
+                  ),
+                  child: new Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      //               decoration: new BoxDecoration(
+                      //         gradient: new LinearGradient(
 //                    colors: <Color>[
 //                      const Color.fromRGBO(162, 146, 199, 0.4),
 //                      const Color.fromRGBO(51, 51, 63, 0.4),
@@ -142,97 +141,102 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
 //                    stops: [0.2, 1.0],
 //                    begin: const FractionalOffset(0.0, 0.0),
 //                    end: const FractionalOffset(0.0, 1.0),
-                //  )
-            //),
-                  child: new ListView(
-                    padding: const EdgeInsets.all(0.0),
-                    children: <Widget>[
-                      new Stack(
-                          alignment: (animationStatus == 0)
-                              ? FractionalOffset.center
-                              : FractionalOffset.center,
-                          children: <Widget>[
+                      //  )
+                      //),
+                      child: new ListView(
+                        padding: const EdgeInsets.all(0.0),
+                        children: <Widget>[
+                          new Stack(
+                              alignment: (animationStatus == 0)
+                                  ? FractionalOffset.center
+                                  : FractionalOffset.center,
+                              children: <Widget>[
 //                            animationStatus == 0
 //                                ?
-                            SizedBox(
-                                height: MediaQuery.of(context).size.height),
-                            animationStatus == 0
-                                ? (Container(
-                                    child: new Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        children: <Widget>[
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height),
+                                animationStatus == 0
+                                    ? (Container(
+                                        child: new Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: <Widget>[
 //                                  SizedBox(
 //                                      height: MediaQuery.of(context)
 //                                          .size
 //                                          .height /
 //                                          3),
-                                        new Padding(
-                                          padding: const EdgeInsets.only(),
-                                          child: new InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  animationStatus = 1;
-                                                });
-                                              },
-                                              child: signIn(
-                                                  "Sign in with Google")),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(20.0),
-                                          child: Center(
-                                              child: Text(
-                                            "OR",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20.0),
-                                          )),
-                                        ),
-                                        new Padding(
-                                          padding: const EdgeInsets.only(),
-                                          child: new InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  animationStatus = 2;
-                                                });
-                                              },
-                                              child: signIn(
-                                                  "Sign in with Facebook!")),
-                                        ),
-                                      ])))
-                                : FutureBuilder(
-                                    future: animationStatus == 1
-                                        ? _gSignIn()
-                                        : _fSignIn(),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot snapshot) {
-                                      if (currentUser == null && userProfile==null) {
-                                        print("---------Gangnum");
-                                        return animationStatus == 1
-                                            ? Container(
-                                                child:
-                                                    CircularProgressIndicator(
-                                                value: null,
-                                                strokeWidth: 2.0,
-                                                valueColor:
-                                                    new AlwaysStoppedAnimation<
-                                                        Color>(Colors.white),
-                                              ))
-                                            : Container();
-                                      } else {
-                                        _playAnimation(animationStatus);
-                                        return new StaggerAnimation(
-                                            buttonController: animationStatus ==
-                                                    2
-                                                ? _flogInButtonController.view
-                                                : _glogInButtonController.view);
-                                      }
-                                    })
-                          ])
-                    ],
-                  )))));
+                                            new Padding(
+                                              padding: const EdgeInsets.only(),
+                                              child: new InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      animationStatus = 1;
+                                                    });
+                                                  },
+                                                  child: signIn(
+                                                      "Sign in with Google")),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(20.0),
+                                              child: Center(
+                                                  child: Text(
+                                                "OR",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20.0),
+                                              )),
+                                            ),
+                                            new Padding(
+                                              padding: const EdgeInsets.only(),
+                                              child: new InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      animationStatus = 2;
+                                                    });
+                                                  },
+                                                  child: signIn(
+                                                      "Sign in with Facebook!")),
+                                            ),
+                                          ])))
+                                    : FutureBuilder(
+                                        future: animationStatus == 1
+                                            ? _gSignIn()
+                                            : _fSignIn(),
+                                        builder: (BuildContext context,
+                                            AsyncSnapshot snapshot) {
+                                          if (currentUser == null &&
+                                              userProfile == null) {
+                                            print("---------Gangnum");
+                                            return animationStatus == 1
+                                                ? Container(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                    value: null,
+                                                    strokeWidth: 2.0,
+                                                    valueColor:
+                                                        new AlwaysStoppedAnimation<
+                                                                Color>(
+                                                            Colors.white),
+                                                  ))
+                                                : Container();
+                                          } else {
+                                            _playAnimation(animationStatus);
+                                            return new StaggerAnimation(
+                                                buttonController:
+                                                    animationStatus == 2
+                                                        ? _flogInButtonController
+                                                            .view
+                                                        : _glogInButtonController
+                                                            .view);
+                                          }
+                                        })
+                              ])
+                        ],
+                      )))));
     } else {
       return Dashboard();
     }
@@ -276,7 +280,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
       previouslyLoggedIn = true;
     });
   }
-  
 
   Future _gSignIn() async {
     GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
@@ -291,10 +294,8 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     final FirebaseUser user =
         (await _auth.signInWithCredential(credential)).user;
     currentUser = user;
-    database
-        .reference()
-        .child("Profiles")
-        .update({"${user.providerData[1].uid}": "${user.providerData[1].email}"});
+    database.reference().child("Profiles").update(
+        {"${user.providerData[1].uid}": "${user.providerData[1].email}"});
     print("User: $user");
     return user;
   }
@@ -302,16 +303,13 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   Future<int> _fSignIn() async {
     FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
     AuthCredential cred = FacebookAuthProvider.getCredential(
-        accessToken: facebookLoginResult.accessToken.token
-    );
+        accessToken: facebookLoginResult.accessToken.token);
     AuthResult authResult = await _auth.signInWithCredential(cred);
     FirebaseUser user = authResult.user;
     if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
-          currentUser = user ;
-          database
-          .reference()
-          .child("Profiles")
-          .update({"${user.providerData[1].uid}": "${user.providerData[1].email}"});
+      currentUser = user;
+      database.reference().child("Profiles").update(
+          {"${user.providerData[1].uid}": "${user.providerData[1].email}"});
       print("User : ");
       return 1;
     } else
@@ -336,12 +334,10 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
     return facebookLoginResult;
   }
 
-
 //  addStringToSF() async {
 //    SharedPreferences prefs = await SharedPreferences.getInstance();
 //    prefs.setString("email id", "abc");
 //  }
-
 
   signIn(String str) {
     return (new Container(
@@ -392,7 +388,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
               elevation: 0,
               backgroundColor: Colors.transparent,
               child: Container(
-                
                 padding: EdgeInsets.all(15),
                 height: 150,
                 decoration: BoxDecoration(
@@ -447,5 +442,4 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
           );
         });
   }
-
 }

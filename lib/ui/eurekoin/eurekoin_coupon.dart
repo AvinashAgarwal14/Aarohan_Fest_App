@@ -325,7 +325,7 @@ Widget PaymentSuccessDialog(context, message) {
 
   showDialog(
     context: context,
-    child: Center(
+    builder: (context) => Center(
       child: SizedBox(
         height: 250,
         child: Dialog(

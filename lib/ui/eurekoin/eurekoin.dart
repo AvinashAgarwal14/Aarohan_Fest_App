@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import './eurekoin_transfer.dart';
 import './eurekoin_coupon.dart';
 import 'package:crypto/crypto.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan_fix/barcode_scan.dart';
 import 'package:share/share.dart';
 import 'dart:convert';
 import '../../util/drawer.dart';
@@ -605,7 +605,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
 
     showDialog(
       context: context,
-      child: Center(
+      builder: (context) => Center(
         child: SizedBox(
           height: 370,
           child: Dialog(
