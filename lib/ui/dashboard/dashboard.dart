@@ -203,7 +203,7 @@ class _DashboardState extends State<Dashboard> {
     setState(() {
       currentUser = user;
     });
-    if (currentUser != null) isEurekoinUserRegistered();
+    // if (currentUser != null) isEurekoinUserRegistered(); Eurekoin endpoint down
   }
 
   Future isEurekoinUserRegistered() async {

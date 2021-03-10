@@ -69,26 +69,28 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 // ),
                 Container(
                   // color: Colors.blue[200].withOpacity(1),
-                  child: ListTile(
-                    title: Text(
-                      '${currentUser.providerData[1].displayName}',
-                      style: GoogleFonts.ubuntu(
-                        fontSize: 17,
-                        color: Color(0xFF6B872B),
-                      ),
-                    ),
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        currentUser.providerData[1].photoUrl,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    subtitle: Text(
-                      "${currentUser.providerData[1].email}",
-                      style: GoogleFonts.ubuntu(fontSize: 13),
-                    ),
-                  ),
+                  child: currentUser != null
+                      ? ListTile(
+                          title: Text(
+                            '${currentUser.providerData[1].displayName}',
+                            style: GoogleFonts.ubuntu(
+                              fontSize: 17,
+                              color: Color(0xFF6B872B),
+                            ),
+                          ),
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              currentUser.providerData[1].photoUrl,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          subtitle: Text(
+                            "${currentUser.providerData[1].email}",
+                            style: GoogleFonts.ubuntu(fontSize: 13),
+                          ),
+                        )
+                      : SizedBox(),
                 ),
                 ListTile(
                   leading: Icon(

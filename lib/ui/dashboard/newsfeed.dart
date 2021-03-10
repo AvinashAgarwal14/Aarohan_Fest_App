@@ -126,6 +126,10 @@ class _NewsfeedCardsState extends State<NewsfeedCards> {
                   child: Hero(
                     tag: widget.cardItem.key,
                     child: CachedNetworkImage(
+                        errorWidget: (context, url, error) {
+                          print("Could not load content");
+                          return Image.asset("images/imageplaceholder.png");
+                        },
                         placeholder: (context, url) =>
                             Image.asset("images/imageplaceholder.png"),
                         imageUrl: widget.cardItem.imageUrl,

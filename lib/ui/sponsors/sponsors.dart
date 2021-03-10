@@ -150,6 +150,10 @@ class _SponsorsState extends State<Sponsors> {
                   child: ClipRRect(
                       borderRadius: BorderRadius.all(new Radius.circular(15.0)),
                       child: CachedNetworkImage(
+                        errorWidget: (context, url, error) {
+                          print("Could not load content");
+                          return Image.asset("images/imageplaceholder.png");
+                        },
                         placeholder: (context, url) =>
                             Image.asset("images/imageplaceholder.png"),
                         imageUrl: s.imageUrl,
@@ -183,6 +187,10 @@ class _SponsorsState extends State<Sponsors> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(new Radius.circular(15.0)),
                     child: CachedNetworkImage(
+                      errorWidget: (context, url, error) {
+                        print("Could not load content");
+                        return Image.asset("images/imageplaceholder.png");
+                      },
                       placeholder: (context, url) =>
                           Image.asset("images/imageplaceholder.png"),
                       imageUrl: s.imageUrl,
@@ -204,6 +212,10 @@ class _SponsorsState extends State<Sponsors> {
             child: ClipRRect(
                 borderRadius: BorderRadius.all(new Radius.circular(15.0)),
                 child: CachedNetworkImage(
+                  errorWidget: (context, url, error) {
+                    print("Could not load content");
+                    return Image.asset("images/imageplaceholder.png");
+                  },
                   placeholder: (context, url) =>
                       Image.asset("images/imageplaceholder.png"),
                   imageUrl: s.imageUrl,
@@ -220,6 +232,10 @@ class _SponsorsState extends State<Sponsors> {
             child: ClipRRect(
                 borderRadius: BorderRadius.all(new Radius.circular(15.0)),
                 child: CachedNetworkImage(
+                  errorWidget: (context, url, error) {
+                    print("Could not load content");
+                    return Image.asset("images/imageplaceholder.png");
+                  },
                   placeholder: (context, url) =>
                       Image.asset("images/imageplaceholder.png"),
                   imageUrl: s.imageUrl,

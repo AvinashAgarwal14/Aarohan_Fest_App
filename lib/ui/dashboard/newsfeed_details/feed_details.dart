@@ -20,13 +20,12 @@ class FeedDetailsState extends State<FeedDetails> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -41,9 +40,12 @@ class FeedDetailsState extends State<FeedDetails> {
         Container(
             height: double.infinity,
             child: CachedNetworkImage(
+              errorWidget: (context, url, error) {
+                print("Could not load content");
+                return Image.asset("images/imageplaceholder.png");
+              },
               placeholder: (context, url) =>
-                  Image.asset(
-                      "images/imageplaceholder.png"),
+                  Image.asset("images/imageplaceholder.png"),
               imageUrl: widget.post.imageUrl,
               fit: BoxFit.cover,
             )),
@@ -80,11 +82,8 @@ class FeedDetailsState extends State<FeedDetails> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         SizedBox(height: 20.0),
-                          new StatusCategory(
-                            postKey: widget.post.key,
-                            date: widget.post.date
-                          ),
-
+                        new StatusCategory(
+                            postKey: widget.post.key, date: widget.post.date),
                         SizedBox(height: 20.0),
                         ListTile(
                             title: Text(
@@ -111,9 +110,9 @@ class FeedDetailsState extends State<FeedDetails> {
             ),
           )),
           SlidingUpPanel(
-            minHeight: 65.0,
-            maxHeight: MediaQuery.of(context).size.height * 0.50,
-            panel: new Scaffold(
+              minHeight: 65.0,
+              maxHeight: MediaQuery.of(context).size.height * 0.50,
+              panel: new Scaffold(
                 body: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -134,19 +133,18 @@ class FeedDetailsState extends State<FeedDetails> {
                       SizedBox(height: 13.0),
                       Center(child: Text("Comments")),
                       Container(
-                        height:MediaQuery.of(context).size.height * 0.36,
+                        height: MediaQuery.of(context).size.height * 0.36,
                         child: new CommentCategory(
                             postKey: widget.post.key,
                             commentCount: widget.post.commentsCount),
                       )
                     ]),
                 bottomNavigationBar: new AddNewComment(
-                      postKey: widget.post.key,
-                      user: currentUser,
-                      parent: this,
-                      commentCount: widget.post.commentsCount),
-                )
-          ),
+                    postKey: widget.post.key,
+                    user: currentUser,
+                    parent: this,
+                    commentCount: widget.post.commentsCount),
+              )),
         ]))
       ],
     ));

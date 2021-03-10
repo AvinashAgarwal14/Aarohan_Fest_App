@@ -88,32 +88,38 @@ class _SendImageEntryState extends State<SendImageEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return (comingSoon == false && alreadyUploaded!=null)
+    return (comingSoon == false && alreadyUploaded != null)
         ? (uploading == false)
             ? Scaffold(
                 body: Column(children: <Widget>[
                   Container(
                       height: 400.0,
-                      child: (alreadyUploaded)?
-                      CachedNetworkImage(
-                          placeholder: (context, url) => Image.asset(
-                              "images/imageplaceholder.png"),
-                          imageUrl: savedImageURL)
-                          :(_image != null)
-                          ? Image(image: FileImage(File(_image.path)))
-                          : Image.asset('images/imageplaceholder.png')),
+                      child: (alreadyUploaded)
+                          ? CachedNetworkImage(
+                              errorWidget: (context, url, error) {
+                                print("Could not load content");
+                                return Image.asset(
+                                    "images/imageplaceholder.png");
+                              },
+                              placeholder: (context, url) =>
+                                  Image.asset("images/imageplaceholder.png"),
+                              imageUrl: savedImageURL)
+                          : (_image != null)
+                              ? Image(image: FileImage(File(_image.path)))
+                              : Image.asset('images/imageplaceholder.png')),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         RaisedButton(
                           child: ((_image != null &&
-                                  _image.path == savedImageURL) || savedImageURL!=null)
+                                      _image.path == savedImageURL) ||
+                                  savedImageURL != null)
                               ? Text("Image Uploaded!")
                               : Text('Upload Image'),
-                          onPressed: (_image != null &&
-                                  _image.path != savedImageURL)
-                              ? uploadFile
-                              : null,
+                          onPressed:
+                              (_image != null && _image.path != savedImageURL)
+                                  ? uploadFile
+                                  : null,
                           color: Colors.cyan,
                         ),
                       ]),
@@ -204,9 +210,12 @@ class _SendImageEntryState extends State<SendImageEntry> {
       var format = new DateFormat.yMd();
       var dateString = format.format(DateTime.now());
       MemoryItem newImage = new MemoryItem(
-          currentUser.providerData[1].displayName, dateString, currentUser.providerData[1].email, fileURL);
-      var bytes =
-          utf8.encode("${currentUser.providerData[1].email}" + "${currentUser.providerData[1].displayName}");
+          currentUser.providerData[1].displayName,
+          dateString,
+          currentUser.providerData[1].email,
+          fileURL);
+      var bytes = utf8.encode("${currentUser.providerData[1].email}" +
+          "${currentUser.providerData[1].displayName}");
       var encoded = sha1.convert(bytes);
       _databaseReferenceForMemories.child("$encoded").set(newImage.toJson());
       saveImage(fileURL);
@@ -228,17 +237,20 @@ class _SendImageEntryState extends State<SendImageEntry> {
 
   loadSavedImage() {
     var bytes =
-    utf8.encode("${currentUser.email}" + "${currentUser.displayName}");
+        utf8.encode("${currentUser.email}" + "${currentUser.displayName}");
     var encoded = sha1.convert(bytes);
     print("jhuihihuhiu");
-    _databaseReferenceForMemories.child('$encoded').onValue.listen((Event event) {
-      if(event.snapshot.value == null) {
-        setState((){
+    _databaseReferenceForMemories
+        .child('$encoded')
+        .onValue
+        .listen((Event event) {
+      if (event.snapshot.value == null) {
+        setState(() {
           savedImageURL = null;
           alreadyUploaded = false;
         });
       } else {
-        setState((){
+        setState(() {
           savedImageURL = event.snapshot.value['imageURL'];
           alreadyUploaded = true;
         });

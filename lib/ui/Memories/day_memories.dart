@@ -85,6 +85,11 @@ class _DayMemoriesState extends State<DayMemories>
                                 borderRadius: new BorderRadius.all(
                                     new Radius.circular(10.0)),
                                 child: CachedNetworkImage(
+                                    errorWidget: (context, url, error) {
+                                      print("Could not load content");
+                                      return Image.asset(
+                                          "images/imageplaceholder.png");
+                                    },
                                     placeholder: (context, url) => Image.asset(
                                         "images/imageplaceholder.png"),
                                     imageUrl: sharedImages[index].imageURL,
@@ -107,8 +112,14 @@ class _DayMemoriesState extends State<DayMemories>
                                                             30)),
                                                 width: double.infinity,
                                                 child: CachedNetworkImage(
-                                                    placeholder: (context,
-                                                            url) =>
+                                                    errorWidget:
+                                                        (context, url, error) {
+                                                      print(
+                                                          "Could not load content");
+                                                      return Image.asset(
+                                                          "images/imageplaceholder.png");
+                                                    },
+                                                    placeholder: (context, url) =>
                                                         Image.asset(
                                                             "images/imageplaceholder.png"),
                                                     imageUrl:
@@ -164,6 +175,13 @@ class _DayMemoriesState extends State<DayMemories>
                               //                 child: Container(
                               //                   width: double.infinity,
                               //                   child: CachedNetworkImage(
+                              // errorWidget:
+                              //                     (context, url, error) {
+                              //                   print(
+                              //                       "Could not load content");
+                              //                   return Image.asset(
+                              //                       "images/imageplaceholder.png");
+                              //                 },
                               //                       placeholder: (context, url) =>
                               //                           Image.asset(
                               //                               "images/imageplaceholder.png"),

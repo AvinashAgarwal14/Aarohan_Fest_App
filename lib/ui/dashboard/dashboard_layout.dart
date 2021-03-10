@@ -113,7 +113,7 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                             height: 250.0,
                             viewportFraction: 0.85,
                             aspectRatio: 16 / 9,
-                            pauseAutoPlayOnTouch: false,
+                            // pauseAutoPlayOnTouch: false,
                           ),
                           //TODO add the upcoming events as per the date
                           items: map<Widget>(
@@ -159,6 +159,13 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                         child: new Stack(
                                           children: <Widget>[
                                             CachedNetworkImage(
+                                                errorWidget:
+                                                    (context, url, error) {
+                                                  print(
+                                                      "Could not load content");
+                                                  return Image.asset(
+                                                      "images/imageplaceholder.png");
+                                                },
                                                 placeholder: (context, url) =>
                                                     Image.asset(
                                                         "images/imageplaceholder.png"),
@@ -562,6 +569,12 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                             topRight: Radius.circular(10),
                                           ),
                                           child: CachedNetworkImage(
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                print("Could not load content");
+                                                return Image.asset(
+                                                    "images/imageplaceholder.png");
+                                              },
                                               placeholder: (context, url) =>
                                                   Image.asset(
                                                       "images/imageplaceholder.png"),
@@ -673,6 +686,12 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                           borderRadius: new BorderRadius.all(
                                               new Radius.circular(5.0)),
                                           child: CachedNetworkImage(
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                print("Could not load content");
+                                                return Image.asset(
+                                                    "images/imageplaceholder.png");
+                                              },
                                               placeholder: (context, url) =>
                                                   Image.asset(
                                                       "images/imageplaceholder.png"),
@@ -815,6 +834,13 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                 topRight: Radius.circular(10),
                                               ),
                                               child: CachedNetworkImage(
+                                                  errorWidget:
+                                                      (context, url, error) {
+                                                    print(
+                                                        "Could not load content");
+                                                    return Image.asset(
+                                                        "images/imageplaceholder.png");
+                                                  },
                                                   placeholder: (context, url) =>
                                                       Image.asset(
                                                           "images/imageplaceholder.png"),
@@ -932,6 +958,13 @@ class _DashBoardLayoutState extends State<DashBoardLayout> {
                                                 topRight: Radius.circular(10),
                                               ),
                                               child: CachedNetworkImage(
+                                                  errorWidget:
+                                                      (context, url, error) {
+                                                    print(
+                                                        "Could not load content");
+                                                    return Image.asset(
+                                                        "images/imageplaceholder.png");
+                                                  },
                                                   placeholder: (context, url) =>
                                                       Image.asset(
                                                           "images/imageplaceholder.png"),
