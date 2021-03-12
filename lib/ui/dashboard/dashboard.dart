@@ -38,8 +38,9 @@ class _DashboardState extends State<Dashboard> {
   List<EventTypeModel> eventsType = new List();
   EventResponse res;
   List<EventItem> events;
+  List<EventItem> popularEvents;
   // List<EventsModel> events = new List<EventsModel>();
-  String todayDateIs = "12";
+  String todayDateIs = "8";
 
   bool darkThemeEnabled = false;
   FirebaseUser currentUser;
@@ -73,6 +74,7 @@ class _DashboardState extends State<Dashboard> {
       res = EventResponse.fromJSON(json.decode(value));
       setState(() {
         events = res.events;
+        popularEvents = res.events;
       });
     });
 
@@ -172,80 +174,125 @@ class _DashboardState extends State<Dashboard> {
             Container(
               decoration: BoxDecoration(color: Colors.black),
             ),
-            SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    /// Dates
-                    Container(
-                      height: 100,
-                      child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(vertical: 20.0),
-                          itemCount: dates.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return DateTile(
-                              weekDay: dates[index].weekDay,
-                              date: dates[index].date,
-                              isSelected: todayDateIs == dates[index].date,
-                            );
-                          }),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  /// Dates
+                  Container(
+                    height: 80,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: dates
+                          .map(
+                            (date) => GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  todayDateIs = date.date;
+                                  popularEvents = events
+                                      .where((event) =>
+                                          event != null &&
+                                          int.parse(
+                                                  event.date.substring(0, 2)) ==
+                                              int.parse(date.date))
+                                      .toList();
+                                });
+                              },
+                              child: DateTile(
+                                weekDay: date.weekDay,
+                                date: date.date,
+                                isSelected: todayDateIs == date.date,
+                              ),
+                            ),
+                          )
+                          .toList(),
                     ),
+                    // child: ListView.builder(
+                    //     padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    //     itemCount: dates.length,
+                    //     shrinkWrap: true,
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemBuilder: (context, index) {
+                    //       return GestureDetector(
+                    //         onTap: () {
+                    //           setState(() {
+                    //             todayDateIs = dates[index].date;
+                    //             popularEvents = events
+                    //                 .where((event) =>
+                    //                     event != null &&
+                    //                     int.parse(event.date.substring(0, 2)) ==
+                    //                         int.parse(dates[index].date))
+                    //                 .toList();
+                    //           });
+                    //         },
+                    // child: DateTile(
+                    //   weekDay: dates[index].weekDay,
+                    //   date: dates[index].date,
+                    //   isSelected: todayDateIs == dates[index].date,
+                    // ),
+                    //       );
+                    //     }),
+                  ),
 
-                    /// Events
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      "All Events",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Container(
-                      height: 100,
-                      child: ListView.builder(
-                          itemCount: eventsType.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return EventTile(
-                              imgAssetPath: eventsType[index].imgAssetPath,
-                              eventType: eventsType[index].eventType,
-                            );
-                          }),
-                    ),
+                  /// Events
+                  SizedBox(
+                    height: 16,
+                  ),
+                  // Text(
+                  //   "All Events",
+                  //   style: TextStyle(color: Colors.white, fontSize: 20),
+                  // ),
+                  // SizedBox(
+                  //   height: 16,
+                  // ),
+                  // Container(
+                  //   height: 100,
+                  //   child: ListView.builder(
+                  //       itemCount: eventsType.length,
+                  //       shrinkWrap: true,
+                  //       scrollDirection: Axis.horizontal,
+                  //       itemBuilder: (context, index) {
+                  //         return EventTile(
+                  //           imgAssetPath: eventsType[index].imgAssetPath,
+                  //           eventType: eventsType[index].eventType,
+                  //         );
+                  //       }),
+                  // ),
 
-                    /// Popular Events
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      "Popular Events",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    Container(
-                      height: 300.0,
-                      child: events != null
+                  // /// Popular Events
+                  // SizedBox(
+                  //   height: 16,
+                  // ),
+                  Text(
+                    "Popular Events",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Container(
+                    // height: 300.0,
+                    child: Expanded(
+                      child: popularEvents != null
                           ? ListView.builder(
-                              itemCount: events.length,
+                              itemCount: popularEvents.length,
                               itemBuilder: (context, index) {
-                                return PopularEventTile(
-                                  desc: events[index].title,
-                                  imgeAssetPath: events[index].imageUrl,
-                                  date: events[index].date,
-                                  address: events[index].location,
-                                );
+                                return events[index] != null
+                                    ? PopularEventTile(
+                                        desc: popularEvents[index].title,
+                                        imgeAssetPath:
+                                            popularEvents[index].imageUrl,
+                                        date: popularEvents[index].date,
+                                        address: popularEvents[index].location,
+                                      )
+                                    : SizedBox();
                               },
                             )
                           : SizedBox(),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -453,44 +500,47 @@ class DateTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 20),
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      // margin: EdgeInsets.only(right: 20),
+      width: MediaQuery.of(context).size.width * 0.18,
+      // padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-          color: isSelected ? Color(0xffffd530) : Color(0xff29404E),
+          color: isSelected ? Color(0xff03bc72) : Color(0xff29404E),
           borderRadius: BorderRadius.circular(10),
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: Color(0xffFCCD00),
+                    color: Color(0xff03A062),
                     spreadRadius: 4,
                     blurRadius: 10,
                   ),
                   BoxShadow(
-                    color: Color(0xffFCCD00),
+                    color: Color(0xff03A062),
                     spreadRadius: -4,
                     blurRadius: 5,
                   ),
                 ]
               : []),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            date,
-            style: TextStyle(
-                color: isSelected ? Colors.black : Colors.white,
-                fontWeight: FontWeight.w600),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            weekDay,
-            style: TextStyle(
-                color: isSelected ? Colors.black : Colors.white,
-                fontWeight: FontWeight.w600),
-          )
-        ],
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              date,
+              style: TextStyle(
+                  color: isSelected ? Colors.black : Colors.white,
+                  fontWeight: FontWeight.w600),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              weekDay,
+              style: TextStyle(
+                  color: isSelected ? Colors.black : Colors.white,
+                  fontWeight: FontWeight.w600),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -601,19 +651,30 @@ class PopularEventTile extends StatelessWidget {
             ),
           ),
           ClipRRect(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(8),
-                  bottomRight: Radius.circular(8)),
-              child: Image.network(
-                imgeAssetPath,
-                errorBuilder: (context, error, stackTrace) {
-                  print(stackTrace);
-                  return SizedBox();
-                },
-                height: 100,
-                width: 120,
-                fit: BoxFit.cover,
-              )),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
+            child: imgeAssetPath != null
+                ? Image.network(
+                    imgeAssetPath,
+                    errorBuilder: (context, error, stackTrace) {
+                      print(stackTrace);
+                      return SizedBox();
+                    },
+                    height: 100,
+                    width: 120,
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    "images/imageplaceholder.png",
+                    errorBuilder: (context, error, stackTrace) {
+                      print(stackTrace);
+                      return SizedBox();
+                    },
+                    height: 100,
+                    width: 120,
+                    fit: BoxFit.cover,
+                  ),
+          ),
         ],
       ),
     );
