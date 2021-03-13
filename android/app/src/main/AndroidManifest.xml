@@ -57,7 +57,7 @@
             <data android:scheme="@string/fb_login_protocol_scheme"/>
         </intent-filter>
         </activity>
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCiJDohI3HsqoheJYOik0x7uNRep2X95hU"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCHGGg8lALto6chHSuh_1LlFz2mv0au3hs"/>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

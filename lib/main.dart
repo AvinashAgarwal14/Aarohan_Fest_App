@@ -28,7 +28,6 @@ void main() async {
   // debugPaintBaselinesEnabled = true;
   // debugPaintPointersEnabled = true;
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
       systemNavigationBarIconBrightness: Brightness.dark));
@@ -82,7 +81,7 @@ class Aavishkar_App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF6B872B),
       ),
-      initialRoute: "/splash",
+      initialRoute: "/interficio/interficio.dart",
       routes: <String, WidgetBuilder>{
         "/intro": (BuildContext context) => IntroScreen(),
         "/splash": (BuildContext context) => SplashScreen(),

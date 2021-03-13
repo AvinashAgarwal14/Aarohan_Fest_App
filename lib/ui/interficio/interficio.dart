@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  bool comingsoon = true;
+  bool comingsoon = false;
 
   void _onEntryUpdated(Event event) {
     setState(() {
@@ -71,14 +71,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     autoAuthenticate();
-    _databaseReference = _database.reference().child("comingsoon");
-    _databaseReference.onChildChanged.listen(_onEntryUpdated);
-    _databaseReference.child("JD").once().then((snapshot) {
-      setState(() {
-        comingsoon = snapshot.value;
-      });
-      print(comingsoon);
-    });
+    // _databaseReference = _database.reference().child("comingsoon");
+    // _databaseReference.onChildChanged.listen(_onEntryUpdated);
+    // _databaseReference.child("JD").once().then((snapshot) {
+    //   setState(() {
+    //     comingsoon = snapshot.value;
+    //   });
+    //   print(comingsoon);
+    // });
 
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -115,7 +115,9 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ),
                     )
-                  : user["isAuthenticated"] ? HomePage(user) : AuthPage(user),
+                  : user["isAuthenticated"]
+                      ? HomePage(user)
+                      : AuthPage(user),
         },
       ),
     );
