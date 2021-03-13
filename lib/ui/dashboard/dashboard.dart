@@ -7,6 +7,7 @@ import 'package:arhn_app_2021/ui/account/login.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -32,6 +33,8 @@ class Dashboard extends StatefulWidget {
 }
 
 PageController controller;
+ScrollController _scontroller;
+bool _showDate = true;
 
 class _DashboardState extends State<Dashboard> {
   List<DateModel> dates = new List<DateModel>();
@@ -69,6 +72,9 @@ class _DashboardState extends State<Dashboard> {
   void initState() {
     super.initState();
 
+    _scontroller = ScrollController();
+    _scontroller.addListener(_scrollListener);
+
     getJSON().then((value) {
       print(json.decode(value));
       res = EventResponse.fromJSON(json.decode(value));
@@ -94,6 +100,27 @@ class _DashboardState extends State<Dashboard> {
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark));
     getUser();
+  }
+
+  bool isScrollingDown = false;
+
+  _scrollListener() {
+    print("offset : ${_scontroller.offset}");
+    if (_scontroller.position.userScrollDirection == ScrollDirection.reverse) {
+      if (!isScrollingDown) {
+        isScrollingDown = true;
+        _showDate = false;
+        setState(() {});
+      }
+    }
+
+    if (_scontroller.position.userScrollDirection == ScrollDirection.forward) {
+      if (isScrollingDown) {
+        isScrollingDown = false;
+        _showDate = true;
+        setState(() {});
+      }
+    }
   }
 
   Future getJSON() {
@@ -179,65 +206,69 @@ class _DashboardState extends State<Dashboard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  /// Dates
-                  Container(
-                    height: 80,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: dates
-                          .map(
-                            (date) => GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  todayDateIs = date.date;
-                                  popularEvents = events
-                                      .where((event) =>
-                                          event != null &&
-                                          int.parse(
-                                                  event.date.substring(0, 2)) ==
-                                              int.parse(date.date))
-                                      .toList();
-                                });
-                              },
-                              child: DateTile(
-                                weekDay: date.weekDay,
-                                date: date.date,
-                                isSelected: todayDateIs == date.date,
+                  AnimatedContainer(
+                    height: _showDate ? 80 : 0,
+                    duration: Duration(milliseconds: 400),
+
+                    //date
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: dates
+                            .map(
+                              (date) => GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    todayDateIs = date.date;
+                                    popularEvents = events
+                                        .where((event) =>
+                                            event != null &&
+                                            int.parse(event.date
+                                                    .substring(0, 2)) ==
+                                                int.parse(date.date))
+                                        .toList();
+                                  });
+                                },
+                                child: DateTile(
+                                  weekDay: date.weekDay,
+                                  date: date.date,
+                                  isSelected: todayDateIs == date.date,
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
+                            )
+                            .toList(),
+                      ),
+                      // child: ListView.builder(
+                      //     padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      //     itemCount: dates.length,
+                      //     shrinkWrap: true,
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemBuilder: (context, index) {
+                      //       return GestureDetector(
+                      //         onTap: () {
+                      //           setState(() {
+                      //             todayDateIs = dates[index].date;
+                      //             popularEvents = events
+                      //                 .where((event) =>
+                      //                     event != null &&
+                      //                     int.parse(event.date.substring(0, 2)) ==
+                      //                         int.parse(dates[index].date))
+                      //                 .toList();
+                      //           });
+                      //         },
+                      // child: DateTile(
+                      //   weekDay: dates[index].weekDay,
+                      //   date: dates[index].date,
+                      //   isSelected: todayDateIs == dates[index].date,
+                      // ),
+                      //       );
+                      //     }),
                     ),
-                    // child: ListView.builder(
-                    //     padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    //     itemCount: dates.length,
-                    //     shrinkWrap: true,
-                    //     scrollDirection: Axis.horizontal,
-                    //     itemBuilder: (context, index) {
-                    //       return GestureDetector(
-                    //         onTap: () {
-                    //           setState(() {
-                    //             todayDateIs = dates[index].date;
-                    //             popularEvents = events
-                    //                 .where((event) =>
-                    //                     event != null &&
-                    //                     int.parse(event.date.substring(0, 2)) ==
-                    //                         int.parse(dates[index].date))
-                    //                 .toList();
-                    //           });
-                    //         },
-                    // child: DateTile(
-                    //   weekDay: dates[index].weekDay,
-                    //   date: dates[index].date,
-                    //   isSelected: todayDateIs == dates[index].date,
-                    // ),
-                    //       );
-                    //     }),
                   ),
 
                   /// Events
                   SizedBox(
-                    height: 16,
+                    height: _showDate ? 16 : 0,
                   ),
                   // Text(
                   //   "All Events",
@@ -276,6 +307,7 @@ class _DashboardState extends State<Dashboard> {
                     child: Expanded(
                       child: popularEvents != null
                           ? ListView.builder(
+                              controller: _scontroller,
                               itemCount: popularEvents.length,
                               itemBuilder: (context, index) {
                                 return events[index] != null
@@ -499,50 +531,55 @@ class DateTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // margin: EdgeInsets.only(right: 20),
-      width: MediaQuery.of(context).size.width * 0.18,
-      // padding: EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-          color: isSelected ? Color(0xff03bc72) : Color(0xff29404E),
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: Color(0xff03A062),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                  ),
-                  BoxShadow(
-                    color: Color(0xff03A062),
-                    spreadRadius: -4,
-                    blurRadius: 5,
-                  ),
-                ]
-              : []),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              date,
-              style: TextStyle(
-                  color: isSelected ? Colors.black : Colors.white,
-                  fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              weekDay,
-              style: TextStyle(
-                  color: isSelected ? Colors.black : Colors.white,
-                  fontWeight: FontWeight.w600),
-            )
-          ],
-        ),
-      ),
-    );
+    return Expanded(
+        child: AnimatedContainer(
+            height: _showDate ? 70 : 0,
+            duration: Duration(microseconds: 400),
+            child: Expanded(
+                child: Container(
+              // margin: EdgeInsets.only(right: 20),
+              width: MediaQuery.of(context).size.width * 0.18,
+              // padding: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                  color: isSelected ? Color(0xff03bc72) : Color(0xff29404E),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: (isSelected && _showDate)
+                      ? [
+                          BoxShadow(
+                            color: Color(0xff03A062),
+                            spreadRadius: 4,
+                            blurRadius: 10,
+                          ),
+                          BoxShadow(
+                            color: Color(0xff03A062),
+                            spreadRadius: -4,
+                            blurRadius: 5,
+                          ),
+                        ]
+                      : []),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      date,
+                      style: TextStyle(
+                          color: isSelected ? Colors.black : Colors.white,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      weekDay,
+                      style: TextStyle(
+                          color: isSelected ? Colors.black : Colors.white,
+                          fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
+              ),
+            ))));
   }
 }
 
