@@ -81,7 +81,7 @@ class Aavishkar_App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF6B872B),
       ),
-      initialRoute: "/interficio/interficio.dart",
+      initialRoute: "/splash",
       routes: <String, WidgetBuilder>{
         "/intro": (BuildContext context) => IntroScreen(),
         "/splash": (BuildContext context) => SplashScreen(),

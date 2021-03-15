@@ -3,4 +3,5 @@ class EventsModel{
   String date;
   String address;
   String imgeAssetPath;
+  //bool isSelected;
 }

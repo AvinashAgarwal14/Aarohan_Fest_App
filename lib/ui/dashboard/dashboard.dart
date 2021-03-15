@@ -35,6 +35,7 @@ class Dashboard extends StatefulWidget {
 PageController controller;
 ScrollController _scontroller;
 bool _showDate = true;
+bool _showCategory = true;
 
 class _DashboardState extends State<Dashboard> {
   List<DateModel> dates = new List<DateModel>();
@@ -102,30 +103,18 @@ class _DashboardState extends State<Dashboard> {
     getUser();
   }
 
-  bool isScrollingDown = false;
-
   _scrollListener() {
-    print("offset : ${_scontroller.offset}");
-    if (_scontroller.position.userScrollDirection == ScrollDirection.reverse) {
-      if (!isScrollingDown) {
-        isScrollingDown = true;
-        _showDate = false;
-        setState(() {});
-      }
-    }
-
-    if (_scontroller.position.userScrollDirection == ScrollDirection.forward) {
-      if (isScrollingDown) {
-        isScrollingDown = false;
-        _showDate = true;
-        setState(() {});
-      }
-    }
+    setState(() {
+      _showDate = _scontroller.offset < 50;
+      _showCategory = _scontroller.offset < 200;
+    });
   }
 
   Future getJSON() {
     return rootBundle.loadString('aarohan_events.json');
   }
+
+  int selectedIndexC = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -207,10 +196,10 @@ class _DashboardState extends State<Dashboard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   AnimatedContainer(
-                    height: _showDate ? 80 : 0,
+                    height: _showDate ? 70 : 0,
                     duration: Duration(milliseconds: 400),
-
                     //date
+
                     child: Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -238,63 +227,52 @@ class _DashboardState extends State<Dashboard> {
                             )
                             .toList(),
                       ),
-                      // child: ListView.builder(
-                      //     padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      //     itemCount: dates.length,
-                      //     shrinkWrap: true,
-                      //     scrollDirection: Axis.horizontal,
-                      //     itemBuilder: (context, index) {
-                      //       return GestureDetector(
-                      //         onTap: () {
-                      //           setState(() {
-                      //             todayDateIs = dates[index].date;
-                      //             popularEvents = events
-                      //                 .where((event) =>
-                      //                     event != null &&
-                      //                     int.parse(event.date.substring(0, 2)) ==
-                      //                         int.parse(dates[index].date))
-                      //                 .toList();
-                      //           });
-                      //         },
-                      // child: DateTile(
-                      //   weekDay: dates[index].weekDay,
-                      //   date: dates[index].date,
-                      //   isSelected: todayDateIs == dates[index].date,
-                      // ),
-                      //       );
-                      //     }),
                     ),
                   ),
-
-                  /// Events
+                  AnimatedContainer(
+                    height: _showDate ? 56 : 0,
+                    duration: Duration(microseconds: 400),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Text(
+                          "Category",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                  AnimatedContainer(
+                    height: _showDate ? 70 : 0,
+                    duration: Duration(microseconds: 400),
+                    child: Container(
+                      child: ListView.builder(
+                          itemCount: eventsType.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedIndexC = index;
+                                });
+                              },
+                              child: EventTile(
+                                  imgAssetPath: eventsType[index].imgAssetPath,
+                                  eventType: eventsType[index].eventType,
+                                  isSelected: index == selectedIndexC),
+                            );
+                          }),
+                    ),
+                  ),
                   SizedBox(
                     height: _showDate ? 16 : 0,
                   ),
-                  // Text(
-                  //   "All Events",
-                  //   style: TextStyle(color: Colors.white, fontSize: 20),
-                  // ),
-                  // SizedBox(
-                  //   height: 16,
-                  // ),
-                  // Container(
-                  //   height: 100,
-                  //   child: ListView.builder(
-                  //       itemCount: eventsType.length,
-                  //       shrinkWrap: true,
-                  //       scrollDirection: Axis.horizontal,
-                  //       itemBuilder: (context, index) {
-                  //         return EventTile(
-                  //           imgAssetPath: eventsType[index].imgAssetPath,
-                  //           eventType: eventsType[index].eventType,
-                  //         );
-                  //       }),
-                  // ),
-
-                  // /// Popular Events
-                  // SizedBox(
-                  //   height: 16,
-                  // ),
                   Text(
                     "Popular Events",
                     style: TextStyle(color: Colors.white, fontSize: 20),
@@ -330,63 +308,6 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
       ),
-      // body: Stack(
-      //   children: <Widget>[
-      //     DashBoardLayout(),
-      //     SlidingUpPanel(
-      //       color: Colors.white,
-      //       minHeight: 65.0,
-      //       maxHeight: MediaQuery.of(context).size.height * 0.85,
-      //       panel: Column(
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: <Widget>[
-      //           SizedBox(height: 5.0),
-      //           Row(
-      //             mainAxisAlignment: MainAxisAlignment.center,
-      //             children: <Widget>[
-      //               Container(
-      //                 width: 35,
-      //                 height: 8,
-      //                 decoration: BoxDecoration(
-      //                     color: Colors.grey[300],
-      //                     borderRadius:
-      //                         BorderRadius.all(Radius.circular(12.0))),
-      //               )
-      //             ],
-      //           ),
-      //           SizedBox(height: 13.0),
-      //           Center(
-      //             child: Text(
-      //               "Newsfeed",
-      //               style: TextStyle(
-      //                 fontSize: 21.0,
-      //                 fontWeight: FontWeight.bold,
-      //                 color: Colors.grey[800],
-      //                 // shadows: [
-      //                 //   BoxShadow(
-      //                 //       color: Colors.grey[800],
-      //                 //       offset: Offset(4.0, 4.0),
-      //                 //       blurRadius: 15.0,
-      //                 //       spreadRadius: 1.0),
-      //                 //   BoxShadow(
-      //                 //       color: Colors.white,
-      //                 //       offset: Offset(-4.0, -4.0),
-      //                 //       blurRadius: 15.0,
-      //                 //       spreadRadius: 1.0),
-      //                 // ],
-      //               ),
-      //             ),
-      //           ),
-      //           SizedBox(height: 20.0),
-      //           Container(
-      //               padding: const EdgeInsets.only(left: 14.0, right: 14.0),
-      //               height: MediaQuery.of(context).size.height * 0.75,
-      //               child: Newsfeed()),
-      //         ],
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 
@@ -531,80 +452,99 @@ class DateTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: AnimatedContainer(
-            height: _showDate ? 70 : 0,
-            duration: Duration(microseconds: 400),
-            child: Expanded(
-                child: Container(
-              // margin: EdgeInsets.only(right: 20),
-              width: MediaQuery.of(context).size.width * 0.18,
-              // padding: EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  color: isSelected ? Color(0xff03bc72) : Color(0xff29404E),
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: (isSelected && _showDate)
-                      ? [
-                          BoxShadow(
-                            color: Color(0xff03A062),
-                            spreadRadius: 4,
-                            blurRadius: 10,
-                          ),
-                          BoxShadow(
-                            color: Color(0xff03A062),
-                            spreadRadius: -4,
-                            blurRadius: 5,
-                          ),
-                        ]
-                      : []),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      date,
-                      style: TextStyle(
-                          color: isSelected ? Colors.black : Colors.white,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      weekDay,
-                      style: TextStyle(
-                          color: isSelected ? Colors.black : Colors.white,
-                          fontWeight: FontWeight.w600),
-                    )
-                  ],
-                ),
+    return FittedBox(
+        fit: BoxFit.fill,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+
+          width: MediaQuery.of(context).size.width * 0.18,
+           padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+          decoration: BoxDecoration(
+              color: isSelected ? Color(0xff03bc72) : Color(0xff29404E),
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: (isSelected && _showDate)
+                  ? [
+                      BoxShadow(
+                        color: Color(0xff03A062),
+                        spreadRadius: 4,
+                        blurRadius: 10,
+                      ),
+                      BoxShadow(
+                        color: Color(0xff03A062),
+                        spreadRadius: -4,
+                        blurRadius: 5,
+                      ),
+                    ]
+                  : []),
+          child: Center(
+            child: 
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    date,
+                    style: TextStyle(
+                        color: isSelected ? Colors.black : Colors.white,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    weekDay,
+                    style: TextStyle(
+                        color: isSelected ? Colors.black : Colors.white,
+                        fontWeight: FontWeight.w600),
+                  )
+                ],
               ),
-            ))));
+            
+          ),
+        ));
   }
 }
 
 class EventTile extends StatelessWidget {
   String imgAssetPath;
   String eventType;
-  EventTile({this.imgAssetPath, this.eventType});
+  bool isSelected;
+  EventTile({this.imgAssetPath, this.eventType, this.isSelected});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 60,
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 30),
-      margin: EdgeInsets.only(right: 16),
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: Color(0xff29404E), borderRadius: BorderRadius.circular(12)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+          color: isSelected ? Color(0xff03bc72) : Color(0xff29404E),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: (isSelected && _showDate)
+              ? [
+                  BoxShadow(
+                    color: Color(0xff03A062),
+                    spreadRadius: 4,
+                    blurRadius: 10,
+                  ),
+                  BoxShadow(
+                    color: Color(0xff03A062),
+                    spreadRadius: -4,
+                    blurRadius: 5,
+                  ),
+                ]
+              : []),
+      //child: FittedBox(
+      //fit: BoxFit.scaleDown,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Image.asset(
             imgAssetPath,
             height: 27,
           ),
           SizedBox(
-            height: 12,
+            width: 20,
           ),
           Text(
             eventType,
@@ -612,6 +552,7 @@ class EventTile extends StatelessWidget {
           )
         ],
       ),
+      // ),
     );
   }
 }
