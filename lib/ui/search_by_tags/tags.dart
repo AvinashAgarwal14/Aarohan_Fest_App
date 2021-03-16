@@ -303,7 +303,8 @@ class _SearchByTagsCardsState extends State<SearchByTagsCards> {
               subtitle: new Text(widget.eventCard.date),
             )
           ],
-        ));
+        )
+        );
 
     return cardItem;
   }

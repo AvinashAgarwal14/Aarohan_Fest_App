@@ -15,6 +15,9 @@ IconData facebook = IconData(0xf052, fontFamily: kFontFam);
 IconData google = IconData(0xf1a0, fontFamily: kFontFam);
 IconData facebook_1 = IconData(0xf300, fontFamily: kFontFam);
 
+Color borderColor = Color(0xff03bc72);
+var borderWid = 2.0;
+
 // class ContactUs extends StatefulWidget {
 //   @override
 //   _ContactUsState createState() => _ContactUsState();
@@ -232,9 +235,10 @@ class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       key: _scaffoldKey,
       drawer: NavigationDrawer(),
+
       // appBar: AppBar(backgroundColor: Colors.transparent,),
       body: SafeArea(
         child: Stack(
@@ -243,13 +247,13 @@ class _ContactUsState extends State<ContactUs> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    color: Colors.white,
+                    color: Colors.black,
                     padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
                     child: Text(
                       "Contact Us",
                       style: GoogleFonts.josefinSans(
                         fontSize: 30,
-                        color: Color(0xFF6B872B),
+                        color: Colors.white//(0xFF6B872B),
                       ),
                     ),
                   ),
@@ -257,7 +261,7 @@ class _ContactUsState extends State<ContactUs> {
                     height: 30,
                   ),
                   Container(
-                    color: Colors.white,
+                    color: Colors.black,
                     // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,7 +273,7 @@ class _ContactUsState extends State<ContactUs> {
                             style: TextStyle(
                               fontSize: 21.0,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Colors.white,
                               // shadows: [
                               //   BoxShadow(
                               //       color: Colors.grey[800],
@@ -286,9 +290,9 @@ class _ContactUsState extends State<ContactUs> {
                           ),
                         ),
                         Container(
-                          color: Colors.white,
+                          color: Colors.black,
                           padding: EdgeInsets.symmetric(vertical: 5.0),
-                          height: 300.0,
+                          height: 305.0,
                           // width: MediaQuery.of(context).size.width-10.0,
                           child: ListView.builder(
                             padding: EdgeInsets.symmetric(
@@ -301,21 +305,13 @@ class _ContactUsState extends State<ContactUs> {
                                 height: 100.0,
                                 width: 150.0,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey[800],
-                                        offset: Offset(3.0, 3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-3.0, -3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                  ],
+                                  border: Border.all(
+                                    width:borderWid,
+                                    color: borderColor
+                                  )
                                 ),
                                 margin:
                                     new EdgeInsets.symmetric(horizontal: 10.0),
@@ -344,7 +340,9 @@ class _ContactUsState extends State<ContactUs> {
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
                                               fontSize: 12,
-                                              fontWeight: FontWeight.w500),
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.white
+                                              ),
                                         ),
                                         Row(
                                           children: <Widget>[
@@ -353,7 +351,7 @@ class _ContactUsState extends State<ContactUs> {
                                                 padding: EdgeInsets.all(0.0),
                                                 iconSize: 15.0,
                                                 icon: Icon(Icons.call,
-                                                    color: Colors.grey),
+                                                    color: Colors.white),
                                                 onPressed: () {
                                                   launch("tel:" +
                                                       contactCard["POC"]
@@ -366,7 +364,7 @@ class _ContactUsState extends State<ContactUs> {
                                                 //padding: EdgeInsets.all(0.0),
                                                 iconSize: 15.0,
                                                 icon: Icon(facebook,
-                                                    color: Colors.grey),
+                                                    color: Colors.white),
                                                 disabledColor: Colors.black,
                                                 color: Colors.blueAccent,
                                                 onPressed: () {
@@ -389,7 +387,7 @@ class _ContactUsState extends State<ContactUs> {
                     ),
                   ),
                   Container(
-                    color: Colors.white,
+                    color: Colors.black,
                     // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -401,7 +399,7 @@ class _ContactUsState extends State<ContactUs> {
                             style: TextStyle(
                               fontSize: 21.0,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Colors.white,
                               // shadows: [
                               //   BoxShadow(
                               //       color: Colors.grey[800],
@@ -418,9 +416,9 @@ class _ContactUsState extends State<ContactUs> {
                           ),
                         ),
                         Container(
-                          color: Colors.white,
+                          color: Colors.black,
                           padding: EdgeInsets.symmetric(vertical: 5.0),
-                          height: 300.0,
+                          height: 305.0,
                           // width: MediaQuery.of(context).size.width-10.0,
                           child: ListView.builder(
                             padding: EdgeInsets.symmetric(
@@ -433,21 +431,13 @@ class _ContactUsState extends State<ContactUs> {
                                 height: 100.0,
                                 width: 150.0,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey[800],
-                                        offset: Offset(3.0, 3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-3.0, -3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                  ],
+                                  border: Border.all(
+                                    color:borderColor,
+                                    width: borderWid
+                                  )
                                 ),
                                 margin:
                                     new EdgeInsets.symmetric(horizontal: 10.0),
@@ -476,7 +466,10 @@ class _ContactUsState extends State<ContactUs> {
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
                                               fontSize: 12,
-                                              fontWeight: FontWeight.w500),
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.white
+                                              ),
+                                              
                                         ),
                                         Row(
                                           children: <Widget>[
@@ -485,7 +478,7 @@ class _ContactUsState extends State<ContactUs> {
                                                 padding: EdgeInsets.all(0.0),
                                                 iconSize: 15.0,
                                                 icon: Icon(Icons.call,
-                                                    color: Colors.grey),
+                                                    color: Colors.white),
                                                 onPressed: () {
                                                   launch("tel:" +
                                                       contactCard["PGS"]
@@ -498,7 +491,7 @@ class _ContactUsState extends State<ContactUs> {
                                                 //padding: EdgeInsets.all(0.0),
                                                 iconSize: 15.0,
                                                 icon: Icon(facebook,
-                                                    color: Colors.grey),
+                                                    color: Colors.white),
                                                 disabledColor: Colors.black,
                                                 color: Colors.blueAccent,
                                                 onPressed: () {
@@ -521,7 +514,7 @@ class _ContactUsState extends State<ContactUs> {
                     ),
                   ),
                   Container(
-                    color: Colors.white,
+                    color: Colors.black,
                     // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -533,7 +526,7 @@ class _ContactUsState extends State<ContactUs> {
                             style: TextStyle(
                               fontSize: 21.0,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Colors.white,
                               // shadows: [
                               //   BoxShadow(
                               //       color: Colors.grey[800],
@@ -550,9 +543,9 @@ class _ContactUsState extends State<ContactUs> {
                           ),
                         ),
                         Container(
-                          color: Colors.white,
+                          color: Colors.black,
                           padding: EdgeInsets.symmetric(vertical: 5.0),
-                          height: 300.0,
+                          height: 305.0,
                           // width: MediaQuery.of(context).size.width-10.0,
                           child: ListView.builder(
                             padding: EdgeInsets.symmetric(
@@ -565,21 +558,14 @@ class _ContactUsState extends State<ContactUs> {
                                 height: 100.0,
                                 width: 150.0,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey[800],
-                                        offset: Offset(3.0, 3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-3.0, -3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                  ],
+                                      border: Border.all(
+                                        color: borderColor,
+                                        width: borderWid
+                                      )
+                                 
                                 ),
                                 margin:
                                     new EdgeInsets.symmetric(horizontal: 10.0),
@@ -607,7 +593,9 @@ class _ContactUsState extends State<ContactUs> {
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
                                               fontSize: 12,
-                                              fontWeight: FontWeight.w500),
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.white
+                                              ),
                                         ),
                                         Row(
                                           children: <Widget>[
@@ -616,7 +604,7 @@ class _ContactUsState extends State<ContactUs> {
                                                 padding: EdgeInsets.all(0.0),
                                                 iconSize: 15.0,
                                                 icon: Icon(Icons.call,
-                                                    color: Colors.grey),
+                                                    color: Colors.white),
                                                 onPressed: () {
                                                   launch("tel:" +
                                                       contactCard["PT"][index]);
@@ -628,7 +616,7 @@ class _ContactUsState extends State<ContactUs> {
                                                 //padding: EdgeInsets.all(0.0),
                                                 iconSize: 15.0,
                                                 icon: Icon(facebook,
-                                                    color: Colors.grey),
+                                                    color: Colors.white),
                                                 disabledColor: Colors.black,
                                                 color: Colors.blueAccent,
                                                 onPressed: () {
@@ -651,7 +639,7 @@ class _ContactUsState extends State<ContactUs> {
                     ),
                   ),
                   Container(
-                    color: Colors.white,
+                    color: Colors.black,
                     // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -663,7 +651,7 @@ class _ContactUsState extends State<ContactUs> {
                             style: TextStyle(
                               fontSize: 21.0,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Colors.white,
                               // shadows: [
                               //   BoxShadow(
                               //       color: Colors.grey[800],
@@ -680,10 +668,10 @@ class _ContactUsState extends State<ContactUs> {
                           ),
                         ),
                         Container(
-                          color: Colors.white,
+                          color: Colors.black,
                           padding: EdgeInsets.symmetric(vertical: 5.0),
-                          height: 300.0,
-                          // width: MediaQuery.of(context).size.width-10.0,
+                          height: 305.0,
+                          width: MediaQuery.of(context).size.width - 10.0,
                           child: ListView.builder(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 30),
@@ -695,22 +683,24 @@ class _ContactUsState extends State<ContactUs> {
                                 height: 100.0,
                                 width: 150.0,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey[800],
-                                        offset: Offset(3.0, 3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                    BoxShadow(
-                                        color: Colors.white,
-                                        offset: Offset(-3.0, -3.0),
-                                        blurRadius: 7.0,
-                                        spreadRadius: 1.0),
-                                  ],
-                                ),
+                                    color: Colors.black,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    border: Border.all(
+                                        width: borderWid, color: borderColor)
+                                    /*boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey[800],
+                                            offset: Offset(3.0, 3.0),
+                                            blurRadius: 7.0,
+                                            spreadRadius: 1.0),
+                                        BoxShadow(
+                                            color: Colors.white,
+                                            offset: Offset(-3.0, -3.0),
+                                            blurRadius: 7.0,
+                                            spreadRadius: 1.0),
+                                      ],*/
+                                    ),
                                 margin:
                                     new EdgeInsets.symmetric(horizontal: 10.0),
                                 child: Column(
@@ -738,7 +728,8 @@ class _ContactUsState extends State<ContactUs> {
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
                                               fontSize: 12,
-                                              fontWeight: FontWeight.w500),
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.white),
                                         ),
                                         Row(
                                           children: <Widget>[
@@ -747,7 +738,7 @@ class _ContactUsState extends State<ContactUs> {
                                                 padding: EdgeInsets.all(0.0),
                                                 iconSize: 15.0,
                                                 icon: Icon(Icons.call,
-                                                    color: Colors.grey),
+                                                    color: Colors.white),
                                                 onPressed: () {
                                                   launch("tel:" +
                                                       contactCard["PCC"]
@@ -760,7 +751,7 @@ class _ContactUsState extends State<ContactUs> {
                                                 //padding: EdgeInsets.all(0.0),
                                                 iconSize: 15.0,
                                                 icon: Icon(facebook,
-                                                    color: Colors.grey),
+                                                    color: Colors.white),
                                                 disabledColor: Colors.black,
                                                 color: Colors.blueAccent,
                                                 onPressed: () {
@@ -787,7 +778,7 @@ class _ContactUsState extends State<ContactUs> {
             ),
             FloatingActionButton(
               elevation: 0,
-              foregroundColor: Color(0xFF6B872B),
+              foregroundColor: Colors.white,//(0xFF6B872B),
               backgroundColor: Colors.transparent,
               onPressed: () {
                 _scaffoldKey.currentState.openDrawer();

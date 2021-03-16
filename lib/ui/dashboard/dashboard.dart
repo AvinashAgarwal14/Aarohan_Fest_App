@@ -4,8 +4,10 @@ import 'package:arhn_app_2021/model/event.dart';
 import 'package:arhn_app_2021/model/event_type_model.dart';
 import 'package:arhn_app_2021/model/events_model.dart';
 import 'package:arhn_app_2021/ui/account/login.dart';
+import 'package:arhn_app_2021/ui/search_by_tags/tags.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +38,7 @@ PageController controller;
 ScrollController _scontroller;
 bool _showDate = true;
 bool _showCategory = true;
+bool _showSearchBox = false;
 
 class _DashboardState extends State<Dashboard> {
   List<DateModel> dates = new List<DateModel>();
@@ -107,6 +110,7 @@ class _DashboardState extends State<Dashboard> {
     setState(() {
       _showDate = _scontroller.offset < 50;
       _showCategory = _scontroller.offset < 200;
+      //  _showSearchBox = _scontroller.offset > 50;
     });
   }
 
@@ -115,196 +119,340 @@ class _DashboardState extends State<Dashboard> {
   }
 
   int selectedIndexC = 0;
+  var w = 50.0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
-        child: AppBar(
-          elevation: 0,
-          brightness: Brightness.light,
-          backgroundColor: Colors.black,
-          iconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-          textTheme: TextTheme(
-            title: TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
-            ),
-          ),
-          title: Text(
-            "Aarohan",
-            style: GoogleFonts.ubuntu(
-              fontSize: 25,
-              color: Colors.white,
-            ),
-          ),
-          actions: <Widget>[
-            IconButton(
-              color: Colors.white,
-              icon: Icon(Icons.youtube_searched_for),
-              onPressed: () {
-                Navigator.of(context).pushNamed("/ui/tags");
-              },
-            ),
-            (currentUser != null && isEurekoinAlreadyRegistered != null)
-                ? IconButton(
-                    color: Colors.black,
-                    icon: Image(
-                      image: AssetImage("images/QRIcon.png"),
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      if (isEurekoinAlreadyRegistered == 1) {
-                        scanQR();
-                      } else if (isEurekoinAlreadyRegistered == 0) {
-                        scanQR();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EurekoinHomePage()),
-                        ).then((onReturn) {
-                          getUser();
-                        });
-                      }
-                    })
-                : Container(),
-            //   SizedBox(width:10),
-            // IconButton(
-            //   icon:Icon(Icons.account_box),
-            //   onPressed: (){
-            //     _logout();
-            //   },
-            //   ),
+      key: _scaffoldKey,
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(50.0),
+      //   child: AppBar(
+      //     elevation: 0,
+      //     brightness: Brightness.dark,
+      //     backgroundColor: Colors.black,
+      //     iconTheme: IconThemeData(
+      //       color: Colors.white,
+      //     ),
+      //     textTheme: TextTheme(
+      //       title: TextStyle(
+      //         color: Colors.white,
+      //         fontSize: 20.0,
+      //       ),
+      //     ),
+      //     // title: Text(
+      //     //   "Aarohan",
+      //     //   style: GoogleFonts.ubuntu(
+      //     //     fontSize: 25,
+      //     //     color: Colors.white,
+      //     //   ),
+      //     // ),
+      //     actions: <Widget>[
+      //       IconButton(
+      //         color: Colors.white,
+      //         icon: Icon(Icons.youtube_searched_for),
+      //         onPressed: () {
 
-            SizedBox(width: 10),
-          ],
-        ),
-      ),
+      //           setState(() {
+      //             _showDate=false;
+      //           });
+
+      //           //Navigator.of(context).pushNamed("/ui/tags");
+      //         },
+      //       ),
+      //       (currentUser != null && isEurekoinAlreadyRegistered != null)
+      //           ? IconButton(
+      //               color: Colors.black,
+      //               icon: Image(
+      //                 image: AssetImage("images/QRIcon.png"),
+      //                 color: Colors.black,
+      //               ),
+      //               onPressed: () {
+      //                 if (isEurekoinAlreadyRegistered == 1) {
+      //                   scanQR();
+      //                 } else if (isEurekoinAlreadyRegistered == 0) {
+      //                   scanQR();
+      //                   Navigator.push(
+      //                     context,
+      //                     MaterialPageRoute(
+      //                         builder: (context) => EurekoinHomePage()),
+      //                   ).then((onReturn) {
+      //                     getUser();
+      //                   });
+      //                 }
+      //               })
+      //           : Container(),
+      //       //   SizedBox(width:10),
+      //       // IconButton(
+      //       //   icon:Icon(Icons.account_box),
+      //       //   onPressed: (){
+      //       //     _logout();
+      //       //   },
+      //       //   ),
+
+      //       SizedBox(width: 10),
+      //     ],
+      //   ),
+      //),
       drawer: NavigationDrawer(),
-      body: Container(
-        child: Stack(
+      body: SafeArea(
+        child: Column(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(color: Colors.black),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+              color: Colors.black,
+              height: 60,
+              width: MediaQuery.of(context).size.width,
+              child: Stack(
+                children: [
                   AnimatedContainer(
-                    height: _showDate ? 70 : 0,
+                    alignment: Alignment.centerRight,
                     duration: Duration(milliseconds: 400),
-                    //date
-
-                    child: Container(
+                    height: 60,
+                    width:
+                        !_showSearchBox ? 0 : MediaQuery.of(context).size.width,
+                    child: Align(
+                      alignment: Alignment.centerRight,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: dates
-                            .map(
-                              (date) => GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    todayDateIs = date.date;
-                                    popularEvents = events
-                                        .where((event) =>
-                                            event != null &&
-                                            int.parse(event.date
-                                                    .substring(0, 2)) ==
-                                                int.parse(date.date))
-                                        .toList();
-                                  });
-                                },
-                                child: DateTile(
-                                  weekDay: date.weekDay,
-                                  date: date.date,
-                                  isSelected: todayDateIs == date.date,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            fit: FlexFit.tight,
+                            flex: 5,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                              child: TextField(
+                                // controller: searchController,
+                                style: TextStyle(color: Colors.black),
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white, filled: true,
+
+                                  //hoverColor: ,
+                                  focusColor: Color(0xff03A062),
+                                  prefixIcon: Icon(Icons.search),
+                                  border: OutlineInputBorder(),
+                                  //labelText: "Search Events"
                                 ),
                               ),
-                            )
-                            .toList(),
+                            ),
+                          ),
+                          Flexible(
+                            fit: FlexFit.tight,
+                            flex: 1,
+                            child: FloatingActionButton(
+                              elevation: 0,
+                              foregroundColor: Colors.white, //(0xFF6B872B),
+                              backgroundColor: Colors.transparent,
+                              onPressed: () {
+                                setState(() {
+                                  _showSearchBox = !_showSearchBox;
+                                });
+                              },
+                              child: Icon(Icons.cancel),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   AnimatedContainer(
-                    height: _showDate ? 56 : 0,
-                    duration: Duration(microseconds: 400),
-                    child: Column(
+                    // curve: ,
+                    alignment: Alignment.centerLeft,
+                    duration: Duration(milliseconds: 400),
+                    height: 60,
+                    width:
+                        _showSearchBox ? 0 : MediaQuery.of(context).size.width,
+                    //width: 50,
+                    color: Colors.black,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        Flexible(
+                          flex: 1,
+                          fit: FlexFit.tight,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: FloatingActionButton(
+                              elevation: 0,
+                              foregroundColor: Colors.white, //(0xFF6B872B),
+                              backgroundColor: Colors.transparent,
+                              onPressed: () {
+                                _scaffoldKey.currentState.openDrawer();
+                              },
+                              child: Icon(Icons.menu),
+                            ),
+                          ),
+                        ), //Flexible
                         SizedBox(
-                          height: 16,
+                          width: 20,
+                        ), //SizedBox
+                        Flexible(
+                          flex: 2,
+                          fit: FlexFit.tight,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "Aarahon",
+                              style: GoogleFonts.josefinSans(
+                                  fontSize: 30,
+                                  color: Colors.white //(0xFF6B872B),
+                                  ),
+                            ),
+                          ),
                         ),
-                        Text(
-                          "Category",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                    ),
-                  ),
-                  AnimatedContainer(
-                    height: _showDate ? 70 : 0,
-                    duration: Duration(microseconds: 400),
-                    child: Container(
-                      child: ListView.builder(
-                          itemCount: eventsType.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
+                        Flexible(
+                            flex: 2, fit: FlexFit.tight, child: SizedBox()),
+                        Flexible(
+                          flex: 1,
+                          fit: FlexFit.tight,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: FloatingActionButton(
+                              elevation: 0,
+                              foregroundColor: Colors.white, //(0xFF6B872B),
+                              backgroundColor: Colors.transparent,
+                              onPressed: () {
                                 setState(() {
-                                  selectedIndexC = index;
+                                  _showSearchBox = !_showSearchBox;
                                 });
                               },
-                              child: EventTile(
-                                  imgAssetPath: eventsType[index].imgAssetPath,
-                                  eventType: eventsType[index].eventType,
-                                  isSelected: index == selectedIndexC),
-                            );
-                          }),
-                    ),
-                  ),
-                  SizedBox(
-                    height: _showDate ? 16 : 0,
-                  ),
-                  Text(
-                    "Popular Events",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Container(
-                    // height: 300.0,
-                    child: Expanded(
-                      child: popularEvents != null
-                          ? ListView.builder(
-                              controller: _scontroller,
-                              itemCount: popularEvents.length,
-                              itemBuilder: (context, index) {
-                                return events[index] != null
-                                    ? PopularEventTile(
-                                        desc: popularEvents[index].title,
-                                        imgeAssetPath:
-                                            popularEvents[index].imageUrl,
-                                        date: popularEvents[index].date,
-                                        address: popularEvents[index].location,
-                                      )
-                                    : SizedBox();
-                              },
-                            )
-                          : SizedBox(),
+                              child: Icon(Icons.search),
+                            ),
+                          ),
+                        ), //Flexible
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
+            Expanded(
+              child: Container(
+                //width: MediaQuery.of(context).size.width,
+                //height: MediaQuery.of(context).size.height-130,
+                decoration: BoxDecoration(color: Colors.black),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    AnimatedContainer(
+                      height: _showDate && !_showSearchBox ? 70 : 0,
+                      duration: Duration(milliseconds: 400),
+                      child: Container(
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: dates
+                              .map(
+                                (date) => GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      todayDateIs = date.date;
+                                      popularEvents = events
+                                          .where((event) =>
+                                              event != null &&
+                                              int.parse(event.date
+                                                      .substring(0, 2)) ==
+                                                  int.parse(date.date))
+                                          .toList();
+                                    });
+                                  },
+                                  child: DateTile(
+                                    weekDay: date.weekDay,
+                                    date: date.date,
+                                    isSelected: todayDateIs == date.date,
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    ),
+                    AnimatedContainer(
+                      height: _showDate && !_showSearchBox ? 56 : 0,
+                      duration: Duration(milliseconds: 200),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              "Category",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    AnimatedContainer(
+                      height: _showDate && !_showSearchBox ? 70 : 0,
+                      duration: Duration(milliseconds: 200),
+                      child: Container(
+                        //height: 70,
+                        child: ListView.builder(
+                            itemCount: eventsType.length,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedIndexC = index;
+                                  });
+                                },
+                                child: EventTile(
+                                    imgAssetPath:
+                                        eventsType[index].imgAssetPath,
+                                    eventType: eventsType[index].eventType,
+                                    isSelected: index == selectedIndexC),
+                              );
+                            }),
+                      ),
+                    ),
+                    SizedBox(
+                      height: _showDate && !_showSearchBox ? 16 : 0,
+                    ),
+                    Text(
+                        "Popular Events",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    SizedBox(
+                        height: 20.0,
+                      ),
+                    Container(
+                      // height: 300.0,
+                      child: Expanded(
+                        child: popularEvents != null
+                            ? ListView.builder(
+                                controller: _scontroller,
+                                itemCount: popularEvents.length,
+                                itemBuilder: (context, index) {
+                                  return events[index] != null
+                                      ? PopularEventTile(
+                                          desc: popularEvents[index].title,
+                                          imgeAssetPath:
+                                              popularEvents[index].imageUrl,
+                                          date: popularEvents[index].date,
+                                          address:
+                                              popularEvents[index].location,
+                                        )
+                                      : SizedBox();
+                                },
+                              )
+                            : SizedBox(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            _showSearchBox ? bottomSlide(context) : SizedBox()
           ],
         ),
       ),
@@ -453,55 +601,125 @@ class DateTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-        fit: BoxFit.fill,
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10),
-
-          width: MediaQuery.of(context).size.width * 0.18,
-           padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-          decoration: BoxDecoration(
-              color: isSelected ? Color(0xff03bc72) : Color(0xff29404E),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: (isSelected && _showDate)
-                  ? [
-                      BoxShadow(
-                        color: Color(0xff03A062),
-                        spreadRadius: 4,
-                        blurRadius: 10,
-                      ),
-                      BoxShadow(
-                        color: Color(0xff03A062),
-                        spreadRadius: -4,
-                        blurRadius: 5,
-                      ),
-                    ]
-                  : []),
-          child: Center(
-            child: 
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    date,
-                    style: TextStyle(
-                        color: isSelected ? Colors.black : Colors.white,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    weekDay,
-                    style: TextStyle(
-                        color: isSelected ? Colors.black : Colors.white,
-                        fontWeight: FontWeight.w600),
-                  )
-                ],
+      fit: BoxFit.scaleDown,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        width: MediaQuery.of(context).size.width * 0.18,
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: BoxDecoration(
+            color: isSelected
+                ? Color(0xff03bc72)
+                : Colors.black, //Color(0xff29404E),
+            border: Border.all(
+              color: Color(0xff03bc72),
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: (isSelected && _showDate)
+                ? [
+                    BoxShadow(
+                      color: Color(0xff03A062),
+                      spreadRadius: 4,
+                      blurRadius: 10,
+                    ),
+                    BoxShadow(
+                      color: Color(0xff03A062),
+                      spreadRadius: -4,
+                      blurRadius: 5,
+                    ),
+                  ]
+                : []),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                date,
+                style: TextStyle(
+                    color: isSelected ? Colors.black : Colors.white,
+                    fontWeight: FontWeight.w600),
               ),
-            
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                weekDay,
+                style: TextStyle(
+                    color: isSelected ? Colors.black : Colors.white,
+                    fontWeight: FontWeight.w600),
+              )
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
+}
+
+Widget bottomSlide(BuildContext context) {
+  return SlidingUpPanel(
+    color: Colors.black45,
+    minHeight: 65.0,
+    maxHeight: MediaQuery.of(context).size.height * 0.75,
+    panel: Column(
+      children: <Widget>[
+        SizedBox(height: 5.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: 35,
+              height: 8,
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.all(Radius.circular(12.0))),
+            )
+          ],
+        ),
+        SizedBox(height: 13.0),
+        Padding(
+          padding: EdgeInsets.only(top: 10.0),
+        ),
+        /*Container(
+                    child: new Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: cardChildren,
+                    ),
+                  ),*/
+        Divider(
+          color: Theme.of(context).brightness == Brightness.light
+              ? Colors.grey
+              : Color(0xFF505194),
+        ),
+        Container(
+            /* child: Expanded(
+                /*child: ListView.builder(
+                        cacheExtent: MediaQuery.of(context).size.height * 3,
+                        itemCount: eventsByTags[_selectedTag].length,
+                        itemBuilder: (context, position) {
+                          return Container(
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              new EventDetails(
+                                                  item:
+                                                      eventsByTags[_selectedTag]
+                                                          [position])),
+                                    );
+                                  },
+                                  child: SearchByTagsCards(
+                                      eventCard: eventsByTags[_selectedTag]
+                                          [position])));
+                        }),*/
+                )*/
+            ),
+        SizedBox(height: 55.0),
+      ],
+    ),
+  );
 }
 
 class EventTile extends StatelessWidget {
@@ -512,47 +730,57 @@ class EventTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: isSelected ? Color(0xff03bc72) : Color(0xff29404E),
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: (isSelected && _showDate)
-              ? [
-                  BoxShadow(
-                    color: Color(0xff03A062),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                  ),
-                  BoxShadow(
-                    color: Color(0xff03A062),
-                    spreadRadius: -4,
-                    blurRadius: 5,
-                  ),
-                ]
-              : []),
-      //child: FittedBox(
-      //fit: BoxFit.scaleDown,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Image.asset(
-            imgAssetPath,
-            height: 27,
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Text(
-            eventType,
-            style: TextStyle(color: Colors.white),
-          )
-        ],
+    return FittedBox(
+      alignment: Alignment.topCenter,
+      fit: BoxFit.scaleDown,
+      child: Container(
+        height: 60,
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            color: isSelected
+                ? Color(0xff03bc72)
+                : Colors.black, //Color(0xff29404E),
+            border: Border.all(
+              color: Color(0xff03bc72),
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: (isSelected && _showDate)
+                ? [
+                    BoxShadow(
+                      color: Color(0xff03A062),
+                      spreadRadius: 4,
+                      blurRadius: 10,
+                    ),
+                    BoxShadow(
+                      color: Color(0xff03A062),
+                      spreadRadius: -4,
+                      blurRadius: 5,
+                    ),
+                  ]
+                : []),
+        //child: FittedBox(
+        //fit: BoxFit.scaleDown,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Image.asset(
+              imgAssetPath,
+              height: 27,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              eventType,
+              style: TextStyle(color: Colors.white),
+            )
+          ],
+        ),
+        // ),
       ),
-      // ),
     );
   }
 }
@@ -572,7 +800,19 @@ class PopularEventTile extends StatelessWidget {
       height: 100,
       margin: EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-          color: Color(0xff29404E), borderRadius: BorderRadius.circular(8)),
+
+          // borderRadius: BorderRadius.only(
+          //  topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+
+          /*border: Border(
+                  top: BorderSide(width: 1.0, color: Color(0xff03A062)),
+                  bottom: BorderSide(width: 1.0, color: Color(0xff03A062)),
+                  left: BorderSide(width: 1.0, color: Color(0xff03A062)),
+                  right:  BorderSide(width: 0, color: Color(0xff03A062)),
+                  
+                ),*/
+          border: Border.all(color: Color(0xff03A062), width: 2)),
       child: Row(
         children: <Widget>[
           Expanded(

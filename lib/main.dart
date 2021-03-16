@@ -79,9 +79,9 @@ class Aavishkar_App extends StatelessWidget {
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xFF6B872B),
+        primaryColor: Color(0xff03A062),
       ),
-      initialRoute: "/splash",
+      initialRoute: "/ui/dashboard",
       routes: <String, WidgetBuilder>{
         "/intro": (BuildContext context) => IntroScreen(),
         "/splash": (BuildContext context) => SplashScreen(),
