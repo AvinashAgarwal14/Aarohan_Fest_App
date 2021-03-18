@@ -54,14 +54,14 @@ class DetailItem extends StatelessWidget {
       {
         columnChildren = lines
             .sublist(0, lines.length - 1)
-            .map((String line) => new Text(line))
+            .map((String line) => new Text(line ,style: TextStyle(color: Colors.white),))
             .toList();
         columnChildren
-            .add(new Text(lines.last, style: themeData.textTheme.caption));
+            .add(new Text(lines.last, style: TextStyle(color: Colors.white,fontSize: 12)));
       }
       else
         {
-          columnChildren = lines.map((String line) => new Text(line)).toList();
+          columnChildren = lines.map((String line) => new Text(line,style: TextStyle(color: Colors.white,fontSize: 12))).toList();
         }
 
     final List<Widget> rowChildren = <Widget>[
