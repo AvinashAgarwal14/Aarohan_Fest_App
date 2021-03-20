@@ -60,6 +60,7 @@ dependencies:
   intro_slider: ^2.2.8
   decoding_text_effect: ^1.1.1
   keyboard_visibility: any
+  audioplayers: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -90,6 +91,7 @@ flutter:
     - images/Contributors/
     - assets/
     - assets/images/
+    - lib/ui/arcade/images/
     - assets/Aarohan_logo.jpg    
     - assets/INTRO1.png
     - assets/INTRO2.png

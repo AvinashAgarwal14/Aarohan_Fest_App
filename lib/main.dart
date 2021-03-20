@@ -1,5 +1,6 @@
 // import 'package:arhn_app_2021/ui/arcade/arcade_game.dart';
 // import 'package:arhn_app_2021/ui/arcade/game_controller.dart';
+import 'package:arhn_app_2021/ui/arcade/HomePage.dart';
 import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
 // import 'package:flame/util.dart';
 import 'package:flutter/gestures.dart';
@@ -100,7 +101,7 @@ class Aavishkar_App extends StatelessWidget {
             Contributors(),
         "/ui/about_us/about_us": (BuildContext context) => AboutUsPage(),
         "/interficio/interficio.dart": (BuildContext context) => MyApp(),
-        // "/ui/arcade_game": (BuildContext context) => ArcadeGame(gameController),
+        "/ui/arcade_game": (BuildContext context) => Pacman(),
       },
     );
   }
