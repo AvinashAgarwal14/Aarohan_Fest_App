@@ -59,6 +59,7 @@ dependencies:
   flutter_speed_dial: ^1.2.5
   intro_slider: ^2.2.8
   decoding_text_effect: ^1.1.1
+  keyboard_visibility: any
 
 dev_dependencies:
   flutter_test:

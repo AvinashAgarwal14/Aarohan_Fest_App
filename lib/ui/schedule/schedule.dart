@@ -78,7 +78,7 @@ class _ScheduleState extends State<Schedule> {
                 snap: _appBarBehavior == AppBarBehavior.snapping,
                 flexibleSpace: FlexibleSpaceBar(
                   title: Text(
-                    'Schedule',
+                    'Timeline',
                     style: GoogleFonts.josefinSans(
                       fontSize: 30,
                       color: Color(0xFF6B872B),

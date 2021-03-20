@@ -32,6 +32,7 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:arhn_app_2021/data/data.dart';
 import 'package:decoding_text_effect/decoding_text_effect.dart';
+import 'package:keyboard_visibility/keyboard_visibility.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -45,6 +46,7 @@ bool _showDate = true;
 bool _showCategory = true;
 bool _showSearchBox = false;
 FocusNode myFocusNode;
+bool _showBottomSlide = false;
 
 EventResponse res;
 List<EventItem> events;
@@ -130,6 +132,14 @@ class _DashboardState extends State<Dashboard> {
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark));
     getUser();
+
+    KeyboardVisibilityNotification().addNewListener(
+    onChange: (bool visible) {
+      setState(() {_showBottomSlide = !visible; });
+      
+    },
+  );
+
   }
 
   _scrollListener() {
@@ -184,30 +194,37 @@ class _DashboardState extends State<Dashboard> {
                                 flex: 5,
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                                  child: TextField(
-                                    onChanged: (String value) async {
+                                  child: Focus(
+                                    onFocusChange: (Focus) {
                                       setState(() {
-                                        showEvents = events
-                                            .where((event) =>
-                                                event != null &&
-                                                event.title
-                                                    .toString()
-                                                    .toLowerCase()
-                                                    .contains(
-                                                        value.toLowerCase()))
-                                            .toList();
+                                        _showBottomSlide = !Focus;
                                       });
                                     },
-                                    controller: textFieldController,
-                                    focusNode: myFocusNode,
-                                    style: TextStyle(color: Colors.black),
-                                    decoration: InputDecoration(
-                                      fillColor: Colors.white, filled: true,
+                                    child: TextField(
+                                      onChanged: (String value) async {
+                                        setState(() {
+                                          showEvents = events
+                                              .where((event) =>
+                                                  event != null &&
+                                                  event.title
+                                                      .toString()
+                                                      .toLowerCase()
+                                                      .contains(
+                                                          value.toLowerCase()))
+                                              .toList();
+                                        });
+                                      },
+                                      controller: textFieldController,
+                                      focusNode: myFocusNode,
+                                      style: TextStyle(color: Colors.black),
+                                      decoration: InputDecoration(
+                                        fillColor: Colors.white, filled: true,
 
-                                      focusColor: Color(0xff03A062),
-                                      prefixIcon: Icon(Icons.search),
-                                      border: OutlineInputBorder(),
-                                      //labelText: "Search Events"
+                                        focusColor: Color(0xff03A062),
+                                        prefixIcon: Icon(Icons.search),
+                                        border: OutlineInputBorder(),
+                                        //labelText: "Search Events"
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -300,7 +317,8 @@ class _DashboardState extends State<Dashboard> {
                                   onPressed: () {
                                     setState(() {
                                       _showSearchBox = !_showSearchBox;
-                                      myFocusNode.requestFocus();
+                                     _showBottomSlide = true;
+                                      // myFocusNode.
                                     });
                                   },
                                   child: Icon(Icons.search),
@@ -463,7 +481,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ],
             ),
-            _showSearchBox ? new BottomSlide() : SizedBox()
+            _showSearchBox && _showBottomSlide ? new BottomSlide() : SizedBox()
           ],
         ),
       ),
@@ -671,12 +689,12 @@ class BottomSlide extends StatefulWidget {
   @override
   _BottomSlideState createState() => _BottomSlideState();
 }
+
 List<EventItem> bottomSlideList = events;
+
 class _BottomSlideState extends State<BottomSlide> {
   @override
   Widget build(BuildContext context) {
-    
-
     final List<Widget> choiceChips = tags.map<Widget>((String name) {
       Color chipColor;
       chipColor = Color(0xff03A062);
@@ -692,7 +710,9 @@ class _BottomSlideState extends State<BottomSlide> {
             bottomSlideList = events
                 .where((element) =>
                     element != null &&
-                    element.tag.toLowerCase().contains(_selectedTag.toLowerCase()) )
+                    element.tag
+                        .toLowerCase()
+                        .contains(_selectedTag.toLowerCase()))
                 .toList();
           });
           print(bottomSlideList);
@@ -713,7 +733,7 @@ class _BottomSlideState extends State<BottomSlide> {
 
     return SlidingUpPanel(
       color: Colors.black,
-      minHeight: 100.0,
+      minHeight: 200.0,
       maxHeight: MediaQuery.of(context).size.height * 0.85,
       panel: Column(
         children: <Widget>[
@@ -782,75 +802,7 @@ class _BottomSlideState extends State<BottomSlide> {
   }
 }
 
-/*Widget bottomSlide(BuildContext context) {
-  return SlidingUpPanel(
-    color: Colors.black,
-    minHeight: 100.0,
-    maxHeight: MediaQuery.of(context).size.height * 0.85,
-    panel: Column(
-      children: <Widget>[
-        SizedBox(height: 5.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              width: 35,
-              height: 8,
-              decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.all(Radius.circular(12.0))),
-            )
-          ],
-        ),
-        SizedBox(height: 13.0),
-        Padding(
-          padding: EdgeInsets.only(top: 10.0),
-        ),
-        Divider(
-          color: Theme.of(context).brightness == Brightness.light
-              ? Colors.grey
-              : Color(0xFF505194),
-        ),
-        Container(
-          child: new Column(
-            mainAxisSize: MainAxisSize.min,
-            children: cardChildren,
-          ),
-        ),
-        SizedBox(height: 13.0),
-        Container(
-          child: Expanded(
-            child: events != null
-                ? ListView.builder(
-                    controller: _scontroller,
-                    itemCount: showEvents.length,
-                    itemBuilder: (context, index) {
-                      return events[index] != null
-                          ? GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (_) {
-                                  return EventDetails(item: showEvents[index]);
-                                }));
-                              },
-                              child: PopularEventTile(
-                                desc: showEvents[index].title,
-                                imgeAssetPath: showEvents[index].imageUrl,
-                                date: showEvents[index].date,
-                                address: showEvents[index].location,
-                              ),
-                            )
-                          : SizedBox();
-                    },
-                  )
-                : SizedBox(),
-          ),
-        ),
-        SizedBox(height: 55.0),
-      ],
-    ),
-  );
-}*/
+
 
 class EventTile extends StatelessWidget {
   String imgAssetPath;

@@ -148,7 +148,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       Icons.access_time,
                     ),
                     title: Text(
-                      "Schedule",
+                      "Timeline",
                     ),
                     onTap: () {
                       Navigator.popUntil(
@@ -184,18 +184,20 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 //           context, (ModalRoute.withName('/ui/account/login')));
                 //       Navigator.of(context).pushNamed("/ui/share_memories");
                 //     }),
-                ListTile(
-                    leading: Icon(
-                      Icons.youtube_searched_for,
-                    ),
-                    title: Text(
-                      "Tags",
-                    ),
-                    onTap: () {
-                      Navigator.popUntil(
-                          context, (ModalRoute.withName('/ui/account/login')));
-                      Navigator.of(context).pushNamed("/ui/tags");
-                    }),
+
+                // ListTile(
+                //     leading: Icon(
+                //       Icons.youtube_searched_for,
+                //     ),
+                //     title: Text(
+                //       "Tags",
+                //     ),
+                //     onTap: () {
+                //       Navigator.popUntil(
+                //           context, (ModalRoute.withName('/ui/account/login')));
+                //       Navigator.of(context).pushNamed("/ui/tags");
+                //     }),
+
                 // ListTile(
                 //   leading: Icon(
                 //     Icons.my_location,
