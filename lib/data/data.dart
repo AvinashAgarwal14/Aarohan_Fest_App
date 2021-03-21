@@ -38,22 +38,22 @@ List<EventTypeModel> getEventTypes() {
   EventTypeModel eventModel = new EventTypeModel();
 
   //1
-  eventModel.imgAssetPath = "assets/concert.png";
-  eventModel.eventType = "Concert";
+  eventModel.imgAssetPath = "assets/education.png";
+  eventModel.eventType = "Workshops";
   events.add(eventModel);
 
   eventModel = new EventTypeModel();
 
   //1
   eventModel.imgAssetPath = "assets/sports.png";
-  eventModel.eventType = "Sports";
+  eventModel.eventType = "Events";
   events.add(eventModel);
 
   eventModel = new EventTypeModel();
 
   //1
-  eventModel.imgAssetPath = "assets/education.png";
-  eventModel.eventType = "Education";
+  eventModel.imgAssetPath = "assets/concert.png";
+  eventModel.eventType = "Talks";
   events.add(eventModel);
 
   eventModel = new EventTypeModel();

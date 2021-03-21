@@ -4,6 +4,7 @@ import '../../util/drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:math';
 
 class Contributors extends StatefulWidget {
   @override
@@ -17,6 +18,8 @@ IconData linkedin = IconData(0xe801, fontFamily: kFontFam);
 IconData facebook = IconData(0xf052, fontFamily: kFontFam);
 IconData google = IconData(0xf1a0, fontFamily: kFontFam);
 IconData facebook_1 = IconData(0xf300, fontFamily: kFontFam);
+
+double value = 0;
 
 //TODO Data Entry
 Map contributors = {
@@ -119,163 +122,186 @@ class _ContributorsState extends State<Contributors> {
       },
       child: Scaffold(
         backgroundColor: Colors.black,
-        key: _scaffoldKey,
-        drawer: NavigationDrawer(),
-        // appBar: AppBar(
-        //   title: Text("Contributors"),
-        // ),
-//      backgroundColor: Theme.of(context).brightness==Brightness.light?Colors.white70:Colors.black ,
         body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  FloatingActionButton(
-                    elevation: 0,
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.transparent,
-                    onPressed: () {
-                      _scaffoldKey.currentState.openDrawer();
-                    },
-                    child: Icon(Icons.menu),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
-                    child: Text(
-                      "Contributors",
-                      style: GoogleFonts.josefinSans(
-                        fontSize: 35,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200,
-                        childAspectRatio: 6 / 10,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return Container(
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              border: Border.all(
-                                  width: 2, color: Color(0xff03A062))),
-                          //margin: new EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Stack(
-                                  children: [
-                                    Container(
-                                        height: 150.0,
-                                        child: ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10),
-                                            ),
-                                            child: Image.asset(
-                                                contributors["Image"][index],
-                                                height: double.infinity,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover))),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Color(0xff03A062),
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(10),
-                                            bottomRight: Radius.circular(10)),
-                                      ),
-                                      padding: EdgeInsets.all(5),
-                                      margin: EdgeInsets.only(top: 110),
-                                      // color: Color(0xff03A062),
-                                      child: Text(
-                                        contributors["Name"][index],
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.white),
-                                      ),
-                                    )
-                                  ],
+                  child: Stack(
+            children: [
+
+
+              Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                FloatingActionButton(
+                                  elevation: 0,
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.transparent,
+                                  onPressed: () {
+                                    
+                                    _scaffoldKey.currentState.openDrawer();
+                                  },
+                                  child: Icon(Icons.menu),
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Flexible(
-                                      child: IconButton(
-                                        icon: Icon(
-                                          facebook,
-                                        ),
-                                        disabledColor: Colors.black,
-                                        color: Colors.blueAccent,
-                                        onPressed: () {
-                                          _launchURL(
-                                              contributors["ProfilesFacebook"]
-                                                  [index]);
-                                        },
-                                      ),
+                                Container(
+                                  padding:
+                                      EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
+                                  child: Text(
+                                    "Contributors",
+                                    style: GoogleFonts.josefinSans(
+                                      fontSize: 35,
+                                      color: Colors.white,
                                     ),
-                                    IconButton(
-                                      icon: Icon(
-                                        linkedin,
-                                        color: Colors.blue,
-                                      ),
-                                      onPressed: () {
-                                        _launchURL(
-                                            contributors["ProfilesLinkedin"]
-                                                [index]);
-                                      },
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    IconButton(
-                                      icon: Icon(
-                                        github_circled,
-                                        color:
-                                            Color.fromRGBO(201, 81, 12, 1.0),
-                                      ),
-                                      onPressed: () {
-                                        _launchURL(
-                                            contributors["ProfilesGithub"]
-                                                [index]);
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.call),
-                                      color: Colors.green,
-                                      onPressed: () {
-                                        launch("tel:" +
-                                            contributors["Contact"][index]);
-                                      },
-                                    ),
-                                  ],
+                              ],
+                            ),
+                            Expanded(
+                                                          child: Container(
+                                
+                                padding: EdgeInsets.all(10),
+                                child: GridView.builder(
+                                  gridDelegate:
+                                      SliverGridDelegateWithMaxCrossAxisExtent(
+                                          maxCrossAxisExtent: 200,
+                                          childAspectRatio: 6 / 10,
+                                          crossAxisSpacing: 10,
+                                          mainAxisSpacing: 10),
+                                  itemCount: 10,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            border: Border.all(
+                                                width: 2,
+                                                color: Color(0xff03A062))),
+                                        //margin: new EdgeInsets.symmetric(horizontal: 10.0),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Stack(
+                                                children: [
+                                                  Container(
+                                                      height: 150.0,
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(10),
+                                                            topRight:
+                                                                Radius.circular(10),
+                                                          ),
+                                                          child: Image.asset(
+                                                              contributors["Image"]
+                                                                  [index],
+                                                              height:
+                                                                  double.infinity,
+                                                              width:
+                                                                  double.infinity,
+                                                              fit: BoxFit.cover))),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0xff03A062),
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight:
+                                                                  Radius.circular(
+                                                                      10),
+                                                              bottomRight:
+                                                                  Radius.circular(
+                                                                      10)),
+                                                    ),
+                                                    padding: EdgeInsets.all(5),
+                                                    margin:
+                                                        EdgeInsets.only(top: 110),
+                                                    // color: Color(0xff03A062),
+                                                    child: Text(
+                                                      contributors["Name"][index],
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.white),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Flexible(
+                                                    child: IconButton(
+                                                      icon: Icon(
+                                                        facebook,
+                                                      ),
+                                                      disabledColor: Colors.black,
+                                                      color: Colors.blueAccent,
+                                                      onPressed: () {
+                                                        _launchURL(contributors[
+                                                                "ProfilesFacebook"]
+                                                            [index]);
+                                                      },
+                                                    ),
+                                                  ),
+                                                  IconButton(
+                                                    icon: Icon(
+                                                      linkedin,
+                                                      color: Colors.blue,
+                                                    ),
+                                                    onPressed: () {
+                                                      _launchURL(contributors[
+                                                              "ProfilesLinkedin"]
+                                                          [index]);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  IconButton(
+                                                    icon: Icon(
+                                                      github_circled,
+                                                      color: Color.fromRGBO(
+                                                          201, 81, 12, 1.0),
+                                                    ),
+                                                    onPressed: () {
+                                                      _launchURL(contributors[
+                                                          "ProfilesGithub"][index]);
+                                                    },
+                                                  ),
+                                                  IconButton(
+                                                    icon: Icon(Icons.call),
+                                                    color: Colors.green,
+                                                    onPressed: () {
+                                                      launch("tel:" +
+                                                          contributors["Contact"]
+                                                              [index]);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ]));
+                                  },
                                 ),
-                              ]));
-                    },
-                  ),
-                ),
-              ),
+                              ),
+                            ),
+                          ],
+                        ),
+             
+             
             ],
           ),
         ),

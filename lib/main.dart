@@ -29,9 +29,9 @@ void main() async {
   // debugPaintBaselinesEnabled = true;
   // debugPaintPointersEnabled = true;
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarIconBrightness: Brightness.dark));
+      statusBarColor: Color(0xff121212),
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light));
 
   WidgetsFlutterBinding.ensureInitialized();
   // Util flameUtil = Util();

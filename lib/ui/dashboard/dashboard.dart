@@ -52,6 +52,9 @@ EventResponse res;
 List<EventItem> events;
 List<EventItem> showEvents;
 
+Color background = const Color(0xff121212); 
+Color cardColor = const Color(0xff343536);
+
 List<String> tags = <String>[
   'Logic',
   'Strategy',
@@ -128,9 +131,11 @@ class _DashboardState extends State<Dashboard> {
     controller = PageController();
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarIconBrightness: Brightness.dark));
+        statusBarColor: background,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: background, 
+    ));
     getUser();
 
     KeyboardVisibilityNotification().addNewListener(
@@ -171,7 +176,7 @@ class _DashboardState extends State<Dashboard> {
             Column(
               children: <Widget>[
                 Container(
-                  color: Colors.black,
+                  color: background,
                   height: 60,
                   width: MediaQuery.of(context).size.width,
                   child: Stack(
@@ -216,7 +221,7 @@ class _DashboardState extends State<Dashboard> {
                                       },
                                       controller: textFieldController,
                                       focusNode: myFocusNode,
-                                      style: TextStyle(color: Colors.black),
+                                      style: TextStyle(color: background),
                                       decoration: InputDecoration(
                                         fillColor: Colors.white, filled: true,
 
@@ -260,7 +265,7 @@ class _DashboardState extends State<Dashboard> {
                             ? 0
                             : MediaQuery.of(context).size.width,
                         //width: 50,
-                        color: Colors.black,
+                        color: background,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -291,7 +296,7 @@ class _DashboardState extends State<Dashboard> {
                                 child: Container(
                                   alignment: Alignment.centerLeft,
                                   height: 60,
-                                  color: Colors.black,
+                                  color: background,
                                   child: DecodingTextEffect(
                                     "Aarahon",
                                     decodeEffect: DecodeEffect.fromStart,
@@ -335,7 +340,7 @@ class _DashboardState extends State<Dashboard> {
                   child: Container(
                     //width: MediaQuery.of(context).size.width,
                     //height: MediaQuery.of(context).size.height-130,
-                    decoration: BoxDecoration(color: Colors.black),
+                    decoration: BoxDecoration(color:background),
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -385,7 +390,7 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                                 Container(
                                   alignment: Alignment.centerLeft,
-                                  color: Colors.black,
+                                  color:background,
                                   child: DecodingTextEffect(
                                     "Category",
                                     decodeEffect: DecodeEffect.fromStart,
@@ -431,9 +436,9 @@ class _DashboardState extends State<Dashboard> {
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          color: Colors.black,
+                          color: background,
                           child: DecodingTextEffect(
-                            "Events",
+                            "Filtered list",
                             decodeEffect: DecodeEffect.fromStart,
                             textStyle:
                                 TextStyle(color: Colors.white, fontSize: 20),
@@ -638,11 +643,11 @@ class DateTile extends StatelessWidget {
         decoration: BoxDecoration(
             color: isSelected
                 ? Color(0xff03bc72)
-                : Colors.black, //Color(0xff29404E),
-            border: Border.all(
+                : cardColor, //Color(0xff29404E),
+            /*border: Border.all(
               color: Color(0xff03bc72),
               width: 2,
-            ),
+            ),*/
             borderRadius: BorderRadius.circular(10),
             boxShadow: (isSelected && _showDate)
                 ? [
@@ -817,17 +822,18 @@ class EventTile extends StatelessWidget {
       fit: BoxFit.scaleDown,
       child: Container(
         height: 60,
+        width: 170,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 20),
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: isSelected
                 ? Color(0xff03bc72)
-                : Colors.black, //Color(0xff29404E),
-            border: Border.all(
+                : cardColor, //Color(0xff29404E),
+           /* border: Border.all(
               color: Color(0xff03bc72),
               width: 2,
-            ),
+            ),*/
             borderRadius: BorderRadius.circular(10),
             boxShadow: (isSelected && _showDate)
                 ? [
@@ -846,7 +852,7 @@ class EventTile extends StatelessWidget {
         //child: FittedBox(
         //fit: BoxFit.scaleDown,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset(
               imgAssetPath,
@@ -882,11 +888,14 @@ class PopularEventTile extends StatelessWidget {
       height: 100,
       margin: EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
+        //#303236
+        color: cardColor,
 
           // borderRadius: BorderRadius.only(
           //  topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
           borderRadius: BorderRadius.all(Radius.circular(8)),
-          border: Border.all(color: Color(0xff03A062), width: 2)),
+          //border: Border.all(color: Color(0xff03A062), width: 2)
+          ),
       child: Row(
         children: <Widget>[
           Expanded(

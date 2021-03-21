@@ -42,7 +42,7 @@ class _SponsorsState extends State<Sponsors> {
         iconTheme: IconThemeData(
           color: Color(0xFF6B872B),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         title: Text(
           "Sponsors",
           style:
