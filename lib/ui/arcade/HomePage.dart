@@ -144,7 +144,7 @@ class _PacmanState extends State<Pacman> {
       advancedPlayer = new AudioPlayer();
       audioInGame = new AudioCache(fixedPlayer: advancedPlayer);
       audioPaused = new AudioCache(fixedPlayer: advancedPlayer2);
-      audioInGame.loop('pacman_beginning.wav');
+      //audioInGame.loop('pacman_beginning.wav');
       preGame = false;
       getFood();
 
