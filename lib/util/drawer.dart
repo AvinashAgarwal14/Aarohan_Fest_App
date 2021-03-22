@@ -117,6 +117,22 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     Navigator.of(context).pushNamed("/ui/eurekoin");
                   },
                 ),
+
+                ListTile(
+                  leading: Icon(
+                    Icons.monetization_on,
+                  ),
+                  title: Text(
+                    "Eurekoin leaderboard",
+                  ),
+                  onTap: () {
+                    // Navigator.popUntil(
+                    //     context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.of(context).pushNamed("/eurekoin/leader_board");
+                  },
+                ),
+
+                
                 // ListTile(
                 //   leading: Icon(
                 //     Icons.casino,

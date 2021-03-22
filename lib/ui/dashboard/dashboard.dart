@@ -729,28 +729,24 @@ class _DashboardState extends State<Dashboard> {
                                                                 .size
                                                                 .width *
                                                             0.28,
-                                                    child: Hero(
-                                                      tag: showEvents[index]
-                                                          .title,
-                                                      child: CachedNetworkImage(
-                                                        height: 100,
-                                                        width: 120,
-                                                        fit: BoxFit.cover,
-                                                        errorWidget: (context,
-                                                            url, error) {
-                                                          print(
-                                                              "Could not load content");
-                                                          return Image.asset(
-                                                              "images/imageplaceholder.png");
-                                                        },
-                                                        placeholder: (context,
-                                                                url) =>
-                                                            Image.asset(
-                                                                "images/imageplaceholder.png"),
-                                                        imageUrl:
-                                                            showEvents[index]
-                                                                .imageUrl,
-                                                      ),
+                                                    child: CachedNetworkImage(
+                                                      height: 100,
+                                                      width: 120,
+                                                      fit: BoxFit.cover,
+                                                      errorWidget: (context,
+                                                          url, error) {
+                                                        print(
+                                                            "Could not load content");
+                                                        return Image.asset(
+                                                            "images/imageplaceholder.png");
+                                                      },
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          Image.asset(
+                                                              "images/imageplaceholder.png"),
+                                                      imageUrl:
+                                                          showEvents[index]
+                                                              .imageUrl,
                                                     ),
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -807,7 +803,7 @@ class _DashboardState extends State<Dashboard> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: <Widget>[
-                                                        Text(
+                                                       Text(
                                                           showEvents[index]
                                                               .title,
                                                           style: TextStyle(

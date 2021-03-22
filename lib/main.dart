@@ -2,6 +2,7 @@
 // import 'package:arhn_app_2021/ui/arcade/game_controller.dart';
 import 'package:arhn_app_2021/ui/arcade/HomePage.dart';
 import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
+import 'package:arhn_app_2021/ui/eurekoin/eurekoin_leaderboard.dart';
 // import 'package:flame/util.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class Aavishkar_App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xff03A062),
       ),
-      initialRoute: "/ui/dashboard",
+      initialRoute: "/splash",
       routes: <String, WidgetBuilder>{
         "/intro": (BuildContext context) => IntroScreen(),
         "/splash": (BuildContext context) => SplashScreen(),
@@ -102,6 +103,7 @@ class Aavishkar_App extends StatelessWidget {
         "/ui/about_us/about_us": (BuildContext context) => AboutUsPage(),
         "/interficio/interficio.dart": (BuildContext context) => MyApp(),
         "/ui/arcade_game": (BuildContext context) => Pacman(),
+        "/eurekoin/leader_board": (BuildContext context) => EurekoinLeaderBoard(),
       },
     );
   }

@@ -195,13 +195,16 @@ class _ContributorsState extends State<Contributors> {
                         ),
                         Container(
                           padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
-                          child: DecodingTextEffect(
-                            "Contributors",
-                            decodeEffect: DecodeEffect.fromStart,
-                            textStyle: GoogleFonts.josefinSans(
-                                fontSize: 35,
-                                color: Colors.white //(0xFF6B872B),
-                                ),
+                          child: FittedBox(
+                            fit: BoxFit.fill,
+                            child: DecodingTextEffect(
+                              "Contributors",
+                              decodeEffect: DecodeEffect.fromStart,
+                              textStyle: GoogleFonts.josefinSans(
+                                  fontSize: 30,
+                                  color: Colors.white //(0xFF6B872B),
+                                  ),
+                            ),
                           ),
                         ),
                       ],
