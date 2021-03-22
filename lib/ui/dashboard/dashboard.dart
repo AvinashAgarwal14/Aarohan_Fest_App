@@ -196,79 +196,210 @@ class _DashboardState extends State<Dashboard> {
                     height: 60.0,
                     child: Stack(
                       children: [
-                        AnimatedContainer(
-                          alignment: Alignment.centerRight,
+                        AnimatedOpacity(
                           duration: Duration(milliseconds: 400),
-                          height: 60,
-                          width: !_showSearchBox
-                              ? 0
-                              : MediaQuery.of(context).size.width,
-                          child: Align(
+                          opacity: !_showSearchBox ? 0 : 1,
+                          child: AnimatedContainer(
                             alignment: Alignment.centerRight,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  fit: FlexFit.tight,
-                                  flex: 5,
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                                    child: Focus(
-                                      onFocusChange: (Focus) {
-                                        setState(() {
-                                          _showBottomSlide = !Focus;
-                                        });
-                                      },
-                                      child: TextField(
-                                        onChanged: (String value) async {
+                            duration: Duration(milliseconds: 400),
+                            height: 60,
+                            width: !_showSearchBox
+                                ? 0
+                                : MediaQuery.of(context).size.width,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    flex: 5,
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 10, 0, 0),
+                                      child: Focus(
+                                        onFocusChange: (Focus) {
                                           setState(() {
-                                            showEvents = events
-                                                .where((event) =>
-                                                    event != null &&
-                                                    event.title
-                                                        .toString()
-                                                        .toLowerCase()
-                                                        .contains(value
-                                                            .toLowerCase()))
-                                                .toList();
+                                            _showBottomSlide = !Focus;
                                           });
                                         },
-                                        controller: textFieldController,
-                                        focusNode: myFocusNode,
-                                        style: TextStyle(color: background),
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white, filled: true,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color.fromRGBO(
+                                                    112, 113, 119, 0.25),
+                                                offset: Offset(-1, -1),
+                                                blurRadius: 8,
+                                              ),
+                                              BoxShadow(
+                                                color: Color.fromRGBO(
+                                                    13, 13, 15, 0.3),
+                                                offset: Offset(2, 2),
+                                                blurRadius: 12,
+                                              ),
+                                            ],
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            color: Color(0xFF2C3035),
+                                          ),
+                                          /*margin: EdgeInsets.only(
+                                              left: 24,
+                                              right: 24,
+                                              top: 10,
+                                              bottom: 10),*/
+                                          child: Neumorphic(
+                                            style: NeumorphicStyle(
+                                              shape: NeumorphicShape.flat,
+                                              boxShape:
+                                                  NeumorphicBoxShape.roundRect(
+                                                BorderRadius.circular(4),
+                                              ),
+                                              depth: -1,
+                                              lightSource: LightSource.topLeft,
+                                              color: Color(0xFF2C3035),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(3),
+                                              child: TextField(
+                                                onChanged:
+                                                    (String value) async {
+                                                  setState(() {
+                                                    showEvents = events
+                                                        .where((event) =>
+                                                            event != null &&
+                                                            event.title
+                                                                .toString()
+                                                                .toLowerCase()
+                                                                .contains(value
+                                                                    .toLowerCase()))
+                                                        .toList();
+                                                  });
+                                                },
+                                                controller: textFieldController,
+                                                focusNode: myFocusNode,
+                                                //  style: TextStyle(color: background),
+                                                decoration: InputDecoration(
+                                                  // fillColor: Color(0xFF13171a),
+                                                  filled: true,
+                                                  focusColor: Color(0xff03A062),
+                                                  prefixIcon:
+                                                      Icon(Icons.search),
 
-                                          focusColor: Color(0xff03A062),
-                                          prefixIcon: Icon(Icons.search),
-                                          border: OutlineInputBorder(),
-                                          //labelText: "Search Events"
+                                                  // border: OutlineInputBorder(),
+                                                  //labelText: "Search Events"
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
+
+                                        /* TextField(
+                                          onChanged: (String value) async {
+                                            setState(() {
+                                              showEvents = events
+                                                  .where((event) =>
+                                                      event != null &&
+                                                      event.title
+                                                          .toString()
+                                                          .toLowerCase()
+                                                          .contains(value
+                                                              .toLowerCase()))
+                                                  .toList();
+                                            });
+                                          },
+                                          controller: textFieldController,
+                                          focusNode: myFocusNode,
+                                          style: TextStyle(color: background),
+                                          decoration: InputDecoration(
+                                            fillColor: Colors.white, filled: true,
+
+                                            focusColor: Color(0xff03A062),
+                                            prefixIcon: Icon(Icons.search),
+                                            border: OutlineInputBorder(),
+                                            //labelText: "Search Events"
+                                          ),
+                                        ),*/
                                       ),
                                     ),
                                   ),
-                                ),
-                                Flexible(
-                                  fit: FlexFit.tight,
-                                  flex: 1,
-                                  child: FloatingActionButton(
-                                    elevation: 0,
-                                    foregroundColor:
-                                        Colors.white, //(0xFF6B872B),
-                                    backgroundColor: Colors.transparent,
-                                    onPressed: () {
-                                      setState(() {
-                                        _showSearchBox = !_showSearchBox;
-                                        myFocusNode.unfocus();
-                                        showEvents = res.events;
-                                        textFieldController.clear();
-                                      });
-                                    },
-                                    child: Icon(Icons.cancel),
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 10, top: 10, right: 10),
+                                      child: NeumorphicButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _showSearchBox = !_showSearchBox;
+                                            myFocusNode.unfocus();
+                                            showEvents = res.events;
+                                            textFieldController.clear();
+                                          });
+                                        },
+                                        padding: EdgeInsets.all(0),
+                                        style: NeumorphicStyle(
+                                          shape: NeumorphicShape.concave,
+                                          boxShape: NeumorphicBoxShape.circle(),
+                                          depth: 7.5,
+                                          intensity: 1.0,
+                                          lightSource: LightSource.topLeft,
+                                          shadowLightColor:
+                                              Colors.grey[700].withOpacity(0.6),
+                                          shadowDarkColor: Colors.black,
+                                        ),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Color(0xFF63d471)
+                                                  .withOpacity(0.5),
+                                              width: 1.5,
+                                              style: BorderStyle.solid,
+                                            ),
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                              colors: [
+                                                Color(0xFF396b4b),
+                                                Color(0xFF78e08f),
+                                              ],
+                                            ),
+                                          ),
+                                          height: 50.0,
+                                          width: 50.0,
+                                          child: Center(
+                                            child: Icon(
+                                              Icons.cancel,
+                                              color: Colors.white,
+                                              // size: 25,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                    // FloatingActionButton(
+                                    //   elevation: 0,
+                                    //   foregroundColor:
+                                    //       Colors.white, //(0xFF6B872B),
+                                    //   backgroundColor: Colors.transparent,
+                                    //   onPressed: () {
+                                    //     setState(() {
+                                    //       _showSearchBox = !_showSearchBox;
+                                    //       myFocusNode.unfocus();
+                                    //       showEvents = res.events;
+                                    //       textFieldController.clear();
+                                    //     });
+                                    //   },
+                                    //   child: Icon(Icons.cancel),
+                                    // ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -337,11 +468,9 @@ class _DashboardState extends State<Dashboard> {
                                   ),
                                 ),
                               ), //Flexible
-                              SizedBox(
-                                width: 20,
-                              ), //SizedBox
+                             //SizedBox
                               Flexible(
-                                flex: 2,
+                                flex: 4,
                                 fit: FlexFit.tight,
                                 child: FittedBox(
                                   fit: BoxFit.scaleDown,
@@ -360,10 +489,10 @@ class _DashboardState extends State<Dashboard> {
                                   ),
                                 ),
                               ),
-                              Flexible(
-                                  flex: 2,
-                                  fit: FlexFit.tight,
-                                  child: SizedBox()),
+                              // Flexible(
+                              //     flex: 2,
+                              //     fit: FlexFit.tight,
+                              //     child: SizedBox()),
                               Flexible(
                                 flex: 1,
                                 fit: FlexFit.tight,
@@ -1024,71 +1153,87 @@ class _BottomSlideState extends State<BottomSlide> {
     ];
 
     return SlidingUpPanel(
-      color: Colors.black,
+      // color: Colors.black,
       minHeight: 200.0,
-      maxHeight: MediaQuery.of(context).size.height * 0.85,
-      panel: Column(
-        children: <Widget>[
-          SizedBox(height: 5.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: 35,
-                height: 8,
-                decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.all(Radius.circular(12.0))),
-              )
+      maxHeight: MediaQuery.of(context).size.height * 0.80,
+      panel: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: [
+              Color(0xFF13171a),
+              Color(0xFF32393f),
+            ],
+            stops: [
+              0.1,
+              0.35,
             ],
           ),
-          SizedBox(height: 13.0),
-          Padding(
-            padding: EdgeInsets.only(top: 10.0),
-          ),
-          Divider(
-            color: Theme.of(context).brightness == Brightness.light
-                ? Colors.grey
-                : Color(0xFF505194),
-          ),
-          Container(
-            child: new Column(
-              mainAxisSize: MainAxisSize.min,
-              children: cardChildren,
+        ),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 5.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: 35,
+                  height: 8,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                )
+              ],
             ),
-          ),
-          SizedBox(height: 13.0),
-          Container(
-            child: Expanded(
-              child: events != null
-                  ? ListView.builder(
-                      controller: _scontroller,
-                      itemCount: bottomSlideList.length,
-                      itemBuilder: (context, index) {
-                        return bottomSlideList[index] != null
-                            ? GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (_) {
-                                    return EventDetails(
-                                        item: bottomSlideList[index]);
-                                  }));
-                                },
-                                child: PopularEventTile(
-                                  desc: bottomSlideList[index].title,
-                                  imgeAssetPath:
-                                      bottomSlideList[index].imageUrl,
-                                  date: bottomSlideList[index].date,
-                                  address: bottomSlideList[index].location,
-                                ),
-                              )
-                            : SizedBox();
-                      },
-                    )
-                  : SizedBox(),
+            SizedBox(height: 13.0),
+            Padding(
+              padding: EdgeInsets.only(top: 10.0),
             ),
-          ),
-        ],
+            Divider(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey
+                  : Color(0xFF505194),
+            ),
+            Container(
+              child: new Column(
+                mainAxisSize: MainAxisSize.min,
+                children: cardChildren,
+              ),
+            ),
+            SizedBox(height: 13.0),
+            Container(
+              child: Expanded(
+                child: events != null
+                    ? ListView.builder(
+                        controller: _scontroller,
+                        itemCount: bottomSlideList.length,
+                        itemBuilder: (context, index) {
+                          return bottomSlideList[index] != null
+                              ? GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (_) {
+                                      return EventDetails(
+                                          item: bottomSlideList[index]);
+                                    }));
+                                  },
+                                  child: PopularEventTile(
+                                    desc: bottomSlideList[index].title,
+                                    imgeAssetPath:
+                                        bottomSlideList[index].imageUrl,
+                                    date: bottomSlideList[index].date,
+                                    address: bottomSlideList[index].location,
+                                  ),
+                                )
+                              : SizedBox();
+                        },
+                      )
+                    : SizedBox(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
