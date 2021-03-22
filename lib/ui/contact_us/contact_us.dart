@@ -1,3 +1,5 @@
+import 'package:decoding_text_effect/decoding_text_effect.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../util/drawer.dart';
@@ -241,551 +243,674 @@ class _ContactUsState extends State<ContactUs> {
 
       // appBar: AppBar(backgroundColor: Colors.transparent,),
       body: SafeArea(
-        child: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    color: Colors.black,
-                    padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
-                    child: Text(
-                      "Contact Us",
-                      style: GoogleFonts.josefinSans(
-                        fontSize: 30,
-                        color: Colors.white//(0xFF6B872B),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [
+                Color(0xFF13171a),
+                Color(0xFF32393f),
+              ],
+              stops: [
+                0.1,
+                0.35,
+              ],
+            ),
+          ),
+          width: MediaQuery.of(context).size.width,
+          child: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        NeumorphicButton(
+                          margin: EdgeInsets.only(top: 5.0, left: 10.0),
+                          onPressed: () {
+                            _scaffoldKey.currentState.openDrawer();
+                          },
+                          padding: EdgeInsets.all(0),
+                          style: NeumorphicStyle(
+                            shape: NeumorphicShape.concave,
+                            boxShape: NeumorphicBoxShape.circle(),
+                            depth: 7.5,
+                            intensity: 1.0,
+                            lightSource: LightSource.topLeft,
+                            shadowLightColor: Colors.grey[700].withOpacity(0.6),
+                            shadowDarkColor: Colors.black,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Color(0xFF63d471).withOpacity(0.5),
+                                width: 1.5,
+                                style: BorderStyle.solid,
+                              ),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xFF396b4b),
+                                  Color(0xFF78e08f),
+                                ],
+                              ),
+                            ),
+                            height: 50.0,
+                            width: 50.0,
+                            child: Center(
+                              child: Icon(
+                                Icons.menu,
+                                color: Colors.white,
+                                // size: 25,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            // color: Colors.black,
+                            // padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
+                            child: Center(
+                              child: DecodingTextEffect(
+                                "Contact Us",
+                                decodeEffect: DecodeEffect.fromStart,
+                                textStyle: GoogleFonts.josefinSans(
+                                    fontSize: 30,
+                                    color: Colors.white //(0xFF6B872B),
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      // color: Colors.black,
+                      // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              "Overall Coordinator",
+                              style: TextStyle(
+                                fontSize: 21.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                // shadows: [
+                                //   BoxShadow(
+                                //       color: Colors.grey[800],
+                                //       offset: Offset(2.0, 2.0),
+                                //       blurRadius: 10.0,
+                                //       spreadRadius: 1.0),
+                                //   BoxShadow(
+                                //       color: Colors.white,
+                                //       offset: Offset(-2.0, -2.0),
+                                //       blurRadius: 10.0,
+                                //       spreadRadius: 1.0),
+                                // ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            // color: Colors.black,
+                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                            height: 305.0,
+                            // width: MediaQuery.of(context).size.width-10.0,
+                            child: ListView.builder(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 30),
+                              cacheExtent: 1350.0,
+                              itemCount: 4,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Neumorphic(
+                                  margin: new EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  style: NeumorphicStyle(
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(12.0),
+                                    ),
+                                    depth: 10.0,
+                                    intensity: 1.0,
+                                    lightSource: LightSource.topLeft,
+                                    shadowLightColor:
+                                        Colors.grey[700].withOpacity(0.6),
+                                    shadowDarkColor: Colors.black,
+                                  ),
+                                  child: Container(
+                                    height: 100.0,
+                                    width: 150.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF292D32),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                      border: Border.all(
+                                        style: BorderStyle.solid,
+                                        width: 1.5,
+                                        color:
+                                            Colors.grey[700].withOpacity(0.3),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                            height: 150.0,
+                                            child: ClipRRect(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
+                                                ),
+                                                child: Image.asset(
+                                                    contactCard["IOC"][index],
+                                                    height: double.infinity,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover))),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 8),
+                                          child: Column(children: <Widget>[
+                                            Text(
+                                              contactCard["OverallCoordinator"]
+                                                  [index],
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white),
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: IconButton(
+                                                    padding:
+                                                        EdgeInsets.all(0.0),
+                                                    iconSize: 15.0,
+                                                    icon: Icon(Icons.call,
+                                                        color: Colors.white),
+                                                    onPressed: () {
+                                                      launch("tel:" +
+                                                          contactCard["POC"]
+                                                              [index]);
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: IconButton(
+                                                    //padding: EdgeInsets.all(0.0),
+                                                    iconSize: 15.0,
+                                                    icon: Icon(facebook,
+                                                        color: Colors.white),
+                                                    disabledColor: Colors.black,
+                                                    color: Colors.blueAccent,
+                                                    onPressed: () {
+                                                      _launchURL(
+                                                          contactCard["FOC"]
+                                                              [index]);
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ]),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    color: Colors.black,
-                    // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            "Overall Coordinator",
-                            style: TextStyle(
-                              fontSize: 21.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              // shadows: [
-                              //   BoxShadow(
-                              //       color: Colors.grey[800],
-                              //       offset: Offset(2.0, 2.0),
-                              //       blurRadius: 10.0,
-                              //       spreadRadius: 1.0),
-                              //   BoxShadow(
-                              //       color: Colors.white,
-                              //       offset: Offset(-2.0, -2.0),
-                              //       blurRadius: 10.0,
-                              //       spreadRadius: 1.0),
-                              // ],
+                    Container(
+                      // color: Colors.black,
+                      // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              "General Secretary",
+                              style: TextStyle(
+                                fontSize: 21.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                // shadows: [
+                                //   BoxShadow(
+                                //       color: Colors.grey[800],
+                                //       offset: Offset(2.0, 2.0),
+                                //       blurRadius: 10.0,
+                                //       spreadRadius: 1.0),
+                                //   BoxShadow(
+                                //       color: Colors.white,
+                                //       offset: Offset(-2.0, -2.0),
+                                //       blurRadius: 10.0,
+                                //       spreadRadius: 1.0),
+                                // ],
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          color: Colors.black,
-                          padding: EdgeInsets.symmetric(vertical: 5.0),
-                          height: 305.0,
-                          // width: MediaQuery.of(context).size.width-10.0,
-                          child: ListView.builder(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 30),
-                            cacheExtent: 1350.0,
-                            itemCount: 4,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                height: 100.0,
-                                width: 150.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  border: Border.all(
-                                    width:borderWid,
-                                    color: borderColor
-                                  )
-                                ),
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                        height: 150.0,
-                                        child: ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10),
-                                            ),
-                                            child: Image.asset(
-                                                contactCard["IOC"][index],
-                                                height: double.infinity,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover))),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 8),
-                                      child: Column(children: <Widget>[
-                                        Text(
-                                          contactCard["OverallCoordinator"]
-                                              [index],
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.white
-                                              ),
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: IconButton(
-                                                padding: EdgeInsets.all(0.0),
-                                                iconSize: 15.0,
-                                                icon: Icon(Icons.call,
-                                                    color: Colors.white),
-                                                onPressed: () {
-                                                  launch("tel:" +
-                                                      contactCard["POC"]
-                                                          [index]);
-                                                },
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: IconButton(
-                                                //padding: EdgeInsets.all(0.0),
-                                                iconSize: 15.0,
-                                                icon: Icon(facebook,
-                                                    color: Colors.white),
-                                                disabledColor: Colors.black,
-                                                color: Colors.blueAccent,
-                                                onPressed: () {
-                                                  _launchURL(contactCard["FOC"]
-                                                      [index]);
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ]),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            "General Secretary",
-                            style: TextStyle(
-                              fontSize: 21.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              // shadows: [
-                              //   BoxShadow(
-                              //       color: Colors.grey[800],
-                              //       offset: Offset(2.0, 2.0),
-                              //       blurRadius: 10.0,
-                              //       spreadRadius: 1.0),
-                              //   BoxShadow(
-                              //       color: Colors.white,
-                              //       offset: Offset(-2.0, -2.0),
-                              //       blurRadius: 10.0,
-                              //       spreadRadius: 1.0),
-                              // ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          color: Colors.black,
-                          padding: EdgeInsets.symmetric(vertical: 5.0),
-                          height: 305.0,
-                          // width: MediaQuery.of(context).size.width-10.0,
-                          child: ListView.builder(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 30),
-                            cacheExtent: 1350.0,
-                            itemCount: 4,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                height: 100.0,
-                                width: 150.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  border: Border.all(
-                                    color:borderColor,
-                                    width: borderWid
-                                  )
-                                ),
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                        height: 150.0,
-                                        child: ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10),
-                                            ),
-                                            child: Image.asset(
-                                                contactCard["IGS"][index],
-                                                height: double.infinity,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover))),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 8),
-                                      child: Column(children: <Widget>[
-                                        Text(
-                                          contactCard["GeneralSecretary"]
-                                              [index],
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.white
-                                              ),
-                                              
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: IconButton(
-                                                padding: EdgeInsets.all(0.0),
-                                                iconSize: 15.0,
-                                                icon: Icon(Icons.call,
-                                                    color: Colors.white),
-                                                onPressed: () {
-                                                  launch("tel:" +
-                                                      contactCard["PGS"]
-                                                          [index]);
-                                                },
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: IconButton(
-                                                //padding: EdgeInsets.all(0.0),
-                                                iconSize: 15.0,
-                                                icon: Icon(facebook,
-                                                    color: Colors.white),
-                                                disabledColor: Colors.black,
-                                                color: Colors.blueAccent,
-                                                onPressed: () {
-                                                  _launchURL(contactCard["FGS"]
-                                                      [index]);
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ]),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            "Treasurer",
-                            style: TextStyle(
-                              fontSize: 21.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              // shadows: [
-                              //   BoxShadow(
-                              //       color: Colors.grey[800],
-                              //       offset: Offset(2.0, 2.0),
-                              //       blurRadius: 10.0,
-                              //       spreadRadius: 1.0),
-                              //   BoxShadow(
-                              //       color: Colors.white,
-                              //       offset: Offset(-2.0, -2.0),
-                              //       blurRadius: 10.0,
-                              //       spreadRadius: 1.0),
-                              // ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          color: Colors.black,
-                          padding: EdgeInsets.symmetric(vertical: 5.0),
-                          height: 305.0,
-                          // width: MediaQuery.of(context).size.width-10.0,
-                          child: ListView.builder(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 30),
-                            cacheExtent: 1350.0,
-                            itemCount: 4,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                height: 100.0,
-                                width: 150.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                      border: Border.all(
-                                        color: borderColor,
-                                        width: borderWid
-                                      )
-                                 
-                                ),
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                        height: 150.0,
-                                        child: ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10),
-                                            ),
-                                            child: Image.asset(
-                                                contactCard["IT"][index],
-                                                height: double.infinity,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover))),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 8),
-                                      child: Column(children: <Widget>[
-                                        Text(
-                                          contactCard["Treasurer"][index],
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.white
-                                              ),
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: IconButton(
-                                                padding: EdgeInsets.all(0.0),
-                                                iconSize: 15.0,
-                                                icon: Icon(Icons.call,
-                                                    color: Colors.white),
-                                                onPressed: () {
-                                                  launch("tel:" +
-                                                      contactCard["PT"][index]);
-                                                },
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: IconButton(
-                                                //padding: EdgeInsets.all(0.0),
-                                                iconSize: 15.0,
-                                                icon: Icon(facebook,
-                                                    color: Colors.white),
-                                                disabledColor: Colors.black,
-                                                color: Colors.blueAccent,
-                                                onPressed: () {
-                                                  _launchURL(
-                                                      contactCard["FT"][index]);
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ]),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            "Corporate Communication",
-                            style: TextStyle(
-                              fontSize: 21.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              // shadows: [
-                              //   BoxShadow(
-                              //       color: Colors.grey[800],
-                              //       offset: Offset(2.0, 2.0),
-                              //       blurRadius: 10.0,
-                              //       spreadRadius: 1.0),
-                              //   BoxShadow(
-                              //       color: Colors.white,
-                              //       offset: Offset(-2.0, -2.0),
-                              //       blurRadius: 10.0,
-                              //       spreadRadius: 1.0),
-                              // ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          color: Colors.black,
-                          padding: EdgeInsets.symmetric(vertical: 5.0),
-                          height: 305.0,
-                          width: MediaQuery.of(context).size.width - 10.0,
-                          child: ListView.builder(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 30),
-                            cacheExtent: 1350.0,
-                            itemCount: 5,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                height: 100.0,
-                                width: 150.0,
-                                decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    border: Border.all(
-                                        width: borderWid, color: borderColor)
-                                    /*boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey[800],
-                                            offset: Offset(3.0, 3.0),
-                                            blurRadius: 7.0,
-                                            spreadRadius: 1.0),
-                                        BoxShadow(
-                                            color: Colors.white,
-                                            offset: Offset(-3.0, -3.0),
-                                            blurRadius: 7.0,
-                                            spreadRadius: 1.0),
-                                      ],*/
+                          Container(
+                            // color: Colors.black,
+                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                            height: 305.0,
+                            // width: MediaQuery.of(context).size.width-10.0,
+                            child: ListView.builder(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 30),
+                              cacheExtent: 1350.0,
+                              itemCount: 4,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Neumorphic(
+                                  margin: new EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  style: NeumorphicStyle(
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(12.0),
                                     ),
-                                margin:
-                                    new EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                        height: 150.0,
-                                        child: ClipRRect(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(10),
+                                    depth: 10.0,
+                                    intensity: 1.0,
+                                    lightSource: LightSource.topLeft,
+                                    shadowLightColor:
+                                        Colors.grey[700].withOpacity(0.6),
+                                    shadowDarkColor: Colors.black,
+                                  ),
+                                  child: Container(
+                                    height: 100.0,
+                                    width: 150.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF292D32),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                      border: Border.all(
+                                        style: BorderStyle.solid,
+                                        width: 1.5,
+                                        color:
+                                            Colors.grey[700].withOpacity(0.3),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                            height: 150.0,
+                                            child: ClipRRect(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
+                                                ),
+                                                child: Image.asset(
+                                                    contactCard["IGS"][index],
+                                                    height: double.infinity,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover))),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 8),
+                                          child: Column(children: <Widget>[
+                                            Text(
+                                              contactCard["GeneralSecretary"]
+                                                  [index],
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white),
                                             ),
-                                            child: Image.asset(
-                                                contactCard["ICC"][index],
-                                                height: double.infinity,
-                                                width: double.infinity,
-                                                fit: BoxFit.cover))),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 8),
-                                      child: Column(children: <Widget>[
-                                        Text(
-                                          contactCard["CorporateCommunication"]
-                                              [index],
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.white),
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: IconButton(
-                                                padding: EdgeInsets.all(0.0),
-                                                iconSize: 15.0,
-                                                icon: Icon(Icons.call,
-                                                    color: Colors.white),
-                                                onPressed: () {
-                                                  launch("tel:" +
-                                                      contactCard["PCC"]
-                                                          [index]);
-                                                },
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: IconButton(
-                                                //padding: EdgeInsets.all(0.0),
-                                                iconSize: 15.0,
-                                                icon: Icon(facebook,
-                                                    color: Colors.white),
-                                                disabledColor: Colors.black,
-                                                color: Colors.blueAccent,
-                                                onPressed: () {
-                                                  _launchURL(contactCard["FCC"]
-                                                      [index]);
-                                                },
-                                              ),
-                                            ),
-                                          ],
+                                            Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: IconButton(
+                                                    padding:
+                                                        EdgeInsets.all(0.0),
+                                                    iconSize: 15.0,
+                                                    icon: Icon(Icons.call,
+                                                        color: Colors.white),
+                                                    onPressed: () {
+                                                      launch("tel:" +
+                                                          contactCard["PGS"]
+                                                              [index]);
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: IconButton(
+                                                    //padding: EdgeInsets.all(0.0),
+                                                    iconSize: 15.0,
+                                                    icon: Icon(facebook,
+                                                        color: Colors.white),
+                                                    disabledColor: Colors.black,
+                                                    color: Colors.blueAccent,
+                                                    onPressed: () {
+                                                      _launchURL(
+                                                          contactCard["FGS"]
+                                                              [index]);
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ]),
                                         )
-                                      ]),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    Container(
+                      // color: Colors.black,
+                      // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              "Treasurer",
+                              style: TextStyle(
+                                fontSize: 21.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                // shadows: [
+                                //   BoxShadow(
+                                //       color: Colors.grey[800],
+                                //       offset: Offset(2.0, 2.0),
+                                //       blurRadius: 10.0,
+                                //       spreadRadius: 1.0),
+                                //   BoxShadow(
+                                //       color: Colors.white,
+                                //       offset: Offset(-2.0, -2.0),
+                                //       blurRadius: 10.0,
+                                //       spreadRadius: 1.0),
+                                // ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            // color: Colors.black,
+                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                            height: 305.0,
+                            // width: MediaQuery.of(context).size.width-10.0,
+                            child: ListView.builder(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 30),
+                              cacheExtent: 1350.0,
+                              itemCount: 4,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Neumorphic(
+                                  margin: new EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  style: NeumorphicStyle(
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(12.0),
+                                    ),
+                                    depth: 10.0,
+                                    intensity: 1.0,
+                                    lightSource: LightSource.topLeft,
+                                    shadowLightColor:
+                                        Colors.grey[700].withOpacity(0.6),
+                                    shadowDarkColor: Colors.black,
+                                  ),
+                                  child: Container(
+                                    height: 100.0,
+                                    width: 150.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF292D32),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                      border: Border.all(
+                                        style: BorderStyle.solid,
+                                        width: 1.5,
+                                        color:
+                                            Colors.grey[700].withOpacity(0.3),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                            height: 150.0,
+                                            child: ClipRRect(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
+                                                ),
+                                                child: Image.asset(
+                                                    contactCard["IT"][index],
+                                                    height: double.infinity,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover))),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 8),
+                                          child: Column(children: <Widget>[
+                                            Text(
+                                              contactCard["Treasurer"][index],
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white),
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: IconButton(
+                                                    padding:
+                                                        EdgeInsets.all(0.0),
+                                                    iconSize: 15.0,
+                                                    icon: Icon(Icons.call,
+                                                        color: Colors.white),
+                                                    onPressed: () {
+                                                      launch("tel:" +
+                                                          contactCard["PT"]
+                                                              [index]);
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: IconButton(
+                                                    //padding: EdgeInsets.all(0.0),
+                                                    iconSize: 15.0,
+                                                    icon: Icon(facebook,
+                                                        color: Colors.white),
+                                                    disabledColor: Colors.black,
+                                                    color: Colors.blueAccent,
+                                                    onPressed: () {
+                                                      _launchURL(
+                                                          contactCard["FT"]
+                                                              [index]);
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ]),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      // color: Colors.black,
+                      // padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              "Corporate Communication",
+                              style: TextStyle(
+                                fontSize: 21.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                // shadows: [
+                                //   BoxShadow(
+                                //       color: Colors.grey[800],
+                                //       offset: Offset(2.0, 2.0),
+                                //       blurRadius: 10.0,
+                                //       spreadRadius: 1.0),
+                                //   BoxShadow(
+                                //       color: Colors.white,
+                                //       offset: Offset(-2.0, -2.0),
+                                //       blurRadius: 10.0,
+                                //       spreadRadius: 1.0),
+                                // ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            // color: Colors.black,
+                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                            height: 305.0,
+                            width: MediaQuery.of(context).size.width - 10.0,
+                            child: ListView.builder(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 30),
+                              cacheExtent: 1350.0,
+                              itemCount: 5,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Neumorphic(
+                                  margin: new EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  style: NeumorphicStyle(
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(12.0),
+                                    ),
+                                    depth: 10.0,
+                                    intensity: 1.0,
+                                    lightSource: LightSource.topLeft,
+                                    shadowLightColor:
+                                        Colors.grey[700].withOpacity(0.6),
+                                    shadowDarkColor: Colors.black,
+                                  ),
+                                  child: Container(
+                                    height: 100.0,
+                                    width: 150.0,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF292D32),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                      border: Border.all(
+                                        style: BorderStyle.solid,
+                                        width: 1.5,
+                                        color:
+                                            Colors.grey[700].withOpacity(0.3),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                            height: 150.0,
+                                            child: ClipRRect(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
+                                                ),
+                                                child: Image.asset(
+                                                    contactCard["ICC"][index],
+                                                    height: double.infinity,
+                                                    width: double.infinity,
+                                                    fit: BoxFit.cover))),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 8),
+                                          child: Column(children: <Widget>[
+                                            Text(
+                                              contactCard[
+                                                      "CorporateCommunication"]
+                                                  [index],
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white),
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: IconButton(
+                                                    padding:
+                                                        EdgeInsets.all(0.0),
+                                                    iconSize: 15.0,
+                                                    icon: Icon(Icons.call,
+                                                        color: Colors.white),
+                                                    onPressed: () {
+                                                      launch("tel:" +
+                                                          contactCard["PCC"]
+                                                              [index]);
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: IconButton(
+                                                    //padding: EdgeInsets.all(0.0),
+                                                    iconSize: 15.0,
+                                                    icon: Icon(facebook,
+                                                        color: Colors.white),
+                                                    disabledColor: Colors.black,
+                                                    color: Colors.blueAccent,
+                                                    onPressed: () {
+                                                      _launchURL(
+                                                          contactCard["FCC"]
+                                                              [index]);
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ]),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            FloatingActionButton(
-              elevation: 0,
-              foregroundColor: Colors.white,//(0xFF6B872B),
-              backgroundColor: Colors.transparent,
-              onPressed: () {
-                _scaffoldKey.currentState.openDrawer();
-              },
-              child: Icon(Icons.menu),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

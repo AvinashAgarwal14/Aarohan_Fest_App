@@ -1,3 +1,4 @@
+import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../model/sponsor.dart';
@@ -40,13 +41,15 @@ class _SponsorsState extends State<Sponsors> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Color(0xFF6B872B),
+          color: Colors.white,
         ),
-        backgroundColor: Colors.black,
-        title: Text(
+        backgroundColor: Color(0xFF32393f),
+        title: DecodingTextEffect(
           "Sponsors",
-          style:
-              GoogleFonts.josefinSans(color: Color(0xFF6B872B), fontSize: 30),
+          decodeEffect: DecodeEffect.fromStart,
+          textStyle: GoogleFonts.josefinSans(
+              fontSize: 30, color: Colors.white //(0xFF6B872B),
+              ),
         ),
       ),
       drawer: NavigationDrawer(),

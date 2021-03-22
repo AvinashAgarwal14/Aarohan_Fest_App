@@ -1,3 +1,5 @@
+import 'package:decoding_text_effect/decoding_text_effect.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../util/drawer.dart';
@@ -18,6 +20,7 @@ IconData linkedin = IconData(0xe801, fontFamily: kFontFam);
 IconData facebook = IconData(0xf052, fontFamily: kFontFam);
 IconData google = IconData(0xf1a0, fontFamily: kFontFam);
 IconData facebook_1 = IconData(0xf300, fontFamily: kFontFam);
+final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 double value = 0;
 
@@ -106,8 +109,6 @@ class _ContributorsState extends State<Contributors> {
         systemNavigationBarIconBrightness: Brightness.dark));
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   Widget separator;
   @override
   Widget build(BuildContext context) {
@@ -121,188 +122,251 @@ class _ContributorsState extends State<Contributors> {
         Navigator.pop(context);
       },
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: NavigationDrawer(),
         backgroundColor: Colors.black,
         body: SafeArea(
-                  child: Stack(
-            children: [
-
-
-              Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                FloatingActionButton(
-                                  elevation: 0,
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: Colors.transparent,
-                                  onPressed: () {
-                                    
-                                    _scaffoldKey.currentState.openDrawer();
-                                  },
-                                  child: Icon(Icons.menu),
-                                ),
-                                Container(
-                                  padding:
-                                      EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
-                                  child: Text(
-                                    "Contributors",
-                                    style: GoogleFonts.josefinSans(
-                                      fontSize: 35,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Expanded(
-                                                          child: Container(
-                                
-                                padding: EdgeInsets.all(10),
-                                child: GridView.builder(
-                                  gridDelegate:
-                                      SliverGridDelegateWithMaxCrossAxisExtent(
-                                          maxCrossAxisExtent: 200,
-                                          childAspectRatio: 6 / 10,
-                                          crossAxisSpacing: 10,
-                                          mainAxisSpacing: 10),
-                                  itemCount: 10,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.black,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            border: Border.all(
-                                                width: 2,
-                                                color: Color(0xff03A062))),
-                                        //margin: new EdgeInsets.symmetric(horizontal: 10.0),
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Stack(
-                                                children: [
-                                                  Container(
-                                                      height: 150.0,
-                                                      child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                            topLeft:
-                                                                Radius.circular(10),
-                                                            topRight:
-                                                                Radius.circular(10),
-                                                          ),
-                                                          child: Image.asset(
-                                                              contributors["Image"]
-                                                                  [index],
-                                                              height:
-                                                                  double.infinity,
-                                                              width:
-                                                                  double.infinity,
-                                                              fit: BoxFit.cover))),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0xff03A062),
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topRight:
-                                                                  Radius.circular(
-                                                                      10),
-                                                              bottomRight:
-                                                                  Radius.circular(
-                                                                      10)),
-                                                    ),
-                                                    padding: EdgeInsets.all(5),
-                                                    margin:
-                                                        EdgeInsets.only(top: 110),
-                                                    // color: Color(0xff03A062),
-                                                    child: Text(
-                                                      contributors["Name"][index],
-                                                      textAlign: TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.white),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Flexible(
-                                                    child: IconButton(
-                                                      icon: Icon(
-                                                        facebook,
-                                                      ),
-                                                      disabledColor: Colors.black,
-                                                      color: Colors.blueAccent,
-                                                      onPressed: () {
-                                                        _launchURL(contributors[
-                                                                "ProfilesFacebook"]
-                                                            [index]);
-                                                      },
-                                                    ),
-                                                  ),
-                                                  IconButton(
-                                                    icon: Icon(
-                                                      linkedin,
-                                                      color: Colors.blue,
-                                                    ),
-                                                    onPressed: () {
-                                                      _launchURL(contributors[
-                                                              "ProfilesLinkedin"]
-                                                          [index]);
-                                                    },
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.spaceEvenly,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  IconButton(
-                                                    icon: Icon(
-                                                      github_circled,
-                                                      color: Color.fromRGBO(
-                                                          201, 81, 12, 1.0),
-                                                    ),
-                                                    onPressed: () {
-                                                      _launchURL(contributors[
-                                                          "ProfilesGithub"][index]);
-                                                    },
-                                                  ),
-                                                  IconButton(
-                                                    icon: Icon(Icons.call),
-                                                    color: Colors.green,
-                                                    onPressed: () {
-                                                      launch("tel:" +
-                                                          contributors["Contact"]
-                                                              [index]);
-                                                    },
-                                                  ),
-                                                ],
-                                              ),
-                                            ]));
-                                  },
-                                ),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                  Color(0xFF13171a),
+                  Color(0xFF32393f),
+                ],
+                stops: [
+                  0.1,
+                  0.35,
+                ],
+              ),
+            ),
+            width: MediaQuery.of(context).size.width,
+            child: Stack(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        NeumorphicButton(
+                          margin: EdgeInsets.only(top: 5.0, left: 10.0),
+                          onPressed: () {
+                            _scaffoldKey.currentState.openDrawer();
+                          },
+                          padding: EdgeInsets.all(0),
+                          style: NeumorphicStyle(
+                            shape: NeumorphicShape.concave,
+                            boxShape: NeumorphicBoxShape.circle(),
+                            depth: 7.5,
+                            intensity: 1.0,
+                            lightSource: LightSource.topLeft,
+                            shadowLightColor: Colors.grey[700].withOpacity(0.6),
+                            shadowDarkColor: Colors.black,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Color(0xFF63d471).withOpacity(0.5),
+                                width: 1.5,
+                                style: BorderStyle.solid,
+                              ),
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xFF396b4b),
+                                  Color(0xFF78e08f),
+                                ],
                               ),
                             ),
-                          ],
+                            height: 50.0,
+                            width: 50.0,
+                            child: Center(
+                              child: Icon(
+                                Icons.menu,
+                                color: Colors.white,
+                                // size: 25,
+                              ),
+                            ),
+                          ),
                         ),
-             
-             
-            ],
+                        Container(
+                          padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
+                          child: DecodingTextEffect(
+                            "Contributors",
+                            decodeEffect: DecodeEffect.fromStart,
+                            textStyle: GoogleFonts.josefinSans(
+                                fontSize: 35,
+                                color: Colors.white //(0xFF6B872B),
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Expanded(
+                      child: Container(
+                        // padding: EdgeInsets.all(10),
+                        child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 200,
+                                  childAspectRatio: 6 / 10,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10),
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return Neumorphic(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 10.0),
+                              style: NeumorphicStyle(
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.circular(12.0),
+                                ),
+                                depth: 10.0,
+                                intensity: 1.0,
+                                lightSource: LightSource.topLeft,
+                                shadowLightColor:
+                                    Colors.grey[700].withOpacity(0.6),
+                                shadowDarkColor: Colors.black,
+                              ),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF292D32),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(12)),
+                                    border: Border.all(
+                                      style: BorderStyle.solid,
+                                      width: 1.5,
+                                      color: Colors.grey[700].withOpacity(0.3),
+                                    ),
+                                  ),
+                                  //margin: new EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.bottomLeft,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(10),
+                                                topRight: Radius.circular(10),
+                                              ),
+                                              image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                  contributors["Image"][index],
+                                                ),
+                                              ),
+                                            ),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Color(0xff03A062),
+                                                borderRadius: BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(10),
+                                                    bottomRight:
+                                                        Radius.circular(10)),
+                                              ),
+                                              padding: EdgeInsets.all(5),
+                                              margin:
+                                                  EdgeInsets.only(bottom: 10),
+                                              child: Text(
+                                                contributors["Name"][index],
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 10.0, horizontal: 10.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Flexible(
+                                                child: IconButton(
+                                                  icon: Icon(
+                                                    facebook,
+                                                  ),
+                                                  disabledColor: Colors.black,
+                                                  color: Colors.blueAccent,
+                                                  onPressed: () {
+                                                    _launchURL(contributors[
+                                                            "ProfilesFacebook"]
+                                                        [index]);
+                                                  },
+                                                ),
+                                              ),
+                                              IconButton(
+                                                icon: Icon(
+                                                  linkedin,
+                                                  color: Colors.blue,
+                                                ),
+                                                onPressed: () {
+                                                  _launchURL(contributors[
+                                                          "ProfilesLinkedin"]
+                                                      [index]);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            IconButton(
+                                              icon: Icon(
+                                                github_circled,
+                                                color: Color.fromRGBO(
+                                                    201, 81, 12, 1.0),
+                                              ),
+                                              onPressed: () {
+                                                _launchURL(contributors[
+                                                    "ProfilesGithub"][index]);
+                                              },
+                                            ),
+                                            IconButton(
+                                              icon: Icon(Icons.call),
+                                              color: Colors.green,
+                                              onPressed: () {
+                                                launch("tel:" +
+                                                    contributors["Contact"]
+                                                        [index]);
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ])),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

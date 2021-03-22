@@ -100,8 +100,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Dashboard",
                   ),
                   onTap: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).pushNamed("/ui/dashboard");
+                    // Navigator.pop(context);
+                    Navigator.of(context).pushReplacementNamed("/ui/dashboard");
                   },
                 ),
                 ListTile(
@@ -112,8 +112,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Eurekoin Wallet",
                   ),
                   onTap: () {
-                    Navigator.popUntil(
-                        context, (ModalRoute.withName('/ui/account/login')));
+                    // Navigator.popUntil(
+                    //     context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context).pushNamed("/ui/eurekoin");
                   },
                 ),
@@ -138,8 +138,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Arcade",
                   ),
                   onTap: (() {
-                    Navigator.popUntil(
-                        context, (ModalRoute.withName('/ui/account/login')));
+                    // Navigator.popUntil(
+                    //     context, (ModalRoute.withName('/ui/account/login')));
                     Navigator.of(context).pushNamed("/ui/arcade_game");
                   }),
                 ),
@@ -151,9 +151,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       "Timeline",
                     ),
                     onTap: () {
-                      Navigator.popUntil(
-                          context, (ModalRoute.withName('/ui/account/login')));
-                      Navigator.of(context).pushNamed("/ui/schedule");
+                      // Navigator.popUntil(
+                      //     context, (ModalRoute.withName('/ui/account/login')));
+                      Navigator.of(context)
+                          .pushReplacementNamed("/ui/schedule");
                     }),
                 ListTile(
                     title: Text("Utilities",
@@ -168,9 +169,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       "Scoreboard",
                     ),
                     onTap: () {
-                      Navigator.popUntil(
-                          context, (ModalRoute.withName('/ui/account/login')));
-                      Navigator.of(context).pushNamed("/ui/scoreboard");
+                      // Navigator.popUntil(
+                      //     context, (ModalRoute.withName('/ui/account/login')));
+                      Navigator.of(context)
+                          .pushReplacementNamed("/ui/scoreboard");
                     }),
                 // ListTile(
                 //     leading: Icon(
@@ -235,9 +237,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     "Sponsors",
                   ),
                   onTap: (() {
-                    Navigator.popUntil(
-                        context, (ModalRoute.withName('/ui/account/login')));
-                    Navigator.of(context).pushNamed("/ui/sponsors/sponsors");
+                    // Navigator.popUntil(
+                    //     context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.of(context)
+                        .pushReplacementNamed("/ui/sponsors/sponsors");
                   }),
                 ),
                 ListTile(
@@ -248,10 +251,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       "Contact Us",
                     ),
                     onTap: () {
-                      Navigator.popUntil(
-                          context, (ModalRoute.withName('/ui/account/login')));
+                      // Navigator.popUntil(
+                      //     context, (ModalRoute.withName('/ui/account/login')));
                       Navigator.of(context)
-                          .pushNamed("/ui/contact_us/contact_us");
+                          .pushReplacementNamed("/ui/contact_us/contact_us");
                     }),
                 ListTile(
                     leading: Icon(
@@ -261,18 +264,19 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       "Contributors",
                     ),
                     onTap: () {
-                      Navigator.popUntil(
-                          context, (ModalRoute.withName('/ui/account/login')));
-                      Navigator.of(context)
-                          .pushNamed("/ui/contributors/contributors");
+                      // Navigator.popUntil(
+                      //     context, (ModalRoute.withName('/ui/account/login')));
+                      Navigator.of(context).pushReplacementNamed(
+                          "/ui/contributors/contributors");
                     }),
                 ListTile(
                   leading: Icon(Icons.info),
                   title: Text("About Aarohan"),
                   onTap: (() {
-                    Navigator.popUntil(
-                        context, (ModalRoute.withName('/ui/account/login')));
-                    Navigator.of(context).pushNamed("/ui/about_us/about_us");
+                    // Navigator.popUntil(
+                    //     context, (ModalRoute.withName('/ui/account/login')));
+                    Navigator.of(context)
+                        .pushReplacementNamed("/ui/about_us/about_us");
                   }),
                 ),
                 ListTile(
@@ -297,7 +301,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       previouslyLoggedIn = true;
       setState(() {
         previouslyLoggedIn = true;
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => LogInPage()),
         );
@@ -311,7 +315,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     setState(() {
       previouslyLoggedIn = true;
 
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => LogInPage()),
       );
