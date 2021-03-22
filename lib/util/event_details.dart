@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../model/event.dart';
@@ -47,107 +48,207 @@ class EventDetailsState extends State<EventDetails> {
     return new Theme(
       data: themeData,
       child: Scaffold(
-        backgroundColor: Colors.black,
-        // key: _scaffoldKeyForSchedule,
-        // drawer: NavigationDrawer(),
         body: SafeArea(
-          child: CustomScrollView(
-            slivers: <Widget>[
-              new SliverAppBar(
-                iconTheme: IconThemeData(
-                  color: Colors.white,
-                ),
-                elevation: 0,
-                backgroundColor: Colors.black,
-                expandedHeight: _appBarHeight,
-                pinned: _appBarBehavior == AppBarBehavior.pinned,
-                floating: _appBarBehavior == AppBarBehavior.floating ||
-                    _appBarBehavior == AppBarBehavior.snapping,
-                snap: _appBarBehavior == AppBarBehavior.snapping,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Text(
-                    widget.item.title,
-                    style: GoogleFonts.josefinSans(
-                      fontSize: 25,
-                      color: themeData.primaryColor,
+            child: Container(
+          padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [
+                Color(0xFF13171a),
+                Color(0xFF32393f),
+              ],
+              stops: [
+                0.1,
+                0.35,
+              ],
+            ),
+          ),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
+            child: Container(
+              child: Neumorphic(
+                  //margin: EdgeInsets.symmetric(horizontal: 10),
+                  style: NeumorphicStyle(
+                    color: Color(0xFF292D32),
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.circular(12.0),
                     ),
+                    depth: 5,
+                    intensity: 1,
+                    lightSource: LightSource.topLeft,
+                    shadowLightColor: Colors.grey[700].withOpacity(0.5),
+                    shadowDarkColor: Colors.black,
                   ),
-                  background: Hero(
-                    tag: widget.item.imageUrl,
-                    child: CachedNetworkImage(
-                      height: _appBarHeight-200,
-                      width: MediaQuery.of(context).size.width,
-                      errorWidget: (context, url, error) {
-                        print("Could not load content");
-                        return Image.asset("images/imageplaceholder.png");
-                      },
-                      placeholder: (context, url) =>
-                          Image.asset("images/imageplaceholder.png"),
-                      imageUrl: widget.item.imageUrl,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ),
-              new SliverList(
-                delegate: new SliverChildListDelegate(
-                  <Widget>[
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Icon(Icons.date_range, color: Colors.white),
-                              Padding(
-                                padding: EdgeInsets.only(top: 10.0),
-                              ),
-                              Text(
-                                widget.item.date,
-                                style: TextStyle(color: Colors.white),
-                              )
-                            ],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Stack(
+                        children: [
+                          Hero(
+                            tag: widget.item.imageUrl,
+                            child: CachedNetworkImage(
+                              height: 220,
+                              width: MediaQuery.of(context).size.width,
+                              errorWidget: (context, url, error) {
+                                print("Could not load content");
+                                return Image.asset(
+                                    "images/imageplaceholder.png");
+                              },
+                              placeholder: (context, url) =>
+                                  Image.asset("images/imageplaceholder.png"),
+                              imageUrl: widget.item.imageUrl,
+                              fit: BoxFit.fill,
+                            ),
                           ),
-                          (widget.item.location != "nil")
-                              ? Column(
+
+                          NeumorphicButton(
+                                    onPressed: () {
+
+                                      Navigator.of(context).pop();
+                                     
+                                    },
+                                    margin: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(0),
+                                    style: NeumorphicStyle(
+                                      shape: NeumorphicShape.concave,
+                                      boxShape: NeumorphicBoxShape.circle(),
+                                      depth: 7.5,
+                                      intensity: 1.0,
+                                      lightSource: LightSource.topLeft,
+                                      shadowLightColor:
+                                          Colors.grey[700].withOpacity(0.6),
+                                      shadowDarkColor: Colors.black,
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Color(0xFF63d471)
+                                              .withOpacity(0.5),
+                                          width: 1.5,
+                                          style: BorderStyle.solid,
+                                        ),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            Color(0xFF396b4b),
+                                            Color(0xFF78e08f),
+                                          ],
+                                        ),
+                                      ),
+                                      height: 50.0,
+                                      width: 50.0,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.arrow_back,
+                                          color: Colors.white,
+                                          // size: 25,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                          
+                        ],
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Neumorphic(
+                              padding: EdgeInsets.all(10),
+                              style: NeumorphicStyle(
+                                color: Color(0xFF292D32),
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.circular(12.0),
+                                ),
+                                depth: 5,
+                                intensity: 1,
+                                lightSource: LightSource.topLeft,
+                                shadowLightColor:
+                                    Colors.grey[700].withOpacity(0.5),
+                                shadowDarkColor: Colors.black,
+                              ),
+                              child: Container(
+                                width: 90,
+                                child: Column(
                                   children: <Widget>[
-                                    Icon(Icons.location_on,
-                                        color: Colors.white),
+                                    Icon(Icons.date_range, color: Colors.white),
                                     Padding(
                                       padding: EdgeInsets.only(top: 10.0),
                                     ),
-                                    Hero(
-                                        tag:
-                                            "${widget.item.title}${widget.item.location}",
-                                        child: Text(widget.item.location,
-                                            style:
-                                                TextStyle(color: Colors.white)))
+                                    Text(
+                                      widget.item.date,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    )
                                   ],
-                                )
-                              : Container(),
-                          Column(
-                            children: <Widget>[
-                              Icon(Icons.category, color: Colors.white),
-                              Padding(
-                                padding: EdgeInsets.only(top: 10.0),
+                                ),
                               ),
-                              Text(widget.item.tag,
-                                  style: TextStyle(color: Colors.white))
-                            ],
-                          )
-                        ],
+                            ),
+                            Neumorphic(
+                              padding: EdgeInsets.all(10),
+                              style: NeumorphicStyle(
+                                color: Color(0xFF292D32),
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.circular(12.0),
+                                ),
+                                depth: 5,
+                                intensity: 1,
+                                lightSource: LightSource.topLeft,
+                                shadowLightColor:
+                                    Colors.grey[700].withOpacity(0.5),
+                                shadowDarkColor: Colors.black,
+                              ),
+                              child: Container(
+                                width: 90,
+                                child: Column(
+                                  children: <Widget>[
+                                    Icon(Icons.category, color: Colors.white),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 10.0),
+                                    ),
+                                    Text(widget.item.tag,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Divider(
-                      color: themeData.primaryColor,
-                      thickness: 2,
-                    ),
-                    (widget.item.contact != null)
-                        ? Column(
-                            children: [
-                              new DetailCategory(
+                      (widget.item.contact != null)
+                          ? Neumorphic(
+                              margin: EdgeInsets.all(10),
+                              style: NeumorphicStyle(
+                                color: Color(0xFF292D32),
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.circular(12.0),
+                                ),
+                                depth: 5,
+                                intensity: 1,
+                                lightSource: LightSource.topLeft,
+                                shadowLightColor:
+                                    Colors.grey[700].withOpacity(0.5),
+                                shadowDarkColor: Colors.black,
+                              ),
+                              child: new DetailCategory(
                                 icon: Icons.call,
                                 children: <Widget>[
                                   new DetailItem(
@@ -163,17 +264,25 @@ class EventDetailsState extends State<EventDetails> {
                                   ),
                                 ],
                               ),
-                              Divider(
-                                color: themeData.primaryColor,
-                                thickness: 2,
+                            )
+                          : Container(),
+                      (widget.item.link != "nil")
+                          ? Neumorphic(
+                              margin: EdgeInsets.all(10),
+                              style: NeumorphicStyle(
+                                color: Color(0xFF292D32),
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.circular(12.0),
+                                ),
+                                depth: 5,
+                                intensity: 1,
+                                lightSource: LightSource.topLeft,
+                                shadowLightColor:
+                                    Colors.grey[700].withOpacity(0.5),
+                                shadowDarkColor: Colors.black,
                               ),
-                            ],
-                          )
-                        : Container(),
-                    (widget.item.link != "nil")
-                        ? Column(
-                            children: [
-                              new DetailCategory(
+                              child: new DetailCategory(
                                 icon: Icons.link,
                                 children: <Widget>[
                                   new DetailItem(
@@ -193,30 +302,32 @@ class EventDetailsState extends State<EventDetails> {
                                   ),
                                 ],
                               ),
-                              Divider(
-                                color: themeData.primaryColor,
-                                thickness: 2,
-                              ),
-                            ],
-                          )
-                        : Container(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 20.0),
-                      child: Text(
-                        widget.item.body,
-                        style: TextStyle(color: Colors.white, fontSize: 18.0),
+                            )
+                          : Container(),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20.0, right: 20, top: 20.0),
+                        child: Text(
+                          widget.item.title,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 250,
-                    )
-                  ],
-                ),
-              ),
-            ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 20.0),
+                        child: Text(
+                          widget.item.body,
+                          style: TextStyle(color: Colors.white, fontSize: 18.0),
+                        ),
+                      ),
+                    ],
+                  )),
+            ),
           ),
-        ),
+        )),
       ),
     );
   }

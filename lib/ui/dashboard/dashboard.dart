@@ -6,6 +6,7 @@ import 'package:arhn_app_2021/model/events_model.dart';
 import 'package:arhn_app_2021/ui/account/login.dart';
 import 'package:arhn_app_2021/ui/scoreboard/scoreboard.dart';
 import 'package:arhn_app_2021/ui/search_by_tags/tags.dart';
+import 'package:arhn_app_2021/util/app_widgets.dart';
 import 'package:arhn_app_2021/util/event_details.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -468,7 +469,7 @@ class _DashboardState extends State<Dashboard> {
                                   ),
                                 ),
                               ), //Flexible
-                             //SizedBox
+
                               Flexible(
                                 flex: 4,
                                 fit: FlexFit.tight,
@@ -1033,76 +1034,75 @@ class DateTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Neumorphic(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        style: NeumorphicStyle(
-          color: Color(0xFF292D32),
-          shape: NeumorphicShape.flat,
-          boxShape: NeumorphicBoxShape.roundRect(
-            BorderRadius.circular(12.0),
+        fit: BoxFit.scaleDown,
+        child: Neumorphic(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          style: NeumorphicStyle(
+            color: Color(0xFF292D32),
+            shape: NeumorphicShape.flat,
+            boxShape: NeumorphicBoxShape.roundRect(
+              BorderRadius.circular(12.0),
+            ),
+            depth: 5,
+            intensity: 1,
+            lightSource: LightSource.topLeft,
+            shadowLightColor: Colors.grey[700].withOpacity(0.5),
+            shadowDarkColor: Colors.black,
           ),
-          depth: 5,
-          intensity: 1,
-          lightSource: LightSource.topLeft,
-          shadowLightColor: Colors.grey[700].withOpacity(0.5),
-          shadowDarkColor: Colors.black,
-        ),
-        child: Container(
-          // margin: EdgeInsets.symmetric(horizontal: 10),
-          width: MediaQuery.of(context).size.width * 0.18,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          decoration: BoxDecoration(
-            color: isSelected
-                ? Color(0xFF78e08f)
-                : Color(0xFF292D32), //Color(0xff29404E),
-            border: Border.all(
+          child: Container(
+            // margin: EdgeInsets.symmetric(horizontal: 10),
+            width: MediaQuery.of(context).size.width * 0.18,
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            decoration: BoxDecoration(
               color: isSelected
-                  ? Color(0xFF03A062).withOpacity(0.5)
-                  : Colors.grey[700].withOpacity(0.5),
-              width: 1,
+                  ? Color(0xFF78e08f)
+                  : Color(0xFF292D32), //Color(0xff29404E),
+              border: Border.all(
+                color: isSelected
+                    ? Color(0xFF03A062).withOpacity(0.5)
+                    : Colors.grey[700].withOpacity(0.5),
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(12),
+              // boxShadow: (isSelected && _showDate)
+              //     ? [
+              //         BoxShadow(
+              //           color: Color(0xff03A062),
+              //           spreadRadius: 4,
+              //           blurRadius: 10,
+              //         ),
+              //         BoxShadow(
+              //           color: Color(0xff03A062),
+              //           spreadRadius: -4,
+              //           blurRadius: 5,
+              //         ),
+              //       ]
+              //     : [],
             ),
-            borderRadius: BorderRadius.circular(12),
-            // boxShadow: (isSelected && _showDate)
-            //     ? [
-            //         BoxShadow(
-            //           color: Color(0xff03A062),
-            //           spreadRadius: 4,
-            //           blurRadius: 10,
-            //         ),
-            //         BoxShadow(
-            //           color: Color(0xff03A062),
-            //           spreadRadius: -4,
-            //           blurRadius: 5,
-            //         ),
-            //       ]
-            //     : [],
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  date,
-                  style: TextStyle(
-                      color: isSelected ? Colors.black : Colors.white,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  weekDay,
-                  style: TextStyle(
-                      color: isSelected ? Colors.black : Colors.white,
-                      fontWeight: FontWeight.w600),
-                )
-              ],
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    date,
+                    style: TextStyle(
+                        color: isSelected ? Colors.black : Colors.white,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    weekDay,
+                    style: TextStyle(
+                        color: isSelected ? Colors.black : Colors.white,
+                        fontWeight: FontWeight.w600),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
 
