@@ -14,6 +14,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show SystemChrome, rootBundle;
@@ -52,7 +53,7 @@ EventResponse res;
 List<EventItem> events;
 List<EventItem> showEvents;
 
-Color background = const Color(0xff121212); 
+Color background = const Color(0xff121212);
 Color cardColor = const Color(0xff343536);
 
 List<String> tags = <String>[
@@ -131,20 +132,20 @@ class _DashboardState extends State<Dashboard> {
     controller = PageController();
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: background,
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: background, 
+      statusBarColor: background,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: background,
     ));
     getUser();
 
     KeyboardVisibilityNotification().addNewListener(
-    onChange: (bool visible) {
-      setState(() {_showBottomSlide = !visible; });
-      
-    },
-  );
-
+      onChange: (bool visible) {
+        setState(() {
+          _showBottomSlide = !visible;
+        });
+      },
+    );
   }
 
   _scrollListener() {
@@ -173,185 +174,270 @@ class _DashboardState extends State<Dashboard> {
       body: SafeArea(
         child: Stack(
           children: [
-            Column(
-              children: <Widget>[
-                Container(
-                  color: background,
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  child: Stack(
-                    children: [
-                      AnimatedContainer(
-                        alignment: Alignment.centerRight,
-                        duration: Duration(milliseconds: 400),
-                        height: 60,
-                        width: !_showSearchBox
-                            ? 0
-                            : MediaQuery.of(context).size.width,
-                        child: Align(
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    Color(0xFF13171a),
+                    Color(0xFF32393f),
+                  ],
+                  stops: [
+                    0.1,
+                    0.35,
+                  ],
+                ),
+              ),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: [
+                  Container(
+                    height: 60.0,
+                    child: Stack(
+                      children: [
+                        AnimatedContainer(
                           alignment: Alignment.centerRight,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                fit: FlexFit.tight,
-                                flex: 5,
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                                  child: Focus(
-                                    onFocusChange: (Focus) {
-                                      setState(() {
-                                        _showBottomSlide = !Focus;
-                                      });
-                                    },
-                                    child: TextField(
-                                      onChanged: (String value) async {
+                          duration: Duration(milliseconds: 400),
+                          height: 60,
+                          width: !_showSearchBox
+                              ? 0
+                              : MediaQuery.of(context).size.width,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  fit: FlexFit.tight,
+                                  flex: 5,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                                    child: Focus(
+                                      onFocusChange: (Focus) {
                                         setState(() {
-                                          showEvents = events
-                                              .where((event) =>
-                                                  event != null &&
-                                                  event.title
-                                                      .toString()
-                                                      .toLowerCase()
-                                                      .contains(
-                                                          value.toLowerCase()))
-                                              .toList();
+                                          _showBottomSlide = !Focus;
                                         });
                                       },
-                                      controller: textFieldController,
-                                      focusNode: myFocusNode,
-                                      style: TextStyle(color: background),
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.white, filled: true,
+                                      child: TextField(
+                                        onChanged: (String value) async {
+                                          setState(() {
+                                            showEvents = events
+                                                .where((event) =>
+                                                    event != null &&
+                                                    event.title
+                                                        .toString()
+                                                        .toLowerCase()
+                                                        .contains(value
+                                                            .toLowerCase()))
+                                                .toList();
+                                          });
+                                        },
+                                        controller: textFieldController,
+                                        focusNode: myFocusNode,
+                                        style: TextStyle(color: background),
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white, filled: true,
 
-                                        focusColor: Color(0xff03A062),
-                                        prefixIcon: Icon(Icons.search),
-                                        border: OutlineInputBorder(),
-                                        //labelText: "Search Events"
+                                          focusColor: Color(0xff03A062),
+                                          prefixIcon: Icon(Icons.search),
+                                          border: OutlineInputBorder(),
+                                          //labelText: "Search Events"
+                                        ),
                                       ),
+                                    ),
+                                  ),
+                                ),
+                                Flexible(
+                                  fit: FlexFit.tight,
+                                  flex: 1,
+                                  child: FloatingActionButton(
+                                    elevation: 0,
+                                    foregroundColor:
+                                        Colors.white, //(0xFF6B872B),
+                                    backgroundColor: Colors.transparent,
+                                    onPressed: () {
+                                      setState(() {
+                                        _showSearchBox = !_showSearchBox;
+                                        myFocusNode.unfocus();
+                                        showEvents = res.events;
+                                        textFieldController.clear();
+                                      });
+                                    },
+                                    child: Icon(Icons.cancel),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        AnimatedContainer(
+                          padding: EdgeInsets.symmetric(horizontal: 12.0),
+                          // curve: ,
+                          alignment: Alignment.centerLeft,
+                          duration: Duration(milliseconds: 400),
+                          height: 60,
+                          width: _showSearchBox
+                              ? 0
+                              : MediaQuery.of(context).size.width,
+                          //width: 50,
+                          // color: background,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                flex: 1,
+                                fit: FlexFit.tight,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: NeumorphicButton(
+                                    onPressed: () {
+                                      _scaffoldKey.currentState.openDrawer();
+                                    },
+                                    padding: EdgeInsets.all(0),
+                                    style: NeumorphicStyle(
+                                      shape: NeumorphicShape.concave,
+                                      boxShape: NeumorphicBoxShape.circle(),
+                                      depth: 7.5,
+                                      intensity: 1.0,
+                                      lightSource: LightSource.topLeft,
+                                      shadowLightColor:
+                                          Colors.grey[700].withOpacity(0.6),
+                                      shadowDarkColor: Colors.black,
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Color(0xFF63d471)
+                                              .withOpacity(0.5),
+                                          width: 1.5,
+                                          style: BorderStyle.solid,
+                                        ),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            Color(0xFF396b4b),
+                                            Color(0xFF78e08f),
+                                          ],
+                                        ),
+                                      ),
+                                      height: 50.0,
+                                      width: 50.0,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.menu,
+                                          color: Colors.white,
+                                          // size: 25,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ), //Flexible
+                              SizedBox(
+                                width: 20,
+                              ), //SizedBox
+                              Flexible(
+                                flex: 2,
+                                fit: FlexFit.tight,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Container(
+                                    alignment: Alignment.centerLeft,
+                                    height: 60,
+                                    // color: background,
+                                    child: DecodingTextEffect(
+                                      "Aarohan",
+                                      decodeEffect: DecodeEffect.fromStart,
+                                      textStyle: GoogleFonts.josefinSans(
+                                          fontSize: 30,
+                                          color: Colors.white //(0xFF6B872B),
+                                          ),
                                     ),
                                   ),
                                 ),
                               ),
                               Flexible(
-                                fit: FlexFit.tight,
+                                  flex: 2,
+                                  fit: FlexFit.tight,
+                                  child: SizedBox()),
+                              Flexible(
                                 flex: 1,
-                                child: FloatingActionButton(
-                                  elevation: 0,
-                                  foregroundColor: Colors.white, //(0xFF6B872B),
-                                  backgroundColor: Colors.transparent,
-                                  onPressed: () {
-                                    setState(() {
-                                      _showSearchBox = !_showSearchBox;
-                                      myFocusNode.unfocus();
-                                      showEvents = res.events;
-                                      textFieldController.clear();
-                                    });
-                                  },
-                                  child: Icon(Icons.cancel),
+                                fit: FlexFit.tight,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: NeumorphicButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _showSearchBox = !_showSearchBox;
+                                        _showBottomSlide = true;
+                                        // myFocusNode.
+                                      });
+                                    },
+                                    padding: EdgeInsets.all(0),
+                                    style: NeumorphicStyle(
+                                      shape: NeumorphicShape.concave,
+                                      boxShape: NeumorphicBoxShape.circle(),
+                                      depth: 7.5,
+                                      intensity: 1.0,
+                                      lightSource: LightSource.topLeft,
+                                      shadowLightColor:
+                                          Colors.grey[700].withOpacity(0.6),
+                                      shadowDarkColor: Colors.black,
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Color(0xFF63d471)
+                                              .withOpacity(0.5),
+                                          width: 1.5,
+                                          style: BorderStyle.solid,
+                                        ),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            Color(0xFF396b4b),
+                                            Color(0xFF78e08f),
+                                          ],
+                                        ),
+                                      ),
+                                      height: 50.0,
+                                      width: 50.0,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.search,
+                                          color: Colors.white,
+                                          // size: 25,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ), //Flexible
                             ],
                           ),
                         ),
-                      ),
-                      AnimatedContainer(
-                        // curve: ,
-                        alignment: Alignment.centerLeft,
-                        duration: Duration(milliseconds: 400),
-                        height: 60,
-                        width: _showSearchBox
-                            ? 0
-                            : MediaQuery.of(context).size.width,
-                        //width: 50,
-                        color: background,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: FloatingActionButton(
-                                  elevation: 0,
-                                  foregroundColor: Colors.white, //(0xFF6B872B),
-                                  backgroundColor: Colors.transparent,
-                                  onPressed: () {
-                                    _scaffoldKey.currentState.openDrawer();
-                                  },
-                                  child: Icon(Icons.menu),
-                                ),
-                              ),
-                            ), //Flexible
-                            SizedBox(
-                              width: 20,
-                            ), //SizedBox
-                            Flexible(
-                              flex: 2,
-                              fit: FlexFit.tight,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Container(
-                                  alignment: Alignment.centerLeft,
-                                  height: 60,
-                                  color: background,
-                                  child: DecodingTextEffect(
-                                    "Aarahon",
-                                    decodeEffect: DecodeEffect.fromStart,
-                                    textStyle: GoogleFonts.josefinSans(
-                                        fontSize: 30,
-                                        color: Colors.white //(0xFF6B872B),
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                                flex: 2, fit: FlexFit.tight, child: SizedBox()),
-                            Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: FloatingActionButton(
-                                  elevation: 0,
-                                  foregroundColor: Colors.white, //(0xFF6B872B),
-                                  backgroundColor: Colors.transparent,
-                                  onPressed: () {
-                                    setState(() {
-                                      _showSearchBox = !_showSearchBox;
-                                     _showBottomSlide = true;
-                                      // myFocusNode.
-                                    });
-                                  },
-                                  child: Icon(Icons.search),
-                                ),
-                              ),
-                            ), //Flexible
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    //width: MediaQuery.of(context).size.width,
-                    //height: MediaQuery.of(context).size.height-130,
-                    decoration: BoxDecoration(color:background),
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
+                      children: [
                         AnimatedContainer(
                           curve: myCurve,
                           height: _showDate && !_showSearchBox ? 70 : 0,
                           duration: Duration(milliseconds: 400),
                           child: Container(
                             child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: dates
                                   .map(
                                     (date) => GestureDetector(
@@ -389,8 +475,9 @@ class _DashboardState extends State<Dashboard> {
                                   height: 16,
                                 ),
                                 Container(
+                                  margin: EdgeInsets.only(left: 10.0),
                                   alignment: Alignment.centerLeft,
-                                  color:background,
+                                  // color: background,
                                   child: DecodingTextEffect(
                                     "Category",
                                     decodeEffect: DecodeEffect.fromStart,
@@ -434,57 +521,239 @@ class _DashboardState extends State<Dashboard> {
                         SizedBox(
                           height: _showDate && !_showSearchBox ? 16 : 0,
                         ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          color: background,
-                          child: DecodingTextEffect(
-                            "Filtered list",
-                            decodeEffect: DecodeEffect.fromStart,
-                            textStyle:
-                                TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        Container(
-                          // height: 300.0,
-                          child: Expanded(
-                            child: showEvents != null
-                                ? ListView.builder(
-                                    controller: _scontroller,
-                                    itemCount: showEvents.length,
-                                    itemBuilder: (context, index) {
-                                      return events[index] != null
-                                          ? GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(context,
-                                                    MaterialPageRoute(
-                                                        builder: (_) {
-                                                  return EventDetails(
-                                                      item: showEvents[index]);
-                                                }));
-                                              },
-                                              child: PopularEventTile(
-                                                desc: showEvents[index].title,
-                                                imgeAssetPath:
-                                                    showEvents[index].imageUrl,
-                                                date: showEvents[index].date,
-                                                address:
-                                                    showEvents[index].location,
-                                              ),
-                                            )
-                                          : SizedBox();
-                                    },
-                                  )
-                                : SizedBox(),
-                          ),
-                        ),
                       ],
                     ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: showEvents != null
+                          ? ListView.builder(
+                              controller: _scontroller,
+                              itemCount: showEvents.length,
+                              itemBuilder: (context, index) {
+                                return events[index] != null
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(builder: (_) {
+                                            return EventDetails(
+                                                item: showEvents[index]);
+                                          }));
+                                        },
+                                        child: Neumorphic(
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: 9.0, horizontal: 15.0),
+                                          style: NeumorphicStyle(
+                                            shape: NeumorphicShape.flat,
+                                            boxShape:
+                                                NeumorphicBoxShape.roundRect(
+                                              BorderRadius.circular(12.0),
+                                            ),
+                                            depth: 8.0,
+                                            intensity: 1.0,
+                                            lightSource: LightSource.top,
+                                            shadowLightColor: Colors.grey[700]
+                                                .withOpacity(0.55),
+                                            shadowDarkColor: Colors.black,
+                                          ),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFF292D32),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
+                                            height: 100.0,
+                                            // width: MediaQuery.of(context).size.width * 0.7,
+                                            child: Row(
+                                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Neumorphic(
+                                                  style: NeumorphicStyle(
+                                                    shape: NeumorphicShape.flat,
+                                                    boxShape: NeumorphicBoxShape
+                                                        .roundRect(
+                                                      BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                12.0),
+                                                        bottomLeft:
+                                                            Radius.circular(
+                                                                12.0),
+                                                      ),
+                                                    ),
+                                                    depth: 8.0,
+                                                    intensity: 0.7,
+                                                    lightSource:
+                                                        LightSource.top,
+                                                    shadowLightColor: Colors
+                                                        .grey[700]
+                                                        .withOpacity(0.7),
+                                                    shadowDarkColor: Colors
+                                                        .black
+                                                        .withOpacity(0.9),
+                                                  ),
+                                                  child: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.28,
+                                                    child: Hero(
+                                                      tag: showEvents[index]
+                                                          .title,
+                                                      child: CachedNetworkImage(
+                                                        height: 100,
+                                                        width: 120,
+                                                        fit: BoxFit.cover,
+                                                        errorWidget: (context,
+                                                            url, error) {
+                                                          print(
+                                                              "Could not load content");
+                                                          return Image.asset(
+                                                              "images/imageplaceholder.png");
+                                                        },
+                                                        placeholder: (context,
+                                                                url) =>
+                                                            Image.asset(
+                                                                "images/imageplaceholder.png"),
+                                                        imageUrl:
+                                                            showEvents[index]
+                                                                .imageUrl,
+                                                      ),
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                12.0),
+                                                        bottomLeft:
+                                                            Radius.circular(
+                                                                12.0),
+                                                      ),
+                                                      // border: Border.all(
+                                                      //   style:
+                                                      //       BorderStyle.solid,
+                                                      //   width: 1.5,
+                                                      //   color: Color(0xFF63d471)
+                                                      //       .withOpacity(0.5),
+                                                      // ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 16),
+                                                    // width:
+                                                    //     MediaQuery.of(context)
+                                                    //             .size
+                                                    //             .width -
+                                                    //         100,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(
+                                                                12.0),
+                                                        bottomRight:
+                                                            Radius.circular(
+                                                                12.0),
+                                                      ),
+                                                      border: Border.all(
+                                                        style:
+                                                            BorderStyle.solid,
+                                                        width: 1.5,
+                                                        color: Colors.grey[700]
+                                                            .withOpacity(0.3),
+                                                      ),
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: <Widget>[
+                                                        Text(
+                                                          showEvents[index]
+                                                              .title,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 18),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                        SizedBox(
+                                                          height: 8,
+                                                        ),
+                                                        Row(
+                                                          children: <Widget>[
+                                                            Image.asset(
+                                                              "assets/calender.png",
+                                                              height: 12,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 8,
+                                                            ),
+                                                            Text(
+                                                              showEvents[index]
+                                                                  .date,
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 10),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        Row(
+                                                          children: <Widget>[
+                                                            Image.asset(
+                                                              "assets/location.png",
+                                                              height: 12,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 8,
+                                                            ),
+                                                            Hero(
+                                                              tag:
+                                                                  "${showEvents[index].title}${showEvents[index].title}",
+                                                              child: Text(
+                                                                showEvents[
+                                                                        index]
+                                                                    .location,
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        10),
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox();
+                              },
+                            )
+                          : SizedBox(),
+                    ),
+                  ),
+                ],
+              ),
             ),
             _showSearchBox && _showBottomSlide ? new BottomSlide() : SizedBox()
           ],
@@ -636,53 +905,71 @@ class DateTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.scaleDown,
-      child: Container(
+      child: Neumorphic(
         margin: EdgeInsets.symmetric(horizontal: 10),
-        width: MediaQuery.of(context).size.width * 0.18,
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        decoration: BoxDecoration(
+        style: NeumorphicStyle(
+          color: Color(0xFF292D32),
+          shape: NeumorphicShape.flat,
+          boxShape: NeumorphicBoxShape.roundRect(
+            BorderRadius.circular(12.0),
+          ),
+          depth: 5,
+          intensity: 1,
+          lightSource: LightSource.topLeft,
+          shadowLightColor: Colors.grey[700].withOpacity(0.5),
+          shadowDarkColor: Colors.black,
+        ),
+        child: Container(
+          // margin: EdgeInsets.symmetric(horizontal: 10),
+          width: MediaQuery.of(context).size.width * 0.18,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: BoxDecoration(
             color: isSelected
-                ? Color(0xff03bc72)
-                : cardColor, //Color(0xff29404E),
-            /*border: Border.all(
-              color: Color(0xff03bc72),
-              width: 2,
-            ),*/
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: (isSelected && _showDate)
-                ? [
-                    BoxShadow(
-                      color: Color(0xff03A062),
-                      spreadRadius: 4,
-                      blurRadius: 10,
-                    ),
-                    BoxShadow(
-                      color: Color(0xff03A062),
-                      spreadRadius: -4,
-                      blurRadius: 5,
-                    ),
-                  ]
-                : []),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                date,
-                style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.white,
-                    fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                weekDay,
-                style: TextStyle(
-                    color: isSelected ? Colors.black : Colors.white,
-                    fontWeight: FontWeight.w600),
-              )
-            ],
+                ? Color(0xFF78e08f)
+                : Color(0xFF292D32), //Color(0xff29404E),
+            border: Border.all(
+              color: isSelected
+                  ? Color(0xFF03A062).withOpacity(0.5)
+                  : Colors.grey[700].withOpacity(0.5),
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(12),
+            // boxShadow: (isSelected && _showDate)
+            //     ? [
+            //         BoxShadow(
+            //           color: Color(0xff03A062),
+            //           spreadRadius: 4,
+            //           blurRadius: 10,
+            //         ),
+            //         BoxShadow(
+            //           color: Color(0xff03A062),
+            //           spreadRadius: -4,
+            //           blurRadius: 5,
+            //         ),
+            //       ]
+            //     : [],
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  date,
+                  style: TextStyle(
+                      color: isSelected ? Colors.black : Colors.white,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  weekDay,
+                  style: TextStyle(
+                      color: isSelected ? Colors.black : Colors.white,
+                      fontWeight: FontWeight.w600),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -807,8 +1094,6 @@ class _BottomSlideState extends State<BottomSlide> {
   }
 }
 
-
-
 class EventTile extends StatelessWidget {
   String imgAssetPath;
   String eventType;
@@ -818,56 +1103,73 @@ class EventTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      alignment: Alignment.topCenter,
       fit: BoxFit.scaleDown,
-      child: Container(
-        height: 60,
-        width: 170,
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Neumorphic(
         margin: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            color: isSelected
-                ? Color(0xff03bc72)
-                : cardColor, //Color(0xff29404E),
-           /* border: Border.all(
-              color: Color(0xff03bc72),
-              width: 2,
-            ),*/
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: (isSelected && _showDate)
-                ? [
-                    BoxShadow(
-                      color: Color(0xff03A062),
-                      spreadRadius: 4,
-                      blurRadius: 10,
-                    ),
-                    BoxShadow(
-                      color: Color(0xff03A062),
-                      spreadRadius: -4,
-                      blurRadius: 5,
-                    ),
-                  ]
-                : []),
-        //child: FittedBox(
-        //fit: BoxFit.scaleDown,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              imgAssetPath,
-              height: 27,
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Text(
-              eventType,
-              style: TextStyle(color: Colors.white),
-            )
-          ],
+        style: NeumorphicStyle(
+          color: Color(0xFF292D32),
+          shape: NeumorphicShape.flat,
+          boxShape: NeumorphicBoxShape.roundRect(
+            BorderRadius.circular(12.0),
+          ),
+          depth: 3,
+          intensity: 1,
+          lightSource: LightSource.topLeft,
+          shadowLightColor: Colors.grey[700].withOpacity(0.5),
+          shadowDarkColor: Colors.black,
         ),
-        // ),
+        child: Container(
+          height: 60,
+          width: 170,
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? Color(0xFF78e08f)
+                : Color(0xFF292D32), //Color(0xff29404E),
+            border: Border.all(
+              color: isSelected
+                  ? Color(0xFF03A062).withOpacity(0.5)
+                  : Colors.grey[700].withOpacity(0.5),
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(12),
+            // boxShadow: (isSelected && _showDate)
+            //     ? [
+            //         BoxShadow(
+            //           color: Color(0xff03A062),
+            //           spreadRadius: 4,
+            //           blurRadius: 10,
+            //         ),
+            //         BoxShadow(
+            //           color: Color(0xff03A062),
+            //           spreadRadius: -4,
+            //           blurRadius: 5,
+            //         ),
+            //       ]
+            //     : [],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                imgAssetPath,
+                color: isSelected ? Colors.black : Colors.white,
+                height: 27,
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                eventType,
+                style: TextStyle(
+                  color: isSelected ? Colors.black : Colors.white,
+                ),
+              )
+            ],
+          ),
+          // ),
+        ),
       ),
     );
   }
@@ -884,92 +1186,106 @@ class PopularEventTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      margin: EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        //#303236
-        color: cardColor,
+    return Neumorphic(
+      margin: EdgeInsets.symmetric(vertical: 9.0, horizontal: 15.0),
+      style: NeumorphicStyle(
+        shape: NeumorphicShape.flat,
+        boxShape: NeumorphicBoxShape.roundRect(
+          BorderRadius.circular(12.0),
+        ),
+        depth: 8.0,
+        intensity: 1.0,
+        lightSource: LightSource.top,
+        shadowLightColor: Colors.grey[700].withOpacity(0.55),
+        shadowDarkColor: Colors.black,
+      ),
+      child: Container(
+        height: 100,
+        // margin: EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          //#303236
+          color: cardColor,
 
           // borderRadius: BorderRadius.only(
           //  topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
           borderRadius: BorderRadius.all(Radius.circular(8)),
           //border: Border.all(color: Color(0xff03A062), width: 2)
-          ),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(left: 16),
-              width: MediaQuery.of(context).size.width - 100,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    desc,
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/calender.png",
-                        height: 12,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        date,
-                        style: TextStyle(color: Colors.white, fontSize: 10),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/location.png",
-                        height: 12,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Hero(
-                        tag: "${desc}${address}",
-                        child: Text(
-                          address,
-                          style: TextStyle(color: Colors.white, fontSize: 10),
+        ),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.only(left: 16),
+                width: MediaQuery.of(context).size.width - 100,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      desc,
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/calender.png",
+                          height: 12,
                         ),
-                      )
-                    ],
-                  ),
-                ],
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          date,
+                          style: TextStyle(color: Colors.white, fontSize: 10),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/location.png",
+                          height: 12,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Hero(
+                          tag: "${desc}${address}",
+                          child: Text(
+                            address,
+                            style: TextStyle(color: Colors.white, fontSize: 10),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Hero(
-            tag: imgeAssetPath,
-            child: CachedNetworkImage(
-              height: 100,
-              width: 120,
-              fit: BoxFit.cover,
-              errorWidget: (context, url, error) {
-                print("Could not load content");
-                return Image.asset("images/imageplaceholder.png");
-              },
-              placeholder: (context, url) =>
-                  Image.asset("images/imageplaceholder.png"),
-              imageUrl: imgeAssetPath,
+            Hero(
+              tag: imgeAssetPath,
+              child: CachedNetworkImage(
+                height: 100,
+                width: 120,
+                fit: BoxFit.cover,
+                errorWidget: (context, url, error) {
+                  print("Could not load content");
+                  return Image.asset("images/imageplaceholder.png");
+                },
+                placeholder: (context, url) =>
+                    Image.asset("images/imageplaceholder.png"),
+                imageUrl: imgeAssetPath,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
