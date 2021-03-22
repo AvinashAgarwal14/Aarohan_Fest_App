@@ -15,13 +15,12 @@ class _DayOneScheduleState extends State<DayOneSchedule> {
 
   @override
   void setState(fn) {
-    if(mounted){
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -34,18 +33,20 @@ class _DayOneScheduleState extends State<DayOneSchedule> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: <Widget>[
-      _buildTimeline(),
-      (_buildSchedule().length != 0)
-          ? Container(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Column(children: _buildSchedule()))
-          : Container(
-              height: 2.0,
-              child: LinearProgressIndicator(
-                  valueColor:
-                      new AlwaysStoppedAnimation<Color>(Color(0xFF505194))))
-    ]);
+    return Stack(
+      children: <Widget>[
+        _buildTimeline(),
+        (_buildSchedule().length != 0)
+            ? Container(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Column(children: _buildSchedule()))
+            : Container(
+                height: 2.0,
+                child: LinearProgressIndicator(
+                    valueColor:
+                        new AlwaysStoppedAnimation<Color>(Color(0xFF505194))))
+      ],
+    );
   }
 
   Widget _buildTimeline() {
@@ -86,10 +87,10 @@ class _DayOneScheduleState extends State<DayOneSchedule> {
                     "${schedule.name}",
                     style: new TextStyle(fontSize: 18.0),
                   ),
-                  new
-              Text(
+                  new Text(
                     "${schedule.category}",
-                    style: new TextStyle(fontSize: 12.0, //color: Colors.grey
+                    style: new TextStyle(
+                      fontSize: 12.0, //color: Colors.grey
                     ),
                   )
                 ],
@@ -99,8 +100,9 @@ class _DayOneScheduleState extends State<DayOneSchedule> {
               padding: const EdgeInsets.only(right: 16.0),
               child: new Text(
                 "${schedule.time}",
-                style: new TextStyle(fontSize: 12.0, //color: Colors.grey
-                 ),
+                style: new TextStyle(
+                  fontSize: 12.0, //color: Colors.grey
+                ),
               ),
             ),
           ],

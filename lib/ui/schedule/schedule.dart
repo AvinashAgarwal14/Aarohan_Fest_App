@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../util/drawer.dart';
 import './day1.dart';
@@ -119,7 +120,7 @@ class _ScheduleState extends State<Schedule> {
                       padding: new EdgeInsets.only(left: 30.0, top: 20.0),
                       height: 90.0,
                       decoration: new BoxDecoration(
-                        //color: Colors.white,
+                        color: Color(0xff292D32),
                         border: new Border(
                           bottom: new BorderSide(
                               width: 0.5,
@@ -144,47 +145,77 @@ class _ScheduleState extends State<Schedule> {
                                 children: <Widget>[
                                   new Text(
                                     week[index],
-                                    style: new TextStyle(
-                                        color: const Color.fromRGBO(
-                                            204, 204, 204, 1.0),
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.w400),
+                                    style: GoogleFonts.josefinSans(
+                                        fontSize: 12,
+                                        color: Colors.white //(0xFF6B872B),
+                                        ),
                                   ),
                                   new Padding(
                                     padding: new EdgeInsets.only(
-                                        top: 10.0, bottom: 5.0),
-                                    child: new Container(
-                                      width: 40.0,
-                                      height: 40.0,
-                                      alignment: Alignment.center,
-                                      decoration: new BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: (presentKey == index)
-                                              ? const Color.fromRGBO(
-                                                  204, 204, 204, 0.3)
-                                              : Colors.transparent),
-                                      child: new Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          new Text(
-                                            arrayDay[index].toString(),
-                                            style: new TextStyle(
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.w400),
+                                        top: 5.0, bottom: 5.0),
+                                    child: Neumorphic(
+                                      style: NeumorphicStyle(
+                                        shape: NeumorphicShape.concave,
+                                        boxShape: NeumorphicBoxShape.circle(),
+                                        depth: 4.0,
+                                        intensity: 1.0,
+                                        lightSource: LightSource.topLeft,
+                                        shadowLightColor:
+                                            Colors.grey[700].withOpacity(0.6),
+                                        shadowDarkColor: Colors.black,
+                                      ),
+                                      child: new Container(
+                                        width: 40.0,
+                                        height: 40.0,
+                                        alignment: Alignment.center,
+                                        decoration: new BoxDecoration(
+                                          border: Border.all(
+                                            color: Color(0xFF63d471)
+                                                .withOpacity(0.5),
+                                            width: 1.5,
+                                            style: BorderStyle.solid,
                                           ),
-                                          (presentKey == index)
-                                              ? new Container(
-                                                  padding: new EdgeInsets.only(
-                                                      top: 3.0),
-                                                  width: 3.0,
-                                                  height: 3.0,
-                                                  decoration: new BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: Color(0xFF505194)),
-                                                )
-                                              : new Container()
-                                        ],
+                                          shape: BoxShape.circle,
+                                          // color: (presentKey == index)
+                                          //     ? const Color.fromRGBO(
+                                          //         204, 204, 204, 0.3)
+                                          //     : Colors.transparent,
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                            colors: [
+                                              Color(0xFF396b4b),
+                                              Color(0xFF78e08f),
+                                            ],
+                                          ),
+                                        ),
+                                        child: new Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            new Text(
+                                              arrayDay[index].toString(),
+                                              style: new TextStyle(
+                                                  fontSize: 12.0,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            (presentKey == index) // Dot
+                                                ? new Container(
+                                                    padding:
+                                                        new EdgeInsets.only(
+                                                            top: 3.0),
+                                                    width: 3.0,
+                                                    height: 3.0,
+                                                    decoration:
+                                                        new BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            color: Color(
+                                                                0xFF505194)),
+                                                  )
+                                                : new Container()
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -195,6 +226,7 @@ class _ScheduleState extends State<Schedule> {
                         },
                       ),
                     ),
+                    //The list
                     Container(
                         // color: Colors.white,
                         child: selectDaySchedule[presentKey])
