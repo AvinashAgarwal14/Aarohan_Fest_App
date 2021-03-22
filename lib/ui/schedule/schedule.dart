@@ -64,226 +64,244 @@ class _ScheduleState extends State<Schedule> {
         key: _scaffoldKeyForSchedule,
         drawer: NavigationDrawer(),
         body: SafeArea(
-          child: CustomScrollView(
-            slivers: <Widget>[
-              new SliverAppBar(
-                leading: NeumorphicButton(
-                  onPressed: () {
-                    _scaffoldKeyForSchedule.currentState.openDrawer();
-                  },
-                  margin: EdgeInsets.only(left: 10.0),
-                  padding: EdgeInsets.all(0),
-                  style: NeumorphicStyle(
-                    shape: NeumorphicShape.concave,
-                    boxShape: NeumorphicBoxShape.circle(),
-                    depth: 7.5,
-                    intensity: 1.0,
-                    lightSource: LightSource.topLeft,
-                    shadowLightColor: Colors.grey[700].withOpacity(0.6),
-                    shadowDarkColor: Colors.black,
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Color(0xFF63d471).withOpacity(0.5),
-                        width: 1.5,
-                        style: BorderStyle.solid,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                  Color(0xFF13171a),
+                  Color(0xFF32393f),
+                ],
+                stops: [
+                  0.1,
+                  0.35,
+                ],
+              ),
+            ),
+            child: CustomScrollView(
+              slivers: <Widget>[
+                new SliverAppBar(
+                  leading: NeumorphicButton(
+                    onPressed: () {
+                      _scaffoldKeyForSchedule.currentState.openDrawer();
+                    },
+                    margin: EdgeInsets.only(left: 10.0),
+                    padding: EdgeInsets.all(0),
+                    style: NeumorphicStyle(
+                      shape: NeumorphicShape.concave,
+                      boxShape: NeumorphicBoxShape.circle(),
+                      depth: 7.5,
+                      intensity: 1.0,
+                      lightSource: LightSource.topLeft,
+                      shadowLightColor: Colors.grey[700].withOpacity(0.6),
+                      shadowDarkColor: Colors.black,
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Color(0xFF63d471).withOpacity(0.5),
+                          width: 1.5,
+                          style: BorderStyle.solid,
+                        ),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xFF396b4b),
+                            Color(0xFF78e08f),
+                          ],
+                        ),
                       ),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xFF396b4b),
-                          Color(0xFF78e08f),
-                        ],
+                      height: 50.0,
+                      width: 50.0,
+                      child: Center(
+                        child: Icon(
+                          Icons.menu,
+                          color: Colors.white,
+                          // size: 25,
+                        ),
                       ),
                     ),
-                    height: 50.0,
-                    width: 50.0,
-                    child: Center(
-                      child: Icon(
-                        Icons.menu,
-                        color: Colors.white,
-                        // size: 25,
+                  ),
+                  elevation: 0,
+                  backgroundColor: Colors.white,
+                  toolbarHeight: 70.0,
+                  expandedHeight: _appBarHeight,
+                  pinned: _appBarBehavior == AppBarBehavior.pinned,
+                  floating: _appBarBehavior == AppBarBehavior.floating ||
+                      _appBarBehavior == AppBarBehavior.snapping,
+                  snap: _appBarBehavior == AppBarBehavior.snapping,
+                  flexibleSpace: FlexibleSpaceBar(
+                    title: Text(
+                      'Timeline',
+                      style: GoogleFonts.josefinSans(
+                        fontSize: 30,
+                        color: Color(0xFF6B872B),
                       ),
                     ),
-                  ),
-                ),
-                elevation: 0,
-                backgroundColor: Colors.white,
-                toolbarHeight: 70.0,
-                expandedHeight: _appBarHeight,
-                pinned: _appBarBehavior == AppBarBehavior.pinned,
-                floating: _appBarBehavior == AppBarBehavior.floating ||
-                    _appBarBehavior == AppBarBehavior.snapping,
-                snap: _appBarBehavior == AppBarBehavior.snapping,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Text(
-                    'Timeline',
-                    style: GoogleFonts.josefinSans(
-                      fontSize: 30,
-                      color: Color(0xFF6B872B),
-                    ),
-                  ),
-                  background: new Stack(
-                    fit: StackFit.expand,
-                    children: <Widget>[
-                      new Image.asset(
-                        "assets/schedule.png",
-                        fit: BoxFit.cover,
-                        height: _appBarHeight,
-                      ),
-                      // This gradient ensures that the toolbar icons are distinct
-                      // against the background image.
-                      const DecoratedBox(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment(0.0, 0.6),
-                            end: Alignment(0.0, -0.4),
-                            colors: <Color>[
-                              Color(0x60000000),
-                              Color(0x00000000)
-                            ],
+                    background: new Stack(
+                      fit: StackFit.expand,
+                      children: <Widget>[
+                        new Image.asset(
+                          "assets/schedule.png",
+                          fit: BoxFit.cover,
+                          height: _appBarHeight,
+                        ),
+                        // This gradient ensures that the toolbar icons are distinct
+                        // against the background image.
+                        const DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment(0.0, 0.6),
+                              end: Alignment(0.0, -0.4),
+                              colors: <Color>[
+                                Color(0x60000000),
+                                Color(0x00000000)
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              new SliverList(
-                delegate: new SliverChildListDelegate(
-                  <Widget>[
-                    new Container(
-                      margin: margin,
-                      alignment: Alignment.center,
-                      padding: new EdgeInsets.only(left: 30.0, top: 20.0),
-                      height: 90.0,
-                      decoration: new BoxDecoration(
-                        color: Color(0xff292D32),
-                        border: new Border(
-                          bottom: new BorderSide(
-                              width: 0.5,
-                              color: const Color.fromRGBO(204, 204, 204, 1.0)),
+                new SliverList(
+                  delegate: new SliverChildListDelegate(
+                    <Widget>[
+                      new Container(
+                        margin: margin,
+                        alignment: Alignment.center,
+                        padding: new EdgeInsets.only(left: 30.0, top: 20.0),
+                        height: 90.0,
+                        decoration: new BoxDecoration(
+                          color: Color(0xff292D32),
+                          border: new Border(
+                            bottom: new BorderSide(
+                                width: 0.5,
+                                color:
+                                    const Color.fromRGBO(204, 204, 204, 1.0)),
+                          ),
                         ),
-                      ),
-                      child: new ListView.builder(
-                        cacheExtent: MediaQuery.of(context).size.height * 5,
-                        itemCount: week.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return new GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                print(presentKey);
-                                presentKey = index;
-                              });
-                            },
-                            child: SizedBox(
-                              width: 80.0,
-                              child: Column(
-                                children: <Widget>[
-                                  new Text(
-                                    week[index],
-                                    style: GoogleFonts.josefinSans(
-                                        fontSize: 12,
-                                        color: Colors.white //(0xFF6B872B),
-                                        ),
-                                  ),
-                                  new Padding(
-                                    padding: new EdgeInsets.only(
-                                        top: 5.0, bottom: 5.0),
-                                    child: Neumorphic(
-                                      style: NeumorphicStyle(
-                                        shape: NeumorphicShape.concave,
-                                        boxShape: NeumorphicBoxShape.circle(),
-                                        depth: 4.0,
-                                        intensity: 1.0,
-                                        lightSource: LightSource.topLeft,
-                                        shadowLightColor:
-                                            Colors.grey[700].withOpacity(0.6),
-                                        shadowDarkColor: Colors.black,
-                                      ),
-                                      child: new Container(
-                                        width: 40.0,
-                                        height: 40.0,
-                                        alignment: Alignment.center,
-                                        decoration: new BoxDecoration(
-                                          border: Border.all(
-                                            color: Color(0xFF63d471)
-                                                .withOpacity(0.5),
-                                            width: 1.5,
-                                            style: BorderStyle.solid,
+                        child: new ListView.builder(
+                          cacheExtent: MediaQuery.of(context).size.height * 5,
+                          itemCount: week.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index) {
+                            return new GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  print(presentKey);
+                                  presentKey = index;
+                                });
+                              },
+                              child: SizedBox(
+                                width: 80.0,
+                                child: Column(
+                                  children: <Widget>[
+                                    new Text(
+                                      week[index],
+                                      style: GoogleFonts.josefinSans(
+                                          fontSize: 12,
+                                          color: Colors.white //(0xFF6B872B),
                                           ),
-                                          shape: BoxShape.circle,
-                                          // color: (presentKey == index)
-                                          //     ? const Color.fromRGBO(
-                                          //         204, 204, 204, 0.3)
-                                          //     : Colors.transparent,
-                                          gradient: (presentKey == index)
-                                              ? LinearGradient(
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                  colors: [
-                                                    Color(0xFF396b4b),
-                                                    Color(0xFF78e08f),
-                                                  ],
-                                                )
-                                              : LinearGradient(
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight,
-                                                  colors: [
-                                                    Color(0xFF78e08f),
-                                                    Color(0xFF396b4b),
-                                                  ],
-                                                ),
+                                    ),
+                                    new Padding(
+                                      padding: new EdgeInsets.only(
+                                          top: 5.0, bottom: 5.0),
+                                      child: Neumorphic(
+                                        style: NeumorphicStyle(
+                                          shape: NeumorphicShape.concave,
+                                          boxShape: NeumorphicBoxShape.circle(),
+                                          depth: 4.0,
+                                          intensity: 1.0,
+                                          lightSource: LightSource.topLeft,
+                                          shadowLightColor:
+                                              Colors.grey[700].withOpacity(0.6),
+                                          shadowDarkColor: Colors.black,
                                         ),
-                                        child: new Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            new Text(
-                                              arrayDay[index].toString(),
-                                              style: new TextStyle(
-                                                  fontSize: 12.0,
-                                                  fontWeight: FontWeight.w400),
+                                        child: new Container(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          alignment: Alignment.center,
+                                          decoration: new BoxDecoration(
+                                            border: Border.all(
+                                              color: Color(0xFF63d471)
+                                                  .withOpacity(0.5),
+                                              width: 1.5,
+                                              style: BorderStyle.solid,
                                             ),
-                                            (presentKey == index) // Dot
-                                                ? new Container(
-                                                    padding:
-                                                        new EdgeInsets.only(
-                                                            top: 3.0),
-                                                    width: 3.0,
-                                                    height: 3.0,
-                                                    decoration:
-                                                        new BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            color: Color(
-                                                                0xFF505194)),
+                                            shape: BoxShape.circle,
+                                            // color: (presentKey == index)
+                                            //     ? const Color.fromRGBO(
+                                            //         204, 204, 204, 0.3)
+                                            //     : Colors.transparent,
+                                            gradient: (presentKey == index)
+                                                ? LinearGradient(
+                                                    begin: Alignment.topLeft,
+                                                    end: Alignment.bottomRight,
+                                                    colors: [
+                                                      Color(0xFF396b4b),
+                                                      Color(0xFF78e08f),
+                                                    ],
                                                   )
-                                                : new Container()
-                                          ],
+                                                : LinearGradient(
+                                                    begin: Alignment.topLeft,
+                                                    end: Alignment.bottomRight,
+                                                    colors: [
+                                                      Color(0xFF78e08f),
+                                                      Color(0xFF396b4b),
+                                                    ],
+                                                  ),
+                                          ),
+                                          child: new Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              new Text(
+                                                arrayDay[index].toString(),
+                                                style: new TextStyle(
+                                                    fontSize: 12.0,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                              (presentKey == index) // Dot
+                                                  ? new Container(
+                                                      padding:
+                                                          new EdgeInsets.only(
+                                                              top: 3.0),
+                                                      width: 3.0,
+                                                      height: 3.0,
+                                                      decoration:
+                                                          new BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              color: Color(
+                                                                  0xFF505194)),
+                                                    )
+                                                  : new Container()
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    //The list
-                    Container(
-                        // color: Colors.white,
-                        child: selectDaySchedule[presentKey])
-                  ],
+                      //The list
+                      Container(
+                          // color: Colors.white,
+                          child: selectDaySchedule[presentKey])
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

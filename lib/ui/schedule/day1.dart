@@ -35,7 +35,7 @@ class _DayOneScheduleState extends State<DayOneSchedule> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Color(0xff32393f)),
+      //decoration: BoxDecoration(color: Color(0xff32393f)),
       child: Stack(
         children: <Widget>[
           _buildTimeline(),
