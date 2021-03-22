@@ -67,11 +67,52 @@ class _ScheduleState extends State<Schedule> {
           child: CustomScrollView(
             slivers: <Widget>[
               new SliverAppBar(
-                iconTheme: IconThemeData(
-                  color: Color(0xFF6B872B),
+                leading: NeumorphicButton(
+                  onPressed: () {
+                    _scaffoldKeyForSchedule.currentState.openDrawer();
+                  },
+                  margin: EdgeInsets.only(left: 10.0),
+                  padding: EdgeInsets.all(0),
+                  style: NeumorphicStyle(
+                    shape: NeumorphicShape.concave,
+                    boxShape: NeumorphicBoxShape.circle(),
+                    depth: 7.5,
+                    intensity: 1.0,
+                    lightSource: LightSource.topLeft,
+                    shadowLightColor: Colors.grey[700].withOpacity(0.6),
+                    shadowDarkColor: Colors.black,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Color(0xFF63d471).withOpacity(0.5),
+                        width: 1.5,
+                        style: BorderStyle.solid,
+                      ),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color(0xFF396b4b),
+                          Color(0xFF78e08f),
+                        ],
+                      ),
+                    ),
+                    height: 50.0,
+                    width: 50.0,
+                    child: Center(
+                      child: Icon(
+                        Icons.menu,
+                        color: Colors.white,
+                        // size: 25,
+                      ),
+                    ),
+                  ),
                 ),
                 elevation: 0,
                 backgroundColor: Colors.white,
+                toolbarHeight: 70.0,
                 expandedHeight: _appBarHeight,
                 pinned: _appBarBehavior == AppBarBehavior.pinned,
                 floating: _appBarBehavior == AppBarBehavior.floating ||
@@ -180,14 +221,23 @@ class _ScheduleState extends State<Schedule> {
                                           //     ? const Color.fromRGBO(
                                           //         204, 204, 204, 0.3)
                                           //     : Colors.transparent,
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            colors: [
-                                              Color(0xFF396b4b),
-                                              Color(0xFF78e08f),
-                                            ],
-                                          ),
+                                          gradient: (presentKey == index)
+                                              ? LinearGradient(
+                                                  begin: Alignment.topLeft,
+                                                  end: Alignment.bottomRight,
+                                                  colors: [
+                                                    Color(0xFF396b4b),
+                                                    Color(0xFF78e08f),
+                                                  ],
+                                                )
+                                              : LinearGradient(
+                                                  begin: Alignment.topLeft,
+                                                  end: Alignment.bottomRight,
+                                                  colors: [
+                                                    Color(0xFF78e08f),
+                                                    Color(0xFF396b4b),
+                                                  ],
+                                                ),
                                         ),
                                         child: new Column(
                                           mainAxisAlignment:
