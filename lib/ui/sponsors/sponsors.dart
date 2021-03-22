@@ -1,5 +1,6 @@
 import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../model/sponsor.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -12,6 +13,8 @@ class Sponsors extends StatefulWidget {
 }
 
 class _SponsorsState extends State<Sponsors> {
+  GlobalKey<ScaffoldState> _scaffoldKeyForSchedule =
+      new GlobalKey<ScaffoldState>();
   List<SponsorItem> sponsorList = List();
   SponsorItem sponsorItem, b;
   final FirebaseDatabase database = FirebaseDatabase.instance;
@@ -39,53 +42,115 @@ class _SponsorsState extends State<Sponsors> {
   Widget build(BuildContext context) {
     indexOfWidget = 0;
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        backgroundColor: Color(0xFF32393f),
-        title: DecodingTextEffect(
-          "Sponsors",
-          decodeEffect: DecodeEffect.fromStart,
-          textStyle: GoogleFonts.josefinSans(
-              fontSize: 30, color: Colors.white //(0xFF6B872B),
-              ),
-        ),
-      ),
-      drawer: NavigationDrawer(),
-      body: sponsorList.length > 0
-          ? ListView.builder(
-              cacheExtent: MediaQuery.of(context).size.height * 5,
-              itemCount: sponsorList.length,
-              padding: EdgeInsets.all(8.0),
-              itemBuilder: (context, index) {
-                if (indexOfWidget < sponsorList.length - 1) {
-                  if ((sponsorList[index].priority) > 1) {
-                    int p = indexOfWidget;
-                    indexOfWidget = indexOfWidget + 1;
-                    // print("------$a----- $p------");
-                    return majorSponsor(
-                        sponsorList[p], sponsorList[indexOfWidget++]);
-                  } else {
-                    indexOfWidget = index + 1;
-                    print("----Gangnum 2 $index");
-                    return majorSponsor(sponsorList[index], b);
-                  }
-                } else if ((indexOfWidget == sponsorList.length - 1) &&
-                    (sponsorList.length % 2 != 0))
-                  return majorSponsor(sponsorList[indexOfWidget++], b);
-              })
-          : Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: Theme.of(context).brightness == Brightness.light
-                          ? AssetImage("images/gifs/loaderlight.gif")
-                          : AssetImage("images/gifs/loaderdark.gif"),
-                      fit: BoxFit.fill)),
+        key: _scaffoldKeyForSchedule,
+        appBar: AppBar(
+          centerTitle: true,
+          toolbarHeight: 70.0,
+          leading: NeumorphicButton(
+            onPressed: () {
+              _scaffoldKeyForSchedule.currentState.openDrawer();
+            },
+            margin: EdgeInsets.only(left: 10.0),
+            padding: EdgeInsets.all(0),
+            style: NeumorphicStyle(
+              shape: NeumorphicShape.concave,
+              boxShape: NeumorphicBoxShape.circle(),
+              depth: 7.5,
+              intensity: 1.0,
+              lightSource: LightSource.topLeft,
+              shadowLightColor: Colors.grey[700].withOpacity(0.6),
+              shadowDarkColor: Colors.black,
             ),
-    );
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Color(0xFF63d471).withOpacity(0.5),
+                  width: 1.5,
+                  style: BorderStyle.solid,
+                ),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFF396b4b),
+                    Color(0xFF78e08f),
+                  ],
+                ),
+              ),
+              height: 50.0,
+              width: 50.0,
+              child: Center(
+                child: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                  // size: 25,
+                ),
+              ),
+            ),
+          ),
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+          backgroundColor: Color(0xFF32393f),
+          title: DecodingTextEffect(
+            "Sponsors",
+            decodeEffect: DecodeEffect.fromStart,
+            textStyle: GoogleFonts.josefinSans(
+                fontSize: 30, color: Colors.white //(0xFF6B872B),
+                ),
+          ),
+        ),
+        drawer: NavigationDrawer(),
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [
+                Color(0xFF13171a),
+                Color(0xFF32393f),
+              ],
+              stops: [
+                0.1,
+                0.35,
+              ],
+            ),
+          ),
+          child: sponsorList.length > 0
+              ? ListView.builder(
+                  cacheExtent: MediaQuery.of(context).size.height * 5,
+                  itemCount: sponsorList.length,
+                  padding: EdgeInsets.all(8.0),
+                  itemBuilder: (context, index) {
+                    if (indexOfWidget < sponsorList.length - 1) {
+                      if ((sponsorList[index].priority) > 1) {
+                        int p = indexOfWidget;
+                        indexOfWidget = indexOfWidget + 1;
+                        // print("------$a----- $p------");
+                        return majorSponsor(
+                            sponsorList[p], sponsorList[indexOfWidget++]);
+                      } else {
+                        indexOfWidget = index + 1;
+                        print("----Gangnum 2 $index");
+                        return majorSponsor(sponsorList[index], b);
+                      }
+                    } else if ((indexOfWidget == sponsorList.length - 1) &&
+                        (sponsorList.length % 2 != 0))
+                      return majorSponsor(sponsorList[indexOfWidget++], b);
+                  })
+              : Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? AssetImage("images/gifs/loaderlight.gif")
+                                  : AssetImage("images/gifs/loaderdark.gif"),
+                          fit: BoxFit.fill)),
+                ),
+        ));
   }
 
   int i = 0;
