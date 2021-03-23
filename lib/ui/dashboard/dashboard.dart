@@ -850,7 +850,7 @@ class _DashboardState extends State<Dashboard> {
     setState(() {
       currentUser = user;
     });
-    // if (currentUser != null) isEurekoinUserRegistered(); Eurekoin endpoint down
+    if (currentUser != null) isEurekoinUserRegistered();
   }
 
   Future isEurekoinUserRegistered() async {
@@ -858,7 +858,7 @@ class _DashboardState extends State<Dashboard> {
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
 
-    String apiUrl = "https://ekoin.nitdgplug.org/api/exists/?token=$encoded";
+    String apiUrl = "https://eurekoin.nitdgplug.org/api/exists/?token=$encoded";
     http.Response response = await http.get(apiUrl);
     var status = json.decode(response.body)['status'];
     if (status == '1') {
@@ -968,7 +968,7 @@ class _DashboardState extends State<Dashboard> {
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl =
-        "https://ekoin.nitdgplug.org/api/coupon/?token=$encoded&code=$coupon";
+        "https://eurekoin.nitdgplug.org/api/coupon/?token=$encoded&code=$coupon";
     http.Response response = await http.get(apiUrl);
     print(response.body);
     var status = json.decode(response.body)['status'];
