@@ -69,7 +69,8 @@ class _DayTwoScheduleState extends State<DayTwoSchedule> {
     var size = MediaQuery.of(context).size;
     return scheduleList.map((schedule) {
       return new Container(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+        height: 90.0,
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         child: Neumorphic(
           style: NeumorphicStyle(
             depth: -2,
@@ -98,6 +99,7 @@ class _DayTwoScheduleState extends State<DayTwoSchedule> {
                 new Expanded(
                   child: new Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Text(
                         "${schedule.name}",
