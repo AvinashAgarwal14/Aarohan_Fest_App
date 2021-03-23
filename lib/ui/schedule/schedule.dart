@@ -226,12 +226,14 @@ class _ScheduleState extends State<Schedule> {
                                           height: 40.0,
                                           alignment: Alignment.center,
                                           decoration: new BoxDecoration(
-                                            border: Border.all(
-                                              color: Color(0xFF63d471)
-                                                  .withOpacity(0.5),
-                                              width: 1.5,
-                                              style: BorderStyle.solid,
-                                            ),
+                                            border: (presentKey == index)
+                                                ? Border.all(
+                                                    color: Color(0xFF63d471)
+                                                        .withOpacity(0.5),
+                                                    width: 1.5,
+                                                    style: BorderStyle.solid,
+                                                  )
+                                                : Border.all(width: 0),
                                             shape: BoxShape.circle,
                                             // color: (presentKey == index)
                                             //     ? const Color.fromRGBO(
@@ -250,8 +252,8 @@ class _ScheduleState extends State<Schedule> {
                                                     begin: Alignment.topLeft,
                                                     end: Alignment.bottomRight,
                                                     colors: [
-                                                      Color(0xFF78e08f),
-                                                      Color(0xFF396b4b),
+                                                      Color(0xFF282D31),
+                                                      Color(0xFF282D31),
                                                     ],
                                                   ),
                                           ),
@@ -262,9 +264,12 @@ class _ScheduleState extends State<Schedule> {
                                               new Text(
                                                 arrayDay[index].toString(),
                                                 style: new TextStyle(
-                                                    fontSize: 12.0,
-                                                    fontWeight:
-                                                        FontWeight.w400),
+                                                  fontSize: 12.0,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: (presentKey == index)
+                                                      ? Colors.black
+                                                      : Colors.white,
+                                                ),
                                               ),
                                               (presentKey == index) // Dot
                                                   ? new Container(
