@@ -91,9 +91,17 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
   }
 
   Widget listTile(int index) {
-    return Padding(
-      padding: EdgeInsets.all(10),
-      child: getNu(Padding(
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: getNu(Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          border: Border.all(
+            style: BorderStyle.solid,
+            width: 1.5,
+            color: Colors.grey[700].withOpacity(0.3),
+          ),
+        ),
         padding: EdgeInsets.all(10),
         child: Row(children: [
           SizedBox(
@@ -258,7 +266,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
           ),
           depth: 5,
           intensity: 1,
-          lightSource: LightSource.topLeft,
+          lightSource: LightSource.top,
           shadowLightColor: Colors.grey[700].withOpacity(0.5),
           shadowDarkColor: Colors.black,
         ),

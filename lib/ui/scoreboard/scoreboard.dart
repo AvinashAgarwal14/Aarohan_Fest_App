@@ -35,17 +35,18 @@ List<DropdownMenuItem<String>> eventList = [
   DropdownMenuItem(
     child: Text(
       "Capture The Flag",
-      style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
     ),
     value: "CTF",
   ),
   DropdownMenuItem(
-    child:
-        Text("Digital Fortress", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+    child: Text("Digital Fortress",
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
     value: "Digitalfortress",
   ),
   DropdownMenuItem(
-    child: Text("Freemex", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+    child: Text("Freemex",
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
     value: "Freemex",
   ),
 //  DropdownMenuItem(
@@ -58,7 +59,7 @@ List<DropdownMenuItem<String>> eventList = [
 //  ),
   DropdownMenuItem(
     child: Text("Online Treasure Hunt",
-        style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
     value: "OTH",
   ),
 //  DropdownMenuItem(
@@ -302,11 +303,13 @@ class _ScoreboardState extends State<Scoreboard> {
                                         opacity: 0.8,
                                         child: PaginatedDataTable(
                                             header: Center(
-                                                child: Text(
-                                              'Score Card',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
+                                              child: Text(
+                                                'Score Card',
+                                                style: TextStyle(
+                                                    // color: Colors.white,
+                                                    ),
+                                              ),
+                                            ),
                                             rowsPerPage: _rowsPerPage,
                                             onRowsPerPageChanged: (int value) {
                                               setState(() {
@@ -319,7 +322,8 @@ class _ScoreboardState extends State<Scoreboard> {
                                               DataColumn(
                                                   label: const Text('Rank',
                                                       style: TextStyle(
-                                                          color: Colors.white)),
+                                                          // color: Colors.white,
+                                                          )),
                                                   numeric: true,
                                                   onSort: (int columnIndex,
                                                           bool ascending) =>
@@ -328,16 +332,22 @@ class _ScoreboardState extends State<Scoreboard> {
                                                           columnIndex,
                                                           ascending)),
                                               DataColumn(
-                                                label: const Text('User',
-                                                    style: TextStyle(
-                                                        color: Colors.white)),
+                                                label: const Text(
+                                                  'User',
+                                                  style: TextStyle(
+                                                      // color: Colors.white,
+                                                      ),
+                                                ),
                                                 // tooltip: d.email,
                                                 numeric: true,
                                               ),
                                               DataColumn(
-                                                  label: const Text('Score',
-                                                      style: TextStyle(
-                                                          color: Colors.white)),
+                                                  label: const Text(
+                                                    'Score',
+                                                    style: TextStyle(
+                                                        // color: Colors.white,
+                                                        ),
+                                                  ),
                                                   numeric: true,
                                                   onSort: (int columnIndex,
                                                           bool ascending) =>
@@ -346,9 +356,12 @@ class _ScoreboardState extends State<Scoreboard> {
                                                           columnIndex,
                                                           ascending)),
                                               DataColumn(
-                                                label: const Text('Email',
-                                                    style: TextStyle(
-                                                        color: Colors.white)),
+                                                label: const Text(
+                                                  'Email',
+                                                  style: TextStyle(
+                                                      // color: Colors.white,
+                                                      ),
+                                                ),
                                               ),
                                             ],
                                             source: _userDataSource),
@@ -358,7 +371,9 @@ class _ScoreboardState extends State<Scoreboard> {
                                 )
                               : Center(
                                   child: Text("Choose Your Event",
-                                      style: TextStyle(color: Colors.white))))
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ))))
                         ],
                       ),
 
@@ -420,7 +435,7 @@ class _ScoreboardState extends State<Scoreboard> {
   Widget backButton() {
     return NeumorphicButton(
       onPressed: () {
-       Navigator.of(context).pop();
+        Navigator.of(context).pop();
       },
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(0),
