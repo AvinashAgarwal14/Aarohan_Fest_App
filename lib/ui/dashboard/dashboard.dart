@@ -2,14 +2,8 @@ import 'dart:async';
 import 'package:arhn_app_2021/model/date_model.dart';
 import 'package:arhn_app_2021/model/event.dart';
 import 'package:arhn_app_2021/model/event_type_model.dart';
-import 'package:arhn_app_2021/model/events_model.dart';
-import 'package:arhn_app_2021/ui/account/login.dart';
-import 'package:arhn_app_2021/ui/scoreboard/scoreboard.dart';
-import 'package:arhn_app_2021/ui/search_by_tags/tags.dart';
-import 'package:arhn_app_2021/util/app_widgets.dart';
 import 'package:arhn_app_2021/util/event_details.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -18,12 +12,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart' show SystemChrome, rootBundle;
+import 'package:flutter/services.dart' show SystemChrome;
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import '../../util/drawer.dart';
 import './dashboard_layout.dart';
-import './newsfeed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:barcode_scan_fix/barcode_scan.dart';
 import '../eurekoin/eurekoin.dart';
@@ -123,7 +116,6 @@ class _DashboardState extends State<Dashboard> {
 
     dates = getDates();
     eventsType = getEventTypes();
-    // events = getEvents();
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -153,12 +145,12 @@ class _DashboardState extends State<Dashboard> {
     setState(() {
       _showDate = _scontroller.offset < 50;
       _showCategory = _scontroller.offset < 200;
-      //  _showSearchBox = _scontroller.offset > 50;
     });
   }
 
   Future getJSON() {
-    return rootBundle.loadString('aarohan_events.json');
+    return DefaultAssetBundle.of(context)
+        .loadString('assets/aarohan_events.json');
   }
 
   int selectedIndexC = 0;
@@ -246,11 +238,6 @@ class _DashboardState extends State<Dashboard> {
                                                 BorderRadius.circular(4),
                                             color: Color(0xFF2C3035),
                                           ),
-                                          /*margin: EdgeInsets.only(
-                                              left: 24,
-                                              right: 24,
-                                              top: 10,
-                                              bottom: 10),*/
                                           child: Neumorphic(
                                             style: NeumorphicStyle(
                                               shape: NeumorphicShape.flat,
@@ -281,48 +268,16 @@ class _DashboardState extends State<Dashboard> {
                                                 },
                                                 controller: textFieldController,
                                                 focusNode: myFocusNode,
-                                                //  style: TextStyle(color: background),
                                                 decoration: InputDecoration(
-                                                  // fillColor: Color(0xFF13171a),
                                                   filled: true,
                                                   focusColor: Color(0xff03A062),
                                                   prefixIcon:
                                                       Icon(Icons.search),
-
-                                                  // border: OutlineInputBorder(),
-                                                  //labelText: "Search Events"
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
-
-                                        /* TextField(
-                                          onChanged: (String value) async {
-                                            setState(() {
-                                              showEvents = events
-                                                  .where((event) =>
-                                                      event != null &&
-                                                      event.title
-                                                          .toString()
-                                                          .toLowerCase()
-                                                          .contains(value
-                                                              .toLowerCase()))
-                                                  .toList();
-                                            });
-                                          },
-                                          controller: textFieldController,
-                                          focusNode: myFocusNode,
-                                          style: TextStyle(color: background),
-                                          decoration: InputDecoration(
-                                            fillColor: Colors.white, filled: true,
-
-                                            focusColor: Color(0xff03A062),
-                                            prefixIcon: Icon(Icons.search),
-                                            border: OutlineInputBorder(),
-                                            //labelText: "Search Events"
-                                          ),
-                                        ),*/
                                       ),
                                     ),
                                   ),
@@ -803,7 +758,7 @@ class _DashboardState extends State<Dashboard> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: <Widget>[
-                                                       Text(
+                                                        Text(
                                                           showEvents[index]
                                                               .title,
                                                           style: TextStyle(

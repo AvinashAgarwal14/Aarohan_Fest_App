@@ -6,10 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
-import 'dart:io';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as JSON;
 import 'package:arhn_app_2021/ui/account/login.dart';
 
 class NavigationDrawer extends StatefulWidget {
@@ -63,12 +59,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               textColor: Color.fromRGBO(255, 255, 255, 1.0),
               selectedColor: Theme.of(context).primaryColor.withOpacity(1.0),
               child: ListView(padding: EdgeInsets.zero, children: <Widget>[
-                // DrawerHeader(
-                //   padding: EdgeInsets.all(0.0),
-                //   child: Image.asset("images/gifs/pacman.gif", fit: BoxFit.cover),
-                // ),
                 Container(
-                  // color: Colors.blue[200].withOpacity(1),
                   child: currentUser != null
                       ? ListTile(
                           title: Text(
@@ -132,7 +123,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   },
                 ),
 
-                
                 // ListTile(
                 //   leading: Icon(
                 //     Icons.casino,
@@ -187,62 +177,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     onTap: () {
                       // Navigator.popUntil(
                       //     context, (ModalRoute.withName('/ui/account/login')));
-                      Navigator.of(context)
-                          .pushNamed("/ui/scoreboard");
+                      Navigator.of(context).pushNamed("/ui/scoreboard");
                     }),
-                // ListTile(
-                //     leading: Icon(
-                //       Icons.image,
-                //     ),
-                //     title: Text(
-                //       "Share Aarohan's Memory",
-                //     ),
-                //     onTap: () {
-                //       Navigator.popUntil(
-                //           context, (ModalRoute.withName('/ui/account/login')));
-                //       Navigator.of(context).pushNamed("/ui/share_memories");
-                //     }),
-
-                // ListTile(
-                //     leading: Icon(
-                //       Icons.youtube_searched_for,
-                //     ),
-                //     title: Text(
-                //       "Tags",
-                //     ),
-                //     onTap: () {
-                //       Navigator.popUntil(
-                //           context, (ModalRoute.withName('/ui/account/login')));
-                //       Navigator.of(context).pushNamed("/ui/tags");
-                //     }),
-
-                // ListTile(
-                //   leading: Icon(
-                //     Icons.my_location,
-                //   ),
-                //   title: Text(
-                //     "Maps",
-                //   ),
-                //   onTap: (() {
-                //     Navigator.popUntil(
-                //         context, (ModalRoute.withName('/ui/dashboard')));
-                //     Navigator.of(context).push(SlideLeftRoute(widget: MapPage()));
-                //   }),
-                // ),
-                // ListTile(
-                //   leading: Icon(
-                //     Icons.map,
-                //   ),
-                //   title: Text(
-                //     "Interficio",
-                //   ),
-                //   onTap: (() {
-                //     Navigator.popUntil(
-                //         context, (ModalRoute.withName('/ui/account/login')));
-                //     Navigator.of(context)
-                //         .pushNamed("/interficio/interficio.dart");
-                //   }),
-                // ),
                 ListTile(
                     title: Text("Team Aavishkar",
                         style: TextStyle(

@@ -87,38 +87,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - aarohan_events.json
     - fonts/Orbitron-Medium.ttf
     - images/
-    - images/gifs/
-    - images/Contributors/
     - assets/
-    - assets/images/
     - lib/ui/arcade/images/
-    - assets/Aarohan_logo.jpg    
-    - assets/INTRO1.png
-    - assets/INTRO2.png
-    - assets/INTRO3.png
-    - assets/AU1.png
-    - assets/AU2.png
-    - assets/AU3.png
-    - assets/AU4.png
-    - assets/SplashScreen.gif
-    - assets/SSinghal.jpeg
-    - assets/PJain.jpeg
-    - assets/SChak.jpeg
-    - assets/DRoy.jpeg
-    - assets/VA.jpeg
-    - assets/SM.jpeg
-    - assets/SNayak.jpeg
-    - assets/AB.jpeg
-    - assets/AshA.jpeg
-    - assets/DDas.jpeg
-    - assets/PSG.jpeg
-    - assets/ST.jpeg
-    - assets/PB.jpeg
-    - assets/SRay.jpeg
-    - assets/Shr.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
