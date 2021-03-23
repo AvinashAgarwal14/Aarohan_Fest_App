@@ -477,7 +477,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
-    String apiUrl = "https://eurkoin.nitdgplug.org/api/exists/?token=$encoded";
+    String apiUrl = "https://eurekoin.nitdgplug.org/api/exists/?token=$encoded";
     http.Response response = await http.get(apiUrl);
     var status = json.decode(response.body)['status'];
     if (status == '1') {
@@ -497,7 +497,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     var name = currentUser.providerData[1].displayName;
 
     String apiUrl =
-        "https://eurkoin.nitdgplug.org/api/register?name=$name&email=$email&referred_invite_code=$referalCode&image=${currentUser.providerData[1].photoUrl}";
+        "https://eurekoin.nitdgplug.org/api/register?name=$name&email=$email&referred_invite_code=$referalCode&image=${currentUser.providerData[1].photoUrl}";
     http.Response response = await http.get(apiUrl);
     var status = json.decode(response.body)['status'];
     if (status == '0') {
@@ -515,7 +515,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     var email = currentUser.providerData[1].email;
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
-    String apiUrl = "https://eurkoin.nitdgplug.org/api/coins/?token=$encoded";
+    String apiUrl = "https://eurekoin.nitdgplug.org/api/coins/?token=$encoded";
     http.Response response = await http.get(apiUrl);
     print(response);
     var status = json.decode(response.body)['coins'];
@@ -530,7 +530,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl =
-        "https://eurkoin.nitdgplug.org/api/invite_code/?token=$encoded";
+        "https://eurekoin.nitdgplug.org/api/invite_code/?token=$encoded";
     http.Response response = await http.get(apiUrl);
     print(response.body);
     var referralCode = json.decode(response.body)['invite_code'];
@@ -683,7 +683,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl =
-        "https://eurkoin.nitdgplug.org/api/coupon/?token=$encoded&code=$coupon";
+        "https://eurekoin.nitdgplug.org/api/coupon/?token=$encoded&code=$coupon";
     print(apiUrl);
     http.Response response = await http.get(apiUrl);
     print(response.body);
@@ -701,7 +701,8 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
 
-    String apiUrl = "https://eurkoin.nitdgplug.org/api/history/?token=$encoded";
+    String apiUrl =
+        "https://eurekoin.nitdgplug.org/api/history/?token=$encoded";
     print(apiUrl);
     http.Response response = await http.get(apiUrl);
     setState(() {

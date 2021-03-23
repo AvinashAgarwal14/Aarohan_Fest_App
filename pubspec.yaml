@@ -89,6 +89,8 @@ flutter:
   assets:
     - fonts/Orbitron-Medium.ttf
     - images/
+    - images/gifs/
+    - images/Contributors/
     - assets/
     - lib/ui/arcade/images/
 
