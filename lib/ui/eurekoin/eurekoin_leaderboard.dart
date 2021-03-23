@@ -63,21 +63,21 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: CustomScrollView(slivers: [
-            SliverToBoxAdapter(child: Row(
-             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            SliverToBoxAdapter(
+                child: Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 backButton(),
-                SizedBox(width: 20,),
-                 DecodingTextEffect(
-                                "Leaderboard",
-                                decodeEffect: DecodeEffect.fromStart,
-                                textStyle: GoogleFonts.josefinSans(
-                                    fontSize: 30,
-                                    color: Colors.white //(0xFF6B872B),
-                                    ),
-                              ),
-                              
-
+                SizedBox(
+                  width: 20,
+                ),
+                DecodingTextEffect(
+                  "Leaderboard",
+                  decodeEffect: DecodeEffect.fromStart,
+                  textStyle: GoogleFonts.josefinSans(
+                      fontSize: 30, color: Colors.white //(0xFF6B872B),
+                      ),
+                ),
               ],
             )),
             SliverToBoxAdapter(child: getToRankView()),
@@ -100,7 +100,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
             width: 10,
           ),
           Text(
-            "${index+1}",
+            "${index + 1}",
             style: TextStyle(color: Colors.white),
           ),
           SizedBox(
@@ -139,7 +139,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
   Widget getTopRankTile(String name, int position, String imageUrl) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.only(left: 20,right: 20, top: 5,bottom: 5),
+      padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
       child: Stack(
         children: [
           getNuCirculer(CircleAvatar(
@@ -262,8 +262,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
           shadowLightColor: Colors.grey[700].withOpacity(0.5),
           shadowDarkColor: Colors.black,
         ),
-        child: c
-        );
+        child: c);
   }
 
   Widget getNuCirculer(Widget c) {
@@ -281,4 +280,3 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
         child: c);
   }
 }
-

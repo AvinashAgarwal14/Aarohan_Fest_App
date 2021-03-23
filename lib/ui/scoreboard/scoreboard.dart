@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -33,17 +35,17 @@ List<DropdownMenuItem<String>> eventList = [
   DropdownMenuItem(
     child: Text(
       "Capture The Flag",
-      style: TextStyle(fontWeight: FontWeight.bold),
+      style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
     ),
     value: "CTF",
   ),
   DropdownMenuItem(
     child:
-        Text("Digital Fortress", style: TextStyle(fontWeight: FontWeight.bold)),
+        Text("Digital Fortress", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
     value: "Digitalfortress",
   ),
   DropdownMenuItem(
-    child: Text("Freemex", style: TextStyle(fontWeight: FontWeight.bold)),
+    child: Text("Freemex", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
     value: "Freemex",
   ),
 //  DropdownMenuItem(
@@ -56,7 +58,7 @@ List<DropdownMenuItem<String>> eventList = [
 //  ),
   DropdownMenuItem(
     child: Text("Online Treasure Hunt",
-        style: TextStyle(fontWeight: FontWeight.bold)),
+        style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white)),
     value: "OTH",
   ),
 //  DropdownMenuItem(
@@ -120,11 +122,11 @@ class _ScoreboardState extends State<Scoreboard> {
       ctf,
       digitalfortress,
       freemex,
-   //   freepl,
-   //   interficio,
+      //   freepl,
+      //   interficio,
       oth
-   //   roadranger
-  ;
+      //   roadranger
+      ;
   UserDataSource _userDataSource = UserDataSource();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
@@ -163,10 +165,10 @@ class _ScoreboardState extends State<Scoreboard> {
       ctf = event.snapshot.value['ctf'];
       digitalfortress = event.snapshot.value['digitalfortress'];
       freemex = event.snapshot.value['freemex'];
-   //   freepl = event.snapshot.value['freepl'];
-   //   interficio = event.snapshot.value['interficio'];
+      //   freepl = event.snapshot.value['freepl'];
+      //   interficio = event.snapshot.value['interficio'];
       oth = event.snapshot.value['oth'];
-   //   roadranger = event.snapshot.value['roadranger'];
+      //   roadranger = event.snapshot.value['roadranger'];
     });
   }
 
@@ -177,10 +179,10 @@ class _ScoreboardState extends State<Scoreboard> {
       ctf = event.snapshot.value['ctf'];
       digitalfortress = event.snapshot.value['digitalfortress'];
       freemex = event.snapshot.value['freemex'];
-  //    freepl = event.snapshot.value['freepl'];
-  //    interficio = event.snapshot.value['interficio'];
+      //    freepl = event.snapshot.value['freepl'];
+      //    interficio = event.snapshot.value['interficio'];
       oth = event.snapshot.value['oth'];
-   //   roadranger = event.snapshot.value['roadranger'];
+      //   roadranger = event.snapshot.value['roadranger'];
     });
   }
 
@@ -196,14 +198,14 @@ class _ScoreboardState extends State<Scoreboard> {
   @override
   Widget build(BuildContext context) {
     if (comingsoon != null &&
-        digitalfortress != null &&
-        freemex != null &&
-    //    freepl != null &&
-        oth != null &&
-        ctf != null
-       // && roadranger != null
-       // && interficio != null
-    ) {
+            digitalfortress != null &&
+            freemex != null &&
+            //    freepl != null &&
+            oth != null &&
+            ctf != null
+        // && roadranger != null
+        // && interficio != null
+        ) {
       print("comming soon: $comingsoon");
       if (comingsoon == false) {
         if (!firsttimeDatafetched) {
@@ -222,6 +224,7 @@ class _ScoreboardState extends State<Scoreboard> {
           child: Scaffold(
             key: _scaffoldKey,
             drawer: NavigationDrawer(),
+
             // appBar: AppBar(
             //   title: const Text('Live Scoreboard'),
             //   elevation: 10.0,
@@ -230,9 +233,19 @@ class _ScoreboardState extends State<Scoreboard> {
               //height: MediaQuery.of(context).size.height,
               //width: MediaQuery.of(context).size.width/2,
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("images/gifs/medal.gif"),
-                      fit: BoxFit.cover)),
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    Color(0xFF13171a),
+                    Color(0xFF32393f),
+                  ],
+                  stops: [
+                    0.1,
+                    0.35,
+                  ],
+                ),
+              ),
               child: RefreshIndicator(
                 displacement: 100.0,
                 backgroundColor: Colors.white,
@@ -244,23 +257,31 @@ class _ScoreboardState extends State<Scoreboard> {
                       ListView(
                         padding: const EdgeInsets.all(10.0),
                         children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.fromLTRB(50.0, 0.0, 30.0, 0.0),
-                            child: Text(
-                              "Live Scoreboard",
-                              style: GoogleFonts.josefinSans(
-                                fontSize: 35,
-                                color: Color(0xFF6B872B),
+                          Row(
+                            children: [
+                              backButton(),
+                              SizedBox(
+                                width: 20,
                               ),
-                            ),
+                              DecodingTextEffect(
+                                "Scoreboard",
+                                decodeEffect: DecodeEffect.fromStart,
+                                textStyle: GoogleFonts.josefinSans(
+                                    fontSize: 30,
+                                    color: Colors.white //(0xFF6B872B),
+                                    ),
+                              ),
+                            ],
                           ),
                           Container(
-                            padding: EdgeInsets.only(top: 12.0),
+                            padding: EdgeInsets.only(top: 10.0, bottom: 20),
                             alignment: Alignment.topCenter,
                             child: DropdownButton(
+                              dropdownColor: Colors.black,
                               value: Selected,
                               iconSize: 13.0,
-                              hint: Text("Select Event"),
+                              hint: Text("Select Event",
+                                  style: TextStyle(color: Colors.white)),
                               items: eventList,
                               elevation: 20,
                               onChanged: ((value) {
@@ -273,66 +294,83 @@ class _ScoreboardState extends State<Scoreboard> {
                             ),
                           ),
                           ((Selected != null)
-                              ? Stack(
-                                  alignment: AlignmentDirectional.topCenter,
-                                  children: <Widget>[
-                                    Opacity(
-                                      opacity: 0.8,
-                                      child: PaginatedDataTable(
-                                          header: Center(
-                                              child: const Text('Score Card')),
-                                          rowsPerPage: _rowsPerPage,
-                                          onRowsPerPageChanged: (int value) {
-                                            setState(() {
-                                              _rowsPerPage = value;
-                                            });
-                                          },
-                                          sortColumnIndex: _sortColumnIndex,
-                                          sortAscending: _sortAscending,
-                                          columns: <DataColumn>[
-                                            DataColumn(
-                                                label: const Text('Rank'),
+                              ? getNu(
+                                  Stack(
+                                    alignment: AlignmentDirectional.topCenter,
+                                    children: <Widget>[
+                                      Opacity(
+                                        opacity: 0.8,
+                                        child: PaginatedDataTable(
+                                            header: Center(
+                                                child: Text(
+                                              'Score Card',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                            rowsPerPage: _rowsPerPage,
+                                            onRowsPerPageChanged: (int value) {
+                                              setState(() {
+                                                _rowsPerPage = value;
+                                              });
+                                            },
+                                            sortColumnIndex: _sortColumnIndex,
+                                            sortAscending: _sortAscending,
+                                            columns: <DataColumn>[
+                                              DataColumn(
+                                                  label: const Text('Rank',
+                                                      style: TextStyle(
+                                                          color: Colors.white)),
+                                                  numeric: true,
+                                                  onSort: (int columnIndex,
+                                                          bool ascending) =>
+                                                      _sort<num>(
+                                                          (User d) => d.rank,
+                                                          columnIndex,
+                                                          ascending)),
+                                              DataColumn(
+                                                label: const Text('User',
+                                                    style: TextStyle(
+                                                        color: Colors.white)),
+                                                // tooltip: d.email,
                                                 numeric: true,
-                                                onSort: (int columnIndex,
-                                                        bool ascending) =>
-                                                    _sort<num>(
-                                                        (User d) => d.rank,
-                                                        columnIndex,
-                                                        ascending)),
-                                            DataColumn(
-                                              label: const Text('User'),
-                                              // tooltip: d.email,
-                                              numeric: true,
-                                            ),
-                                            DataColumn(
-                                                label: const Text('Score'),
-                                                numeric: true,
-                                                onSort: (int columnIndex,
-                                                        bool ascending) =>
-                                                    _sort<num>(
-                                                        (User d) => d.score,
-                                                        columnIndex,
-                                                        ascending)),
-                                            DataColumn(
-                                              label: const Text('Email'),
-                                            ),
-                                          ],
-                                          source: _userDataSource),
-                                    ),
-                                  ],
+                                              ),
+                                              DataColumn(
+                                                  label: const Text('Score',
+                                                      style: TextStyle(
+                                                          color: Colors.white)),
+                                                  numeric: true,
+                                                  onSort: (int columnIndex,
+                                                          bool ascending) =>
+                                                      _sort<num>(
+                                                          (User d) => d.score,
+                                                          columnIndex,
+                                                          ascending)),
+                                              DataColumn(
+                                                label: const Text('Email',
+                                                    style: TextStyle(
+                                                        color: Colors.white)),
+                                              ),
+                                            ],
+                                            source: _userDataSource),
+                                      ),
+                                    ],
+                                  ),
                                 )
-                              : Center(child: Text("Choose Your Event")))
+                              : Center(
+                                  child: Text("Choose Your Event",
+                                      style: TextStyle(color: Colors.white))))
                         ],
                       ),
-                      FloatingActionButton(
-                        elevation: 0,
-                        foregroundColor: Color(0xFF6B872B),
-                        backgroundColor: Colors.transparent,
-                        onPressed: () {
-                          _scaffoldKey.currentState.openDrawer();
-                        },
-                        child: Icon(Icons.menu),
-                      ),
+
+                      // FloatingActionButton(
+                      //   elevation: 0,
+                      //   foregroundColor: Color(0xFF6B872B),
+                      //   backgroundColor: Colors.transparent,
+                      //   onPressed: () {
+                      //     _scaffoldKey.currentState.openDrawer();
+                      //   },
+                      //   child: Icon(Icons.menu),
+                      // ),
                     ],
                   ),
                 ),
@@ -377,6 +415,70 @@ class _ScoreboardState extends State<Scoreboard> {
         ),
       );
     }
+  }
+
+  Widget backButton() {
+    return NeumorphicButton(
+      onPressed: () {
+       Navigator.of(context).pop();
+      },
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(0),
+      style: NeumorphicStyle(
+        shape: NeumorphicShape.concave,
+        boxShape: NeumorphicBoxShape.circle(),
+        depth: 7.5,
+        intensity: 1.0,
+        lightSource: LightSource.topLeft,
+        shadowLightColor: Colors.grey[700].withOpacity(0.6),
+        shadowDarkColor: Colors.black,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: Color(0xFF63d471).withOpacity(0.5),
+            width: 1.5,
+            style: BorderStyle.solid,
+          ),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF396b4b),
+              Color(0xFF78e08f),
+            ],
+          ),
+        ),
+        height: 50.0,
+        width: 50.0,
+        child: Center(
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            // size: 25,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getNu(Widget c) {
+    return Neumorphic(
+        //margin: EdgeInsets.symmetric(horizontal: 10),
+        style: NeumorphicStyle(
+          color: Color(0xFF292D32),
+          shape: NeumorphicShape.flat,
+          boxShape: NeumorphicBoxShape.roundRect(
+            BorderRadius.circular(12.0),
+          ),
+          depth: 5,
+          intensity: 1,
+          lightSource: LightSource.topLeft,
+          shadowLightColor: Colors.grey[700].withOpacity(0.5),
+          shadowDarkColor: Colors.black,
+        ),
+        child: c);
   }
 
   Future<dynamic> getctfScoreData() async {

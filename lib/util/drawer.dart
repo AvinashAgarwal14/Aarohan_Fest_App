@@ -188,7 +188,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       // Navigator.popUntil(
                       //     context, (ModalRoute.withName('/ui/account/login')));
                       Navigator.of(context)
-                          .pushReplacementNamed("/ui/scoreboard");
+                          .pushNamed("/ui/scoreboard");
                     }),
                 // ListTile(
                 //     leading: Icon(
