@@ -32,13 +32,13 @@ class AavishkarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // Wrapped within Dynamic Theme to change the theme
     // By toggling the change theme
-
     return MaterialApp(
       title: "Aarohan App",
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Color(0xff03A062),
+      darkTheme: ThemeData.dark().copyWith(
+        accentColor: Color(0xff03A062),
+        primaryColor: Color(0xFF292D32),
       ),
       initialRoute: "/splash",
       routes: <String, WidgetBuilder>{

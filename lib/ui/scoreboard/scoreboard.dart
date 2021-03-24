@@ -260,7 +260,7 @@ class _ScoreboardState extends State<Scoreboard> {
                         children: <Widget>[
                           Row(
                             children: [
-                              backButton(),
+                              menuButton(),
                               SizedBox(
                                 width: 20,
                               ),
@@ -432,10 +432,10 @@ class _ScoreboardState extends State<Scoreboard> {
     }
   }
 
-  Widget backButton() {
+  Widget menuButton() {
     return NeumorphicButton(
       onPressed: () {
-        Navigator.of(context).pop();
+        _scaffoldKey.currentState.openDrawer();
       },
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(0),
@@ -469,7 +469,7 @@ class _ScoreboardState extends State<Scoreboard> {
         width: 50.0,
         child: Center(
           child: Icon(
-            Icons.arrow_back,
+            Icons.menu,
             color: Colors.white,
             // size: 25,
           ),

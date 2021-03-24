@@ -97,11 +97,22 @@ class CollapsibleBody extends StatelessWidget {
                         child: FlatButton(
                             onPressed: onSave,
                             textTheme: ButtonTextTheme.normal,
-                            child: const Text('Send'))),
+                            child: const Text(
+                              'Send',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ))),
                     Container(
                         margin: const EdgeInsets.only(right: 8.0),
                         child: FlatButton(
-                            onPressed: onCancel, child: const Text('Cancel')))
+                            onPressed: onCancel,
+                            child: const Text(
+                              'Cancel',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            )))
                   ]))
     ]);
   }
@@ -257,7 +268,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                                     //fillColor: Colors.black,
                                     labelText:
                                         "Amount", //helperStyle:  TextStyle(color: Colors.blue),
-                                    labelStyle: TextStyle(color: Colors.grey),
+                                    labelStyle: TextStyle(color: Colors.white),
                                   ),
                                   validator: (val) => val == "" ? val : null),
                               TextFormField(
@@ -265,7 +276,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                                   decoration: InputDecoration(
                                     hintText: "Name",
                                     labelText: "Transfer To",
-                                    labelStyle: TextStyle(color: Colors.grey),
+                                    labelStyle: TextStyle(color: Colors.white),
                                   ),
                                   validator: (val) => val == "" ? val : null),
                               (suggestionList.length != 0)
@@ -318,37 +329,32 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
-    return new Theme(
-        data: themeData,
-        child: SingleChildScrollView(
-            child: new DefaultTextStyle(
-          style: Theme.of(context).textTheme.subhead,
-          child: SafeArea(
-            top: false,
-            bottom: false,
-            child: Container(
-              child: Theme(
-                  data: themeData,
-                  //.copyWith(cardColor: Colors.grey.shade50),
-                  child: ExpansionPanelList(
-                      expansionCallback: (int index, bool isExpanded) {
-                        setState(() {
-                          _transferEurekoinItem[index].isExpanded = !isExpanded;
-                        });
-                        if (_transferEurekoinItem[index].isExpanded == true)
-                          widget.parent.moveDown();
-                      },
-                      children: _transferEurekoinItem
-                          .map((TransferEurekoinItem<dynamic> item) {
-                        return ExpansionPanel(
-                          isExpanded: item.isExpanded,
-                          headerBuilder: item.headerBuilder,
-                          body: item.build(),
-                        );
-                      }).toList())),
-            ),
-          ),
-        )));
+    return SingleChildScrollView(
+        child: new DefaultTextStyle(
+      style: Theme.of(context).textTheme.subhead,
+      child: SafeArea(
+        top: false,
+        bottom: false,
+        child: Container(
+          child: ExpansionPanelList(
+              expansionCallback: (int index, bool isExpanded) {
+                setState(() {
+                  _transferEurekoinItem[index].isExpanded = !isExpanded;
+                });
+                if (_transferEurekoinItem[index].isExpanded == true)
+                  widget.parent.moveDown();
+              },
+              children: _transferEurekoinItem
+                  .map((TransferEurekoinItem<dynamic> item) {
+                return ExpansionPanel(
+                  isExpanded: item.isExpanded,
+                  headerBuilder: item.headerBuilder,
+                  body: item.build(),
+                );
+              }).toList()),
+        ),
+      ),
+    ));
   }
 
   Future<int> transferEurekoin(String amount, String transerTo) async {
