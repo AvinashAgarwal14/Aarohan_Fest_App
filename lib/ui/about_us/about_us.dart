@@ -179,7 +179,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                       padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 0.0),
                       child: new ClipRRect(
                           borderRadius: new BorderRadius.circular(10.0),
-                          child: new Image.asset("assets/AU1.png")),
+                          child: new Image.asset("assets/1096.png")),
                     ),
                     new Container(
                       alignment: Alignment.center,
@@ -210,7 +210,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                                 new ClipRRect(
                                   borderRadius: new BorderRadius.circular(10.0),
                                   child: new Image.asset(
-                                    "assets/AU2.png",
+                                    "assets/aaraap2.png",
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -231,6 +231,9 @@ class _AboutUsPageState extends State<AboutUsPage>
                             )),
                       ),
                     ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     new FadeTransition(
                       opacity: boxOpacityTwo,
                       child: new SlideTransition(
@@ -244,9 +247,13 @@ class _AboutUsPageState extends State<AboutUsPage>
                               new ClipRRect(
                                 borderRadius: new BorderRadius.circular(10.0),
                                 child: new Image.asset(
-                                  "assets/AU3.png",
-                                  fit: BoxFit.fill,
+                                  "assets/brain.png",
+                                  // fit: BoxFit.fill,
+                                  height: 300.0,
                                 ),
+                              ),
+                              SizedBox(
+                                height: 20.0,
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -277,10 +284,13 @@ class _AboutUsPageState extends State<AboutUsPage>
                             child: Column(
                               children: <Widget>[
                                 new ClipRRect(
-                                    borderRadius:
-                                        new BorderRadius.circular(10.0),
-                                    child: new Image.asset("assets/AU4.png",
-                                        fit: BoxFit.fill)),
+                                  borderRadius: new BorderRadius.circular(10.0),
+                                  child: new Image.asset(
+                                    "assets/cubes.gif",
+                                    // fit: BoxFit.fill,
+                                    height: 300.0,
+                                  ),
+                                ),
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),

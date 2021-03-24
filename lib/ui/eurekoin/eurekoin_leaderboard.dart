@@ -45,10 +45,15 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
     });
     String url = "https://eurekoin.nitdgplug.org/api/leaderboard/";
     http.Response response = await http.get(url);
-    Map userMap = json.decode(response.body);
-    userMap.forEach((key, value) {
-      _data.add({"name": key, "eurekoins": value});
-    });
+    List<dynamic> dataList = json.decode(response.body);
+
+    _data = dataList
+        .map((data) => {
+              "name": data["username"],
+              "eurekoins": data["coins"],
+              "imageURL": data["imageURL"]
+            })
+        .toList();
     setState(() {
       _isLoading = false;
     });
@@ -135,8 +140,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
             width: 20,
           ),
           CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://otlibrary.com/wp-content/gallery/king-penguin/KingPenguin_C.jpg"),
+            backgroundImage: NetworkImage(_data[index]["imageURL"]),
             radius: 30,
           ),
           SizedBox(
@@ -218,21 +222,18 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
   Widget getToRankView() {
     return Stack(
       children: [
-        getTopRankTile(_data[0]["name"], 1,
-            "https://otlibrary.com/wp-content/gallery/king-penguin/KingPenguin_C.jpg"),
+        getTopRankTile(_data[0]["name"], 1, _data[0]["imageURL"]),
 
         Container(
           margin: EdgeInsets.only(top: 80),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              getTopRankTile(_data[1]["name"], 2,
-                  "https://otlibrary.com/wp-content/gallery/king-penguin/KingPenguin_C.jpg"),
+              getTopRankTile(_data[1]["name"], 2, _data[1]["imageURL"]),
               SizedBox(
                 width: 70,
               ),
-              getTopRankTile(_data[2]["name"], 3,
-                  "https://otlibrary.com/wp-content/gallery/king-penguin/KingPenguin_C.jpg")
+              getTopRankTile(_data[2]["name"], 3, _data[2]["imageURL"])
             ],
           ),
         )

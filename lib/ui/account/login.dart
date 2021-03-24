@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import './loginAnimation.dart';
@@ -157,21 +158,22 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.stretch,
                                             children: <Widget>[
-//                                  SizedBox(
-//                                      height: MediaQuery.of(context)
-//                                          .size
-//                                          .height /
-//                                          3),
+                                            Image.asset(
+                                              "assets/aarohan-logo.png",
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.45,
+                                            ),
+                                            SizedBox(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    15),
                                             new Padding(
                                               padding: const EdgeInsets.only(),
-                                              child: new InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      animationStatus = 1;
-                                                    });
-                                                  },
-                                                  child: signIn(
-                                                      "Sign in with Google")),
+                                              child:
+                                                  signIn("Sign in with Google"),
                                             ),
                                           ])))
                                     : FutureBuilder(
@@ -277,42 +279,60 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
 //  }
 
   signIn(String str) {
-    return (new Container(
-      width: MediaQuery.of(context).size.width - 80.0,
-      height: 60.0,
-      alignment: FractionalOffset.center,
-      decoration: new BoxDecoration(
-        color: const Color.fromRGBO(123, 123, 123, 1.0),
-        borderRadius: new BorderRadius.all(const Radius.circular(30.0)),
+    return NeumorphicButton(
+      curve: Curves.bounceInOut,
+      onPressed: () {
+        setState(() {
+          animationStatus = 1;
+        });
+      },
+      margin: EdgeInsets.symmetric(horizontal: 30.0),
+      padding: EdgeInsets.zero,
+      style: NeumorphicStyle(
+        depth: -5,
+        intensity: 1,
+        shadowDarkColor: Colors.black,
+        shadowLightColor: Colors.grey[700].withOpacity(0.5),
+        shape: NeumorphicShape.flat,
+        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30.0)),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            // child: Image( image: str.contains("Google")?AssetImage("images/googleicon.jpg"):AssetImage("images/facebookicon.jpg"),),
-            child: str.contains("Google")
-                ? Icon(
-                    google,
-                  )
-                : Icon(
-                    facebook,
-                  ),
-          ),
-          Text(
-            str,
-            maxLines: 1,
-            style: new TextStyle(
-              color: Color.fromRGBO(240, 240, 240, 1.0),
-              fontSize: 20.0,
-              fontWeight: FontWeight.w300,
-              letterSpacing: 0.3,
+      child: (new Container(
+        // width: MediaQuery.of(context).size.width - 80.0,
+        height: 60.0,
+        alignment: FractionalOffset.center,
+        decoration: new BoxDecoration(
+          color: const Color(0xFFEA4335),
+          borderRadius: new BorderRadius.all(const Radius.circular(30.0)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              // child: Image( image: str.contains("Google")?AssetImage("images/googleicon.jpg"):AssetImage("images/facebookicon.jpg"),),
+              child: str.contains("Google")
+                  ? Icon(
+                      google,
+                    )
+                  : Icon(
+                      facebook,
+                    ),
             ),
-          ),
-        ],
-      ),
-    ));
+            Text(
+              str,
+              maxLines: 1,
+              style: new TextStyle(
+                color: Color.fromRGBO(240, 240, 240, 1.0),
+                fontSize: 20.0,
+                fontWeight: FontWeight.w300,
+                letterSpacing: 0.3,
+              ),
+            ),
+          ],
+        ),
+      )),
+    );
   }
 
   Future<bool> _exit() async {
