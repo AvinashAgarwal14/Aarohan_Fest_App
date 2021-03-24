@@ -1,7 +1,4 @@
-
 import 'package:flutter/material.dart';
-
-
 
 import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
@@ -11,7 +8,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:arhn_app_2021/ui/account/login.dart';
-
 
 class NavigationDrawer extends StatefulWidget {
   final String pageName;
@@ -175,7 +171,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 
                 getListItem("Dashboard", "/ui/dashboard"),
                 getListItem("Eurekoin Wallet", "/ui/eurekoin"),
-                getListItem("Eurekoin leaderboard", "/eurekoin/leader_board"),
+                getListItem("Eurekoin Leaderboard", "/eurekoin/leader_board"),
                 getListItem("Arcade", "/ui/arcade_game"),
                 getListItem("Timeline", "/ui/schedule"),
                 getListItem("Scoreboard", "/ui/scoreboard"),
@@ -197,7 +193,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     getNuUp(
                       Padding(
                         padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-                                              child: Row(
+                        child: Row(
                           children: [
                             Icon(
                               Icons.logout,
@@ -225,9 +221,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 SizedBox(
                   height: 40,
                 ),
-
-
-
               ]),
             ),
           ),
@@ -543,7 +536,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     });
   }
 
- 
   Future<void> _logout() async {
     return showDialog(
         context: context,

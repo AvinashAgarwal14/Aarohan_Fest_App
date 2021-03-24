@@ -187,12 +187,12 @@ class _PacmanState extends State<Pacman> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Alert!",
+                            "Game Over!",
                             style: Theme.of(context).textTheme.title,
                           ),
                           SizedBox(height: 10.0),
                           Flexible(
-                            child: Text("Do you want to Logout?"),
+                            child: Text("What would you like to do?"),
                           ),
                           SizedBox(height: 10.0),
                           Row(
