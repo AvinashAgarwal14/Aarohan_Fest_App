@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:arhn_app_2021/util/drawer.dart';
-import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -74,10 +73,9 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
                 SizedBox(
                   width: 20,
                 ),
-                DecodingTextEffect(
+                Text(
                   "Leaderboard",
-                  decodeEffect: DecodeEffect.fromStart,
-                  textStyle: GoogleFonts.josefinSans(
+                  style: GoogleFonts.josefinSans(
                       fontSize: 30, color: Colors.white //(0xFF6B872B),
                       ),
                 ),
