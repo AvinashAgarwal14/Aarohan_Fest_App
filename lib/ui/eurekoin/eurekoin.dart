@@ -110,9 +110,7 @@ class DetailItem extends StatelessWidget {
       rowChildren.add(new SizedBox(
           width: 72.0,
           child: new IconButton(
-              icon: icon,
-              color: themeData.primaryColor,
-              onPressed: onPressed)));
+              icon: icon, color: themeData.accentColor, onPressed: onPressed)));
     } else {
       rowChildren.add(new SizedBox(
         width: 60.0,

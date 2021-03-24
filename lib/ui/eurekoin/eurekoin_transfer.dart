@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import './eurekoin.dart';
@@ -420,90 +421,157 @@ Widget PaymentSuccessDialog(context, message, amount, to) {
     context: context,
     builder: (context) => Center(
       child: SizedBox(
-        height: 310,
+        height: 360,
         child: Dialog(
           // backgroundColor:
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: _isLoading
-                ? Container(
-                    child: LinearProgressIndicator(),
-                  )
-                : Column(
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          color: message == "Successful!"
-                              ? Colors.green
-                              : Colors.red,
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
+          child: Neumorphic(
+            style: NeumorphicStyle(
+              shape: NeumorphicShape.flat,
+              boxShape: NeumorphicBoxShape.roundRect(
+                BorderRadius.circular(20.0),
+              ),
+              depth: 8.0,
+              intensity: 1.0,
+              lightSource: LightSource.top,
+              shadowLightColor: Colors.grey[700].withOpacity(0.55),
+              shadowDarkColor: Colors.black,
+            ),
+            child: Container(
+              color: Color(0xFF292D32),
+              padding: const EdgeInsets.all(16.0),
+              child: _isLoading
+                  ? Container(
+                      child: LinearProgressIndicator(),
+                    )
+                  : Column(
+                      children: <Widget>[
+                        Neumorphic(
+                          style: NeumorphicStyle(
+                            shape: NeumorphicShape.flat,
+                            boxShape: NeumorphicBoxShape.roundRect(
+                              BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            depth: 8.0,
+                            intensity: 1.0,
+                            lightSource: LightSource.top,
+                            shadowLightColor:
+                                Colors.grey[700].withOpacity(0.55),
+                            shadowDarkColor: Colors.black,
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: message == "Successful!"
+                                  ? Colors.green
+                                  : Colors.red,
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
+                            ),
+                            alignment: Alignment.bottomCenter,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 100, vertical: 20),
+                            child: Text(
+                              message,
+                              style: label,
+                            ),
                           ),
                         ),
-                        alignment: Alignment.bottomCenter,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-                        child: Text(
-                          message,
-                          style: label,
+                        Divider(),
+                        Neumorphic(
+                          margin: EdgeInsets.only(top: 10.0),
+                          style: NeumorphicStyle(
+                            shape: NeumorphicShape.flat,
+                            boxShape: NeumorphicBoxShape.roundRect(
+                              BorderRadius.circular(12.0),
+                            ),
+                            depth: 8.0,
+                            intensity: 1.0,
+                            lightSource: LightSource.top,
+                            shadowLightColor:
+                                Colors.grey[700].withOpacity(0.55),
+                            shadowDarkColor: Colors.black,
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 15.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF292D32),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      "DATE",
+                                      style: label,
+                                    ),
+                                    Text("TIME", style: label)
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[Text(date), Text(time)],
+                                ),
+                                Divider(),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text(
+                                          "TO",
+                                          style: label,
+                                        ),
+                                        Text(to),
+                                        // Text(
+                                        //   to,
+                                        //   style: subtitle,
+                                        // ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Divider(),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text(
+                                          "AMOUNT",
+                                          style: label,
+                                        ),
+                                        Text("\$ $amount"),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20.0),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                      Divider(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            "DATE",
-                            style: label,
-                          ),
-                          Text("TIME", style: label)
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[Text(date), Text(time)],
-                      ),
-                      SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "TO",
-                                style: label,
-                              ),
-                              Text(to),
-                              // Text(
-                              //   to,
-                              //   style: subtitle,
-                              // ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "AMOUNT",
-                                style: label,
-                              ),
-                              Text("\$ $amount"),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20.0),
-                    ],
-                  ),
+                      ],
+                    ),
+            ),
           ),
         ),
       ),

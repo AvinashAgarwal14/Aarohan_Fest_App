@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:arhn_app_2021/util/drawer.dart';
 import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -43,6 +44,8 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
     return new Theme(
       data: themeData,
       child: Scaffold(
+        key: _scaffoldKeyForSchedule,
+        drawer: NavigationDrawer(),
         body: SafeArea(
             child: Container(
           padding: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -67,7 +70,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
                 child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                backButton(),
+                menuButton(),
                 SizedBox(
                   width: 20,
                 ),
@@ -204,15 +207,15 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
           ),
         )
 
-        //  backButton()
+        //  menuButton()
       ],
     );
   }
 
-  Widget backButton() {
+  Widget menuButton() {
     return NeumorphicButton(
       onPressed: () {
-        Navigator.of(context).pop();
+        _scaffoldKeyForSchedule.currentState.openDrawer();
       },
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(0),
@@ -246,7 +249,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
         width: 50.0,
         child: Center(
           child: Icon(
-            Icons.arrow_back,
+            Icons.menu,
             color: Colors.white,
             // size: 25,
           ),
