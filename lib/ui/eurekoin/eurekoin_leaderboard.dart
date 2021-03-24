@@ -1,6 +1,9 @@
 import 'dart:convert';
 
-import 'package:arhn_app_2021/util/drawer.dart';
+
+import 'package:arhn_app_2021/util/drawer2.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -66,7 +69,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
       data: themeData,
       child: Scaffold(
         key: _scaffoldKeyForSchedule,
-        drawer: NavigationDrawer(),
+        drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
         body: SafeArea(
             child: Container(
           padding: EdgeInsets.only(top: 10, left: 10, right: 10),

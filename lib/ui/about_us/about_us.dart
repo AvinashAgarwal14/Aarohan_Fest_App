@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../util/drawer.dart';
+import '../../util/drawer2.dart';
 
 class AboutUsPage extends StatefulWidget {
   @override
@@ -148,7 +148,7 @@ class _AboutUsPageState extends State<AboutUsPage>
       },
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: NavigationDrawer(),
+        drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
         // appBar: AppBar(
         //   elevation: 0,
         //   title: Text("About Aavishkar"),

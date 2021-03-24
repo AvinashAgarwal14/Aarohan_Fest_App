@@ -1,7 +1,7 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../util/drawer.dart';
+import '../../util/drawer2.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -115,7 +115,7 @@ class _ContributorsState extends State<Contributors> {
       },
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: NavigationDrawer(),
+        drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
         backgroundColor: Colors.black,
         body: SafeArea(
           child: Container(

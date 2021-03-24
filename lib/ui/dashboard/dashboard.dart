@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show SystemChrome;
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import '../../util/drawer.dart';
+import '../../util/drawer2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:barcode_scan_fix/barcode_scan.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -156,9 +156,10 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    print("${ModalRoute.of(context).settings.name}");
     return Scaffold(
       key: _scaffoldKey,
-      drawer: NavigationDrawer(),
+      drawer: NavigationDrawer("/ui/dashboard"),
       body: SafeArea(
         child: Stack(
           children: [

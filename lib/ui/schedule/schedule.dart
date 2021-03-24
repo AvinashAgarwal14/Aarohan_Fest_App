@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../util/drawer.dart';
+import '../../util/drawer2.dart';
 import './day1.dart';
 import './day2.dart';
 import './day3.dart';
@@ -62,7 +62,7 @@ class _ScheduleState extends State<Schedule> {
       data: themeData,
       child: Scaffold(
         key: _scaffoldKeyForSchedule,
-        drawer: NavigationDrawer(),
+        drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
         body: SafeArea(
           child: Container(
             decoration: BoxDecoration(
