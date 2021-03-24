@@ -12,6 +12,7 @@ import 'package:arhn_app_2021/ui/arcade/pixel.dart';
 import 'package:arhn_app_2021/ui/arcade/player.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class Pacman extends StatefulWidget {
   @override
@@ -163,45 +164,96 @@ class _PacmanState extends State<Pacman> {
               barrierDismissible: false,
               context: context,
               builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Center(child: Text("Game Over!")),
-                  content: Text("Your Score : " + (score).toString()),
-                  actions: [
-                    RaisedButton(
-                      onPressed: () {
-                        //audioInGame.loop('pacman_beginning.wav');
-                        setState(() {
-                          player = numberInRow * 14 + 1;
-                          ghost = numberInRow * 2 - 2;
-                          ghost2 = numberInRow * 9 - 1;
-                          ghost3 = numberInRow * 11 - 2;
-                          paused = false;
-                          preGame = false;
-                          mouthClosed = false;
-                          direction = "right";
-                          food.clear();
-                          getFood();
-                          score = 0;
-                          Navigator.pop(context);
-                        });
-                      },
-                      textColor: Colors.white,
-                      padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Colors.green[200],
-                              Colors.green[400],
-                              Colors.green[800]
-                            ],
-                          ),
-                        ),
-                        padding: const EdgeInsets.all(10.0),
-                        child: const Text('Restart'),
+                return Dialog(
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  child: Neumorphic(
+                    style: NeumorphicStyle(
+                      shape: NeumorphicShape.flat,
+                      boxShape: NeumorphicBoxShape.roundRect(
+                        BorderRadius.circular(20.0),
                       ),
-                    )
-                  ],
+                      depth: 8.0,
+                      intensity: 1.0,
+                      lightSource: LightSource.top,
+                      shadowLightColor: Colors.grey[700].withOpacity(0.55),
+                      shadowDarkColor: Colors.black,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      height: 150,
+                      decoration: BoxDecoration(
+                          color: Color(0xFF292D32),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Alert!",
+                            style: Theme.of(context).textTheme.title,
+                          ),
+                          SizedBox(height: 10.0),
+                          Flexible(
+                            child: Text("Do you want to Logout?"),
+                          ),
+                          SizedBox(height: 10.0),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: NeumorphicButton(
+                                  curve: Curves.bounceInOut,
+                                  child: Center(child: Text("Exit")),
+                                  style: NeumorphicStyle(
+                                      shadowDarkColor: Colors.black,
+                                      shadowLightColor:
+                                          Colors.grey[700].withOpacity(0.6),
+                                      color: Colors.red,
+                                      shape: NeumorphicShape.flat,
+                                      boxShape: NeumorphicBoxShape.roundRect(
+                                          BorderRadius.circular(10.0))),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                              SizedBox(width: 10.0),
+                              Expanded(
+                                child: NeumorphicButton(
+                                  child: Center(child: Text("Restart")),
+                                  style: NeumorphicStyle(
+                                      shadowDarkColor: Colors.black,
+                                      shadowLightColor:
+                                          Colors.grey[700].withOpacity(0.6),
+                                      color: Theme.of(context).accentColor,
+                                      shape: NeumorphicShape.flat,
+                                      boxShape: NeumorphicBoxShape.roundRect(
+                                          BorderRadius.circular(10.0))),
+                                  onPressed: () {
+                                    setState(() {
+                                      player = numberInRow * 14 + 1;
+                                      ghost = numberInRow * 2 - 2;
+                                      ghost2 = numberInRow * 9 - 1;
+                                      ghost3 = numberInRow * 11 - 2;
+                                      paused = false;
+                                      preGame = false;
+                                      mouthClosed = false;
+                                      direction = "right";
+                                      food.clear();
+                                      getFood();
+                                      score = 0;
+                                      Navigator.pop(context);
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               });
         }
