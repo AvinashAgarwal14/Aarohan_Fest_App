@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../model/event.dart';
 import './web_render.dart';
 import './detailSection.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import 'drawer.dart';
 
 class EventDetails extends StatefulWidget {
   final EventItem item;

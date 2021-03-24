@@ -9,11 +9,7 @@ import 'package:flutter/animation.dart';
 import './styles.dart';
 import '../../util/event_details.dart';
 import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
-import '../../util/drawer.dart';
 import 'dart:io';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as JSON;
-import 'package:shared_preferences/shared_preferences.dart';
 
 var kFontFam = 'CustomFonts';
 var firebaseAuth = FirebaseAuth.instance;
@@ -176,28 +172,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                                   },
                                                   child: signIn(
                                                       "Sign in with Google")),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(20.0),
-                                              child: Center(
-                                                  child: Text(
-                                                "OR",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20.0),
-                                              )),
-                                            ),
-                                            new Padding(
-                                              padding: const EdgeInsets.only(),
-                                              child: new InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      animationStatus = 2;
-                                                    });
-                                                  },
-                                                  child: signIn(
-                                                      "Sign in with Facebook!")),
                                             ),
                                           ])))
                                     : FutureBuilder(

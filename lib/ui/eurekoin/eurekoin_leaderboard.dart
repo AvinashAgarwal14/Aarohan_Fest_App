@@ -1,12 +1,7 @@
-import 'dart:ffi';
-
 import 'package:arhn_app_2021/util/drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shape_of_view/shape_of_view.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EurekoinLeaderBoard extends StatefulWidget {
   EurekoinLeaderBoard(); // : super(key: key);
