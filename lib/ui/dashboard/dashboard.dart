@@ -23,7 +23,6 @@ import '../eurekoin/eurekoin.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:arhn_app_2021/data/data.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
@@ -82,7 +81,6 @@ class _DashboardState extends State<Dashboard> {
   int click = 0, gclick = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = new GoogleSignIn();
-  final _facebookLogin = new FacebookLogin();
   Map userProfile;
 
   bool previouslyLoggedIn = false;

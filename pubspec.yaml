@@ -32,10 +32,8 @@ dependencies:
   firebase_auth:
   firebase_core:
   firebase_database:
-  firebase_storage:
   url_launcher: ^5.4.1
   flutter_webview_plugin: ^0.3.10+1
-  flutter_facebook_login:
   cached_network_image: ^2.0.0
   firebase_messaging: ^5.1.4
   google_sign_in:
