@@ -1,16 +1,8 @@
-import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import './loginAnimation.dart';
-import 'package:flutter/animation.dart';
-import './styles.dart';
 import '../../util/event_details.dart';
-import '../../util/detailSection.dart';
-import '../../util/drawer.dart';
-import 'package:arhn_app_2021/ui/account/login.dart';
 
 class Account_Page extends StatefulWidget {
   @override

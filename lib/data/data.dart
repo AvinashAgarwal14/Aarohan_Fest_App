@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:arhn_app_2021/model/date_model.dart';
 import 'package:arhn_app_2021/model/event_type_model.dart';
 import 'package:arhn_app_2021/model/events_model.dart';

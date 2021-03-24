@@ -4,17 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import './loginAnimation.dart';
 import 'package:flutter/animation.dart';
 import './styles.dart';
 import '../../util/event_details.dart';
 import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
-import '../../util/drawer.dart';
 import 'dart:io';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as JSON;
-import 'package:shared_preferences/shared_preferences.dart';
 
 var kFontFam = 'CustomFonts';
 var firebaseAuth = FirebaseAuth.instance;
@@ -36,7 +31,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   int click = 0, gclick = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = new GoogleSignIn();
-  final _facebookLogin = new FacebookLogin();
   FirebaseUser currentUser;
   Map userProfile;
   bool _isLoggedIn = false;
@@ -179,33 +173,11 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                                                   child: signIn(
                                                       "Sign in with Google")),
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(20.0),
-                                              child: Center(
-                                                  child: Text(
-                                                "OR",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20.0),
-                                              )),
-                                            ),
-                                            new Padding(
-                                              padding: const EdgeInsets.only(),
-                                              child: new InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      animationStatus = 2;
-                                                    });
-                                                  },
-                                                  child: signIn(
-                                                      "Sign in with Facebook!")),
-                                            ),
                                           ])))
                                     : FutureBuilder(
                                         future: animationStatus == 1
                                             ? _gSignIn()
-                                            : _fSignIn(),
+                                            : _gSignIn(),
                                         builder: (BuildContext context,
                                             AsyncSnapshot snapshot) {
                                           if (currentUser == null &&
@@ -274,7 +246,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
   }
 
   _fSignOut() async {
-    await _facebookLogin.logOut();
     await _auth.signOut();
     setState(() {
       previouslyLoggedIn = true;
@@ -298,40 +269,6 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
         {"${user.providerData[1].uid}": "${user.providerData[1].email}"});
     print("User: $user");
     return user;
-  }
-
-  Future<int> _fSignIn() async {
-    FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
-    AuthCredential cred = FacebookAuthProvider.getCredential(
-        accessToken: facebookLoginResult.accessToken.token);
-    AuthResult authResult = await _auth.signInWithCredential(cred);
-    FirebaseUser user = authResult.user;
-    if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
-      currentUser = user;
-      database.reference().child("Profiles").update(
-          {"${user.providerData[1].uid}": "${user.providerData[1].email}"});
-      print("User : ");
-      return 1;
-    } else
-      return 0;
-  }
-
-  Future<FacebookLoginResult> _handleFBSignIn() async {
-    FacebookLogin facebookLogin = FacebookLogin();
-    FacebookLoginResult facebookLoginResult =
-        await facebookLogin.logIn(['email']);
-    switch (facebookLoginResult.status) {
-      case FacebookLoginStatus.cancelledByUser:
-        print("Cancelled");
-        break;
-      case FacebookLoginStatus.error:
-        print("error");
-        break;
-      case FacebookLoginStatus.loggedIn:
-        print("Logged In");
-        break;
-    }
-    return facebookLoginResult;
   }
 
 //  addStringToSF() async {
