@@ -286,7 +286,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                                 new ClipRRect(
                                   borderRadius: new BorderRadius.circular(10.0),
                                   child: new Image.asset(
-                                    "assets/cubes.gif",
+                                    "assets/img_6948_polarr.png",
                                     // fit: BoxFit.fill,
                                     height: 300.0,
                                   ),

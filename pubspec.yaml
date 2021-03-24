@@ -113,6 +113,10 @@ flutter:
     - family: Orbitron
       fonts:
         - asset: fonts/Orbitron-Medium.ttf
+
+    - family: Mysterious
+      fonts:
+        - asset: fonts/MidnightMinutes-RpKRl.otf
   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

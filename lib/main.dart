@@ -1,6 +1,7 @@
 import 'package:arhn_app_2021/ui/arcade/HomePage.dart';
 import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
 import 'package:arhn_app_2021/ui/eurekoin/eurekoin_leaderboard.dart';
+import 'package:arhn_app_2021/ui/interficio/interficio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +14,6 @@ import './ui/contact_us/contact_us.dart';
 import './ui/sponsors/sponsors.dart';
 import './ui/contributors/contributors.dart';
 import './ui/about_us/about_us.dart';
-// import './ui/interficio/interficio.dart';
 import 'package:arhn_app_2021/ui/Intro.dart';
 
 void main() async {
@@ -55,7 +55,7 @@ class AavishkarApp extends StatelessWidget {
         "/ui/contributors/contributors": (BuildContext context) =>
             Contributors(),
         "/ui/about_us/about_us": (BuildContext context) => AboutUsPage(),
-        // "/interficio/interficio.dart": (BuildContext context) => MyApp(),
+        "ui/interficio": (BuildContext context) => MyApp(),
         "/ui/arcade_game": (BuildContext context) => Pacman(),
         "/eurekoin/leader_board": (BuildContext context) =>
             EurekoinLeaderBoard(),

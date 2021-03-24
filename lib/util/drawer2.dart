@@ -172,6 +172,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 getListItem("Dashboard", "/ui/dashboard"),
                 getListItem("Eurekoin Wallet", "/ui/eurekoin"),
                 getListItem("Eurekoin Leaderboard", "/eurekoin/leader_board"),
+                getListItem("Journo Detective", "ui/interficio"),
                 getListItem("Arcade", "/ui/arcade_game"),
                 getListItem("Timeline", "/ui/schedule"),
                 getListItem("Scoreboard", "/ui/scoreboard"),
@@ -190,26 +191,31 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                     SizedBox(
                       width: 1,
                     ),
-                    getNuUp(
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.logout,
-                              color: Colors.red,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Sign Out",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            )
-                          ],
+                    GestureDetector(
+                      onTap: () {
+                        _logout();
+                      },
+                      child: getNuUp(
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.logout,
+                                color: Colors.red,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Sign Out",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -486,7 +492,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 ),
           onTap: () {
             // Navigator.pop(context);
-            Navigator.of(context).pushReplacementNamed(screen);
+            Navigator.of(context).pushNamed(screen);
           }),
     );
   }
@@ -545,55 +551,80 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             child: Dialog(
               elevation: 0,
               backgroundColor: Colors.transparent,
-              child: Container(
-                padding: EdgeInsets.all(15),
-                height: 150,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Alert!",
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                    SizedBox(height: 10.0),
-                    Flexible(
-                      child: Text("Do you want to Logout?"),
-                    ),
-                    SizedBox(height: 10.0),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: RaisedButton(
-                            child: Text("Cancel"),
-                            color: Colors.red,
-                            colorBrightness: Brightness.dark,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
+              child: Neumorphic(
+                style: NeumorphicStyle(
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(
+                    BorderRadius.circular(20.0),
+                  ),
+                  depth: 8.0,
+                  intensity: 1.0,
+                  lightSource: LightSource.top,
+                  shadowLightColor: Colors.grey[700].withOpacity(0.55),
+                  shadowDarkColor: Colors.black,
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  height: 150,
+                  decoration: BoxDecoration(
+                      color: Color(0xFF292D32),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Alert!",
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                      SizedBox(height: 10.0),
+                      Flexible(
+                        child: Text("Do you want to Logout?"),
+                      ),
+                      SizedBox(height: 10.0),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: NeumorphicButton(
+                              curve: Curves.bounceInOut,
+                              child: Center(child: Text("Cancel")),
+                              style: NeumorphicStyle(
+                                  shadowDarkColor: Colors.black,
+                                  shadowLightColor:
+                                      Colors.grey[700].withOpacity(0.6),
+                                  color: Colors.red,
+                                  shape: NeumorphicShape.flat,
+                                  boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(10.0))),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 10.0),
-                        Expanded(
-                          child: RaisedButton(
-                            child: Text("Logout"),
-                            color: Colors.green,
-                            colorBrightness: Brightness.dark,
-                            onPressed: () {
-                              _gSignOut();
-                            },
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
+                          SizedBox(width: 10.0),
+                          Expanded(
+                            child: NeumorphicButton(
+                              child: Center(child: Text("Logout")),
+                              style: NeumorphicStyle(
+                                  shadowDarkColor: Colors.black,
+                                  shadowLightColor:
+                                      Colors.grey[700].withOpacity(0.6),
+                                  color: Theme.of(context).accentColor,
+                                  shape: NeumorphicShape.flat,
+                                  boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(10.0))),
+                              onPressed: () {
+                                (currentUser.providerData[1].providerId ==
+                                        "google.com")
+                                    ? _gSignOut()
+                                    : () {};
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

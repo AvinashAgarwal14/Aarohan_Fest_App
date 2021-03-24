@@ -1063,11 +1063,14 @@ class _BottomSlideState extends State<BottomSlide> {
   Widget build(BuildContext context) {
     final List<Widget> choiceChips = tags.map<Widget>((String name) {
       Color chipColor;
-      chipColor = Color(0xff03A062);
+      chipColor = Color(0xFF78e08f);
       return ChoiceChip(
         key: new ValueKey<String>(name),
         backgroundColor: chipColor,
-        label: new Text(name, style: TextStyle(color: Colors.white)),
+        label: new Text(name,
+            style: TextStyle(
+              color: _selectedTag == name ? Colors.white : Colors.black,
+            )),
         selected: _selectedTag == name,
         selectedColor: chipColor.withOpacity(0.3),
         onSelected: (bool value) {

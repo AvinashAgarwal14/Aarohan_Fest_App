@@ -93,14 +93,14 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
         title: "TARGET IN SIGHT",
         styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
-        backgroundImage: "assets/INTRO1.png",
+        backgroundImage: "assets/1.gif",
       ),
     );
     slides.add(
       new Slide(
         title: "FIRE IN THE HOLE",
         styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
-        backgroundImage: "assets/INTRO2.png",
+        backgroundImage: "assets/2.png",
       ),
     );
     slides.add(
@@ -108,7 +108,7 @@ class _IntroScreenState extends State<IntroScreen> {
         maxLineTitle: 2,
         title: "MISSION \n ACCOMPLISHED",
         styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
-        backgroundImage: "assets/INTRO3.png",
+        backgroundImage: "assets/3.png",
       ),
     );
   }
