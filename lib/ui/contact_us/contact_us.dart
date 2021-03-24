@@ -2,7 +2,7 @@ import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../util/drawer.dart';
+import '../../util/drawer2.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -239,7 +239,7 @@ class _ContactUsState extends State<ContactUs> {
     return Scaffold(
       backgroundColor: Colors.black,
       key: _scaffoldKey,
-      drawer: NavigationDrawer(),
+      drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
 
       // appBar: AppBar(backgroundColor: Colors.transparent,),
       body: SafeArea(

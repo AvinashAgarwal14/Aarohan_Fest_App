@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../model/sponsor.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../util/drawer.dart';
+import '../../util/drawer2.dart';
 
 class Sponsors extends StatefulWidget {
   @override
@@ -101,7 +101,7 @@ class _SponsorsState extends State<Sponsors> {
                 ),
           ),
         ),
-        drawer: NavigationDrawer(),
+        drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

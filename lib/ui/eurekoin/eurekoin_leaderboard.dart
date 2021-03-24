@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:arhn_app_2021/util/drawer.dart';
+import 'package:arhn_app_2021/util/drawer2.dart';
 import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -45,7 +45,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
       data: themeData,
       child: Scaffold(
         key: _scaffoldKeyForSchedule,
-        drawer: NavigationDrawer(),
+        drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
         body: SafeArea(
             child: Container(
           padding: EdgeInsets.only(top: 10, left: 10, right: 10),
