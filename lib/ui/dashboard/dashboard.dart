@@ -77,7 +77,7 @@ class _DashboardState extends State<Dashboard> {
   FirebaseUser currentUser;
   int isEurekoinAlreadyRegistered;
   String barcodeString;
-  final loginKey = 'itsnotvalidanyways';
+  final loginKey = '123*aavishkar';
   final FirebaseDatabase database = FirebaseDatabase.instance;
   DatabaseReference databaseReference;
   int click = 0, gclick = 0;

@@ -142,7 +142,7 @@ class EurekoinTransfer extends StatefulWidget {
 class _EurekoinTransferState extends State<EurekoinTransfer> {
   List<TransferEurekoinItem<dynamic>> _transferEurekoinItem;
   FirebaseUser currentUser;
-  final loginKey = 'itsnotvalidanyways';
+  final loginKey = '123*aavishkar';
 
   TextEditingController amountController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
@@ -356,7 +356,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
     var bytes = utf8.encode("$email" + "$loginKey");
     var encoded = sha1.convert(bytes);
     String apiUrl =
-        "https://ekoin.nitdgplug.org/api/transfer/?token=$encoded&amount=$amount&email=$transerTo";
+        "https://eurekoin.nitdgplug.org/api/transfer/?token=$encoded&amount=$amount&email=$transerTo";
     print(apiUrl);
     http.Response response = await http.get(apiUrl);
     print(response.body);
@@ -382,7 +382,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
       return suggestionList;
     } else {
       String apiUrl =
-          "https://ekoin.nitdgplug.org/api/users/?pattern=${emailController.text}";
+          "https://eurekoin.nitdgplug.org/api/users/?pattern=${emailController.text}";
       http.Response response = await http.get(apiUrl);
       return json.decode(response.body)['users'];
     }

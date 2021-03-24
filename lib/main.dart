@@ -13,8 +13,7 @@ import './ui/contact_us/contact_us.dart';
 import './ui/sponsors/sponsors.dart';
 import './ui/contributors/contributors.dart';
 import './ui/about_us/about_us.dart';
-import './ui/interficio/interficio.dart';
-import './ui/games/home_page.dart';
+// import './ui/interficio/interficio.dart';
 import 'package:arhn_app_2021/ui/Intro.dart';
 
 void main() async {
@@ -51,13 +50,12 @@ class AavishkarApp extends StatelessWidget {
         "/ui/account/login": (BuildContext context) => LogInPage(),
         "/ui/scoreboard": (BuildContext context) => Scoreboard(),
         "/ui/eurekoin": (BuildContext context) => EurekoinHomePage(),
-        "/ui/eurekoin_casino": (BuildContext context) => HomePage(),
         "/ui/sponsors/sponsors": (BuildContext context) => Sponsors(),
         "/ui/contact_us/contact_us": (BuildContext context) => ContactUs(),
         "/ui/contributors/contributors": (BuildContext context) =>
             Contributors(),
         "/ui/about_us/about_us": (BuildContext context) => AboutUsPage(),
-        "/interficio/interficio.dart": (BuildContext context) => MyApp(),
+        // "/interficio/interficio.dart": (BuildContext context) => MyApp(),
         "/ui/arcade_game": (BuildContext context) => Pacman(),
         "/eurekoin/leader_board": (BuildContext context) =>
             EurekoinLeaderBoard(),
