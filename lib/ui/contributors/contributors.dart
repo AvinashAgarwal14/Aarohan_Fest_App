@@ -28,75 +28,74 @@ double value = 0;
 Map contributors = {
   // sudipta da
   "Name": [
+    "Souparno Paul",
+    "Anurag Mondal",
+    "Nikhil Kumar",
+    "Subhadip Rudra",
     "Jyotishka Dasgupta",
     "Romit Karmakar",
     "Simran Singh",
     "Avinash Agarwal",
     "Akshat Jain",
-    "Sudipta Pandit",
-    "Mayank Tayal",
-    "Diganta Mitra",
-    "Aritra Karmakar",
-    "Revanth Reddy"
+    
   ],
   "ProfilesFacebook": [
+    "https://www.facebook.com/souparno.paul.1",
+    "https://www.facebook.com/anurag.mondal.5623293",
+    "https://www.facebook.com/nikhil.me.nk05062001",
+    "https://www.facebook.com/subhadip.rudra.5",
     "https://www.instagram.com/jyotishka_dasgupta/",
     "https://www.facebook.com/romitkarmakar123",
     "https://www.facebook.com/simran9907",
     "https://www.facebook.com/avinash.agarwal.1614",
     "https://www.facebook.com/akshat.jain.336333",
-    "",
-    "https://www.facebook.com/mayank.tayal.7",
-    "https://www.facebook.com/diganta.mitra.39",
-    "https://www.facebook.com/aritra.karmakar.3",
-    "https://www.facebook.com/revanth.m"
+   
   ],
   "ProfilesGithub": [
+    "https://github.com/Soupaul",
+    "https://github.com/knightvertrag",
+    "https://github.com/kumanik5661",
+    "https://github.com/subhadiprudra",
     "https://github.com/phoenix7139",
     "https://github.com/romitkarmakar",
     "https://github.com/simran9928",
     "https://github.com/AvinashAgarwal14",
     "https://github.com/Akshat7321",
-    "https://github.com/realsdx",
-    "https://github.com/MTnes",
-    "https://www.facebook.com/diganta.mitra.39",
-    "https://github.com/gravitydestroyer",
-    "https://github.com/revanth-reddy/",
+    
   ],
   "ProfilesLinkedin": [
+    "https://www.linkedin.com/in/souparno-paul-b999a41ab",
+    "https://www.linkedin.com/in/anurag-mondal-8b8b2410a/",
+    "https://www.linkedin.com/in/nikhil-kumar-129978178",
+    "https://www.linkedin.com/in/subhadip-rudra-96b2491b2",
     "https://www.linkedin.com/in/jyotishka-dasgupta-7a2a1217b/",
     "https://www.linkedin.com/in/romit-karmakar-777662131/",
     "https://www.linkedin.com/in/simran-singh-aa4bb5184",
     "https://www.linkedin.com/in/agarwalavinash14/",
     "https://www.linkedin.com/in/akshat-jain-007365a2/",
-    "https://www.linkedin.com/in/sudipta-pandit-69a848171/",
-    "https://www.linkedin.com/in/mayank-tayal-9372a216b",
-    "https://www.facebook.com/diganta.mitra.39",
-    "https://www.facebook.com/aritra.karmakar.3",
-    "https://www.linkedin.com/in/revanth--reddy/",
+   
   ],
   "Contact": [
+    "+91 9830449178",
+    "+91 9748323504",
+    "+91 7980592059",
+    "+91 9851695323",
     "+91 9163479911",
     "+91 6295722469",
     "+91 7595932690",
     "+91 8981866219",
-    "+91 8004937056",
-    "+91 7501479332",
-    "+91 9163626815",
-    "+91 8759579260",
-    "+91 9398562859"
   ],
   "Image": [
+    "images/Contributors/souparno.jpeg",
+    "images/Contributors/anurag.jpeg",
+    "images/Contributors/nikhil.jpg",
+    "images/Contributors/subhadip.jpg",
     "images/Contributors/Jyotishka.jpg",
     "images/Contributors/romit.jpg",
     "images/Contributors/simran.jpeg",
     "images/Contributors/avinash.jpeg",
     "images/Contributors/akshat.jpg",
-    "images/Contributors/pandit.jpeg",
-    "images/Contributors/Tayal.jpg",
-    "images/Contributors/diganta.jpeg",
-    "images/Contributors/aritrabhaiya.jpg",
-    "images/Contributors/revanth_reddy.jpg"
+  
   ],
 };
 
@@ -222,7 +221,7 @@ class _ContributorsState extends State<Contributors> {
                                   childAspectRatio: 6 / 10,
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10),
-                          itemCount: 10,
+                          itemCount: 9,
                           itemBuilder: (context, index) {
                             return Neumorphic(
                               margin: EdgeInsets.symmetric(
