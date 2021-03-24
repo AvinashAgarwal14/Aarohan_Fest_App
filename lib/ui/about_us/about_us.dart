@@ -1,5 +1,7 @@
+import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../util/drawer.dart';
 
@@ -10,6 +12,7 @@ class AboutUsPage extends StatefulWidget {
 
 class _AboutUsPageState extends State<AboutUsPage>
     with TickerProviderStateMixin {
+        GlobalKey<ScaffoldState> _scaffoldKey ;
   var listViewKey = new GlobalKey();
   var scrollController = new ScrollController();
 
@@ -25,6 +28,8 @@ class _AboutUsPageState extends State<AboutUsPage>
   @override
   void initState() {
     super.initState();
+    _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
     animatedBoxOneEnterAnimationController = new AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 2000),
@@ -133,8 +138,7 @@ class _AboutUsPageState extends State<AboutUsPage>
     final boxPositionThree = Tween(begin: Offset(-1.0, 0.0), end: Offset.zero)
         .chain(CurveTween(curve: Curves.elasticOut))
         .animate(animatedBoxThreeEnterAnimationController);
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
+   
 
     return WillPopScope(
       onWillPop: () {
@@ -166,14 +170,16 @@ class _AboutUsPageState extends State<AboutUsPage>
                   controller: scrollController,
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
-                      child: Text(
-                        "About Aarohan",
-                        style: GoogleFonts.josefinSans(
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
-                      ),
+                      padding: EdgeInsets.fromLTRB(90.0, 20.0, 30.0, 0.0),
+                      child: DecodingTextEffect(
+                                "About Aarohan",
+                                decodeEffect: DecodeEffect.fromStart,
+                                textStyle: GoogleFonts.josefinSans(
+                                    fontSize: 30,
+                                    color: Colors.white //(0xFF6B872B),
+                                    ),
+                              ),
+                     
                     ),
                     new Container(
                       padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 0.0),
@@ -325,17 +331,58 @@ class _AboutUsPageState extends State<AboutUsPage>
                     )
                   ],
                 ),
-                FloatingActionButton(
-                  elevation: 0,
-                  foregroundColor: Color(0xFF233327),
-                  backgroundColor: Colors.transparent,
-                  onPressed: () {
-                    _scaffoldKey.currentState.openDrawer();
-                  },
-                  child: Icon(Icons.menu),
-                ),
+
+                menuButton()
+                
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+   Widget menuButton() {
+    return NeumorphicButton(
+      onPressed: () {
+         _scaffoldKey.currentState.openDrawer();
+      //  Navigator.of(context).pop();
+      },
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(0),
+      style: NeumorphicStyle(
+        shape: NeumorphicShape.concave,
+        boxShape: NeumorphicBoxShape.circle(),
+        depth: 7.5,
+        intensity: 1.0,
+        lightSource: LightSource.topLeft,
+        shadowLightColor: Colors.grey[700].withOpacity(0.6),
+        shadowDarkColor: Colors.black,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: Color(0xFF63d471).withOpacity(0.5),
+            width: 1.5,
+            style: BorderStyle.solid,
+          ),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF396b4b),
+              Color(0xFF78e08f),
+            ],
+          ),
+        ),
+        height: 50.0,
+        width: 50.0,
+        child: Center(
+          child: Icon(
+            Icons.menu,
+            color: Colors.white,
+            // size: 25,
           ),
         ),
       ),
