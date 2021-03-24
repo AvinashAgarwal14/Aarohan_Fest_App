@@ -180,7 +180,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         child: c);
   }
 
-  bool isShowing = false;
+  bool isShowing = true;
 
   Widget getDropDownCointainer1() {
     return Container(
@@ -201,20 +201,20 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 SizedBox(
                   width: 15,
                 ),
-                Icon(
-                  isShowing ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                  color: Colors.white,
-                  size: 25,
-                )
+                // Icon(
+                //   isShowing ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+                //   color: Colors.white,
+                //   size: 25,
+                // )
               ],
             ),
-            onTap: () {
-              setState(() {
-                isShowing = !isShowing;
-                isShowing2 = false;
-                isShowing3 = false;
-              });
-            },
+            // onTap: () {
+            //   setState(() {
+            //     isShowing = !isShowing;
+            //     isShowing2 = false;
+            //     isShowing3 = false;
+            //   });
+            // },
           ),
           SizedBox(
             height: isShowing ? 10 : 0,
@@ -250,7 +250,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   //   }),
   // ),
 
-  bool isShowing2 = false;
+  bool isShowing2 = true;
 
   Widget getDropDownCointainer2() {
     return Container(
@@ -271,20 +271,20 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 SizedBox(
                   width: 15,
                 ),
-                Icon(
-                  isShowing2 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                  color: Colors.white,
-                  size: 25,
-                )
+                // Icon(
+                //   isShowing2 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+                //   color: Colors.white,
+                //   size: 25,
+                // )
               ],
             ),
-            onTap: () {
-              setState(() {
-                isShowing2 = !isShowing2;
-                isShowing = false;
-                isShowing3 = false;
-              });
-            },
+            // onTap: () {
+            //   setState(() {
+            //     isShowing2 = !isShowing2;
+            //     isShowing = false;
+            //     isShowing3 = false;
+            //   });
+            // },
           ),
           SizedBox(
             height: isShowing2 ? 10 : 0,
@@ -307,7 +307,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     );
   }
 
-  bool isShowing3 = false;
+  bool isShowing3 = true;
 
   Widget getDropDownCointainer3() {
     return Container(
@@ -328,20 +328,20 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 SizedBox(
                   width: 15,
                 ),
-                Icon(
-                  isShowing3 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                  color: Colors.white,
-                  size: 25,
-                )
+                // Icon(
+                //   isShowing3 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+                //   color: Colors.white,
+                //   size: 25,
+                // )
               ],
             ),
-            onTap: () {
-              setState(() {
-                isShowing3 = !isShowing3;
-                isShowing2 = false;
-                isShowing = false;
-              });
-            },
+            // onTap: () {
+            //   setState(() {
+            //     isShowing3 = !isShowing3;
+            //     isShowing2 = false;
+            //     isShowing = false;
+            //   });
+           // },
           ),
           SizedBox(
             height: isShowing3 ? 10 : 0,
@@ -371,7 +371,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Widget getListItem(String text, String screen) {
     return GestureDetector(
         child: Container(
-          padding: EdgeInsets.only(left: 15, top: 10, bottom: 10, right: 15),
+          padding: EdgeInsets.only(left: 15, top: 15, bottom: 15, right: 15),
           child: Text(
             text,
             style: TextStyle(color: Colors.white),
