@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,28 +23,48 @@ class DetailCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    return new Container(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      decoration: new BoxDecoration(
-          border: new Border(
-              bottom: new BorderSide(color: themeData.dividerColor))),
-      child: new DefaultTextStyle(
-        style: Theme.of(context).textTheme.subhead,
-        child: new SafeArea(
-          top: false,
-          bottom: false,
-          child: new Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              new Container(
-                  padding: (icon != Icons.transfer_within_a_station)
-                      ? const EdgeInsets.symmetric(vertical: 24.0)
-                      : const EdgeInsets.only(
-                          top: 24.0, left: 10.0, bottom: 24.0),
-                  width: 72.0,
-                  child: new Icon(icon, color: themeData.primaryColor)),
-              new Expanded(child: new Column(children: children))
-            ],
+    return Neumorphic(
+      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+      style: NeumorphicStyle(
+        shape: NeumorphicShape.flat,
+        boxShape: NeumorphicBoxShape.roundRect(
+          BorderRadius.circular(12.0),
+        ),
+        depth: 8.0,
+        intensity: 1.0,
+        lightSource: LightSource.top,
+        shadowLightColor: Colors.grey[700].withOpacity(0.55),
+        shadowDarkColor: Colors.black,
+      ),
+      child: new Container(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        decoration: new BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: Color(0xFF292D32),
+          border: Border.all(
+            style: BorderStyle.solid,
+            width: 1.5,
+            color: Colors.grey[700].withOpacity(0.3),
+          ),
+        ),
+        child: new DefaultTextStyle(
+          style: Theme.of(context).textTheme.subhead,
+          child: new SafeArea(
+            top: false,
+            bottom: false,
+            child: new Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Container(
+                    padding: (icon != Icons.transfer_within_a_station)
+                        ? const EdgeInsets.symmetric(vertical: 24.0)
+                        : const EdgeInsets.only(
+                            top: 24.0, left: 10.0, bottom: 24.0),
+                    width: 72.0,
+                    child: new Icon(icon, color: themeData.accentColor)),
+                new Expanded(child: new Column(children: children))
+              ],
+            ),
           ),
         ),
       ),
@@ -52,10 +73,17 @@ class DetailCategory extends StatelessWidget {
 }
 
 class DetailItem extends StatelessWidget {
-  DetailItem({Key key, this.icon, this.lines, this.tooltip, this.onPressed})
+  DetailItem(
+      {Key key,
+      this.icon,
+      this.color,
+      this.lines,
+      this.tooltip,
+      this.onPressed})
       : super(key: key);
 
   final icon;
+  final Color color;
   final List<String> lines;
   final String tooltip;
   final VoidCallback onPressed;
@@ -63,8 +91,14 @@ class DetailItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    final List<Widget> columnChildren =
-        lines.map((String line) => new Text(line)).toList();
+    final List<Widget> columnChildren = lines
+        .map((String line) => new Text(
+              line,
+              style: TextStyle(
+                color: color,
+              ),
+            ))
+        .toList();
 
     final List<Widget> rowChildren = <Widget>[
       new Expanded(
@@ -117,7 +151,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
   bool registerWithReferralCode = false;
   String barcodeString = "";
   var transHistory;
-  List<ListTile> buildItems;
+  List<Widget> buildItems;
   final loginKey = '123*aavishkar';
 
   @override
@@ -245,196 +279,230 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                 : new Scaffold(
                     drawer: NavigationDrawer(),
                     key: _scaffoldKey,
-                    body: new Stack(
-                      children: <Widget>[
-                        new CustomScrollView(
-                          controller: scrollController,
-                          slivers: <Widget>[
-                            new SliverAppBar(
-                              brightness: Brightness.light,
-                              expandedHeight: _appBarHeight,
-                              pinned: _appBarBehavior == AppBarBehavior.pinned,
-                              floating: _appBarBehavior ==
-                                      AppBarBehavior.floating ||
-                                  _appBarBehavior == AppBarBehavior.snapping,
-                              snap: _appBarBehavior == AppBarBehavior.snapping,
-                              flexibleSpace: new FlexibleSpaceBar(
-                                title: Text('Eurekoin Wallet'),
-                                background: new Stack(
-                                  fit: StackFit.expand,
-                                  children: <Widget>[
+                    body: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Color(0xFF13171a),
+                            Color(0xFF32393f),
+                          ],
+                          stops: [
+                            0.1,
+                            0.35,
+                          ],
+                        ),
+                      ),
+                      child: new Stack(
+                        children: <Widget>[
+                          new CustomScrollView(
+                            controller: scrollController,
+                            slivers: <Widget>[
+                              new SliverAppBar(
+                                backgroundColor: Theme.of(context).accentColor,
+                                brightness: Brightness.light,
+                                expandedHeight: _appBarHeight,
+                                pinned:
+                                    _appBarBehavior == AppBarBehavior.pinned,
+                                floating: _appBarBehavior ==
+                                        AppBarBehavior.floating ||
+                                    _appBarBehavior == AppBarBehavior.snapping,
+                                snap:
+                                    _appBarBehavior == AppBarBehavior.snapping,
+                                flexibleSpace: new FlexibleSpaceBar(
+                                  title: Text('Eurekoin Wallet'),
+                                  background: new Stack(
+                                    fit: StackFit.expand,
+                                    children: <Widget>[
 //                                    new Image.asset(
 //                                      "images/gifs/eurekoinSliver.gif",
 //                                      fit: BoxFit.cover,
 //                                      height: _appBarHeight,
 //                                    ),
-                                    // This gradient ensures that the toolbar icons are distinct
-                                    // against the background image.
-                                    const DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment(0.0, 0.6),
-                                          end: Alignment(0.0, -0.4),
-                                          colors: <Color>[
-                                            Color(0x60000000),
-                                            Color(0x00000000)
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            (userReferralCode != null && userEurekoin != null)
-                                ? new SliverList(
-                                    delegate:
-                                        new SliverChildListDelegate(<Widget>[
-                                      DetailCategory(
-                                        icon: Icons.monetization_on,
-                                        children: <Widget>[
-                                          DetailItem(
-                                            lines: <String>[
-                                              "You have: ",
-                                              "$userEurekoin"
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      DetailCategory(
-                                        icon: Icons.message,
-                                        children: <Widget>[
-                                          DetailItem(
-                                            lines: <String>[
-                                              "Refer and Earn",
-                                              "25 Eurekoins"
+                                      // This gradient ensures that the toolbar icons are distinct
+                                      // against the background image.
+                                      const DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment(0.0, 0.6),
+                                            end: Alignment(0.0, -0.4),
+                                            colors: <Color>[
+                                              Color(0x60000000),
+                                              Color(0x00000000)
                                             ],
                                           ),
-                                          DetailItem(
-                                            icon: Icon(Icons.share),
-                                            onPressed: () {
-                                              Share.share(
-                                                  'Use my referal code $userReferralCode to get 25 Eurekoins when you register. \nLink: http://play.google.com/store/apps/details?id=com.app.aavishkar.aavishkarapp');
-                                            },
-                                            lines: <String>[
-                                              "Your Referral Code is: ",
-                                              "$userReferralCode"
-                                            ],
-                                          )
-                                        ],
+                                        ),
                                       ),
-                                      DetailCategory(
-                                        icon: Icons.location_searching,
-                                        children: <Widget>[
-                                          DetailItem(
-                                            icon: Image(
-                                                image: AssetImage(
-                                                    "images/QRIcon.png"),
-                                                color: Color(0xFF505194)),
-                                            onPressed: () {
-                                              scanQR();
-                                            },
-                                            lines: <String>["Scan QR Code"],
-                                          )
-                                        ],
-                                      ),
-                                      DetailCategory(
-                                        icon: Icons.transfer_within_a_station,
-                                        children: <Widget>[
-                                          new MergeSemantics(
-                                            child: new Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 0.0,
-                                                    top: 10.0,
-                                                    right: 10.0),
-                                                child: EurekoinTransfer(
-                                                    name: currentUser
-                                                        .providerData[1]
-                                                        .displayName,
-                                                    email: currentUser
-                                                        .providerData[1].email,
-                                                    parent: this)),
-                                          )
-                                        ],
-                                      ),
-                                      DetailCategory(
-                                        icon: Icons.monetization_on,
-                                        children: <Widget>[
-                                          new MergeSemantics(
-                                            child: new Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 0.0,
-                                                    top: 10.0,
-                                                    right: 10.0),
-                                                child: EurekoinCoupon(
-                                                    name: currentUser
-                                                        .providerData[1]
-                                                        .displayName,
-                                                    email: currentUser
-                                                        .providerData[1].email,
-                                                    parent: this)),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(height: 80.0)
-                                    ]),
-                                  )
-                                : new SliverList(
-                                    delegate: SliverChildListDelegate(<Widget>[
-                                    Container(
-                                        height: 2.0,
-                                        child: LinearProgressIndicator(
-                                            valueColor:
-                                                new AlwaysStoppedAnimation<
-                                                    Color>(Color(0xFF505194)))),
-                                  ]))
-                          ],
-                        ),
-//        ),
-                        SlidingUpPanel(
-                            minHeight: 65.0,
-                            maxHeight:
-                                MediaQuery.of(context).size.height * 0.70,
-                            panel: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  SizedBox(height: 5.0),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                        width: 35,
-                                        height: 8,
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[300],
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(12.0))),
-                                      )
                                     ],
                                   ),
-                                  SizedBox(height: 13.0),
-                                  Center(child: Text("Transaction History")),
-                                  SizedBox(height: 20.0),
-                                  Container(
-                                      padding: const EdgeInsets.only(
-                                          left: 14.0, right: 14.0),
-                                      height:
-                                          MediaQuery.of(context).size.height *
+                                ),
+                              ),
+                              (userReferralCode != null && userEurekoin != null)
+                                  ? new SliverList(
+                                      delegate:
+                                          new SliverChildListDelegate(<Widget>[
+                                        DetailCategory(
+                                          icon: Icons.monetization_on,
+                                          children: <Widget>[
+                                            DetailItem(
+                                              color: Colors.white,
+                                              lines: <String>[
+                                                "You have: ",
+                                                "$userEurekoin"
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        DetailCategory(
+                                          icon: Icons.message,
+                                          children: <Widget>[
+                                            DetailItem(
+                                              color: Colors.white,
+                                              lines: <String>[
+                                                "Refer and Earn",
+                                                "25 Eurekoins"
+                                              ],
+                                            ),
+                                            DetailItem(
+                                              color: Colors.white,
+                                              icon: Icon(Icons.share),
+                                              onPressed: () {
+                                                Share.share(
+                                                    'Use my referal code $userReferralCode to get 25 Eurekoins when you register. \nLink: http://play.google.com/store/apps/details?id=com.app.aavishkar.aavishkarapp');
+                                              },
+                                              lines: <String>[
+                                                "Your Referral Code is: ",
+                                                "$userReferralCode"
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        DetailCategory(
+                                          icon: Icons.location_searching,
+                                          children: <Widget>[
+                                            DetailItem(
+                                              color: Colors.white,
+                                              icon: Image(
+                                                  image: AssetImage(
+                                                      "images/QRIcon.png"),
+                                                  color: Color(0xFF505194)),
+                                              onPressed: () {
+                                                scanQR();
+                                              },
+                                              lines: <String>["Scan QR Code"],
+                                            )
+                                          ],
+                                        ),
+                                        DetailCategory(
+                                          icon: Icons.transfer_within_a_station,
+                                          children: <Widget>[
+                                            new MergeSemantics(
+                                              child: new Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 0.0,
+                                                      top: 10.0,
+                                                      right: 10.0),
+                                                  child: EurekoinTransfer(
+                                                      name: currentUser
+                                                          .providerData[1]
+                                                          .displayName,
+                                                      email: currentUser
+                                                          .providerData[1]
+                                                          .email,
+                                                      parent: this)),
+                                            )
+                                          ],
+                                        ),
+                                        DetailCategory(
+                                          icon: Icons.monetization_on,
+                                          children: <Widget>[
+                                            new MergeSemantics(
+                                              child: new Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 0.0,
+                                                      top: 10.0,
+                                                      right: 10.0),
+                                                  child: EurekoinCoupon(
+                                                      name: currentUser
+                                                          .providerData[1]
+                                                          .displayName,
+                                                      email: currentUser
+                                                          .providerData[1]
+                                                          .email,
+                                                      parent: this)),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 80.0)
+                                      ]),
+                                    )
+                                  : new SliverList(
+                                      delegate:
+                                          SliverChildListDelegate(<Widget>[
+                                      Container(
+                                          height: 2.0,
+                                          child: LinearProgressIndicator(
+                                              valueColor:
+                                                  new AlwaysStoppedAnimation<
+                                                          Color>(
+                                                      Color(0xFF505194)))),
+                                    ]))
+                            ],
+                          ),
+//        ),
+                          SlidingUpPanel(
+                              minHeight: 65.0,
+                              maxHeight:
+                                  MediaQuery.of(context).size.height * 0.70,
+                              panel: Container(
+                                color: Color(0xFF292D32),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      SizedBox(height: 5.0),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            width: 35,
+                                            height: 8,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey[300],
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(12.0))),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 13.0),
+                                      Center(
+                                          child: Text("Transaction History")),
+                                      SizedBox(height: 20.0),
+                                      Container(
+                                          padding: const EdgeInsets.only(
+                                              left: 14.0, right: 14.0),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
                                               0.60,
-                                      child: (transHistory == null)
-                                          ? Container()
-                                          : (transHistory.length != 0)
-                                              ? ListView(
-                                                  cacheExtent:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height *
-                                                          5,
-                                                  children:
-                                                      buildTransactionsWidget())
-                                              : Container()),
-                                ]))
-                      ],
+                                          child: (transHistory == null)
+                                              ? Container()
+                                              : (transHistory.length != 0)
+                                                  ? ListView(
+                                                      cacheExtent:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              5,
+                                                      children:
+                                                          buildTransactionsWidget())
+                                                  : Container()),
+                                    ]),
+                              ))
+                        ],
+                      ),
                     ))
         : new Container(
             padding: EdgeInsets.only(bottom: 40.0),
@@ -717,38 +785,91 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
           .add_jm()
           .format(DateTime.parse(item[2]).toLocal());
       if (item[0] > 0) {
-        buildItems.add(ListTile(
-            title: Text("Received from:"),
-            isThreeLine: true,
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("${item[1]}",
-                    style: TextStyle(
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.black
-                            : Colors.white)),
-                Text("$time")
-              ],
+        buildItems.add(Neumorphic(
+          margin: EdgeInsets.symmetric(vertical: 10.0),
+          style: NeumorphicStyle(
+            shape: NeumorphicShape.flat,
+            boxShape: NeumorphicBoxShape.roundRect(
+              BorderRadius.circular(12.0),
             ),
-            trailing:
-                Text("${item[0]}", style: TextStyle(color: Colors.green))));
+            depth: 8.0,
+            intensity: 1.0,
+            lightSource: LightSource.top,
+            shadowLightColor: Colors.grey[700].withOpacity(0.55),
+            shadowDarkColor: Colors.black,
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+              color: Color(0xFF292D32),
+              border: Border.all(
+                style: BorderStyle.solid,
+                width: 1.5,
+                color: Colors.grey[700].withOpacity(0.3),
+              ),
+            ),
+            child: ListTile(
+                title: Text("Received from:"),
+                isThreeLine: true,
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("${item[1]}",
+                        style: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white)),
+                    Text("$time")
+                  ],
+                ),
+                trailing:
+                    Text("${item[0]}", style: TextStyle(color: Colors.green))),
+          ),
+        ));
       } else {
-        buildItems.add(ListTile(
-            title: Text("Sent to:"),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("${item[1]}",
-                    style: TextStyle(
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.black
-                            : Colors.white)),
-                Text("$time")
-              ],
+        buildItems.add(Neumorphic(
+          margin: EdgeInsets.symmetric(vertical: 10.0),
+          style: NeumorphicStyle(
+            shape: NeumorphicShape.flat,
+            boxShape: NeumorphicBoxShape.roundRect(
+              BorderRadius.circular(12.0),
             ),
-            isThreeLine: true,
-            trailing: Text("${item[0]}", style: TextStyle(color: Colors.red))));
+            depth: 8.0,
+            intensity: 1.0,
+            lightSource: LightSource.top,
+            shadowLightColor: Colors.grey[700].withOpacity(0.55),
+            shadowDarkColor: Colors.black,
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+              color: Color(0xFF292D32),
+              border: Border.all(
+                style: BorderStyle.solid,
+                width: 1.5,
+                color: Colors.grey[700].withOpacity(0.3),
+              ),
+            ),
+            child: ListTile(
+                title: Text("Sent to:"),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("${item[1]}",
+                        style: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white)),
+                    Text("$time")
+                  ],
+                ),
+                isThreeLine: true,
+                trailing:
+                    Text("${item[0]}", style: TextStyle(color: Colors.red))),
+          ),
+        ));
       }
     }
     return buildItems.toList();
