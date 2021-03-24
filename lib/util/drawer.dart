@@ -1,18 +1,11 @@
-import 'package:arhn_app_2021/main.dart';
-import 'package:arhn_app_2021/ui/eurekoin/eurekoin_leaderboard.dart';
 import 'package:flutter/material.dart';
-
-import 'dart:math';
 
 import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:arhn_app_2021/ui/account/login.dart';
-import 'package:http/http.dart';
 
 class NavigationDrawer extends StatefulWidget {
   @override
@@ -29,7 +22,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   int click = 0, gclick = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = new GoogleSignIn();
-  final _facebookLogin = new FacebookLogin();
   Map userProfile;
 
   bool previouslyLoggedIn = false;
@@ -443,7 +435,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   }
 
   _fSignOut() async {
-    _facebookLogin.logOut();
     _auth.signOut();
     setState(() {
       previouslyLoggedIn = true;

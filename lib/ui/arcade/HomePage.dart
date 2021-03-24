@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -10,8 +9,6 @@ import 'package:arhn_app_2021/ui/arcade/ghost2.dart';
 import 'package:arhn_app_2021/ui/arcade/path.dart';
 import 'package:arhn_app_2021/ui/arcade/pixel.dart';
 import 'package:arhn_app_2021/ui/arcade/player.dart';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class Pacman extends StatefulWidget {

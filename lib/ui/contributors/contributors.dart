@@ -1,4 +1,3 @@
-import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,7 +5,6 @@ import '../../util/drawer2.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:math';
 
 class Contributors extends StatefulWidget {
   @override
@@ -37,7 +35,6 @@ Map contributors = {
     "Simran Singh",
     "Avinash Agarwal",
     "Akshat Jain",
-    
   ],
   "ProfilesFacebook": [
     "https://www.facebook.com/souparno.paul.1",
@@ -49,7 +46,6 @@ Map contributors = {
     "https://www.facebook.com/simran9907",
     "https://www.facebook.com/avinash.agarwal.1614",
     "https://www.facebook.com/akshat.jain.336333",
-   
   ],
   "ProfilesGithub": [
     "https://github.com/Soupaul",
@@ -61,7 +57,6 @@ Map contributors = {
     "https://github.com/simran9928",
     "https://github.com/AvinashAgarwal14",
     "https://github.com/Akshat7321",
-    
   ],
   "ProfilesLinkedin": [
     "https://www.linkedin.com/in/souparno-paul-b999a41ab",
@@ -73,7 +68,6 @@ Map contributors = {
     "https://www.linkedin.com/in/simran-singh-aa4bb5184",
     "https://www.linkedin.com/in/agarwalavinash14/",
     "https://www.linkedin.com/in/akshat-jain-007365a2/",
-   
   ],
   "Contact": [
     "+91 9830449178",
@@ -95,7 +89,6 @@ Map contributors = {
     "images/Contributors/simran.jpeg",
     "images/Contributors/avinash.jpeg",
     "images/Contributors/akshat.jpg",
-  
   ],
 };
 
@@ -196,10 +189,9 @@ class _ContributorsState extends State<Contributors> {
                           padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
                           child: FittedBox(
                             fit: BoxFit.fill,
-                            child: DecodingTextEffect(
+                            child: Text(
                               "Contributors",
-                              decodeEffect: DecodeEffect.fromStart,
-                              textStyle: GoogleFonts.josefinSans(
+                              style: GoogleFonts.josefinSans(
                                   fontSize: 30,
                                   color: Colors.white //(0xFF6B872B),
                                   ),

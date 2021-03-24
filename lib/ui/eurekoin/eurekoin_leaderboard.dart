@@ -1,13 +1,13 @@
-import 'dart:ffi';
+import 'dart:convert';
+
 
 import 'package:arhn_app_2021/util/drawer2.dart';
-import 'package:decoding_text_effect/decoding_text_effect.dart';
+
+
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shape_of_view/shape_of_view.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class EurekoinLeaderBoard extends StatefulWidget {
   EurekoinLeaderBoard(); // : super(key: key);
@@ -25,6 +25,9 @@ var margin = EdgeInsets.all(10);
 enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class EurekoinLeader extends State<EurekoinLeaderBoard> {
+  List _data = [];
+  bool _isLoading = false;
+
   @override
   void setState(fn) {
     if (mounted) {
@@ -36,6 +39,22 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _fetchLeaderboard();
+  }
+
+  Future _fetchLeaderboard() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String url = "https://eurekoin.nitdgplug.org/api/leaderboard/";
+    http.Response response = await http.get(url);
+    Map userMap = json.decode(response.body);
+    userMap.forEach((key, value) {
+      _data.add({"name": key, "eurekoins": value});
+    });
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -65,29 +84,30 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
           ),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: CustomScrollView(slivers: [
-            SliverToBoxAdapter(
-                child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                menuButton(),
-                SizedBox(
-                  width: 20,
-                ),
-                DecodingTextEffect(
-                  "Leaderboard",
-                  decodeEffect: DecodeEffect.fromStart,
-                  textStyle: GoogleFonts.josefinSans(
-                      fontSize: 30, color: Colors.white //(0xFF6B872B),
+          child: _isLoading
+              ? Container()
+              : CustomScrollView(slivers: [
+                  SliverToBoxAdapter(
+                      child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      menuButton(),
+                      SizedBox(
+                        width: 20,
                       ),
-                ),
-              ],
-            )),
-            SliverToBoxAdapter(child: getToRankView()),
-            SliverList(
-                delegate: SliverChildListDelegate(
-                    List.generate(10, (index) => listTile(index)).toList())),
-          ]),
+                      Text(
+                        "Leaderboard",
+                        style: GoogleFonts.josefinSans(
+                            fontSize: 30, color: Colors.white //(0xFF6B872B),
+                            ),
+                      ),
+                    ],
+                  )),
+                  SliverToBoxAdapter(child: getToRankView()),
+                  SliverList(
+                      delegate: SliverChildListDelegate(List.generate(
+                          _data.length, (index) => listTile(index)).toList())),
+                ]),
         )),
       ),
     );
@@ -130,14 +150,14 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Name",
+                _data[index]["name"],
                 style: TextStyle(color: Colors.white),
               ),
               SizedBox(
                 height: 5,
               ),
               Text(
-                "20 Coins",
+                "${_data[index]["eurekoins"]} Coins",
                 style: TextStyle(color: Colors.white),
               ),
             ],
@@ -151,33 +171,46 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
-      child: Stack(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          getNuCirculer(CircleAvatar(
-            backgroundImage: NetworkImage(imageUrl),
-            radius: 40,
-          )),
-          Container(
-            alignment: Alignment.center,
-            width: 30,
-            padding: EdgeInsets.symmetric(vertical: 2),
-            margin: EdgeInsets.only(top: 70, left: 25),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2),
-              color: Color(0xFF63d471),
-            ),
-            child: Text(
-              "${position}",
-              style: TextStyle(color: Colors.black),
-            ),
+          Stack(
+            children: [
+              getNuCirculer(CircleAvatar(
+                backgroundImage: NetworkImage(imageUrl),
+                radius: 40,
+              )),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              Container(
+                alignment: Alignment.center,
+                width: 30,
+                padding: EdgeInsets.symmetric(vertical: 2),
+                margin: EdgeInsets.only(top: 70, left: 25),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2),
+                  color: Color(0xFF63d471),
+                ),
+                child: Text(
+                  "${position}",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
           ),
           Container(
             width: 80,
             alignment: Alignment.center,
-            margin: EdgeInsets.only(top: 100),
-            child: Text(
-              name,
-              style: TextStyle(color: Colors.white),
+            // margin: EdgeInsets.only(top: 100),
+            child: Center(
+              child: Text(
+                name.substring(0, name.indexOf(" ")),
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ],
@@ -188,7 +221,7 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
   Widget getToRankView() {
     return Stack(
       children: [
-        getTopRankTile('name', 1,
+        getTopRankTile(_data[0]["name"], 1,
             "https://otlibrary.com/wp-content/gallery/king-penguin/KingPenguin_C.jpg"),
 
         Container(
@@ -196,12 +229,12 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              getTopRankTile('name', 2,
+              getTopRankTile(_data[1]["name"], 2,
                   "https://otlibrary.com/wp-content/gallery/king-penguin/KingPenguin_C.jpg"),
               SizedBox(
                 width: 70,
               ),
-              getTopRankTile('name', 3,
+              getTopRankTile(_data[2]["name"], 3,
                   "https://otlibrary.com/wp-content/gallery/king-penguin/KingPenguin_C.jpg")
             ],
           ),

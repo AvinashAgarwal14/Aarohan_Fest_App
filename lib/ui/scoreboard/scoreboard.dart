@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -264,10 +263,9 @@ class _ScoreboardState extends State<Scoreboard> {
                               SizedBox(
                                 width: 20,
                               ),
-                              DecodingTextEffect(
+                              Text(
                                 "Scoreboard",
-                                decodeEffect: DecodeEffect.fromStart,
-                                textStyle: GoogleFonts.josefinSans(
+                                style: GoogleFonts.josefinSans(
                                     fontSize: 30,
                                     color: Colors.white //(0xFF6B872B),
                                     ),

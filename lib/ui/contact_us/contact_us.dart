@@ -1,4 +1,3 @@
-import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -314,10 +313,9 @@ class _ContactUsState extends State<ContactUs> {
                             // color: Colors.black,
                             // padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
                             child: Center(
-                              child: DecodingTextEffect(
+                              child: Text(
                                 "Contact Us",
-                                decodeEffect: DecodeEffect.fromStart,
-                                textStyle: GoogleFonts.josefinSans(
+                                style: GoogleFonts.josefinSans(
                                     fontSize: 30,
                                     color: Colors.white //(0xFF6B872B),
                                     ),

@@ -1,4 +1,3 @@
-import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -93,10 +92,9 @@ class _SponsorsState extends State<Sponsors> {
             color: Colors.white,
           ),
           backgroundColor: Color(0xFF32393f),
-          title: DecodingTextEffect(
+          title: Text(
             "Sponsors",
-            decodeEffect: DecodeEffect.fromStart,
-            textStyle: GoogleFonts.josefinSans(
+            style: GoogleFonts.josefinSans(
                 fontSize: 30, color: Colors.white //(0xFF6B872B),
                 ),
           ),

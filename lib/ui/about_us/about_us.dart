@@ -1,4 +1,3 @@
-import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -12,7 +11,7 @@ class AboutUsPage extends StatefulWidget {
 
 class _AboutUsPageState extends State<AboutUsPage>
     with TickerProviderStateMixin {
-        GlobalKey<ScaffoldState> _scaffoldKey ;
+  GlobalKey<ScaffoldState> _scaffoldKey;
   var listViewKey = new GlobalKey();
   var scrollController = new ScrollController();
 
@@ -28,8 +27,7 @@ class _AboutUsPageState extends State<AboutUsPage>
   @override
   void initState() {
     super.initState();
-    _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
+    _scaffoldKey = new GlobalKey<ScaffoldState>();
     animatedBoxOneEnterAnimationController = new AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 2000),
@@ -138,7 +136,6 @@ class _AboutUsPageState extends State<AboutUsPage>
     final boxPositionThree = Tween(begin: Offset(-1.0, 0.0), end: Offset.zero)
         .chain(CurveTween(curve: Curves.elasticOut))
         .animate(animatedBoxThreeEnterAnimationController);
-   
 
     return WillPopScope(
       onWillPop: () {
@@ -171,15 +168,12 @@ class _AboutUsPageState extends State<AboutUsPage>
                   children: <Widget>[
                     Container(
                       padding: EdgeInsets.fromLTRB(90.0, 20.0, 30.0, 0.0),
-                      child: DecodingTextEffect(
-                                "About Aarohan",
-                                decodeEffect: DecodeEffect.fromStart,
-                                textStyle: GoogleFonts.josefinSans(
-                                    fontSize: 30,
-                                    color: Colors.white //(0xFF6B872B),
-                                    ),
-                              ),
-                     
+                      child: Text(
+                        "About Aarohan",
+                        style: GoogleFonts.josefinSans(
+                            fontSize: 30, color: Colors.white //(0xFF6B872B),
+                            ),
+                      ),
                     ),
                     new Container(
                       padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 0.0),
@@ -227,8 +221,8 @@ class _AboutUsPageState extends State<AboutUsPage>
                                   ),
                                   padding: EdgeInsets.all(20),
                                   child: Text(
-                                    "We, we were intrigued. The idea of building a virtual reality for everyone to take joy in, it fascinated us. And with that, we decided to weave our reality. 2021 is a year of possibilities. And it is time Team Aavishkar rose to the occasion. To build it's own matrix. Of events. Fun. Knowledge. And innovation. To re-think and re-invent Aarohan."
-                                    ,style: TextStyle(
+                                    "We, we were intrigued. The idea of building a virtual reality for everyone to take joy in, it fascinated us. And with that, we decided to weave our reality. 2021 is a year of possibilities. And it is time Team Aavishkar rose to the occasion. To build it's own matrix. Of events. Fun. Knowledge. And innovation. To re-think and re-invent Aarohan.",
+                                    style: TextStyle(
                                         fontSize: 20.0, color: Colors.white),
                                     textAlign: TextAlign.center,
                                   ),
@@ -331,9 +325,7 @@ class _AboutUsPageState extends State<AboutUsPage>
                     )
                   ],
                 ),
-
                 menuButton()
-                
               ],
             ),
           ),
@@ -342,11 +334,11 @@ class _AboutUsPageState extends State<AboutUsPage>
     );
   }
 
-   Widget menuButton() {
+  Widget menuButton() {
     return NeumorphicButton(
       onPressed: () {
-         _scaffoldKey.currentState.openDrawer();
-      //  Navigator.of(context).pop();
+        _scaffoldKey.currentState.openDrawer();
+        //  Navigator.of(context).pop();
       },
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(0),

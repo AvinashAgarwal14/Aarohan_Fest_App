@@ -16,17 +16,13 @@ import 'package:flutter/services.dart' show SystemChrome;
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import '../../util/drawer2.dart';
-import './dashboard_layout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:barcode_scan_fix/barcode_scan.dart';
-import '../eurekoin/eurekoin.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:arhn_app_2021/data/data.dart';
-import 'package:decoding_text_effect/decoding_text_effect.dart';
 import 'package:keyboard_visibility/keyboard_visibility.dart';
 
 class Dashboard extends StatefulWidget {
@@ -83,7 +79,6 @@ class _DashboardState extends State<Dashboard> {
   int click = 0, gclick = 0;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = new GoogleSignIn();
-  final _facebookLogin = new FacebookLogin();
   Map userProfile;
 
   bool previouslyLoggedIn = false;
@@ -435,10 +430,9 @@ class _DashboardState extends State<Dashboard> {
                                     alignment: Alignment.centerLeft,
                                     height: 60,
                                     // color: background,
-                                    child: DecodingTextEffect(
+                                    child: Text(
                                       "Aarohan",
-                                      decodeEffect: DecodeEffect.fromStart,
-                                      textStyle: GoogleFonts.josefinSans(
+                                      style: GoogleFonts.josefinSans(
                                           fontSize: 30,
                                           color: Colors.white //(0xFF6B872B),
                                           ),
@@ -564,10 +558,9 @@ class _DashboardState extends State<Dashboard> {
                                   margin: EdgeInsets.only(left: 10.0),
                                   alignment: Alignment.centerLeft,
                                   // color: background,
-                                  child: DecodingTextEffect(
+                                  child: Text(
                                     "Category",
-                                    decodeEffect: DecodeEffect.fromStart,
-                                    textStyle: TextStyle(
+                                    style: TextStyle(
                                         color: Colors.white, fontSize: 20),
                                   ),
                                 ),
