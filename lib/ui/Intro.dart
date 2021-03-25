@@ -91,26 +91,30 @@ class _IntroScreenState extends State<IntroScreen> {
 
     slides.add(
       new Slide(
-        title: "TARGET IN SIGHT",
-        styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
+        maxLineTitle: 2,
+        title: "WAKE UP! \n THE MATRIX HAS YOU",
+        styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 28),
         backgroundImage: "assets/1.gif",
       ),
     );
     slides.add(
       new Slide(
-        title: "FIRE IN THE HOLE",
-        styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
-        backgroundImage: "assets/2.png",
+        maxLineTitle: 2,
+        title: "THE PILL IS \n YOUR'S TO CHOOSE",
+        styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 28),
+        backgroundColor: Colors.black,
+        pathImage: "assets/3.png",
+        heightImage: 300.0,
+        widthImage: 300.0,
       ),
     );
     slides.add(
       new Slide(
-        maxLineTitle: 2,
-        title: "MISSION \n ACCOMPLISHED",
-        styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
-        backgroundImage: "assets/3.png",
-        heightImage: 100,
-      ),
+          maxLineTitle: 2,
+          title: "WELCOME, CHOSEN ONE!",
+          styleTitle:
+              GoogleFonts.josefinSans(color: Colors.white, fontSize: 28),
+          backgroundImage: "assets/2.png"),
     );
   }
 
