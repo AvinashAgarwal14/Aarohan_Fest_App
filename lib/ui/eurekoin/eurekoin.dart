@@ -180,7 +180,8 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
     return (currentUser != null)
         ? (isEurekoinAlreadyRegistered == null)
             ? new Scaffold(
-                drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
+                drawer:
+                    NavigationDrawer("${ModalRoute.of(context).settings.name}"),
                 body: new Container(
                   padding: EdgeInsets.only(bottom: 50.0),
                   decoration: BoxDecoration(
@@ -193,7 +194,8 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
               )
             : (isEurekoinAlreadyRegistered == 0)
                 ? new Scaffold(
-                    drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
+                    drawer: NavigationDrawer(
+                        "${ModalRoute.of(context).settings.name}"),
                     body: new Stack(
                       children: <Widget>[
                         new Container(
@@ -275,7 +277,8 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                       ],
                     ))
                 : new Scaffold(
-                    drawer: NavigationDrawer("${ModalRoute.of(context).settings.name}"),
+                    drawer: NavigationDrawer(
+                        "${ModalRoute.of(context).settings.name}"),
                     key: _scaffoldKey,
                     body: Container(
                       decoration: BoxDecoration(
@@ -313,11 +316,11 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                   background: new Stack(
                                     fit: StackFit.expand,
                                     children: <Widget>[
-//                                    new Image.asset(
-//                                      "images/gifs/eurekoinSliver.gif",
-//                                      fit: BoxFit.cover,
-//                                      height: _appBarHeight,
-//                                    ),
+                                      new Image.asset(
+                                        "images/gifs/eurekoinSliver.gif",
+                                        fit: BoxFit.cover,
+                                        height: _appBarHeight,
+                                      ),
                                       // This gradient ensures that the toolbar icons are distinct
                                       // against the background image.
                                       const DecoratedBox(
@@ -367,7 +370,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                               icon: Icon(Icons.share),
                                               onPressed: () {
                                                 Share.share(
-                                                    'Use my referal code $userReferralCode to get 25 Eurekoins when you register. \nLink: http://play.google.com/store/apps/details?id=com.app.aavishkar.aavishkarapp');
+                                                    'Use my referal code $userReferralCode to get 25 Eurekoins when you register. \nLink: https://play.google.com/store/apps/details?id=com.app.aarohan.aarohanapp');
                                               },
                                               lines: <String>[
                                                 "Your Referral Code is: ",

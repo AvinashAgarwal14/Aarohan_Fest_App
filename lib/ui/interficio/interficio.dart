@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,12 +53,29 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  bool comingsoon = false;
+  final FirebaseDatabase _database = FirebaseDatabase.instance;
+  DatabaseReference _databaseReference;
+  bool comingsoon = true;
+
+  void _onEntryUpdated(Event event) {
+    setState(() {
+      print(event.snapshot.value);
+      comingsoon = event.snapshot.value;
+      print(comingsoon);
+    });
+  }
 
   @override
   void initState() {
     autoAuthenticate();
-
+    _databaseReference = _database.reference().child("comingsoon");
+    _databaseReference.onChildChanged.listen(_onEntryUpdated);
+    _databaseReference.child("JD").once().then((snapshot) {
+      setState(() {
+        comingsoon = snapshot.value;
+      });
+      print(comingsoon);
+    });
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

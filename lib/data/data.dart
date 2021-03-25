@@ -6,25 +6,25 @@ List<DateModel> getDates() {
   List<DateModel> dates = new List<DateModel>();
   DateModel dateModel = new DateModel();
 
-  dateModel.date = "7";
+  dateModel.date = "1";
   dateModel.weekDay = "Thu";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
-  dateModel.date = "8";
+  dateModel.date = "2";
   dateModel.weekDay = "Fri";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
-  dateModel.date = "9";
+  dateModel.date = "3";
   dateModel.weekDay = "Sat";
   dates.add(dateModel);
 
   dateModel = new DateModel();
 
-  dateModel.date = "10";
+  dateModel.date = "4";
   dateModel.weekDay = "Sun";
   dates.add(dateModel);
 
@@ -44,7 +44,7 @@ List<EventTypeModel> getEventTypes() {
 
   //1
   eventModel.imgAssetPath = "assets/sports.png";
-  eventModel.eventType = "Events";
+  eventModel.eventType = "Event";
   events.add(eventModel);
 
   eventModel = new EventTypeModel();
