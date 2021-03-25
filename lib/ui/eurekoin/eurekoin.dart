@@ -187,7 +187,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                   decoration: BoxDecoration(
                     color: Colors.black,
                     image: DecorationImage(
-                        image: AssetImage("images/eurekoin.png"),
+                        image: AssetImage("assets/coin.gif"),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -203,7 +203,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                             decoration: BoxDecoration(
                               color: Colors.black,
                               image: DecorationImage(
-                                  image: AssetImage("images/eurekoin.png"),
+                                  image: AssetImage("assets/coin.gif"),
                                   fit: BoxFit.cover),
                             ),
                             alignment: Alignment.bottomCenter,
@@ -223,7 +223,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                                 hintStyle: TextStyle(
                                                     color: Colors.white),
                                                 border: InputBorder.none,
-                                                hintText: "Referal Code",
+                                                hintText: "Referral Code",
                                               ))),
                                       Container(
                                         child: RaisedButton(

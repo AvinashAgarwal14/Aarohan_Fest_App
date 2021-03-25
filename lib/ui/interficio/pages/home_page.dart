@@ -551,6 +551,16 @@ class _HomePageState extends State<HomePage>
                                                     color: Colors.white,
                                                     fontSize: 20.0),
                                               ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              clueData["data"][index][4] != null
+                                                  ? Image.network(
+                                                      "https://${api_url}${clueData["data"][index][4]}",
+                                                      height: 200.0,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : Container(),
                                             ],
                                           )
                                         : Text(
@@ -638,6 +648,16 @@ class _HomePageState extends State<HomePage>
                                         style: GoogleFonts.josefinSans(
                                             color: Colors.white, fontSize: 17),
                                       ),
+                                      SizedBox(
+                                        height: 15.0,
+                                      ),
+                                      unlockedClueData["data"][index][4] != null
+                                          ? Image.network(
+                                              "https://${api_url}${unlockedClueData["data"][index][4]}",
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Container(),
                                     ],
                                   ),
                                 ),
@@ -1518,7 +1538,15 @@ class GameMap extends StatefulWidget {
 }
 
 class _GameMapState extends State<GameMap> {
-  List _markers = [];
+  List _markers = [
+    Marker(
+      markerId: MarkerId(
+        "start",
+      ),
+      position: LatLng(21.1458, 79.0882),
+      infoWindow: InfoWindow(title: "Your Virtual Location"),
+    ),
+  ];
   String _val;
 
   @override
@@ -1562,7 +1590,7 @@ class _GameMapState extends State<GameMap> {
             point.toString(),
           ),
           position: point,
-          infoWindow: InfoWindow(title: "Your marker"),
+          infoWindow: InfoWindow(title: "Your Virtual Location"),
         ),
       );
     });

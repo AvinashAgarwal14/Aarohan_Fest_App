@@ -710,28 +710,40 @@ class _DashboardState extends State<Dashboard> {
                                                                   .size
                                                                   .width *
                                                               0.28,
-                                                          child:
-                                                              CachedNetworkImage(
-                                                            height: 100,
-                                                            width: 120,
-                                                            fit: BoxFit.cover,
-                                                            errorWidget:
-                                                                (context, url,
-                                                                    error) {
-                                                              print(
-                                                                  "Could not load content");
-                                                              return Image.asset(
-                                                                  "images/imageplaceholder.png");
-                                                            },
-                                                            placeholder: (context,
-                                                                    url) =>
-                                                                Image.asset(
-                                                                    "images/imageplaceholder.png"),
-                                                            imageUrl:
-                                                                showEvents[
-                                                                        index]
-                                                                    .imageUrl,
-                                                          ),
+                                                          child: showEvents[
+                                                                          index]
+                                                                      .imageUrl ==
+                                                                  ""
+                                                              ? Image.asset(
+                                                                  "images/imageplaceholder.png",
+                                                                  fit: BoxFit
+                                                                      .cover)
+                                                              : CachedNetworkImage(
+                                                                  // height: 100,
+                                                                  // width: 120,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  errorWidget:
+                                                                      (context,
+                                                                          url,
+                                                                          error) {
+                                                                    print(
+                                                                        "Could not load content");
+                                                                    return Image.asset(
+                                                                        "images/imageplaceholder.png",
+                                                                        fit: BoxFit
+                                                                            .cover);
+                                                                  },
+                                                                  placeholder: (context,
+                                                                          url) =>
+                                                                      Image.asset(
+                                                                          "images/imageplaceholder.png",
+                                                                          fit: BoxFit
+                                                                              .cover),
+                                                                  imageUrl: showEvents[
+                                                                          index]
+                                                                      .imageUrl,
+                                                                ),
                                                           decoration:
                                                               BoxDecoration(
                                                             borderRadius:
@@ -1355,20 +1367,24 @@ class PopularEventTile extends StatelessWidget {
                 ),
               ),
             ),
-            Hero(
-              tag: imgeAssetPath,
-              child: CachedNetworkImage(
-                height: 100,
-                width: 120,
-                fit: BoxFit.cover,
-                errorWidget: (context, url, error) {
-                  print("Could not load content");
-                  return Image.asset("images/imageplaceholder.png");
-                },
-                placeholder: (context, url) =>
-                    Image.asset("images/imageplaceholder.png"),
-                imageUrl: imgeAssetPath,
-              ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.28,
+              child: imgeAssetPath == ""
+                  ? Image.asset("images/imageplaceholder.png", fit: BoxFit.fill)
+                  : CachedNetworkImage(
+                      // height: 100,
+                      // width: 120,
+                      fit: BoxFit.cover,
+                      errorWidget: (context, url, error) {
+                        print("Could not load content");
+                        return Image.asset("images/imageplaceholder.png",
+                            fit: BoxFit.fill);
+                      },
+                      placeholder: (context, url) => Image.asset(
+                          "images/imageplaceholder.png",
+                          fit: BoxFit.fill),
+                      imageUrl: imgeAssetPath,
+                    ),
             ),
           ],
         ),
