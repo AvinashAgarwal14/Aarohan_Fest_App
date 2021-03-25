@@ -2,6 +2,7 @@ import 'package:arhn_app_2021/ui/arcade/HomePage.dart';
 import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
 import 'package:arhn_app_2021/ui/eurekoin/eurekoin_leaderboard.dart';
 import 'package:arhn_app_2021/ui/interficio/interficio.dart';
+import 'package:arhn_app_2021/ui/prelims/prelims.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -49,6 +50,7 @@ class AavishkarApp extends StatelessWidget {
         "/intro": (BuildContext context) => IntroScreen(),
         "/splash": (BuildContext context) => SplashScreen(),
         "/ui/dashboard": (BuildContext context) => Dashboard(),
+        "/ui/prelims": (BuildContext context) => Prelims(),
         "/ui/tags": (BuildContext context) => SearchByTags(),
         "/ui/schedule": (BuildContext context) => Schedule(),
         "/ui/account/login": (BuildContext context) => LogInPage(),

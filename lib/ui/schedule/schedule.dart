@@ -126,7 +126,7 @@ class _ScheduleState extends State<Schedule> {
                     ),
                   ),
                   elevation: 0,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Color(0xFF292C31),
                   toolbarHeight: 70.0,
                   expandedHeight: _appBarHeight,
                   pinned: _appBarBehavior == AppBarBehavior.pinned,
@@ -138,14 +138,14 @@ class _ScheduleState extends State<Schedule> {
                       'Timeline',
                       style: GoogleFonts.josefinSans(
                         fontSize: 30,
-                        color: Color(0xFF6B872B),
+                        color: Colors.white,
                       ),
                     ),
                     background: new Stack(
                       fit: StackFit.expand,
                       children: <Widget>[
                         new Image.asset(
-                          "assets/schedule.png",
+                          "assets/timeline.png",
                           fit: BoxFit.cover,
                           height: _appBarHeight,
                         ),

@@ -35,6 +35,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   bool showSponsor = false;
   bool showContactUs = false;
   bool showJD = false;
+  bool showPrelims = false;
 
   @override
   void setState(fn) {
@@ -64,6 +65,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     databaseReference.child("JD").once().then((DataSnapshot snapshot) {
       setState(() {
         showJD = snapshot.value;
+      });
+    });
+    databaseReference.child("prelims").once().then((DataSnapshot snapshot) {
+      setState(() {
+        showPrelims = snapshot.value;
       });
     });
   }
@@ -195,6 +201,9 @@ style: GoogleFonts.ubuntu(fontSize: 13),
                 getListItem("Dashboard", "/ui/dashboard"),
                 getListItem("Eurekoin Wallet", "/ui/eurekoin"),
                 getListItem("Eurekoin Leaderboard", "/eurekoin/leader_board"),
+                showPrelims
+                    ? getListItem("Prelims", "/ui/prelims")
+                    : SizedBox(),
                 showJD
                     ? getListItem("Journo Detective", "ui/interficio")
                     : SizedBox(),
