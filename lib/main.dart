@@ -36,6 +36,10 @@ class AavishkarApp extends StatelessWidget {
       title: "Aarohan App",
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark().copyWith(
+        accentColor: Color(0xff03A062),
+        primaryColor: Color(0xFF292D32),
+      ),
       darkTheme: ThemeData.dark().copyWith(
         accentColor: Color(0xff03A062),
         primaryColor: Color(0xFF292D32),

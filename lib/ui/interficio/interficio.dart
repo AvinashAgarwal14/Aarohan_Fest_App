@@ -55,27 +55,11 @@ class _MyAppState extends State<MyApp> {
 
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   DatabaseReference _databaseReference;
-  bool comingsoon = true;
-
-  void _onEntryUpdated(Event event) {
-    setState(() {
-      print(event.snapshot.value);
-      comingsoon = event.snapshot.value;
-      print(comingsoon);
-    });
-  }
+  bool comingsoon = false;
 
   @override
   void initState() {
     autoAuthenticate();
-    _databaseReference = _database.reference().child("comingsoon");
-    _databaseReference.onChildChanged.listen(_onEntryUpdated);
-    _databaseReference.child("JD").once().then((snapshot) {
-      setState(() {
-        comingsoon = snapshot.value;
-      });
-      print(comingsoon);
-    });
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

@@ -6,6 +6,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import 'package:arhn_app_2021/ui/account/login.dart';
 
@@ -31,6 +32,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Map userProfile;
 
   bool previouslyLoggedIn = false;
+  bool showSponsor = false;
+  bool showContactUs = false;
+  bool showJD = false;
 
   @override
   void setState(fn) {
@@ -43,6 +47,25 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   void initState() {
     super.initState();
     initUser();
+
+    final databaseReference =
+        FirebaseDatabase.instance.reference().child("comingsoon");
+
+    databaseReference.child("sponsor").once().then((DataSnapshot snapshot) {
+      setState(() {
+        showSponsor = snapshot.value;
+      });
+    });
+    databaseReference.child("contactUs").once().then((DataSnapshot snapshot) {
+      setState(() {
+        showContactUs = snapshot.value;
+      });
+    });
+    databaseReference.child("JD").once().then((DataSnapshot snapshot) {
+      setState(() {
+        showJD = snapshot.value;
+      });
+    });
   }
 
   initUser() async {
@@ -58,49 +81,49 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         child: Drawer(
           child: Container(
             decoration: BoxDecoration(
-                /*gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: [
-                  Color(0xFF13171a),
-                  Color(0xFF32393f),
-                ],
-                stops: [
-                  0.1,
-                  0.35,
-                ],
-              ),*/
+/*gradient: LinearGradient(
+begin: Alignment.bottomCenter,
+end: Alignment.topCenter,
+colors: [
+Color(0xFF13171a),
+Color(0xFF32393f),
+],
+stops: [
+0.1,
+0.35,
+],
+),*/
                 color: Color(0xFF292D32)),
             child: ListTileTheme(
               iconColor: Color.fromRGBO(255, 255, 255, 1.0),
               textColor: Color.fromRGBO(255, 255, 255, 1.0),
               selectedColor: Theme.of(context).primaryColor.withOpacity(1.0),
               child: ListView(padding: EdgeInsets.zero, children: <Widget>[
-                /*Container(
-                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                  child: currentUser != null
-                      ? ListTile(
-                          title: Text(
-                            '${currentUser.providerData[1].displayName}',
-                            style: GoogleFonts.ubuntu(
-                              fontSize: 17,
-                              color: Color(0xFF6B872B),
-                            ),
-                          ),
-                          leading: getNuUp(ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.network(
-                              currentUser.providerData[1].photoUrl,
-                              fit: BoxFit.fill,
-                            ),
-                          )),
-                          subtitle: Text(
-                            "${currentUser.providerData[1].email}",
-                            style: GoogleFonts.ubuntu(fontSize: 13),
-                          ),
-                        )
-                      : SizedBox(),
-                ),*/
+/*Container(
+margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+child: currentUser != null
+? ListTile(
+title: Text(
+'${currentUser.providerData[1].displayName}',
+style: GoogleFonts.ubuntu(
+fontSize: 17,
+color: Color(0xFF6B872B),
+),
+),
+leading: getNuUp(ClipRRect(
+borderRadius: BorderRadius.circular(20),
+child: Image.network(
+currentUser.providerData[1].photoUrl,
+fit: BoxFit.fill,
+),
+)),
+subtitle: Text(
+"${currentUser.providerData[1].email}",
+style: GoogleFonts.ubuntu(fontSize: 13),
+),
+)
+: SizedBox(),
+),*/
 
                 currentUser != null
                     ? Container(
@@ -113,10 +136,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                               height: 60,
                               width: 60,
                               child: getNuUp(ClipRRect(
-                                //borderRadius: BorderRadius.circular(20),
+//borderRadius: BorderRadius.circular(20),
                                 child: Image.network(
                                   currentUser.providerData[1].photoUrl,
-                                  // fit: BoxFit.fill,
+// fit: BoxFit.fill,
                                 ),
                               )),
                             ),
@@ -143,41 +166,47 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       )
                     : SizedBox(),
 
-                // getNuUp(GestureDetector(
-                //           onTap: () {
-                //             _logout();
-                //           },
-                //           child: Container(
-                //             height: 50,
-                //             width: 50,
-                //             child: Icon(
-                //               Icons.logout,
-                //               color: Colors.white,
-                //             ),
-                //           ),
-                //         ))
+// getNuUp(GestureDetector(
+// onTap: () {
+// _logout();
+// },
+// child: Container(
+// height: 50,
+// width: 50,
+// child: Icon(
+// Icons.logout,
+// color: Colors.white,
+// ),
+// ),
+// ))
 
-                // currentUser != null?Container(
-                //   height: 60,
-                //   width: 60,
-                //                   child: getNuUp(ClipRRect(
-                //     //borderRadius: BorderRadius.circular(20),
-                //     child: Image.network(
-                //       currentUser.providerData[1].photoUrl,
-                //      // fit: BoxFit.fill,
-                //     ),
-                //   )),
-                // ):SizedBox(),
+// currentUser != null?Container(
+// height: 60,
+// width: 60,
+// child: getNuUp(ClipRRect(
+// //borderRadius: BorderRadius.circular(20),
+// child: Image.network(
+// currentUser.providerData[1].photoUrl,
+// // fit: BoxFit.fill,
+// ),
+// )),
+// ):SizedBox(),
 
                 getListItem("Dashboard", "/ui/dashboard"),
                 getListItem("Eurekoin Wallet", "/ui/eurekoin"),
                 getListItem("Eurekoin Leaderboard", "/eurekoin/leader_board"),
-                getListItem("Journo Detective", "ui/interficio"),
+                showJD
+                    ? getListItem("Journo Detective", "ui/interficio")
+                    : SizedBox(),
                 getListItem("Arcade", "/ui/arcade_game"),
                 getListItem("Timeline", "/ui/schedule"),
                 getListItem("Scoreboard", "/ui/scoreboard"),
-                getListItem("Sponsors", "/ui/sponsors/sponsors"),
-                getListItem("Contact Us", "/ui/contact_us/contact_us"),
+                showSponsor
+                    ? getListItem("Sponsors", "/ui/sponsors/sponsors")
+                    : SizedBox(),
+                showContactUs
+                    ? getListItem("Contact Us", "/ui/contact_us/contact_us")
+                    : SizedBox(),
                 getListItem("Contributors", "/ui/contributors/contributors"),
                 getListItem("About Aarohan", "/ui/about_us/about_us"),
 
@@ -237,7 +266,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 
   Widget getNuUp(Widget c) {
     return Neumorphic(
-        //margin: EdgeInsets.symmetric(horizontal: 10),
+//margin: EdgeInsets.symmetric(horizontal: 10),
         style: NeumorphicStyle(
           color: Color(0xFF292D32),
           shape: NeumorphicShape.flat,
@@ -255,13 +284,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 
   Widget getNuUp1(Widget c) {
     return Neumorphic(
-        //margin: EdgeInsets.symmetric(horizontal: 10),
+//margin: EdgeInsets.symmetric(horizontal: 10),
         style: NeumorphicStyle(
           color: Color(0xFF292D32),
           shape: NeumorphicShape.flat,
-          /*boxShape: NeumorphicBoxShape.roundRect(
-            BorderRadius.circular(16.0),
-          ),*/
+/*boxShape: NeumorphicBoxShape.roundRect(
+BorderRadius.circular(16.0),
+),*/
           depth: 5,
           intensity: 1,
           lightSource: LightSource.top,
@@ -292,20 +321,20 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 SizedBox(
                   width: 15,
                 ),
-                // Icon(
-                //   isShowing ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                //   color: Colors.white,
-                //   size: 25,
-                // )
+// Icon(
+// isShowing ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+// color: Colors.white,
+// size: 25,
+// )
               ],
             ),
-            // onTap: () {
-            //   setState(() {
-            //     isShowing = !isShowing;
-            //     isShowing2 = false;
-            //     isShowing3 = false;
-            //   });
-            // },
+// onTap: () {
+// setState(() {
+// isShowing = !isShowing;
+// isShowing2 = false;
+// isShowing3 = false;
+// });
+// },
           ),
           SizedBox(
             height: isShowing ? 10 : 0,
@@ -333,13 +362,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     );
   }
 
-  // ListTile(
-  //   leading: Icon(Icons.power_settings_new),
-  //   title: Text("Logout"),
-  //   onTap: (() {
-  //     _logout();
-  //   }),
-  // ),
+// ListTile(
+// leading: Icon(Icons.power_settings_new),
+// title: Text("Logout"),
+// onTap: (() {
+// _logout();
+// }),
+// ),
 
   bool isShowing2 = true;
 
@@ -362,20 +391,20 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 SizedBox(
                   width: 15,
                 ),
-                // Icon(
-                //   isShowing2 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                //   color: Colors.white,
-                //   size: 25,
-                // )
+// Icon(
+// isShowing2 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+// color: Colors.white,
+// size: 25,
+// )
               ],
             ),
-            // onTap: () {
-            //   setState(() {
-            //     isShowing2 = !isShowing2;
-            //     isShowing = false;
-            //     isShowing3 = false;
-            //   });
-            // },
+// onTap: () {
+// setState(() {
+// isShowing2 = !isShowing2;
+// isShowing = false;
+// isShowing3 = false;
+// });
+// },
           ),
           SizedBox(
             height: isShowing2 ? 10 : 0,
@@ -419,20 +448,20 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 SizedBox(
                   width: 15,
                 ),
-                // Icon(
-                //   isShowing3 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                //   color: Colors.white,
-                //   size: 25,
-                // )
+// Icon(
+// isShowing3 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+// color: Colors.white,
+// size: 25,
+// )
               ],
             ),
-            // onTap: () {
-            //   setState(() {
-            //     isShowing3 = !isShowing3;
-            //     isShowing2 = false;
-            //     isShowing = false;
-            //   });
-            // },
+// onTap: () {
+// setState(() {
+// isShowing3 = !isShowing3;
+// isShowing2 = false;
+// isShowing = false;
+// });
+// },
           ),
           SizedBox(
             height: isShowing3 ? 10 : 0,
@@ -491,7 +520,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   ),
                 ),
           onTap: () {
-            // Navigator.pop(context);
+// Navigator.pop(context);
             Navigator.of(context).pushNamed(screen);
           }),
     );
@@ -521,7 +550,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   Colors.black //Colors.grey[700].withOpacity(0.55),
               ),
 
-          // width: MediaQuery.of(context).size.width * 0.7,
+// width: MediaQuery.of(context).size.width * 0.7,
 
           child: c),
     );

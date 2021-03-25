@@ -109,6 +109,7 @@ class _IntroScreenState extends State<IntroScreen> {
         title: "MISSION \n ACCOMPLISHED",
         styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 31),
         backgroundImage: "assets/3.png",
+        heightImage: 100,
       ),
     );
   }
