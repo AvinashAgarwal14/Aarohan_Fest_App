@@ -150,83 +150,86 @@ class ContactUs extends StatefulWidget {
 
 Map contactCard = {
   "OverallCoordinator": [
-    "Shivam Singhal",
-    "Sudipta Chakraborty",
-    "Piyush Jain",
-    "Dibyadipta Roy"
+    "Liman Rahman",
+    "Shashwat Bhattacharjee",
+    "Nikhil Vashistha",
+    "Aadarsh Shaw",
+    "Utkarsh Chaurasia"
   ],
   "GeneralSecretary": [
-    "Ankit Beniwal",
-    "Subhranshu Mohanty",
-    "Shashank Nayak",
-    "Vartika Arora"
+    "Ayush Kumar Shukla",
+    "Soumik Paul",
+    "Swaraj Agrawal",
+    "Manish Awasthi",
+    "Akshat Jain"
   ],
   "Treasurer": [
-    "Ashutosh Agarwal",
-    "Akshay Verma",
-    "Satantra Tewari",
-    "Partha Sarathi Ghosh",
+    "Avinash Prasad",
+    "Bhavesh Chandwani",
+    "Sparsh Kedia",
+    "Riddhiman Sanyal",
   ],
   "CorporateCommunication": [
-    "Debmalya Das",
-    "Shrish",
-    "ShankAR Ray",
-    "Piyush Bhatia",
-    "Vartika Arora"
+    "Akshat Jain",
+    "Raman Kapri",
+    "Jaideep Datta",
+    "Sakchi Agarwal"
   ],
-  "POC": ["9093244444", "9609248966", "8603598657", "9007681899"],
-  "PGS": ["8670010822", "9668401115", "9830733021", "8584855577"],
-  "PCC": ["9474768198", "7477472208", "9641657380", "8171444354", "8584855577"],
-  "PT": ["9831176750", "8839843696", "8944921556", "8101052654"],
+  "POC": ["9475522304", "9163322604", "9835274836", "9832509202", "7355399636"],
+  "PGS": ["8001507060", "9593493630", "9407256919", "8436336451", "8004937056"],
+  "PCC": ["8004937056", "9002726215", "9002198118", "7044988664"],
+  "PT": ["8617671512", "7355722096", "8100553002", "8670052205"],
   "FOC": [
-    "https://www.facebook.com/profile.php?id=100006888462062",
-    "https://www.facebook.com/sudipt.chakraborty",
-    "https://www.facebook.com/profile.php?id=100005207954302",
-    "https://www.facebook.com/dibyadipta.roy",
+    "https://www.facebook.com/liman.rahman.1",
+    "https://www.facebook.com/shashwat.bhattacharjee",
+    "https://www.facebook.com/nikhil.vashistha.12",
+    "null",
+    "https://www.facebook.com/prosperous.uttkarsh",
   ],
   "FGS": [
-    "https://www.facebook.com/baranwalankit30",
-    "https://www.facebook.com/profile.php?id=100011772971308",
-    "https://www.facebook.com/Shashanknan",
-    "https://www.facebook.com/vartika.arora.733"
+    "https://www.facebook.com/profile.php?id=100011461941432",
+    "https://m.facebook.com/soumik.paul.503",
+    "https://www.facebook.com/swaraj.agrawal.33",
+    "https://www.facebook.com/manish.awasthi.2408",
+    "https://www.facebook.com/akshat.jain.336333"
   ],
   "FT": [
-    "https://www.facebook.com/ashutosh.agarwal97",
-    "https://www.facebook.com/akshay.verma.96742277",
-    "https://www.facebook.com/satantra.tewari",
-    "https://www.facebook.com/itsparthaghosh"
+    "https://www.facebook.com/avinash.prasad.1238",
+    "https://www.facebook.com/profile.php?id=100009740767459",
+    "null",
+    "null"
   ],
   "FCC": [
-    "https://www.facebook.com/itsdebmalyadas",
-    "https://www.facebook.com/albesray.morkel",
-    "https://www.facebook.com/albesray.morkel",
-    "http://facebook.com/profile.php?id=100004485453709AZA",
-    "https://www.facebook.com/vartika.arora.733"
+    "https://www.facebook.com/akshat.jain.336333",
+    "https://m.facebook.com/Raman1309?ref=bookmarks",
+    "https://www.facebook.com/jaideep.datta.31",
+    "null"
   ],
   "ICC": [
-    "assets/DDas.jpeg",
-    "assets/Shr.jpeg",
-    "assets/SRay.jpeg",
-    "assets/PB.jpeg",
-    "assets/VA.jpeg",
+    "assets/akshat.jpg",
+    "assets/CC2.jpg",
+    "assets/CC3.JPG",
+    "assets/CC4.jpg",
   ],
   "IT": [
-    "assets/AshA.jpeg",
-    "assets/A.jpeg",
-    "assets/ST.jpeg",
-    "assets/PSG.jpeg",
+    "assets/T1.jpg",
+    "assets/T2.jpg",
+    "assets/T3.jpg",
+    "assets/T4.jpg",
   ],
   "IGS": [
-    "assets/AB.jpeg",
-    "assets/SM.jpeg",
-    "assets/SNayak.jpeg",
-    "assets/VA.jpeg",
+    "assets/GS1.jpg",
+    "assets/GS2.jpeg",
+    "assets/GS3.jpg",
+    "assets/GS4.jpg",
+    "assets/akshat.jpg",
   ],
   "IOC": [
-    "assets/SSinghal.jpeg",
-    "assets/SChak.jpeg",
-    "assets/PJain.jpeg",
-    "assets/DRoy.jpeg"
+    "assets/OC1.jpg",
+    "assets/OC2.jpg",
+    "assets/OC3.png",
+    "assets/OC4.jpg",
+    "assets/OC5.jpg",
   ],
 };
 
@@ -366,7 +369,7 @@ class _ContactUsState extends State<ContactUs> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 30),
                               cacheExtent: 1350.0,
-                              itemCount: 4,
+                              itemCount: 5,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Neumorphic(
@@ -510,7 +513,7 @@ class _ContactUsState extends State<ContactUs> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 30),
                               cacheExtent: 1350.0,
-                              itemCount: 4,
+                              itemCount: 5,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Neumorphic(
@@ -797,7 +800,7 @@ class _ContactUsState extends State<ContactUs> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 30),
                               cacheExtent: 1350.0,
-                              itemCount: 5,
+                              itemCount: 4,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Neumorphic(
