@@ -262,6 +262,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                           child: Column(
                             children: <Widget>[
                               TextFormField(
+                                  cursorColor: Theme.of(context).accentColor,
                                   style: Theme.of(context).textTheme.subhead,
                                   keyboardType: TextInputType.number,
                                   controller: amountController,
@@ -273,6 +274,7 @@ class _EurekoinTransferState extends State<EurekoinTransfer> {
                                   ),
                                   validator: (val) => val == "" ? val : null),
                               TextFormField(
+                                  cursorColor: Theme.of(context).accentColor,
                                   controller: emailController,
                                   decoration: InputDecoration(
                                     hintText: "Name",
@@ -464,6 +466,7 @@ Widget PaymentSuccessDialog(context, message, amount, to) {
                             shadowDarkColor: Colors.black,
                           ),
                           child: Container(
+                            height: 50,
                             decoration: BoxDecoration(
                               color: message == "Successful!"
                                   ? Colors.green
@@ -472,9 +475,7 @@ Widget PaymentSuccessDialog(context, message, amount, to) {
                                 top: Radius.circular(20),
                               ),
                             ),
-                            alignment: Alignment.bottomCenter,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 100, vertical: 20),
+                            alignment: Alignment.center,
                             child: Text(
                               message,
                               style: label,

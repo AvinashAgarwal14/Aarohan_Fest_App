@@ -778,18 +778,24 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
       context: context,
       builder: (BuildContext context) {
         // return object of type Dialog
-        return AlertDialog(
-          title: new Text("QR Code Result"),
-          content: new Text("$message"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+        return Dialog(
+          child: Neumorphic(
+            child: Container(
+              //Todo: Check this dialog
+              child: Column(
+                children: [
+                  Text("QR Code Result"),
+                  Text("$message"),
+                  FlatButton(
+                    child: new Text("Close"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
         );
       },
     );

@@ -232,6 +232,7 @@ class _EurekoinCouponState extends State<EurekoinCoupon> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 16.0),
                             child: TextFormField(
+                                cursorColor: Theme.of(context).accentColor,
                                 controller: item.couponController,
                                 decoration: InputDecoration(
                                   labelText: "Coupon Code",
@@ -366,6 +367,7 @@ Widget PaymentSuccessDialog(context, message) {
                       shadowDarkColor: Colors.black,
                     ),
                     child: Container(
+                      height: 50,
                       decoration: BoxDecoration(
                         color: message == "Successful!"
                             ? Colors.green
@@ -374,9 +376,7 @@ Widget PaymentSuccessDialog(context, message) {
                           top: Radius.circular(20),
                         ),
                       ),
-                      alignment: Alignment.bottomCenter,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                      alignment: Alignment.center,
                       child: Text(
                         message,
                         style: label,

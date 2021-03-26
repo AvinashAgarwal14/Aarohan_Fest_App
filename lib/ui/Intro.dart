@@ -99,13 +99,18 @@ class _IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
+        centerWidget: Image(
+          image: AssetImage("assets/3.png"),
+          height: 300,
+          width: 300,
+        ),
         maxLineTitle: 2,
         title: "THE PILL IS \n YOUR'S TO CHOOSE",
         styleTitle: GoogleFonts.josefinSans(color: Colors.white, fontSize: 28),
         backgroundColor: Colors.black,
-        pathImage: "assets/3.png",
-        heightImage: 300.0,
-        widthImage: 300.0,
+        // pathImage: "assets/3.png",
+        // heightImage: 300.0,
+        // widthImage: 300.0,
       ),
     );
     slides.add(

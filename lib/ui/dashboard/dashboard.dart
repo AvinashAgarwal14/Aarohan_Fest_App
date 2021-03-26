@@ -289,6 +289,9 @@ class _DashboardState extends State<Dashboard> {
                                                           padding:
                                                               EdgeInsets.all(3),
                                                           child: TextField(
+                                                            cursorColor: Theme
+                                                                    .of(context)
+                                                                .accentColor,
                                                             onChanged:
                                                                 (String value) {
                                                               setState(() {
@@ -917,39 +920,6 @@ class _DashboardState extends State<Dashboard> {
                                                                     )
                                                                   ],
                                                                 ),
-                                                                SizedBox(
-                                                                  height: 4,
-                                                                ),
-                                                                Row(
-                                                                  children: <
-                                                                      Widget>[
-                                                                    Text(
-                                                                      "#",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize:
-                                                                            16.0,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: 8,
-                                                                    ),
-                                                                    Text(
-                                                                      showEvents[
-                                                                              index]
-                                                                          .tag,
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              10),
-                                                                    ),
-                                                                  ],
-                                                                ),
                                                               ],
                                                             ),
                                                           ),
@@ -1138,18 +1108,33 @@ class DateTile extends StatelessWidget {
             // margin: EdgeInsets.symmetric(horizontal: 10),
             width: MediaQuery.of(context).size.width * 0.18,
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            decoration: BoxDecoration(
-              color: isSelected
-                  ? Color(0xFF78e08f)
-                  : Color(0xFF292D32), //Color(0xff29404E),
-              border: Border.all(
-                color: isSelected
-                    ? Color(0xFF03A062).withOpacity(0.5)
-                    : Colors.grey[700].withOpacity(0.5),
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(12),
-            ),
+            decoration: (isSelected)
+                ? BoxDecoration(
+                    // color: isSelected
+                    //     ? Color(0xFF78e08f)
+                    //     : Color(0xFF292D32), //Color(0xff29404E),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF396b4b),
+                        Color(0xFF78e08f),
+                      ],
+                    ),
+                    border: Border.all(
+                      color: Color(0xFF03A062).withOpacity(0.5),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  )
+                : BoxDecoration(
+                    color: Color(0xFF292D32), //Color(0xff29404E),
+                    border: Border.all(
+                      color: Colors.grey[700].withOpacity(0.5),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1278,7 +1263,7 @@ class _BottomSlideState extends State<BottomSlide> {
             SizedBox(height: 13.0),
             Container(
               child: Expanded(
-                child: events != null
+                child: bottomSlideList != null
                     ? ListView.builder(
                         controller: ScrollController(),
                         itemCount: bottomSlideList.length,
@@ -1292,12 +1277,173 @@ class _BottomSlideState extends State<BottomSlide> {
                                           item: bottomSlideList[index]);
                                     }));
                                   },
-                                  child: PopularEventTile(
-                                    desc: bottomSlideList[index].title,
-                                    imgeAssetPath:
-                                        bottomSlideList[index].imageUrl,
-                                    date: bottomSlideList[index].date,
-                                    address: bottomSlideList[index].location,
+                                  child: Neumorphic(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 9.0, horizontal: 15.0),
+                                    style: NeumorphicStyle(
+                                      shape: NeumorphicShape.flat,
+                                      boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.circular(12.0),
+                                      ),
+                                      depth: 8.0,
+                                      intensity: 1.0,
+                                      lightSource: LightSource.top,
+                                      shadowLightColor:
+                                          Colors.grey[700].withOpacity(0.55),
+                                      shadowDarkColor: Colors.black,
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFF292D32),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                      height: 100.0,
+                                      // width: MediaQuery.of(context).size.width * 0.7,
+                                      child: Row(
+                                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Neumorphic(
+                                            style: NeumorphicStyle(
+                                              shape: NeumorphicShape.flat,
+                                              boxShape:
+                                                  NeumorphicBoxShape.roundRect(
+                                                BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(12.0),
+                                                  bottomLeft:
+                                                      Radius.circular(12.0),
+                                                ),
+                                              ),
+                                              depth: 8.0,
+                                              intensity: 0.7,
+                                              lightSource: LightSource.top,
+                                              shadowLightColor: Colors.grey[700]
+                                                  .withOpacity(0.7),
+                                              shadowDarkColor:
+                                                  Colors.black.withOpacity(0.9),
+                                            ),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.28,
+                                              child: bottomSlideList[index]
+                                                          .imageUrl ==
+                                                      ""
+                                                  ? Image.asset(
+                                                      "images/imageplaceholder.png",
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.28,
+                                                      height: 100.0,
+                                                      fit: BoxFit.fill)
+                                                  : CachedNetworkImage(
+                                                      // height: 100,
+                                                      // width: 120,
+                                                      fit: BoxFit.cover,
+                                                      errorWidget: (context,
+                                                          url, error) {
+                                                        print(
+                                                            "Could not load content");
+                                                        return Image.asset(
+                                                            "images/imageplaceholder.png",
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.28,
+                                                            height: 100.0,
+                                                            fit: BoxFit.fill);
+                                                      },
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          Image.asset(
+                                                              "images/imageplaceholder.png",
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.28,
+                                                              height: 100.0,
+                                                              fit: BoxFit.fill),
+                                                      imageUrl:
+                                                          bottomSlideList[index]
+                                                              .imageUrl,
+                                                    ),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(12.0),
+                                                  bottomLeft:
+                                                      Radius.circular(12.0),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              padding:
+                                                  EdgeInsets.only(left: 16),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(12.0),
+                                                  bottomRight:
+                                                      Radius.circular(12.0),
+                                                ),
+                                                border: Border.all(
+                                                  style: BorderStyle.solid,
+                                                  width: 1.5,
+                                                  color: Colors.grey[700]
+                                                      .withOpacity(0.3),
+                                                ),
+                                              ),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                    bottomSlideList[index]
+                                                        .title,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 18),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Icon(
+                                                        Icons.calendar_today,
+                                                        size: 15.0,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 8,
+                                                      ),
+                                                      Text(
+                                                        bottomSlideList[index]
+                                                            .date,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 10),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 )
                               : SizedBox();
@@ -1347,18 +1493,30 @@ class EventTile extends StatelessWidget {
           width: 170,
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            color: isSelected
-                ? Color(0xFF78e08f)
-                : Color(0xFF292D32), //Color(0xff29404E),
-            border: Border.all(
-              color: isSelected
-                  ? Color(0xFF03A062).withOpacity(0.5)
-                  : Colors.grey[700].withOpacity(0.5),
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(12),
-          ),
+          decoration: (isSelected)
+              ? BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFF396b4b),
+                      Color(0xFF78e08f),
+                    ],
+                  ),
+                  border: Border.all(
+                    color: Color(0xFF03A062).withOpacity(0.5),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                )
+              : BoxDecoration(
+                  color: Color(0xFF292D32), //Color(0xff29404E),
+                  border: Border.all(
+                    color: Colors.grey[700].withOpacity(0.5),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

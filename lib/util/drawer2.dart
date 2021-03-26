@@ -82,51 +82,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         opacity: 1,
         child: Drawer(
           child: Container(
-            decoration: BoxDecoration(
-/*gradient: LinearGradient(
-begin: Alignment.bottomCenter,
-end: Alignment.topCenter,
-colors: [
-Color(0xFF13171a),
-Color(0xFF32393f),
-],
-stops: [
-0.1,
-0.35,
-],
-),*/
-                color: Color(0xFF292D32)),
+            decoration: BoxDecoration(color: Color(0xFF292D32)),
             child: ListTileTheme(
               iconColor: Color.fromRGBO(255, 255, 255, 1.0),
               textColor: Color.fromRGBO(255, 255, 255, 1.0),
               selectedColor: Theme.of(context).primaryColor.withOpacity(1.0),
               child: ListView(padding: EdgeInsets.zero, children: <Widget>[
-/*Container(
-margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-child: currentUser != null
-? ListTile(
-title: Text(
-'${currentUser.providerData[1].displayName}',
-style: GoogleFonts.ubuntu(
-fontSize: 17,
-color: Color(0xFF6B872B),
-),
-),
-leading: getNuUp(ClipRRect(
-borderRadius: BorderRadius.circular(20),
-child: Image.network(
-currentUser.providerData[1].photoUrl,
-fit: BoxFit.fill,
-),
-)),
-subtitle: Text(
-"${currentUser.providerData[1].email}",
-style: GoogleFonts.ubuntu(fontSize: 13),
-),
-)
-: SizedBox(),
-),*/
-
                 currentUser != null
                     ? Container(
                         padding: EdgeInsets.all(40),
@@ -138,11 +99,9 @@ style: GoogleFonts.ubuntu(fontSize: 13),
                               height: 60,
                               width: 60,
                               child: getNuUp(ClipRRect(
-//borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
                                   imageUrl:
                                       currentUser.providerData[1].photoUrl,
-// fit: BoxFit.fill,
                                 ),
                               )),
                             ),
@@ -168,54 +127,51 @@ style: GoogleFonts.ubuntu(fontSize: 13),
                         ),
                       )
                     : SizedBox(),
-
-// getNuUp(GestureDetector(
-// onTap: () {
-// _logout();
-// },
-// child: Container(
-// height: 50,
-// width: 50,
-// child: Icon(
-// Icons.logout,
-// color: Colors.white,
-// ),
-// ),
-// ))
-
-// currentUser != null?Container(
-// height: 60,
-// width: 60,
-// child: getNuUp(ClipRRect(
-// //borderRadius: BorderRadius.circular(20),
-// child: Image.network(
-// currentUser.providerData[1].photoUrl,
-// // fit: BoxFit.fill,
-// ),
-// )),
-// ):SizedBox(),
-
+                ListTile(
+                  title: Text(
+                    'Utilities',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  ),
+                ),
                 getListItem("Dashboard", "/ui/dashboard"),
+                getListItem("Timeline", "/ui/schedule"),
                 getListItem("Eurekoin Wallet", "/ui/eurekoin"),
                 getListItem("Eurekoin Leaderboard", "/eurekoin/leader_board"),
-                getListItem("Prelims", "/ui/prelims"),
-                getListItem("Journo Detective", "ui/interficio"),
-
-                getListItem("Arcade", "/ui/arcade_game"),
-                getListItem("Timeline", "/ui/schedule"),
                 getListItem("Scoreboard", "/ui/scoreboard"),
-
+                Divider(
+                  color: Colors.white,
+                  thickness: 0.2,
+                  endIndent: 15,
+                  indent: 15,
+                ),
+                ListTile(
+                  title: Text(
+                    'Attractions',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  ),
+                ),
+                getListItem("Prelims", "/ui/prelims"),
+                getListItem("Game", "/ui/arcade_game"),
+                getListItem("Journo Detective", "ui/interficio"),
+                Divider(
+                  color: Colors.white,
+                  thickness: 0.2,
+                  endIndent: 15,
+                  indent: 15,
+                ),
+                ListTile(
+                  title: Text(
+                    'Team Aavishkar',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  ),
+                ),
                 getListItem("Sponsors", "/ui/sponsors/sponsors"),
-
                 getListItem("Contact Us", "/ui/contact_us/contact_us"),
-
                 getListItem("Contributors", "/ui/contributors/contributors"),
                 getListItem("About Aarohan", "/ui/about_us/about_us"),
-
                 SizedBox(
                   height: 40,
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -286,13 +242,9 @@ style: GoogleFonts.ubuntu(fontSize: 13),
 
   Widget getNuUp1(Widget c) {
     return Neumorphic(
-//margin: EdgeInsets.symmetric(horizontal: 10),
         style: NeumorphicStyle(
           color: Color(0xFF292D32),
           shape: NeumorphicShape.flat,
-/*boxShape: NeumorphicBoxShape.roundRect(
-BorderRadius.circular(16.0),
-),*/
           depth: 5,
           intensity: 1,
           lightSource: LightSource.top,
@@ -323,20 +275,8 @@ BorderRadius.circular(16.0),
                 SizedBox(
                   width: 15,
                 ),
-// Icon(
-// isShowing ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-// color: Colors.white,
-// size: 25,
-// )
               ],
             ),
-// onTap: () {
-// setState(() {
-// isShowing = !isShowing;
-// isShowing2 = false;
-// isShowing3 = false;
-// });
-// },
           ),
           SizedBox(
             height: isShowing ? 10 : 0,
@@ -364,14 +304,6 @@ BorderRadius.circular(16.0),
     );
   }
 
-// ListTile(
-// leading: Icon(Icons.power_settings_new),
-// title: Text("Logout"),
-// onTap: (() {
-// _logout();
-// }),
-// ),
-
   bool isShowing2 = true;
 
   Widget getDropDownCointainer2() {
@@ -393,20 +325,8 @@ BorderRadius.circular(16.0),
                 SizedBox(
                   width: 15,
                 ),
-// Icon(
-// isShowing2 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-// color: Colors.white,
-// size: 25,
-// )
               ],
             ),
-// onTap: () {
-// setState(() {
-// isShowing2 = !isShowing2;
-// isShowing = false;
-// isShowing3 = false;
-// });
-// },
           ),
           SizedBox(
             height: isShowing2 ? 10 : 0,
@@ -450,20 +370,8 @@ BorderRadius.circular(16.0),
                 SizedBox(
                   width: 15,
                 ),
-// Icon(
-// isShowing3 ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-// color: Colors.white,
-// size: 25,
-// )
               ],
             ),
-// onTap: () {
-// setState(() {
-// isShowing3 = !isShowing3;
-// isShowing2 = false;
-// isShowing = false;
-// });
-// },
           ),
           SizedBox(
             height: isShowing3 ? 10 : 0,
