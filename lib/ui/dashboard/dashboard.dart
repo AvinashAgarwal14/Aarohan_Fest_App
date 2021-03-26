@@ -172,7 +172,7 @@ class _DashboardState extends State<Dashboard> {
       body: SafeArea(
         child: Stack(
           children: [
-            (showEvents.length != 40)
+            (showEvents.length == null)
                 ? Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
@@ -1422,9 +1422,9 @@ class PopularEventTile extends StatelessWidget {
                     ),
                     Row(
                       children: <Widget>[
-                        Image.asset(
-                          "assets/calender.png",
-                          height: 12,
+                        Icon(
+                          Icons.calendar_today,
+                          size: 15.0,
                         ),
                         SizedBox(
                           width: 8,
