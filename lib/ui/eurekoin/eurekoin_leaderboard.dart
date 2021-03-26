@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-
 import 'package:arhn_app_2021/util/drawer2.dart';
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -93,18 +91,24 @@ class EurekoinLeader extends State<EurekoinLeaderBoard> {
               ? Container()
               : CustomScrollView(slivers: [
                   SliverToBoxAdapter(
-                      child: Row(
+                      child: Stack(
+                    alignment: Alignment.centerLeft,
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       menuButton(),
                       SizedBox(
                         width: 20,
                       ),
-                      Text(
-                        "Leaderboard",
-                        style: GoogleFonts.josefinSans(
-                            fontSize: 30, color: Colors.white //(0xFF6B872B),
-                            ),
+                      Container(
+                        child: Center(
+                          child: Text(
+                            "Leaderboard",
+                            style: GoogleFonts.josefinSans(
+                                fontSize: 26,
+                                color: Colors.white //(0xFF6B872B),
+                                ),
+                          ),
+                        ),
                       ),
                     ],
                   )),
