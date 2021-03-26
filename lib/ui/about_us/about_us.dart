@@ -167,12 +167,15 @@ class _AboutUsPageState extends State<AboutUsPage>
                   controller: scrollController,
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.fromLTRB(90.0, 20.0, 30.0, 0.0),
-                      child: Text(
-                        "About Aarohan",
-                        style: GoogleFonts.josefinSans(
-                            fontSize: 30, color: Colors.white //(0xFF6B872B),
-                            ),
+                      height: 70,
+                      //padding: EdgeInsets.fromLTRB(90.0, 20.0, 30.0, 0.0),
+                      child: Center(
+                        child: Text(
+                          "About Aarohan",
+                          style: GoogleFonts.josefinSans(
+                              fontSize: 26, color: Colors.white //(0xFF6B872B),
+                              ),
+                        ),
                       ),
                     ),
                     new Container(

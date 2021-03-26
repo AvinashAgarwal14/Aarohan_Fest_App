@@ -210,6 +210,9 @@ class _PacmanState extends State<Pacman> {
                                       boxShape: NeumorphicBoxShape.roundRect(
                                           BorderRadius.circular(10.0))),
                                   onPressed: () {
+                                    setState(() {
+                                      paused = true;
+                                    });
                                     Navigator.pop(context);
                                     Navigator.pop(context);
                                   },

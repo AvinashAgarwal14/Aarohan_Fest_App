@@ -257,18 +257,31 @@ class _ScoreboardState extends State<Scoreboard> {
                       ListView(
                         padding: const EdgeInsets.all(10.0),
                         children: <Widget>[
-                          Row(
+                          Stack(
+                            alignment: Alignment.centerRight,
                             children: [
-                              menuButton(),
-                              SizedBox(
-                                width: 20,
+                              Positioned(
+                                left: 0,
+                                top: 0,
+                                child: menuButton(),
                               ),
-                              Text(
-                                "Scoreboard",
-                                style: GoogleFonts.josefinSans(
-                                    fontSize: 30,
-                                    color: Colors.white //(0xFF6B872B),
+                              // SizedBox(
+                              //   width: 20,
+                              // ),
+                              Positioned(
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 70,
+                                  child: Center(
+                                    child: Text(
+                                      "Scoreboard",
+                                      style: GoogleFonts.josefinSans(
+                                          fontSize: 26,
+                                          color: Colors.white //(0xFF6B872B),
+                                          ),
                                     ),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -435,7 +448,7 @@ class _ScoreboardState extends State<Scoreboard> {
       onPressed: () {
         _scaffoldKey.currentState.openDrawer();
       },
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(5),
       padding: EdgeInsets.all(0),
       style: NeumorphicStyle(
         shape: NeumorphicShape.concave,

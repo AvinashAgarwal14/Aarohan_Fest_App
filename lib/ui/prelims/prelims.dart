@@ -75,58 +75,70 @@ class _PrelimsState extends State<Prelims> {
           ),
           child: Column(
             children: [
-              Row(
+              Stack(
+                alignment: Alignment.centerRight,
                 children: [
-                  NeumorphicButton(
-                    onPressed: () {
-                      _scaffoldKey.currentState.openDrawer();
-                    },
-                    margin: EdgeInsets.only(top: 10, left: 10),
-                    padding: EdgeInsets.all(0),
-                    style: NeumorphicStyle(
-                      shape: NeumorphicShape.concave,
-                      boxShape: NeumorphicBoxShape.circle(),
-                      depth: 7.5,
-                      intensity: 1.0,
-                      lightSource: LightSource.topLeft,
-                      shadowLightColor: Colors.grey[700].withOpacity(0.6),
-                      shadowDarkColor: Colors.black,
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Color(0xFF63d471).withOpacity(0.5),
-                          width: 1.5,
-                          style: BorderStyle.solid,
-                        ),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color(0xFF396b4b),
-                            Color(0xFF78e08f),
-                          ],
-                        ),
+                  Positioned(
+                    left: 10,
+                    child: NeumorphicButton(
+                      onPressed: () {
+                        _scaffoldKey.currentState.openDrawer();
+                      },
+                      margin: EdgeInsets.only(left: 10),
+                      padding: EdgeInsets.all(0),
+                      style: NeumorphicStyle(
+                        shape: NeumorphicShape.concave,
+                        boxShape: NeumorphicBoxShape.circle(),
+                        depth: 7.5,
+                        intensity: 1.0,
+                        lightSource: LightSource.topLeft,
+                        shadowLightColor: Colors.grey[700].withOpacity(0.6),
+                        shadowDarkColor: Colors.black,
                       ),
-                      height: 50.0,
-                      width: 50.0,
-                      child: Center(
-                        child: Icon(
-                          Icons.menu,
-                          color: Colors.white,
-                          // size: 25,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Color(0xFF63d471).withOpacity(0.5),
+                            width: 1.5,
+                            style: BorderStyle.solid,
+                          ),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color(0xFF396b4b),
+                              Color(0xFF78e08f),
+                            ],
+                          ),
+                        ),
+                        height: 50.0,
+                        width: 50.0,
+                        child: Center(
+                          child: Icon(
+                            Icons.menu,
+                            color: Colors.white,
+                            // size: 25,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20, left: 30),
-                    child: Text(
-                      "Prelims",
-                      style: GoogleFonts.josefinSans(
-                          fontSize: 30, color: Colors.white //(0xFF6B872B),
-                          ),
+                  Positioned(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 70,
+                      // margin: EdgeInsets.only(
+                      //     top: 20,
+                      //     left: MediaQuery.of(context).size.width * 0.25),
+                      child: Center(
+                        child: Text(
+                          "Prelims",
+                          style: GoogleFonts.josefinSans(
+                              fontSize: 26, color: Colors.white //(0xFF6B872B),
+                              ),
+                        ),
+                      ),
                     ),
                   )
                 ],

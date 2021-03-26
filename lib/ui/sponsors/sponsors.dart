@@ -95,7 +95,7 @@ class _SponsorsState extends State<Sponsors> {
           title: Text(
             "Sponsors",
             style: GoogleFonts.josefinSans(
-                fontSize: 30, color: Colors.white //(0xFF6B872B),
+                fontSize: 26, color: Colors.white //(0xFF6B872B),
                 ),
           ),
         ),

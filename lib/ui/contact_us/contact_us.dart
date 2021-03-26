@@ -157,9 +157,9 @@ Map contactCard = {
     "Utkarsh Chaurasia"
   ],
   "GeneralSecretary": [
+    "Swaraj Agrawal",
     "Akshat Jain",
     "Soumik Paul",
-    "Swaraj Agrawal",
     "Manish Awasthi",
   ],
   "Treasurer": [
@@ -170,14 +170,14 @@ Map contactCard = {
     "Riddhiman Sanyal",
   ],
   "CorporateCommunication": [
-    "Akshat Jain",
     "Raman Kapri",
+    "Akshat Jain",
     "Jaideep Datta",
     "Sakchi Agarwal"
   ],
   "POC": ["9475522304", "9163322604", "9835274836", "9832509202", "7355399636"],
-  "PGS": ["8004937056", "9593493630", "9407256919", "8436336451"],
-  "PCC": ["8004937056", "9002726215", "9002198118", "7044988664"],
+  "PGS": ["9407256919", "8004937056", "9593493630", "8436336451"],
+  "PCC": ["9002726215", "8004937056", "9002198118", "7044988664"],
   "PT": ["8001507060", "8617671512", "7355722096", "8100553002", "8670052205"],
   "FOC": [
     "https://www.facebook.com/liman.rahman.1",
@@ -187,9 +187,9 @@ Map contactCard = {
     "https://www.facebook.com/prosperous.uttkarsh",
   ],
   "FGS": [
+    "https://www.facebook.com/swaraj.agrawal.33",
     "https://www.facebook.com/akshat.jain.336333",
     "https://m.facebook.com/soumik.paul.503",
-    "https://www.facebook.com/swaraj.agrawal.33",
     "https://www.facebook.com/manish.awasthi.2408",
   ],
   "FT": [
@@ -200,14 +200,14 @@ Map contactCard = {
     "null"
   ],
   "FCC": [
-    "https://www.facebook.com/akshat.jain.336333",
     "https://m.facebook.com/Raman1309?ref=bookmarks",
+    "https://www.facebook.com/akshat.jain.336333",
     "https://www.facebook.com/jaideep.datta.31",
     "null"
   ],
   "ICC": [
-    "assets/akshat.jpg",
     "assets/CC2.jpg",
+    "assets/akshat.jpg",
     "assets/CC3.JPG",
     "assets/CC4.jpg",
   ],
@@ -219,9 +219,9 @@ Map contactCard = {
     "assets/T4.jpg",
   ],
   "IGS": [
+    "assets/GS3.jpg",
     "assets/akshat.jpg",
     "assets/GS2.jpg",
-    "assets/GS3.jpg",
     "assets/GS4.jpg",
   ],
   "IOC": [
@@ -266,7 +266,7 @@ class _ContactUsState extends State<ContactUs> {
               SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    Row(
+                    Stack(
                       children: [
                         NeumorphicButton(
                           margin: EdgeInsets.only(top: 5.0, left: 10.0),
@@ -313,13 +313,14 @@ class _ContactUsState extends State<ContactUs> {
                         ),
                         Expanded(
                           child: Container(
+                            height: 75,
                             // color: Colors.black,
                             // padding: EdgeInsets.fromLTRB(50.0, 10.0, 30.0, 0.0),
                             child: Center(
                               child: Text(
                                 "Contact Us",
                                 style: GoogleFonts.josefinSans(
-                                    fontSize: 30,
+                                    fontSize: 26,
                                     color: Colors.white //(0xFF6B872B),
                                     ),
                               ),
