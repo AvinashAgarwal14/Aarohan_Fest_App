@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-String buttonName="";
-class StaggerAnimation extends StatelessWidget {
 
-  StaggerAnimation({Key key, this.buttonController,})
-      : buttonSqueezeanimation = new Tween(
+String buttonName = "";
+
+class StaggerAnimation extends StatelessWidget {
+  StaggerAnimation({
+    Key key,
+    this.buttonController,
+  })  : buttonSqueezeanimation = new Tween(
           begin: 320.0,
           end: 70.0,
-        )
-            .animate(
+        ).animate(
           new CurvedAnimation(
             parent: buttonController,
             curve: new Interval(
@@ -20,8 +22,7 @@ class StaggerAnimation extends StatelessWidget {
         buttomZoomOut = new Tween(
           begin: 70.0,
           end: 1000.0,
-        )
-            .animate(
+        ).animate(
           new CurvedAnimation(
             parent: buttonController,
             curve: new Interval(
@@ -34,8 +35,7 @@ class StaggerAnimation extends StatelessWidget {
         containerCircleAnimation = new EdgeInsetsTween(
           begin: const EdgeInsets.only(bottom: 50.0),
           end: const EdgeInsets.only(bottom: 0.0),
-        )
-            .animate(
+        ).animate(
           new CurvedAnimation(
             parent: buttonController,
             curve: new Interval(
@@ -79,14 +79,17 @@ class StaggerAnimation extends StatelessWidget {
                         buttomZoomOut.value == 70 ? 60.0 : buttomZoomOut.value,
                     alignment: FractionalOffset.center,
                     decoration: new BoxDecoration(
-                      color: const Color.fromRGBO(123, 123, 123, 1.0),
+                      // color: const Color.fromRGBO(123, 123, 123, 1.0),
+                      color: Color(0xFF32393f),
                       borderRadius: buttomZoomOut.value < 400
                           ? new BorderRadius.all(const Radius.circular(30.0))
                           : new BorderRadius.all(const Radius.circular(0.0)),
                     ),
                     child: buttonSqueezeanimation.value > 75.0
                         ? new Text(
-                           buttonController.debugLabel=="google"?"Sign in With Google": "Sign in With Facebook",
+                            buttonController.debugLabel == "google"
+                                ? "Sign in With Google"
+                                : "Sign in With Facebook",
                             maxLines: 1,
                             style: new TextStyle(
                               color: Colors.white,
@@ -110,7 +113,8 @@ class StaggerAnimation extends StatelessWidget {
                       shape: buttomZoomOut.value < 500
                           ? BoxShape.circle
                           : BoxShape.rectangle,
-                      color: const Color.fromRGBO(123, 123, 123, 1.0),
+                      // color: const Color.fromRGBO(123, 123, 123, 1.0),
+                      color: Color(0xFF32393f),
                     ),
                   ),
           )),
@@ -121,7 +125,7 @@ class StaggerAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     buttonController.addListener(() {
       if (buttonController.isCompleted) {
-       // Navigator.pushNamed(context, "/home");
+        // Navigator.pushNamed(context, "/home");
       }
     });
     return new AnimatedBuilder(

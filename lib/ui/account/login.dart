@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:arhn_app_2021/ui/dashboard/dashboard_loader.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -212,7 +213,7 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
                         ],
                       )))));
     } else {
-      return Dashboard();
+      return DashboardLoader();
     }
   }
 
@@ -344,55 +345,77 @@ class LogInPageState extends State<LogInPage> with TickerProviderStateMixin {
             child: Dialog(
               elevation: 0,
               backgroundColor: Colors.transparent,
-              child: Container(
-                padding: EdgeInsets.all(15),
-                height: 150,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Alert!",
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                    SizedBox(height: 10.0),
-                    Flexible(
-                      child: Text("Do you want to Exit?"),
-                    ),
-                    SizedBox(height: 10.0),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: RaisedButton(
-                            child: Text("Cancel"),
-                            color: Colors.red,
-                            colorBrightness: Brightness.dark,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
+              child: Neumorphic(
+                style: NeumorphicStyle(
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(
+                    BorderRadius.circular(20.0),
+                  ),
+                  depth: 8.0,
+                  intensity: 1.0,
+                  lightSource: LightSource.top,
+                  shadowLightColor: Colors.grey[700].withOpacity(0.55),
+                  shadowDarkColor: Colors.black,
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  height: 150,
+                  decoration: BoxDecoration(
+                      color: Color(0xFF292D32),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Alert!",
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                      SizedBox(height: 10.0),
+                      Flexible(
+                        child: Text("Do you want to Exit?"),
+                      ),
+                      SizedBox(height: 10.0),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: NeumorphicButton(
+                              curve: Curves.bounceInOut,
+                              child: Center(child: Text("Cancel")),
+                              style: NeumorphicStyle(
+                                  shadowDarkColor: Colors.black,
+                                  shadowLightColor:
+                                      Colors.grey[700].withOpacity(0.6),
+                                  color: Colors.red,
+                                  shape: NeumorphicShape.flat,
+                                  boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(10.0))),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 10.0),
-                        Expanded(
-                          child: RaisedButton(
-                            child: Text("Exit"),
-                            color: Colors.green,
-                            colorBrightness: Brightness.dark,
-                            onPressed: () {
-                              exit(0);
-                            },
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
+                          SizedBox(width: 10.0),
+                          Expanded(
+                            child: NeumorphicButton(
+                              child: Center(child: Text("Exit")),
+                              style: NeumorphicStyle(
+                                  shadowDarkColor: Colors.black,
+                                  shadowLightColor:
+                                      Colors.grey[700].withOpacity(0.6),
+                                  color: Theme.of(context).accentColor,
+                                  shape: NeumorphicShape.flat,
+                                  boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(10.0))),
+                              onPressed: () {
+                                exit(0);
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
