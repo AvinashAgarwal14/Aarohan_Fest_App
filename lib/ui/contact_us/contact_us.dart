@@ -220,14 +220,14 @@ Map contactCard = {
   ],
   "IGS": [
     "assets/akshat.jpg",
-    "assets/GS2.jpeg",
+    "assets/GS2.jpg",
     "assets/GS3.jpg",
     "assets/GS4.jpg",
   ],
   "IOC": [
     "assets/OC1.jpg",
     "assets/OC2.jpg",
-    "assets/OC3.png",
+    "assets/OC3.jpg",
     "assets/OC4.jpg",
     "assets/OC5.jpg",
   ],

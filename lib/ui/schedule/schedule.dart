@@ -145,7 +145,7 @@ class _ScheduleState extends State<Schedule> {
                       fit: StackFit.expand,
                       children: <Widget>[
                         new Image.asset(
-                          "assets/timeline.png",
+                          "assets/timeline.jpg",
                           fit: BoxFit.cover,
                           height: _appBarHeight,
                         ),

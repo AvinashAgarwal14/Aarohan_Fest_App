@@ -86,7 +86,7 @@ Map contributors = {
     "images/Contributors/subhadip.jpg",
     "images/Contributors/Jyotishka.jpg",
     "images/Contributors/romit.jpg",
-    "images/Contributors/simran.jpeg",
+    "images/Contributors/simran.jpg",
     "images/Contributors/avinash.jpeg",
     "images/Contributors/akshat.jpg",
   ],
