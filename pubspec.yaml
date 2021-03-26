@@ -41,8 +41,6 @@ dependencies:
   carousel_slider:
   flutter_swiper:
   barcode_scan_fix: any
-  intl: ^0.15.7
-  # palette_generator: ^0.2.0
   path_provider: ^1.5.1
   share: ^0.6.3+5
   google_maps_flutter: ^0.5.20+6
@@ -50,17 +48,14 @@ dependencies:
   http: ^0.12.0+3
   sliding_up_panel: ^0.3.6
   dio: ^3.0.8
-  # flame: ^0.17.3
   google_fonts: ^0.3.2
   image_picker: ^0.6.0+17
   flutter_staggered_grid_view: ^0.3.0
-  flutter_speed_dial: ^1.2.5
   intro_slider: ^2.2.8
   keyboard_visibility: any
-  audioplayers: ^0.17.0
   flutter_neumorphic: ^3.1.0
 
-  shape_of_view: ^1.0.2
+  
 
 dev_dependencies:
   flutter_test:
