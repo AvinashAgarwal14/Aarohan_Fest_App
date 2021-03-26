@@ -13,7 +13,7 @@ class _DashboardLoaderState extends State<DashboardLoader> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.of(context).pushNamed("/ui/dashboard");
+      Navigator.of(context).pushReplacementNamed("/ui/dashboard");
     });
   }
 
