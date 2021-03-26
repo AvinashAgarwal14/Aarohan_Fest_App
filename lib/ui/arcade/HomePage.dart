@@ -695,165 +695,170 @@ class _PacmanState extends State<Pacman> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          Expanded(
-            flex: (MediaQuery.of(context).size.height.toInt() * 0.0139).toInt(),
-            child: GestureDetector(
-              onVerticalDragUpdate: (details) {
-                if (details.delta.dy > 0) {
-                  direction = "down";
-                } else if (details.delta.dy < 0) {
-                  direction = "up";
-                }
-                // print(direction);
-              },
-              onHorizontalDragUpdate: (details) {
-                if (details.delta.dx > 0) {
-                  direction = "right";
-                } else if (details.delta.dx < 0) {
-                  direction = "left";
-                }
-                // print(direction);
-              },
-              child: Container(
-                child: GridView.builder(
-                  padding: (MediaQuery.of(context).size.height.toInt() * 0.0139)
-                              .toInt() >
-                          10
-                      ? EdgeInsets.only(top: 80)
-                      : EdgeInsets.only(top: 20),
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: numberOfSquares,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: numberInRow),
-                  itemBuilder: (BuildContext context, int index) {
-                    if (mouthClosed && player == index) {
-                      return Padding(
-                        padding: EdgeInsets.all(4),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.yellow, shape: BoxShape.circle),
-                        ),
-                      );
-                    } else if (player == index) {
-                      switch (direction) {
-                        case "left":
-                          return Transform.rotate(
-                            angle: pi,
-                            child: MyPlayer(),
-                          );
-                          break;
-                        case "right":
-                          return MyPlayer();
-                          break;
-                        case "up":
-                          return Transform.rotate(
-                            angle: 3 * pi / 2,
-                            child: MyPlayer(),
-                          );
-                          break;
-                        case "down":
-                          return Transform.rotate(
-                            angle: pi / 2,
-                            child: MyPlayer(),
-                          );
-                          break;
-                        default:
-                          return MyPlayer();
+      body: Container(
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.07),
+        child: Column(
+          children: [
+            Expanded(
+              flex:
+                  (MediaQuery.of(context).size.height.toInt() * 0.0139).toInt(),
+              child: GestureDetector(
+                onVerticalDragUpdate: (details) {
+                  if (details.delta.dy > 0) {
+                    direction = "down";
+                  } else if (details.delta.dy < 0) {
+                    direction = "up";
+                  }
+                  // print(direction);
+                },
+                onHorizontalDragUpdate: (details) {
+                  if (details.delta.dx > 0) {
+                    direction = "right";
+                  } else if (details.delta.dx < 0) {
+                    direction = "left";
+                  }
+                  // print(direction);
+                },
+                child: Container(
+                  child: GridView.builder(
+                    padding:
+                        (MediaQuery.of(context).size.height.toInt() * 0.0139)
+                                    .toInt() >
+                                10
+                            ? EdgeInsets.only(top: 80)
+                            : EdgeInsets.only(top: 20),
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: numberOfSquares,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: numberInRow),
+                    itemBuilder: (BuildContext context, int index) {
+                      if (mouthClosed && player == index) {
+                        return Padding(
+                          padding: EdgeInsets.all(4),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.yellow, shape: BoxShape.circle),
+                          ),
+                        );
+                      } else if (player == index) {
+                        switch (direction) {
+                          case "left":
+                            return Transform.rotate(
+                              angle: pi,
+                              child: MyPlayer(),
+                            );
+                            break;
+                          case "right":
+                            return MyPlayer();
+                            break;
+                          case "up":
+                            return Transform.rotate(
+                              angle: 3 * pi / 2,
+                              child: MyPlayer(),
+                            );
+                            break;
+                          case "down":
+                            return Transform.rotate(
+                              angle: pi / 2,
+                              child: MyPlayer(),
+                            );
+                            break;
+                          default:
+                            return MyPlayer();
+                        }
+                      } else if (ghost == index) {
+                        return MyGhost();
+                      } else if (ghost2 == index) {
+                        return MyGhost2();
+                      } else if (ghost3 == index) {
+                        return MyGhost3();
+                      } else if (barriers.contains(index)) {
+                        return MyPixel(
+                          innerColor: Colors.green[900], //deep
+                          outerColor: Colors.lightGreenAccent, //light
+                          // child: Text(index.toString()),
+                        );
+                      } else if (preGame || food.contains(index)) {
+                        return MyPath(
+                          innerColor: Colors.yellow,
+                          outerColor: Colors.black,
+                          // child: Text(index.toString()),
+                        );
+                      } else {
+                        return MyPath(
+                          innerColor: Colors.black,
+                          outerColor: Colors.black,
+                        );
                       }
-                    } else if (ghost == index) {
-                      return MyGhost();
-                    } else if (ghost2 == index) {
-                      return MyGhost2();
-                    } else if (ghost3 == index) {
-                      return MyGhost3();
-                    } else if (barriers.contains(index)) {
-                      return MyPixel(
-                        innerColor: Colors.green[900], //deep
-                        outerColor: Colors.lightGreenAccent, //light
-                        // child: Text(index.toString()),
-                      );
-                    } else if (preGame || food.contains(index)) {
-                      return MyPath(
-                        innerColor: Colors.yellow,
-                        outerColor: Colors.black,
-                        // child: Text(index.toString()),
-                      );
-                    } else {
-                      return MyPath(
-                        innerColor: Colors.black,
-                        outerColor: Colors.black,
-                      );
-                    }
-                  },
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    " Score : " + (score).toString(),
-                    // // (MediaQuery.of(context).size.height.toInt() * 0.0139)
-                    //     .toInt()
-                    //     .toString(),
-                    style: TextStyle(color: Colors.white, fontSize: 23),
-                  ),
-                  GestureDetector(
-                    onTap: startGame,
-                    child: Text("P L A Y",
-                        style: TextStyle(color: Colors.white, fontSize: 23)),
-                  ),
-                  if (!paused)
+            Expanded(
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      " Score : " + (score).toString(),
+                      // // (MediaQuery.of(context).size.height.toInt() * 0.0139)
+                      //     .toInt()
+                      //     .toString(),
+                      style: TextStyle(color: Colors.white, fontSize: 23),
+                    ),
                     GestureDetector(
-                      child: Icon(
-                        Icons.pause,
-                        color: Colors.white,
+                      onTap: startGame,
+                      child: Text("P L A Y",
+                          style: TextStyle(color: Colors.white, fontSize: 23)),
+                    ),
+                    if (!paused)
+                      GestureDetector(
+                        child: Icon(
+                          Icons.pause,
+                          color: Colors.white,
+                        ),
+                        onTap: () => {
+                          if (!paused)
+                            {
+                              paused = true,
+                              // advancedPlayer.pause(),
+                              // audioPaused.loop('pacman_intermission.wav'),
+                            }
+                          else
+                            {
+                              paused = false,
+                              // advancedPlayer2.stop(),
+                            },
+                          Icon(
+                            Icons.play_arrow,
+                            color: Colors.white,
+                          )
+                        },
                       ),
-                      onTap: () => {
-                        if (!paused)
-                          {
-                            paused = true,
-                            // advancedPlayer.pause(),
-                            // audioPaused.loop('pacman_intermission.wav'),
-                          }
-                        else
-                          {
-                            paused = false,
-                            // advancedPlayer2.stop(),
-                          },
-                        Icon(
+                    if (paused)
+                      GestureDetector(
+                        child: Icon(
                           Icons.play_arrow,
                           color: Colors.white,
-                        )
-                      },
-                    ),
-                  if (paused)
-                    GestureDetector(
-                      child: Icon(
-                        Icons.play_arrow,
-                        color: Colors.white,
+                        ),
+                        onTap: () => {
+                          if (paused)
+                            {paused = false}
+                          else
+                            {
+                              paused = true,
+                              // advancedPlayer.pause(),
+                              // audioPaused.loop('pacman_intermission.wav'),
+                            },
+                        },
                       ),
-                      onTap: () => {
-                        if (paused)
-                          {paused = false}
-                        else
-                          {
-                            paused = true,
-                            // advancedPlayer.pause(),
-                            // audioPaused.loop('pacman_intermission.wav'),
-                          },
-                      },
-                    ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
