@@ -34,7 +34,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
 
   bool previouslyLoggedIn = false;
   bool showSponsor = false;
-  bool showContactUs = false;
   bool showJD = false;
   bool showPrelims = false;
 
@@ -58,11 +57,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         showSponsor = snapshot.value;
       });
     });
-    databaseReference.child("contactUs").once().then((DataSnapshot snapshot) {
-      setState(() {
-        showContactUs = snapshot.value;
-      });
-    });
+
     databaseReference.child("JD").once().then((DataSnapshot snapshot) {
       setState(() {
         showJD = snapshot.value;
@@ -537,9 +532,6 @@ BorderRadius.circular(16.0),
                 break;
               case "Sponsors":
                 if (!showSponsor) screen = "/ui/comingsoon";
-                break;
-              case "Contact Us":
-                if (!showContactUs) screen = "/ui/comingsoon";
                 break;
             }
             Navigator.of(context).pushNamed(screen);

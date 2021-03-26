@@ -166,11 +166,11 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     print("${ModalRoute.of(context).settings.name}");
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: NavigationDrawer("/ui/dashboard"),
-      body: SafeArea(
-        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: NavigationDrawer("/ui/dashboard"),
+        body: Stack(
           children: [
             (showEvents.length == null)
                 ? Container(
@@ -289,9 +289,10 @@ class _DashboardState extends State<Dashboard> {
                                                           padding:
                                                               EdgeInsets.all(3),
                                                           child: TextField(
-                                                            onChanged: (String
-                                                                value) async {
+                                                            onChanged:
+                                                                (String value) {
                                                               setState(() {
+                                                                showEvents = [];
                                                                 showEvents = events
                                                                     .where((event) =>
                                                                         event !=
@@ -586,6 +587,7 @@ class _DashboardState extends State<Dashboard> {
                                                   (date) => DateTile(
                                                     callback: () {
                                                       setState(() {
+                                                        showEvents = [];
                                                         selectedDate =
                                                             date.date;
                                                         selectedIndexC = -1;
@@ -660,6 +662,7 @@ class _DashboardState extends State<Dashboard> {
                                                     setState(() {
                                                       selectedIndexC = index;
                                                       selectedDate = "";
+                                                      showEvents = [];
                                                       showEvents = events
                                                           .where((event) =>
                                                               event != null &&
