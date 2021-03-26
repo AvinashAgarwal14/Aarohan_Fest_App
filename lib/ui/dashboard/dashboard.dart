@@ -565,7 +565,7 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                               ),
                               SizedBox(
-                                height: 10.0,
+                                height: 15.0,
                               ),
                               Container(
                                 child: Column(
@@ -577,36 +577,39 @@ class _DashboardState extends State<Dashboard> {
                                           _showDate && !_showSearchBox ? 70 : 0,
                                       duration: Duration(milliseconds: 400),
                                       child: Container(
-                                        child: Row(
-                                          children: dates
-                                              .map(
-                                                (date) => GestureDetector(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      selectedDate = date.date;
-                                                      selectedIndexC = -1;
-                                                      showEvents = events
-                                                          .where((event) =>
-                                                              event != null &&
-                                                              int.parse(event
-                                                                      .date
-                                                                      .substring(
-                                                                          0,
-                                                                          2)) ==
-                                                                  int.parse(date
-                                                                      .date))
-                                                          .toList();
-                                                    });
-                                                  },
-                                                  child: DateTile(
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: dates
+                                                .map(
+                                                  (date) => DateTile(
+                                                    callback: () {
+                                                      setState(() {
+                                                        selectedDate =
+                                                            date.date;
+                                                        selectedIndexC = -1;
+                                                        showEvents = events
+                                                            .where((event) =>
+                                                                event != null &&
+                                                                int.parse(event
+                                                                        .date
+                                                                        .substring(
+                                                                            0,
+                                                                            2)) ==
+                                                                    int.parse(date
+                                                                        .date))
+                                                            .toList();
+                                                      });
+                                                    },
                                                     weekDay: date.weekDay,
                                                     date: date.date,
                                                     isSelected: selectedDate ==
                                                         date.date,
                                                   ),
-                                                ),
-                                              )
-                                              .toList(),
+                                                )
+                                                .toList(),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -619,7 +622,7 @@ class _DashboardState extends State<Dashboard> {
                                         child: Column(
                                           children: [
                                             SizedBox(
-                                              height: 16,
+                                              height: 15,
                                             ),
                                             Container(
                                               margin:
@@ -633,9 +636,9 @@ class _DashboardState extends State<Dashboard> {
                                                     fontSize: 20),
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 16,
-                                            ),
+                                            // SizedBox(
+                                            //   height: 10,
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -652,29 +655,28 @@ class _DashboardState extends State<Dashboard> {
                                             shrinkWrap: true,
                                             scrollDirection: Axis.horizontal,
                                             itemBuilder: (context, index) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    selectedIndexC = index;
-                                                    selectedDate = "";
-                                                    showEvents = events
-                                                        .where((event) =>
-                                                            event != null &&
-                                                            eventsType[index]
-                                                                    .eventType ==
-                                                                event.category)
-                                                        .toList();
-                                                  });
-                                                },
-                                                child: EventTile(
-                                                    imgAssetPath:
-                                                        eventsType[index]
-                                                            .imgAssetPath,
-                                                    eventType: eventsType[index]
-                                                        .eventType,
-                                                    isSelected: index ==
-                                                        selectedIndexC),
-                                              );
+                                              return EventTile(
+                                                  callback: () {
+                                                    setState(() {
+                                                      selectedIndexC = index;
+                                                      selectedDate = "";
+                                                      showEvents = events
+                                                          .where((event) =>
+                                                              event != null &&
+                                                              eventsType[index]
+                                                                      .eventType ==
+                                                                  event
+                                                                      .category)
+                                                          .toList();
+                                                    });
+                                                  },
+                                                  imgAssetPath:
+                                                      eventsType[index]
+                                                          .imgAssetPath,
+                                                  eventType: eventsType[index]
+                                                      .eventType,
+                                                  isSelected:
+                                                      index == selectedIndexC);
                                             }),
                                       ),
                                     ),
@@ -1105,13 +1107,17 @@ class DateTile extends StatelessWidget {
   String weekDay;
   String date;
   bool isSelected;
-  DateTile({this.weekDay, this.date, this.isSelected});
+  var callback;
+  DateTile({this.weekDay, this.date, this.isSelected, this.callback});
 
   @override
   Widget build(BuildContext context) {
     return FittedBox(
         fit: BoxFit.scaleDown,
-        child: Neumorphic(
+        child: NeumorphicButton(
+          onPressed: callback,
+          curve: Curves.bounceInOut,
+          padding: EdgeInsets.zero,
           margin: EdgeInsets.symmetric(horizontal: 10),
           style: NeumorphicStyle(
             color: Color(0xFF292D32),
@@ -1258,7 +1264,7 @@ class _BottomSlideState extends State<BottomSlide> {
             Divider(
               color: Theme.of(context).brightness == Brightness.light
                   ? Colors.grey
-                  : Color(0xFF505194),
+                  : Color(0xFF03A062),
             ),
             Container(
               child: new Column(
@@ -1308,13 +1314,18 @@ class EventTile extends StatelessWidget {
   String imgAssetPath;
   String eventType;
   bool isSelected;
-  EventTile({this.imgAssetPath, this.eventType, this.isSelected});
+  var callback;
+  EventTile(
+      {this.imgAssetPath, this.eventType, this.isSelected, this.callback});
 
   @override
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.scaleDown,
-      child: Neumorphic(
+      child: NeumorphicButton(
+        onPressed: callback,
+        curve: Curves.bounceInOut,
+        padding: EdgeInsets.zero,
         margin: EdgeInsets.all(10),
         style: NeumorphicStyle(
           color: Color(0xFF292D32),

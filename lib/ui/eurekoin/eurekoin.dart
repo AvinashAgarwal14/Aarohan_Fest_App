@@ -387,7 +387,7 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                               icon: Image(
                                                   image: AssetImage(
                                                       "images/QRIcon.png"),
-                                                  color: Color(0xFF505194)),
+                                                  color: Color(0xFF03A062)),
                                               onPressed: () {
                                                 scanQR();
                                               },

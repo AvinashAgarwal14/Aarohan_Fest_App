@@ -3,6 +3,7 @@ import 'package:arhn_app_2021/ui/dashboard/dashboard.dart';
 import 'package:arhn_app_2021/ui/eurekoin/eurekoin_leaderboard.dart';
 import 'package:arhn_app_2021/ui/interficio/interficio.dart';
 import 'package:arhn_app_2021/ui/prelims/prelims.dart';
+import 'package:arhn_app_2021/util/coming_soon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -65,6 +66,7 @@ class AavishkarApp extends StatelessWidget {
         "/ui/arcade_game": (BuildContext context) => Pacman(),
         "/eurekoin/leader_board": (BuildContext context) =>
             EurekoinLeaderBoard(),
+        "/ui/comingsoon": (BuildContext context) => ComingSoon(),
       },
     );
   }

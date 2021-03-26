@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
@@ -143,8 +144,9 @@ style: GoogleFonts.ubuntu(fontSize: 13),
                               width: 60,
                               child: getNuUp(ClipRRect(
 //borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  currentUser.providerData[1].photoUrl,
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      currentUser.providerData[1].photoUrl,
 // fit: BoxFit.fill,
                                 ),
                               )),
@@ -201,21 +203,17 @@ style: GoogleFonts.ubuntu(fontSize: 13),
                 getListItem("Dashboard", "/ui/dashboard"),
                 getListItem("Eurekoin Wallet", "/ui/eurekoin"),
                 getListItem("Eurekoin Leaderboard", "/eurekoin/leader_board"),
-                showPrelims
-                    ? getListItem("Prelims", "/ui/prelims")
-                    : SizedBox(),
-                showJD
-                    ? getListItem("Journo Detective", "ui/interficio")
-                    : SizedBox(),
+                getListItem("Prelims", "/ui/prelims"),
+                getListItem("Journo Detective", "ui/interficio"),
+
                 getListItem("Arcade", "/ui/arcade_game"),
                 getListItem("Timeline", "/ui/schedule"),
                 getListItem("Scoreboard", "/ui/scoreboard"),
-                showSponsor
-                    ? getListItem("Sponsors", "/ui/sponsors/sponsors")
-                    : SizedBox(),
-                showContactUs
-                    ? getListItem("Contact Us", "/ui/contact_us/contact_us")
-                    : SizedBox(),
+
+                getListItem("Sponsors", "/ui/sponsors/sponsors"),
+
+                getListItem("Contact Us", "/ui/contact_us/contact_us"),
+
                 getListItem("Contributors", "/ui/contributors/contributors"),
                 getListItem("About Aarohan", "/ui/about_us/about_us"),
 
@@ -530,6 +528,20 @@ BorderRadius.circular(16.0),
                 ),
           onTap: () {
 // Navigator.pop(context);
+            switch (text) {
+              case "Prelims":
+                if (!showPrelims) screen = "/ui/comingsoon";
+                break;
+              case "Journo Detective":
+                if (!showJD) screen = "/ui/comingsoon";
+                break;
+              case "Sponsors":
+                if (!showSponsor) screen = "/ui/comingsoon";
+                break;
+              case "Contact Us":
+                if (!showContactUs) screen = "/ui/comingsoon";
+                break;
+            }
             Navigator.of(context).pushNamed(screen);
           }),
     );
