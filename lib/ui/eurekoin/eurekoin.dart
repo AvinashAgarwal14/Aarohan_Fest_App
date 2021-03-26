@@ -301,6 +301,52 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                             controller: scrollController,
                             slivers: <Widget>[
                               new SliverAppBar(
+                                toolbarHeight: 70,
+                                leading: NeumorphicButton(
+                                  onPressed: () {
+                                    _scaffoldKey.currentState.openDrawer();
+                                  },
+                                  margin: EdgeInsets.only(left: 10.0),
+                                  padding: EdgeInsets.all(0),
+                                  style: NeumorphicStyle(
+                                    shape: NeumorphicShape.concave,
+                                    boxShape: NeumorphicBoxShape.circle(),
+                                    depth: 5.5,
+                                    intensity: 1.0,
+                                    lightSource: LightSource.topLeft,
+                                    shadowLightColor:
+                                        Colors.grey[700].withOpacity(0.6),
+                                    shadowDarkColor: Colors.black,
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color:
+                                            Color(0xFF63d471).withOpacity(0.5),
+                                        width: 1.5,
+                                        style: BorderStyle.solid,
+                                      ),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [
+                                          Color(0xFF396b4b),
+                                          Color(0xFF78e08f),
+                                        ],
+                                      ),
+                                    ),
+                                    height: 50.0,
+                                    width: 50.0,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.menu,
+                                        color: Colors.white,
+                                        // size: 25,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 backgroundColor: Theme.of(context).accentColor,
                                 brightness: Brightness.light,
                                 expandedHeight: _appBarHeight,
@@ -311,8 +357,13 @@ class EurekoinHomePageState extends State<EurekoinHomePage> {
                                     _appBarBehavior == AppBarBehavior.snapping,
                                 snap:
                                     _appBarBehavior == AppBarBehavior.snapping,
-                                flexibleSpace: new FlexibleSpaceBar(
-                                  title: Text('Eurekoin Wallet'),
+                                flexibleSpace: FlexibleSpaceBar(
+                                  title: Padding(
+                                    padding: const EdgeInsets.only(bottom: 4),
+                                    child: Text(
+                                      'Eurekoin Wallet',
+                                    ),
+                                  ),
                                   background: new Stack(
                                     fit: StackFit.expand,
                                     children: <Widget>[
